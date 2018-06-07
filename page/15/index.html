@@ -1535,165 +1535,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/bzoj1271/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/01/bzoj1271/" itemprop="url">bzoj1271 [BeiJingWc2008]秦腾与教学评估</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T17:51:53+08:00">
-                2018-05-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###中文题面<br>Description<br>在秦腾进入北京大学学习的第一个学期，就不幸遇到了前所未有的教学评估。在教学评估期间，同学们被要求八点<br>起床，十一点回宿舍睡觉，不准旷课，上课不准迟到，上课不准睡觉……甚至连著名的北大三角地也在教学评估期<br>间被以影响校容的理由被拆除。这些“变态”规定令习惯了自由自在随性生活学习的北大同学叫苦不迭。这一天又<br>到了星期五，一大早就是秦腾最不喜欢的高等代数课。可是因为是教学评估时期，不能迟到，于是他在八点五分的<br>时候挣扎着爬出了宿舍，希望能赶快混进在八点钟已经上课了的教室。可是，刚一出宿舍楼门他就傻眼了:从宿舍<br>到教学楼的路上已经站满了教学评估团的成员。他们的目的就是抓住像他这样迟到的学生，扣除学校的分数。秦腾<br>当然不能让评估团得逞。他经过观察发现，整个评估团分成了N个小组，每个小组的成员都分布在从宿舍楼到教学<br>楼的路上的某一段，并且同一小组的成员间的距离是相等的。于是，我们可以用三个整数S,E,D来描述评估团的小<br>组:既该小组的成员在从宿舍到教学楼的路上的:S,S+D,S+2D,…,S+KD(K∈Z,S+KD≤E,S+(K+1)D&gt;E)位置。观察到了<br>教学评估团的这一特点，又经过了认真的思考，秦腾想出了对策:如果在路上的某一位置有奇数个教学评估团成员<br>，他就可以运用调虎离山，声东击西，隔山打牛，暗度陈仓……等方法，以这一地点为突破口到达教学楼。但是由<br>于教学评估团的成员的十分狡猾，成员位置安排的设计极其精妙，导致在整条路上几乎没有这样的位置出现。即使<br>由于安排不慎重出现了这样的位置，最多也仅有一个。现在秦腾观察出了所有小组的安排，但是由于整个教学评估<br>团的人数太多，他实在看不出这样的位置是否存在。现在，你的任务是写一个程序，帮助他做出判断。<br>Input<br>第一行为T代表测试数据组数<br>每组第一行为N<br>接下来N行，每行三个整数Si,Ei,Di<br>N&lt;=200000<br>0&lt;=Si,Ei,Di&lt;=2^31-1<br>输入文件不大于2048K<br>Output<br>对于每组数据如果所求位置不存在，则输出Poor Qin Teng:(<br>否则输出两个整数Posi,Count,代表在唯一位置Posi,有Count个教学评估图的成员<br>Count为奇数,注意输出的所有符号为英文半号<br>Sample Input<br>3</p>
-<p>2</p>
-<p>1 10 1</p>
-<p>2 10 1</p>
-<p>2</p>
-<p>1 10 1</p>
-<p>1 10 1</p>
-<p>4</p>
-<p>1 10 1</p>
-<p>4 4 1</p>
-<p>1 5 1</p>
-<p>6 10 1<br>Sample Output<br>1 1</p>
-<p>Poor QIN Teng:(</p>
-<p>4 3</p>
-<p>###提示<br>&emsp;&emsp;1.能否对每条线段单独分析？<br>&emsp;&emsp;2.最多只有一个奇数说明了什么？</p>
-<p>###代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">200010</span>;</span><br><span class="line">ll T, n;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ll s, e, d;</span><br><span class="line">&#125;e[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (x &lt; e[i].s)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span> (x &gt; e[i].e)</span><br><span class="line">		&#123;</span><br><span class="line">			ll temp = (e[i].e - e[i].s) / e[i].d;</span><br><span class="line">			res += temp + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			ll temp = (x - e[i].s) / e[i].d;</span><br><span class="line">			res += temp + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (res % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">solvee</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (x &lt; e[i].s || x &gt; e[i].e)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span> (x == e[i].s)</span><br><span class="line">		&#123;</span><br><span class="line">			res++;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> ((x - e[i].s) % e[i].d == <span class="number">0</span>)</span><br><span class="line">			res++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>, &amp;e[i].s, &amp;e[i].e, &amp;e[i].d);</span><br><span class="line">	ll l = <span class="number">0</span>, r = (<span class="number">1L</span>L &lt;&lt; <span class="number">31</span>) - <span class="number">1</span>, ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (check(r))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Poor QIN Teng:(\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (l &lt;= r)</span><br><span class="line">	&#123;</span><br><span class="line">		ll mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (check(mid))</span><br><span class="line">			l = mid + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			ans = mid;</span><br><span class="line">			r = mid - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld %lld\n"</span>, ans,solvee(ans));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span> (T--)</span><br><span class="line">		solve();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析<br>&emsp;&emsp;这道题显然不能直接对每一条线段上的点进行分析. 要确定点的位置必须要更快的方法. 可以考虑二分.<br>&emsp;&emsp;想要二分确定这个位置，肯定要慢慢逼近. 看似没有任何单调性，没有依据去逼近. 利用题目中给的信息：最多只有一个奇数点!<br>&emsp;&emsp;这有毛用？新的思路：奇偶前缀和.利用奇数+偶数=奇数，偶数+偶数=偶数来二分. 求出每一个位置的前缀的奇偶性，则可根据此来二分出位置.</p>
-<p>###总结<br>&emsp;&emsp;如何求得一个<strong>具体</strong>的答案？可以通过其他题目中给出的变量来解出这个答案，也可以通过<strong>枚举</strong>的方法判定这个答案是否成立. 道理用哪一种方法？依据数据规模来定.这是从大的方面来想如何解这一类题.<br>&emsp;&emsp;碰到了奇数/偶数这些词，与数的奇偶性联系在一起.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/bzoj1720/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1819,6 +1660,165 @@
 <p>###代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">int</span> c, n, ans, cnt;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line">&#125;e[maxn], p[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.x &lt; b.x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp2</span><span class="params">(node a, node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.y &lt; b.y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check2</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r,<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (r - l + <span class="number">1</span> &lt; c)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= r; i++)</span><br><span class="line">		p[++cnt] = e[i];</span><br><span class="line">	sort(p + <span class="number">1</span>, p + <span class="number">1</span> + cnt, cmp2);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = c; i &lt;= cnt; i++)</span><br><span class="line">		<span class="keyword">if</span> (p[i].y - p[i - c + <span class="number">1</span>].y &lt;= len)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> l = <span class="number">1</span>, r = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (r &lt;= n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (e[r].x - e[l].x &gt; len)</span><br><span class="line">			<span class="keyword">if</span> (check2(l, r - <span class="number">1</span>,len))</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">while</span> (e[r].x - e[l].x &gt; len)</span><br><span class="line">			l++;</span><br><span class="line">		r++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> check2(l, n,len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;c, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;e[i].x, &amp;e[i].y);</span><br><span class="line">	sort(e + <span class="number">1</span>, e + <span class="number">1</span> + n, cmp);</span><br><span class="line">	<span class="keyword">int</span> l = <span class="number">0</span>, r = <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">while</span> (l &lt;= r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (check(mid))</span><br><span class="line">		&#123;</span><br><span class="line">			ans = mid;</span><br><span class="line">			r = mid - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			l = mid + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>###分析<br>&emsp;&emsp;求<strong>具体</strong>的答案，要么解出来，要么<strong>枚举并判定</strong>，显然边长不可能直接解出来，那么就二分咯.<br>&emsp;&emsp;点的坐标存不下怎么办？离散化即可. 判定是否可行根本不需要知道具体的坐标的值.<br>&emsp;&emsp;如何判定？根据要满足的条件：1.点在以二分出来的边长为x的正方形内. 2.点的个数要≥c. 假定已经满足其中一条，判断另一条是否合法.<br>&emsp;&emsp;对于x轴上的判定，将所有的边长不超过二分出的x的极大正方形提出来，判断横坐标在正方形之内的点的纵坐标是否满足要求. 由于不太好求纵坐标范围在[l,r]的点有多少个，改为判断第i个点与第i+c个点的纵坐标之差是否≤x. </p>
 <p>###总结<br>&emsp;&emsp;满足多个条件的二分的判定一定要会. </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/bzoj1271/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/01/bzoj1271/" itemprop="url">bzoj1271 [BeiJingWc2008]秦腾与教学评估</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T17:51:53+08:00">
+                2018-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###中文题面<br>Description<br>在秦腾进入北京大学学习的第一个学期，就不幸遇到了前所未有的教学评估。在教学评估期间，同学们被要求八点<br>起床，十一点回宿舍睡觉，不准旷课，上课不准迟到，上课不准睡觉……甚至连著名的北大三角地也在教学评估期<br>间被以影响校容的理由被拆除。这些“变态”规定令习惯了自由自在随性生活学习的北大同学叫苦不迭。这一天又<br>到了星期五，一大早就是秦腾最不喜欢的高等代数课。可是因为是教学评估时期，不能迟到，于是他在八点五分的<br>时候挣扎着爬出了宿舍，希望能赶快混进在八点钟已经上课了的教室。可是，刚一出宿舍楼门他就傻眼了:从宿舍<br>到教学楼的路上已经站满了教学评估团的成员。他们的目的就是抓住像他这样迟到的学生，扣除学校的分数。秦腾<br>当然不能让评估团得逞。他经过观察发现，整个评估团分成了N个小组，每个小组的成员都分布在从宿舍楼到教学<br>楼的路上的某一段，并且同一小组的成员间的距离是相等的。于是，我们可以用三个整数S,E,D来描述评估团的小<br>组:既该小组的成员在从宿舍到教学楼的路上的:S,S+D,S+2D,…,S+KD(K∈Z,S+KD≤E,S+(K+1)D&gt;E)位置。观察到了<br>教学评估团的这一特点，又经过了认真的思考，秦腾想出了对策:如果在路上的某一位置有奇数个教学评估团成员<br>，他就可以运用调虎离山，声东击西，隔山打牛，暗度陈仓……等方法，以这一地点为突破口到达教学楼。但是由<br>于教学评估团的成员的十分狡猾，成员位置安排的设计极其精妙，导致在整条路上几乎没有这样的位置出现。即使<br>由于安排不慎重出现了这样的位置，最多也仅有一个。现在秦腾观察出了所有小组的安排，但是由于整个教学评估<br>团的人数太多，他实在看不出这样的位置是否存在。现在，你的任务是写一个程序，帮助他做出判断。<br>Input<br>第一行为T代表测试数据组数<br>每组第一行为N<br>接下来N行，每行三个整数Si,Ei,Di<br>N&lt;=200000<br>0&lt;=Si,Ei,Di&lt;=2^31-1<br>输入文件不大于2048K<br>Output<br>对于每组数据如果所求位置不存在，则输出Poor Qin Teng:(<br>否则输出两个整数Posi,Count,代表在唯一位置Posi,有Count个教学评估图的成员<br>Count为奇数,注意输出的所有符号为英文半号<br>Sample Input<br>3</p>
+<p>2</p>
+<p>1 10 1</p>
+<p>2 10 1</p>
+<p>2</p>
+<p>1 10 1</p>
+<p>1 10 1</p>
+<p>4</p>
+<p>1 10 1</p>
+<p>4 4 1</p>
+<p>1 5 1</p>
+<p>6 10 1<br>Sample Output<br>1 1</p>
+<p>Poor QIN Teng:(</p>
+<p>4 3</p>
+<p>###提示<br>&emsp;&emsp;1.能否对每条线段单独分析？<br>&emsp;&emsp;2.最多只有一个奇数说明了什么？</p>
+<p>###代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">200010</span>;</span><br><span class="line">ll T, n;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ll s, e, d;</span><br><span class="line">&#125;e[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (x &lt; e[i].s)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span> (x &gt; e[i].e)</span><br><span class="line">		&#123;</span><br><span class="line">			ll temp = (e[i].e - e[i].s) / e[i].d;</span><br><span class="line">			res += temp + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			ll temp = (x - e[i].s) / e[i].d;</span><br><span class="line">			res += temp + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (res % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">solvee</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (x &lt; e[i].s || x &gt; e[i].e)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span> (x == e[i].s)</span><br><span class="line">		&#123;</span><br><span class="line">			res++;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> ((x - e[i].s) % e[i].d == <span class="number">0</span>)</span><br><span class="line">			res++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>, &amp;e[i].s, &amp;e[i].e, &amp;e[i].d);</span><br><span class="line">	ll l = <span class="number">0</span>, r = (<span class="number">1L</span>L &lt;&lt; <span class="number">31</span>) - <span class="number">1</span>, ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (check(r))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Poor QIN Teng:(\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (l &lt;= r)</span><br><span class="line">	&#123;</span><br><span class="line">		ll mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (check(mid))</span><br><span class="line">			l = mid + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			ans = mid;</span><br><span class="line">			r = mid - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld %lld\n"</span>, ans,solvee(ans));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span> (T--)</span><br><span class="line">		solve();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###分析<br>&emsp;&emsp;这道题显然不能直接对每一条线段上的点进行分析. 要确定点的位置必须要更快的方法. 可以考虑二分.<br>&emsp;&emsp;想要二分确定这个位置，肯定要慢慢逼近. 看似没有任何单调性，没有依据去逼近. 利用题目中给的信息：最多只有一个奇数点!<br>&emsp;&emsp;这有毛用？新的思路：奇偶前缀和.利用奇数+偶数=奇数，偶数+偶数=偶数来二分. 求出每一个位置的前缀的奇偶性，则可根据此来二分出位置.</p>
+<p>###总结<br>&emsp;&emsp;如何求得一个<strong>具体</strong>的答案？可以通过其他题目中给出的变量来解出这个答案，也可以通过<strong>枚举</strong>的方法判定这个答案是否成立. 道理用哪一种方法？依据数据规模来定.这是从大的方面来想如何解这一类题.<br>&emsp;&emsp;碰到了奇数/偶数这些词，与数的奇偶性联系在一起.</p>
 
           
         
