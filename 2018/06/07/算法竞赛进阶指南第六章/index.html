@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="总结," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="###前言&amp;emsp;&amp;emsp;花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. ###1.一些思考成果&amp;emsp;&amp;emsp;线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/&amp;emsp;&amp;emsp;为什么使用dp?http://w">
+<meta name="keywords" content="总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法竞赛进阶指南第六章">
+<meta property="og:url" content="http://yoursite.com/2018/06/07/算法竞赛进阶指南第六章/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="###前言&amp;emsp;&amp;emsp;花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. ###1.一些思考成果&amp;emsp;&amp;emsp;线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/&amp;emsp;&amp;emsp;为什么使用dp?http://w">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-07T03:42:28.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法竞赛进阶指南第六章">
+<meta name="twitter:description" content="###前言&amp;emsp;&amp;emsp;花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. ###1.一些思考成果&amp;emsp;&amp;emsp;线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/&amp;emsp;&amp;emsp;为什么使用dp?http://w">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/07/算法竞赛进阶指南第六章/"/>
+
+
+
+
+
+  <title>算法竞赛进阶指南第六章 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/算法竞赛进阶指南第六章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法竞赛进阶指南第六章</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T09:43:53+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###前言<br>&emsp;&emsp;花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了.</p>
+<p>###1.一些思考成果<br>&emsp;&emsp;线性dp总结：  <a href="http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/</a><br>&emsp;&emsp;为什么使用dp?<br><a href="http://www.zbtrs.top/2018/05/23/why%20uses%20dp/" target="_blank" rel="noopener">http://www.zbtrs.top/2018/05/23/why%20uses%20dp/</a><br>&emsp;&emsp;一类基准点划分计数dp:<br><a href="http://www.zbtrs.top/2018/05/27/%E4%B8%80%E7%B1%BB%E5%9F%BA%E5%87%86%E7%82%B9%E5%88%92%E5%88%86%E8%AE%A1%E6%95%B0dp/" target="_blank" rel="noopener">http://www.zbtrs.top/2018/05/27/%E4%B8%80%E7%B1%BB%E5%9F%BA%E5%87%86%E7%82%B9%E5%88%92%E5%88%86%E8%AE%A1%E6%95%B0dp/</a></p>
+<p>###2.不满足最优子结构性导致dp出错的例子<br>&emsp;&emsp;做这种题不是很多，遇到过两种比较常见的例子.<br>&emsp;&emsp;1.位运算的最值问题. 一般不能对整体进行dp,而言按位贪心，对每一位进行dp.<br>&emsp;&emsp;2.求乘积最值，但有负数. 两个绝对值大的负数相乘可能会得到一个更大的正数，而如果仅记录最大值，是无法进行这种转移的，因此还需要记录最小值.</p>
+<p>###3.背包问题<br>&emsp;&emsp;0-1背包就不说了，想说一下多重背包的可行性问题. 原则：迫不得已时再用. 对于每一个物品，如果当前体积拼不出来，但是用上这个物品后当前体积能拼出来，并且物品数不会超，就用这个物品，物品数–. 每一轮只考虑当前物品对体积的贡献.<br>&emsp;&emsp;多重背包的二进制拆分法和单调队列优化. 注意：二进制拆分法只能适用于物品数为正整数的情况.<br>&emsp;&emsp;还有一类神奇的分治背包问题. 见<a href="https://www.cnblogs.com/zbtrs/p/8708099.html" target="_blank" rel="noopener">https://www.cnblogs.com/zbtrs/p/8708099.html</a> (分治，控制边界，不让第i个物品插入背包，插入背包用单调队列优化，还是基于单调队列优化的多重背包问题).<br>&emsp;&emsp;多重背包问题一定要先枚举余数再来优化. 有时候也可以用斜率优化，见<a href="http://www.zbtrs.top/2018/04/13/bzoj4073%20%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96+%E8%B4%AA%E5%BF%83/" target="_blank" rel="noopener">http://www.zbtrs.top/2018/04/13/bzoj4073%20%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96+%E8%B4%AA%E5%BF%83/</a></p>
+<p>###4.区间dp的两种类型<br>&emsp;&emsp;1.计算操作的影响时，可以只考虑区间内部或与区间端点相邻的点的值.<br>&emsp;&emsp;2.需要考虑区间外的影响.<br>&emsp;&emsp;如何看出用区间dp? $O(n^3)$的复杂度，并且数字会被消掉(挪动).<br>&emsp;&emsp;对于第一类问题，一般的状态就是$f_{l,r}$,枚举中间点k来转移. 可能还要考虑端点的转移，因此转移可能会分多种情况讨论. 如果需要考虑的信息比较多，可能要多加一维. 见<a href="http://www.cnblogs.com/zbtrs/p/8454935.html" target="_blank" rel="noopener">http://www.cnblogs.com/zbtrs/p/8454935.html</a><br>&emsp;&emsp;对于第二类问题，通常需要多加一维表示向右/左扩展多少位. 见poj1390</p>
+<p>###5.换根与二次扫描法<br>&emsp;&emsp;先从下往上dfs一次，再从上往下更新. 一般要用到两个数组.注意递归与更新子节点的先后顺序.</p>
+<p>###6.环形dp与环形状态转移方程<br>&emsp;&emsp;环形dp的两种处理方法：<br>&emsp;&emsp;1.强行经过分界点，处理分界点的情况.<br>&emsp;&emsp;2.复制一份，在链上处理.<br>&emsp;&emsp;一般是选用第二种方法，不仅状态转移方程唯一，还能知道环是从哪里断开的. 如果用第二种方法不能使得状态转移方程唯一(或者是有特殊情况，必须枚举起点，使得复杂度特别高),就必须使用第一种方法了. 通过改变边界条件进行两次dp实现目的.<br>&emsp;&emsp;后效性的处理方法：列出状态转移方程，高斯消元求解. 注意特殊的矩阵.</p>
+<p>###7.状压dp<br>&emsp;&emsp;需要知道一些元素的信息. 不仅可以用二进制状压，还可以用三进制状压…….十进制状压就和普通的记录信息没什么区别了.<br>&emsp;&emsp;可能会有大量的无用状态，处理无用状态的方法是预处理出有用状态(对于每一阶段而言约束条件都一样)或是利用刷表法，只扩展有用状态.(配合dfs转移).</p>
+<p>###8.倍增优化dp转移<br>&emsp;&emsp;状态转移具有单一重复性. 你可以手动模拟状态转移，发现转移的方向是确定的，在一维上转移量比较大，转移可以叠加，那么就可以用倍增来优化dp转移.一般都是先预处理出倍增数组，然后从高位到低位拼凑.<br>&emsp;&emsp;常见模型：1.拼数. 2.树上往祖先节点跳.</p>
+<p>###9.数据结构优化dp转移<br>&emsp;&emsp;这类优化针对的是对决策的权值有要求、决策点的位置有要求的状态转移方程. 如果仅仅只是对决策点的位置有要求，可以用单调队列，单调栈之类的单调数据结构进行维护. 这类优化还是很好看出来的.</p>
+<p>###10.单调队列的神级应用<br>&emsp;&emsp;1.最简单的一类应用：决策点的范围随着i的增大而上下界同时增大. 可以认为决策点和i是连在一起的.<br>&emsp;&emsp;2.比较容易写错的一类应用：决策点和i不连在一起，每次加入队列的不是第i个元素，而是第i-k个元素.<br>&emsp;&emsp;3.放入单调队列的不仅仅是$f_j$,而是关于j的整个多项式.<br>&emsp;&emsp;4.利用贪心思想，数学证明找到最优决策点的特征，发现正好可以用单调队列维护. 此时，单调队列维护的仅仅是<strong>可能</strong>的最优决策点，找最优决策点还需要在队列中枚举判断，可以用set加速.或者利用单调队列维护的元素的性质，可以直接从队尾/队首找到最优决策点.<br>&emsp;&emsp;5.若决策点位置满足的多项式与转移代价多项式不同，将哪一个放入单调队列中取决于用单调队列维护什么. 若维护可能的最优决策点，则将决策点位置满足的多项式放入单调队列中，否则放入转移代价多项式.<br>详见poj3071,bzoj1233.</p>
+<p>###11.费用提前计算思想<br>&emsp;&emsp;不知道它之前的具体代价，但知道它对以后的代价的影响. 比如物品加工的等待时间，不知道前面有多少组物品加工对当前物品的等待时间有影响，但是知道当前物品加工对后面物品的等待时间一定有影响，将影响加入到转移的代价中，就消除了后效性.</p>
+<p>###12.斜率优化与四边形不等式<br>&emsp;&emsp;原则：优先选择斜率优化，不行再用四边形不等式优化.<br>&emsp;&emsp;斜率优化的两种形式，一种是$f_i = f_j + ……$一种是$f_j = f_i + ……$,第一种是直接计算，第二种是将$f_i$变成截距，反解得到. 一般采用第一种形式，如果第一种形式的斜率不单调，则采用第二种形式，保留整个凸包(不进行队首的操作)，二分找斜率分界点.<br>&emsp;&emsp;四边形不等式优化的两种类型：<br>&emsp;&emsp;1.一维状态dp. $w_{i,j + 1} + w_{i + 1,j} ≥ w_{i,j} + w_{i + 1,j + 1}$.<br>&emsp;&emsp;2.二维状态dp. 满足上述式子的同时，还要满足$w_{i,j + 1} ≥ w_{i + 1,j}$.这样二维状态dp也满足四边形不等式，决策位置$pos_{i,j - 1}≤pos_{i,j}≤pos_{i + 1,j}$.注意枚举顺序.</p>
+<p>###13.数位dp<br>&emsp;&emsp;前导0的处理. dfs的所有参数都丢到状态中记录.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/bzoj1079/" rel="next" title="bzoj1079 [SCOI2008]着色方案">
+                <i class="fa fa-chevron-left"></i> bzoj1079 [SCOI2008]着色方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

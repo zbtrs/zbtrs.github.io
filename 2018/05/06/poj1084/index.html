@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="搜索,IDA*," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="###英文题面Description The left figure below shows a complete 33 grid made with 2(3*4) (=24) matchsticks. The lengths of all matchsticks are one. You can find many squares of different sizes in the grid.">
+<meta name="keywords" content="搜索,IDA*">
+<meta property="og:type" content="article">
+<meta property="og:title" content="poj1084 Square Destroyer">
+<meta property="og:url" content="http://yoursite.com/2018/05/06/poj1084/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="###英文题面Description The left figure below shows a complete 33 grid made with 2(3*4) (=24) matchsticks. The lengths of all matchsticks are one. You can find many squares of different sizes in the grid.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://poj.org/images/1084/1084.gif">
+<meta property="og:updated_time" content="2018-06-07T09:51:19.816Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="poj1084 Square Destroyer">
+<meta name="twitter:description" content="###英文题面Description The left figure below shows a complete 33 grid made with 2(3*4) (=24) matchsticks. The lengths of all matchsticks are one. You can find many squares of different sizes in the grid.">
+<meta name="twitter:image" content="http://poj.org/images/1084/1084.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/06/poj1084/"/>
+
+
+
+
+
+  <title>poj1084 Square Destroyer | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/poj1084/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">poj1084 Square Destroyer</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T14:02:53+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###英文题面<br>Description</p>
+<p>The left figure below shows a complete 3<em>3 grid made with 2</em>(3*4) (=24) matchsticks. The lengths of all matchsticks are one. You can find many squares of different sizes in the grid. The size of a square is the length of its side. In the grid shown in the left figure, there are 9 squares of size one, 4 squares of size two, and 1 square of size three. </p>
+<p>Each matchstick of the complete grid is identified with a unique number which is assigned from left to right and from top to bottom as shown in the left figure. If you take some matchsticks out from the complete grid, then some squares in the grid will be destroyed, which results in an incomplete 3<em>3 grid. The right figure illustrates an incomplete 3</em>3 grid after removing three matchsticks numbered with 12, 17 and 23. This removal destroys 5 squares of size one, 3 squares of size two, and 1 square of size three. Consequently, the incomplete grid does not have squares of size three, but still has 4 squares of size one and 1 square of size two.<br><img src="http://poj.org/images/1084/1084.gif" alt="a"><br>As input, you are given a (complete or incomplete) n<em>n grid made with no more than 2n(n+1) matchsticks for a natural number 5 &lt;= n . Your task is to compute the minimum number of matchsticks taken<br>out to destroy all the squares existing in the input n</em>n grid.<br>Input</p>
+<p>The input consists of T test cases. The number of test cases (T ) is given in the first line of the input file.<br>Each test case consists of two lines: The first line contains a natural number n , not greater than 5, which implies you are given a (complete or incomplete) n<em>n grid as input, and the second line begins with a nonnegative integer k , the number of matchsticks that are missing from the complete n</em>n grid, followed by<br>k numbers specifying the matchsticks. Note that if k is equal to zero, then the input grid is a complete n<em>n grid; otherwise, the input grid is an incomplete n</em>n grid such that the specified k matchsticks are missing from the complete n*n grid.<br>Output</p>
+<p>Print exactly one line for each test case. The line should contain the minimum number of matchsticks that have to be taken out to destroy all the squares in the input grid.<br>Sample Input</p>
+<p>2<br>2<br>0<br>3<br>3 12 17 23<br>Sample Output</p>
+<p>3<br>3<br>Source</p>
+<p>Taejon 2001</p>
+<p>###翻译<br>一个边长为n的网格，去掉几条边后，问你：最少要删掉多少条边才能使得网格中没有正方形？</p>
+<p>###代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T,n,heng[<span class="number">10</span>][<span class="number">10</span>],shu[<span class="number">10</span>][<span class="number">10</span>],len;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">H</span><span class="params">(<span class="keyword">int</span> xiaxian)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> theng[<span class="number">10</span>][<span class="number">10</span>],tshu[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">memset</span>(theng,<span class="number">0</span>,<span class="keyword">sizeof</span>(theng));</span><br><span class="line">    <span class="built_in">memset</span>(tshu,<span class="number">0</span>,<span class="keyword">sizeof</span>(tshu));</span><br><span class="line">    <span class="built_in">memcpy</span>(theng,heng,<span class="keyword">sizeof</span>(heng));</span><br><span class="line">    <span class="built_in">memcpy</span>(tshu,shu,<span class="keyword">sizeof</span>(shu));</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len = xiaxian; len &lt;= n; len++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i + len - <span class="number">1</span> &lt;= n; i++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j + len - <span class="number">1</span> &lt;= n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= i + len - <span class="number">1</span>; k++)</span><br><span class="line">                    <span class="keyword">if</span> (tshu[k][j] == <span class="number">0</span> || tshu[k][j + len] == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        flag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= j + len - <span class="number">1</span>; k++)</span><br><span class="line">                    <span class="keyword">if</span> (theng[i][k] == <span class="number">0</span> || theng[i + len][k] == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        flag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">if</span> (!flag)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                res++;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= i + len - <span class="number">1</span>; k++)</span><br><span class="line">                    tshu[k][j] = tshu[k][j + len] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= j + len - <span class="number">1</span>; k++)</span><br><span class="line">                    theng[i][k] = theng[i + len][k] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> dep,<span class="keyword">int</span> limit,<span class="keyword">int</span> xiaxian)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = H(xiaxian);</span><br><span class="line">    <span class="keyword">if</span> (temp + dep &gt; limit + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (temp == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len = xiaxian; len &lt;= n; len++)  <span class="comment">//从正方形边长的下限开始枚举</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i + len - <span class="number">1</span> &lt;= n; i++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j + len - <span class="number">1</span> &lt;= n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//先判断以(i,j)为左上角，边长为len的正方形是否存在.</span></span><br><span class="line">                <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= i + len - <span class="number">1</span>; k++)</span><br><span class="line">                    <span class="keyword">if</span> (shu[k][j] == <span class="number">0</span> || shu[k][j + len] == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        flag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= j + len - <span class="number">1</span>; k++)</span><br><span class="line">                    <span class="keyword">if</span> (heng[i][k] == <span class="number">0</span> || heng[i + len][k] == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        flag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">if</span> (!flag)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= i + len - <span class="number">1</span>; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    shu[k][j] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">bool</span> flagg = dfs(dep + <span class="number">1</span>,limit,len);</span><br><span class="line">                    <span class="keyword">if</span> (flagg)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    shu[k][j] = <span class="number">1</span>;</span><br><span class="line">                    shu[k][j + len] = <span class="number">0</span>;</span><br><span class="line">                    flagg = dfs(dep + <span class="number">1</span>,limit,len);</span><br><span class="line">                    <span class="keyword">if</span> (flagg)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    shu[k][j + len] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= j + len - <span class="number">1</span>; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    heng[i][k] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">bool</span> flagg = dfs(dep + <span class="number">1</span>,limit,len);</span><br><span class="line">                    <span class="keyword">if</span> (flagg)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    heng[i][k] = <span class="number">1</span>;</span><br><span class="line">                    heng[i + len][k] = <span class="number">0</span>;</span><br><span class="line">                    flagg = dfs(dep + <span class="number">1</span>,limit,len);</span><br><span class="line">                    <span class="keyword">if</span> (flagg)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    heng[i + len][k] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">goto</span> endd;  <span class="comment">//到这里，若边长最小的正方形都不行，边长大的肯定都不行</span></span><br><span class="line">            &#125;</span><br><span class="line">    endd:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) <span class="comment">//以(i,j)为左端点、上端点的边</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">                heng[i][j] = shu[i][j] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">            <span class="keyword">int</span> hang = (x - <span class="number">1</span>) / (<span class="number">2</span> * n + <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> temp = (hang - <span class="number">1</span>) * (<span class="number">2</span> * n + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (x - temp &lt;= n)  <span class="comment">//将序号转化到坐标</span></span><br><span class="line">                heng[hang][x - temp] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                shu[hang][x - n - temp] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (H(<span class="number">1</span>) == <span class="number">0</span>) <span class="comment">//如果已经满足题意了</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (len = <span class="number">1</span>;; len++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (dfs(<span class="number">1</span>,len,<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###分析<br>&emsp;&emsp;很显然是一道搜索题. BFS?状态记录不下. DFS?边数太多，容易进入不是最优解的搜索树中,而搜索树节点的扩展速度超级快.  那么将这两种做法综合起来，就是迭代加深搜索.<br>&emsp;&emsp;迭代加深搜索可以限制一个搜索的深度，使得DFS函数的返回类型是bool型，这样一旦搜索失败就可以不用继续搜了. 而普通的DFS不行，不知道具体要搜多少层，求最优解，只能将所有的可能都给搜遍，最坏的结果是将所有边都给枚举一遍.<br>&emsp;&emsp;为了避免多次搜到同一局面，规定一个搜索顺序：每次只搜当前网格图中边长最小的正方形. 枚举这个正方形上的每一条边，删掉这条边后继续递归下去. 如果边长最小的正方形都不行，那么其它的正方形肯定不行. 可以用“决策包容性”来证明. 这种策略所能到达的后继局面一定包含了搜其它正方形所能到达的后继局面. 破坏了当前局面的最小正方形，后继局面的最小正方形的边长一定不小于当前局面的最小正方形的边长,这样相当于把所有的正方形都给考虑到了，并且每种局面最多只会被考虑一次.<br>&emsp;&emsp;想到了优先队列的BFS就要想到A*,想到了迭代加深搜索就要想到IDA* ,估价函数设计为：每次找到一个边长最小的正方形，砍掉它的所有边，计数器+1，直到找不到正方形为止. 这个估价函数一定满足估价函数的设计要求，因为对于一个正方形，我们只需要砍掉它的一条边就能破坏它，在估价函数中砍掉了它的所有边，将这个正方形可能影响到的所有正方形都考虑进去了. 所以$H()≤g()$</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/搜索/" rel="tag"># 搜索</a>
+          
+            <a href="/tags/IDA/" rel="tag"># IDA*</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/06/bzoj1975/" rel="next" title="bzoj1975 [Sdoi2010]魔法猪学院">
+                <i class="fa fa-chevron-left"></i> bzoj1975 [Sdoi2010]魔法猪学院
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/07/bzoj4559/" rel="prev" title="bzoj4559 [JLoi2016]成绩比较">
+                bzoj4559 [JLoi2016]成绩比较 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
