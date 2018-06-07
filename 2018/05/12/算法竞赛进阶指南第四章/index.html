@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="总结," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="###前言&amp;emsp;&amp;emsp;花了5天的时间把这一章学完了. 发现有好多数学定理我以前都不会证明，现在学了一遍，算是建立了比较完整的知识体系吧. ###1.余数与除法分块&amp;emsp;&amp;emsp;遇到余数，要么是变成同余式处理，要么是将余数化为余数表达式. 即k mod i = k - (k / i) * i. 或者是r = k - pi.  注意到第一个式子有k / i下取整. 我们可以利用商">
+<meta name="keywords" content="总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法竞赛进阶指南第四章">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/算法竞赛进阶指南第四章/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="###前言&amp;emsp;&amp;emsp;花了5天的时间把这一章学完了. 发现有好多数学定理我以前都不会证明，现在学了一遍，算是建立了比较完整的知识体系吧. ###1.余数与除法分块&amp;emsp;&amp;emsp;遇到余数，要么是变成同余式处理，要么是将余数化为余数表达式. 即k mod i = k - (k / i) * i. 或者是r = k - pi.  注意到第一个式子有k / i下取整. 我们可以利用商">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-07T09:58:39.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法竞赛进阶指南第四章">
+<meta name="twitter:description" content="###前言&amp;emsp;&amp;emsp;花了5天的时间把这一章学完了. 发现有好多数学定理我以前都不会证明，现在学了一遍，算是建立了比较完整的知识体系吧. ###1.余数与除法分块&amp;emsp;&amp;emsp;遇到余数，要么是变成同余式处理，要么是将余数化为余数表达式. 即k mod i = k - (k / i) * i. 或者是r = k - pi.  注意到第一个式子有k / i下取整. 我们可以利用商">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/算法竞赛进阶指南第四章/"/>
+
+
+
+
+
+  <title>算法竞赛进阶指南第四章 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/算法竞赛进阶指南第四章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法竞赛进阶指南第四章</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-12T17:12:53+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###前言<br>&emsp;&emsp;花了5天的时间把这一章学完了. 发现有好多数学定理我以前都不会证明，现在学了一遍，算是建立了比较完整的知识体系吧.</p>
+<p>###1.余数与除法分块<br>&emsp;&emsp;遇到余数，要么是变成同余式处理，要么是将余数化为余数表达式. 即k mod i = k - (k / i) * i. 或者是r = k - pi.  注意到第一个式子有k / i下取整. 我们可以利用商是由若干段连续的数字拼成的这一事实来优化算法. 当i属于 [x, k /(k / x)]时，[k / i]的值都相等.</p>
+<p>###2.积性函数的求值方法.<br>&emsp;&emsp;对于积性函数$f(x)$，通常将$x$分解为$p_1^{q_1}p_2^{q_2}…p_n^{q_n}$,分别求出$f(p_i^{q_i})$的值，最后再乘起来就是$f(x)$的值了，这利用了一个数的不同质因子间互质这一定理.</p>
+<p>###3.欧拉函数的若干性质<br>&emsp;&emsp;1.对于所有的大于1的n,1~n中与n互质的数的和为$n*φ(n) / 2$.<br>&emsp;&emsp;2.若a,b互质，则$φ(ab) = φ(a)φ(b)$. （欧拉函数是积性函数）<br>&emsp;&emsp;3.若$p | n$且$p^2 | n$,则$φ(n) = φ(n / p) * p$.<br>&emsp;&emsp;4.若第3条中的$p^2$不整除$n$,则$φ(n) = φ(n / p) * (p - 1)$.<br>&emsp;&emsp;5.若d为n的约数，那么$Σφ(d) = n$.<br>&emsp;&emsp;因为$gcd(n,x) = gcd(n,n-x)$,即与n不互质的数成对出现，平均值为$n/2$，可以证明性质1，利用性质1可以求与一个数不互质的数的和.<br>&emsp;&emsp;利用第2,3,4条性质，可以在线性筛中求出$φ(n)$的值,性质二的证明可以利用上面提到的积性函数的求值方法：将a,b分解质因数. 性质3可以通过公式展开直接证明. 性质4则利用性质2证明.<br>&emsp;&emsp;对于第5条性质,令$g(n) = Σφ(d)$,证明$g(n)$是积性函数，利用积性函数的求值方法即可证明. 如何证明$g(n)$是积性函数？只需要证明$g(n)g(m) = g(nm)$即可，其中n,m互质.</p>
+<p>###4.费马小定理的证明<br>&emsp;&emsp;费马小定理：若p是质数，对于任意整数a,有$a^p = a （mod p)$<br>&emsp;&emsp;由费马小定理可以导出欧拉定理$a^{φ(p)} = 1(mod p)$,由于$p$是质数，<br>所以$φ(p) = p - 1$,证明了欧拉定理即可证明费马小定理.<br>&emsp;&emsp;利用简化剩余系来证明. 若${a_1,a_2,…,a_{φ(n)}}$与${aa_1,aa_2,…,aa_{φ(n)}}$都能表示模n下的简化剩余系，那么$a^{φ(n)}a_1a_2…a_{φ(n)} = (aa_1)(aa_2)……(aa_{φ(n)}) = a_1a_2…a_{φ(n)}(modn)$,也就是将上述两个集合分别乘起来,因为a与n互质，所以a可以消掉，就得到了上面的定理，同时也证明了欧拉定理. 这一步利用了一个关键的性质：<strong>模n意义下，与n互质的数不影响整除性，故a可以消掉</strong>.<br>&emsp;&emsp;上面的结论都是在这两个集合是等价的前提下推导出来的，下面来证明这两个集合是等价的. 我们只需要两个集合的元素是一一对应的即可. 对于n原来的简化剩余系，若有$a_i,a_j$,$aa_i = aa_j(modn)$,那么a可以消掉，得到$a_i = a_j(modn)$. 当$a_i ≠a_j$ 时，$aa_i,aa_j$一定对应着不同的同余类. $a_i对应aa_i$,两个集合大小相等，那么这两个集合就是等价的.</p>
+<p>###5.裴蜀定理的证明<br>&emsp;&emsp;先证明边界情况：b = 0时,x = 1,y = 0. 再对欧几里得算法的递归过程应用数学归纳法. 若$bx + (amodb)y = gcd(b,amodb)$利用余数的展开式，对式子进行变形，令$x’ = y,y’ = x - (a/b)y$,因为$gcd(b,amodb) = gcd(a,b)$,所以$ax’ + by’ = gcd(a,b)$,正好就是欧几里得算法往上一层的情况.</p>
+<p>###6.乘法逆元与中国剩余定理<br>&emsp;&emsp;一定要注意：<strong>乘法逆元只有保证在模数为大质数的情况下才一定会有</strong>.若p为小质数，x是p的倍数，那么x不存在模p意义下的逆元.<br>&emsp;&emsp;中国剩余定理类似拉格朗日插值法，都是利用特殊的点值，只有当$x = x_i$时，$y = y_i$. 当$x = x_k (k≠i)$时，$y = 0$,因此可以将答案写成$Σa_iM_it_i(modm_i)$.<br><strong>中国剩余定理求出来的解一定要不断地加mod使之变成非负数！</strong><br>&emsp;&emsp;若模数不互质，可以用增加模数的lcm法，或者直接合并两个方程.</p>
+<p>###7.矩阵快速幂<br>&emsp;&emsp;如果一类问题满足以下特点：<br>&emsp;&emsp;1.可以抽象出一个长度为n的一维向量，该向量在每个单位时间发生一次变化.<br>&emsp;&emsp;2.变化的形式是一个线性递推(只能乘上or加上一个数).<br>&emsp;&emsp;3.该递推式在每个时间可能作用于不同的数据上，但本身保持不变.<br>&emsp;&emsp;4.向量变化时间(递推的轮数)很长，但向量长度n不大.<br>&emsp;&emsp;即可使用矩阵快速幂优化递推.<br>&emsp;&emsp;设计转移矩阵也有很多技巧. 若状态矩阵的第i维对下一层状态矩阵的第j维有影响，那么转移矩阵的$a_{i,j} = ?$,?根据题目来定. 状态矩阵是一个横着的矩阵，其列数与转移矩阵的行数相等.<br>&emsp;&emsp;若递推式具有周期性(在同一个周期内的不同时间递推式不同)，周期很小，那么可以构造周期长度个矩阵.</p>
+<p>###8.高斯消元and线性基<br>&emsp;&emsp;高斯消元可以用来解线性方程组，异或方程组，模线性方程组(我目前遇到的)，线性基主要是用来处理异或问题的.<br>&emsp;&emsp;高斯消元有四类不同的写法:<br>&emsp;&emsp;1.有且仅有一组解的线性方程组. （模）<br>&emsp;&emsp;2.贪心+线性方程组.<br>&emsp;&emsp;3.异或方程组.<br>&emsp;&emsp;4.有多种解的情况的线性方程组.（模）<br>&emsp;&emsp;第一种怎么写都可以. 第二种是类似于线性基一样的写法，不交换行的位置，每次消掉能找到的最高位. 第三种就是每次找最大的数，换到第i行. 消掉其它的i的最高位为1的数. 第四种要维护当前消到了第几行，消到了第几列. 优先保证第i行被消掉，而不是贪心中的保证第j列被消掉，以下是四种高斯消元的代码：</p>
+<p>####代码1<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="built_in">fabs</span>(a[j][i]) &gt; eps)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">double</span> t = a[i][i] / a[j][i];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= n + <span class="number">1</span>; k++)</span><br><span class="line">                    a[i][k] -= t * a[j][k];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= n + <span class="number">1</span>; k++)</span><br><span class="line">                    swap(a[i][k],a[j][k]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            a[i][n + <span class="number">1</span>] -= x[j] * a[i][j];</span><br><span class="line">        x[i] = a[i][n + <span class="number">1</span>] / a[i][i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####代码2<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">guess</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">fabs</span>(e[i].t[j]) &gt; eps)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (vis[j])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">long</span> <span class="keyword">double</span> temp = e[i].t[j] / e[vis[j]].t[j];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= n; k++)</span><br><span class="line">                        e[i].t[k] -= temp * e[vis[j]].t[k];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    vis[j] = i;</span><br><span class="line">                    cnt++;</span><br><span class="line">                    ans += e[i].w;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####代码3<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">guess</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (ll j = i + <span class="number">1</span>; j &lt;= cnt; j++)</span><br><span class="line">            <span class="keyword">if</span> (e[j] &gt; e[i])</span><br><span class="line">                swap(e[i],e[j]);</span><br><span class="line">        <span class="keyword">if</span> (e[i] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            t = i - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (ll k = <span class="number">63</span>; k &gt;= <span class="number">0</span>; k--)</span><br><span class="line">            <span class="keyword">if</span> ((e[i] &gt;&gt; k) &amp; <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (ll j = <span class="number">1</span>; j &lt;= cnt; j++)</span><br><span class="line">                    <span class="keyword">if</span> (i != j &amp;&amp; ((e[j] &gt;&gt; k) &amp; <span class="number">1</span>))</span><br><span class="line">                        e[j] ^= e[i];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####代码4<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">guess</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> row,col;</span><br><span class="line">    <span class="keyword">for</span> (row = <span class="number">1</span>,col = <span class="number">1</span>; row &lt;= m &amp;&amp; col &lt;= n; row++,col++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = row; i &lt;= m; i++)</span><br><span class="line">            <span class="keyword">if</span> (a[i][col])</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (i == m + <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            row--;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i != row)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n + <span class="number">1</span>; j++)</span><br><span class="line">                swap(a[row][j],a[i][j]);</span><br><span class="line">        <span class="keyword">for</span> (i = row + <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">            <span class="keyword">if</span> (a[i][col])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> LCM = lcm(a[i][col],a[row][col]);</span><br><span class="line">                <span class="keyword">int</span> t1 = LCM / a[i][col],t2 = LCM / a[row][col];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = col; j &lt;= n + <span class="number">1</span>; j++)</span><br><span class="line">                    a[i][j] = ((a[i][j] * t1 - t2 * a[row][j]) % mod + mod) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = row; i &lt;= m; i++)</span><br><span class="line">        <span class="keyword">if</span> (a[i][n + <span class="number">1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            flag = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span> (row &lt;= n)</span><br><span class="line">    &#123;</span><br><span class="line">        flag = <span class="number">-2</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            temp = (temp + a[i][j] * ans[j] % mod) % mod;</span><br><span class="line">        temp = ((a[i][n + <span class="number">1</span>] - temp) % mod + mod) % mod;</span><br><span class="line">        <span class="keyword">int</span> A = a[i][i],B = mod;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        <span class="keyword">int</span> d = exgcd(A,B,x,y);</span><br><span class="line">        x *= (temp / d);</span><br><span class="line">        x %= mod;</span><br><span class="line">        x = (x % (mod / d) + (mod / d)) % (mod / d);</span><br><span class="line">        ans[i] = x;</span><br><span class="line">        <span class="keyword">if</span> (ans[i] &lt; <span class="number">3</span>)</span><br><span class="line">            ans[i] += <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;线性基的性质：1.选取任意不相同的基底异或结果都不为0.<br>&emsp;&emsp;2.一个线性空间的所有基包含的向量个数都相等，可以依据此来贪心.<br>&emsp;&emsp;3.需要考虑0的情况！<br>&emsp;&emsp;4.不去重异或集合是去重异或集合的$2^t$个整数各重复$2^{n - t}$次所形成的.</p>
+<p>###9.概率/期望/01分数规划/博弈<br>&emsp;&emsp;期望dp要倒推，概率dp要正推. 期望dp如果要正推就要先求出到达每个点的概率,转移的代价要乘上概率.<br>&emsp;&emsp;01分数规划用二分.<br>&emsp;&emsp;sg函数用来求解有向图游戏. 在应用sg函数之前，<strong>必须先将失败条件转化为一方不能移动.</strong>,可以通过微调边界来实现.<br>&emsp;&emsp;mex与xor的区别：<strong>mex对应的是每一种决策所转移到的状态的sg值的集合,xor是一种决策将当前任务分成的若干个子任务的sg值的运算.</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/12/joyoi魔法珠/" rel="next" title="tyvj2049 魔法珠">
+                <i class="fa fa-chevron-left"></i> tyvj2049 魔法珠
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/13/cf980d/" rel="prev" title="Codeforces 980 D.Perfect Groups">
+                Codeforces 980 D.Perfect Groups <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
