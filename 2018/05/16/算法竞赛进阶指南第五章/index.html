@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###前言&amp;emsp;&amp;emsp;历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用. ###1.并查集&amp;emsp;&amp;emsp;无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).&amp;emsp;&amp;emsp;几个经典的用并查集维护的关系：&amp;emsp;&amp;emsp;1.对立集">
+<meta name="description" content="###前言   历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用. ###1.并查集   无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).   几个经典的用并查集维护的关系：   1.对立集合.   2.同类集合. ###2.树状数组   树状数组区间修改+区间">
 <meta name="keywords" content="总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法竞赛进阶指南第五章">
 <meta property="og:url" content="http://yoursite.com/2018/05/16/算法竞赛进阶指南第五章/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###前言&amp;emsp;&amp;emsp;历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用. ###1.并查集&amp;emsp;&amp;emsp;无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).&amp;emsp;&amp;emsp;几个经典的用并查集维护的关系：&amp;emsp;&amp;emsp;1.对立集">
+<meta property="og:description" content="###前言   历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用. ###1.并查集   无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).   几个经典的用并查集维护的关系：   1.对立集合.   2.同类集合. ###2.树状数组   树状数组区间修改+区间">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-07T09:35:11.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法竞赛进阶指南第五章">
-<meta name="twitter:description" content="###前言&amp;emsp;&amp;emsp;历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用. ###1.并查集&amp;emsp;&amp;emsp;无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).&amp;emsp;&amp;emsp;几个经典的用并查集维护的关系：&amp;emsp;&amp;emsp;1.对立集">
+<meta name="twitter:description" content="###前言   历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用. ###1.并查集   无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).   几个经典的用并查集维护的关系：   1.对立集合.   2.同类集合. ###2.树状数组   树状数组区间修改+区间">
 
 
 
@@ -322,13 +322,28 @@
       
 
       
-        <p>###前言<br>&emsp;&emsp;历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用.</p>
-<p>###1.并查集<br>&emsp;&emsp;无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).<br>&emsp;&emsp;几个经典的用并查集维护的关系：<br>&emsp;&emsp;1.对立集合.<br>&emsp;&emsp;2.同类集合.</p>
-<p>###2.树状数组<br>&emsp;&emsp;树状数组区间修改+区间查询,思想是将整体求和转化为统计单点贡献. </p>
-<p>###3.线段树<br>&emsp;&emsp;线段树维护一段数的gcd,利用定理$gcd(x,y) = gcd(x,y - x)$,维护序列首位元素以及差分数组.</p>
-<p>###4.扫描线<br>&emsp;&emsp;将无法“准确”计算的矩形变成对称的线段. <strong>因为对称，所以不用pushdown,pushdown是为了处理查询的区间是修改区间的子区间这种情况.</strong>,维护区间内的点是否被完全覆盖. 一个长度为2的区间不可再分，而在线段树中可以，故要将右端点-1.<br>&emsp;&emsp;求一类有限制的极值问题，<strong>要搞清楚到底是什么产生了极值，针对它设计算法,对限制进行转化</strong>.比如选点连通问题、机器任务问题、矩形星星问题等等.</p>
-<p>###5.分块<br>&emsp;&emsp;分块的常用方法:<br>&emsp;&emsp;1.整体排序，块内排序.<br>&emsp;&emsp;2.块内二分求值.<br>&emsp;&emsp;3.对变量大小进行分类讨论，采取不同的方法. 比如若变量小，数组能开的下，就维护块的前缀和. 否则暴力统计.<br>&emsp;&emsp;4.解决二维偏序的“which”问题.</p>
-<p>###6.一类从后往前依次确定的题.<br>&emsp;&emsp;poj2828,poj2182. 最后一个数可以立马确定. 并且前面的数可以通过后面的数以及自身的值来确定. </p>
+        <p>###前言
+  历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用.
+###1.并查集
+  无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).
+  几个经典的用并查集维护的关系：
+  1.对立集合.
+  2.同类集合.
+###2.树状数组
+  树状数组区间修改+区间查询,思想是将整体求和转化为统计单点贡献.
+###3.线段树
+  线段树维护一段数的gcd,利用定理$gcd(x,y) = gcd(x,y - x)$,维护序列首位元素以及差分数组.
+###4.扫描线
+  将无法“准确”计算的矩形变成对称的线段. <strong>因为对称，所以不用pushdown,pushdown是为了处理查询的区间是修改区间的子区间这种情况.</strong>,维护区间内的点是否被完全覆盖. 一个长度为2的区间不可再分，而在线段树中可以，故要将右端点-1.
+  求一类有限制的极值问题，<strong>要搞清楚到底是什么产生了极值，针对它设计算法,对限制进行转化</strong>.比如选点连通问题、机器任务问题、矩形星星问题等等.
+###5.分块
+  分块的常用方法:
+  1.整体排序，块内排序.
+  2.块内二分求值.
+  3.对变量大小进行分类讨论，采取不同的方法. 比如若变量小，数组能开的下，就维护块的前缀和. 否则暴力统计.
+  4.解决二维偏序的“which”问题.
+###6.一类从后往前依次确定的题.
+  poj2828,poj2182. 最后一个数可以立马确定. 并且前面的数可以通过后面的数以及自身的值来确定.</p>
 
       
     </div>
@@ -359,8 +374,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/15/cf979d/" rel="next" title="Codeforces 979 D.Kuro and GCD and XOR and SUM">
-                <i class="fa fa-chevron-left"></i> Codeforces 979 D.Kuro and GCD and XOR and SUM
+              <a href="/2018/05/16/poj3580/" rel="next" title="poj3580 SuperMemo">
+                <i class="fa fa-chevron-left"></i> poj3580 SuperMemo
               </a>
             
           </div>
@@ -369,8 +384,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/16/poj3580/" rel="prev" title="poj3580 SuperMemo">
-                poj3580 SuperMemo <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/17/cf975/" rel="prev" title="Codeforces 975 A. Aramic script">
+                Codeforces 975 A. Aramic script <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
