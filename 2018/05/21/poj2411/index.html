@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###英文题面 Description Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his &apos;toilet series&apos; (where he had to use his toilet paper to d">
+<meta name="description" content="英文题面Description Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his ‘toilet series’ (where he had to use his toilet paper to draw">
 <meta name="keywords" content="dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="poj2411 Mondriaan&#39;s Dream">
 <meta property="og:url" content="http://yoursite.com/2018/05/21/poj2411/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###英文题面 Description Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his &apos;toilet series&apos; (where he had to use his toilet paper to d">
+<meta property="og:description" content="英文题面Description Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his ‘toilet series’ (where he had to use his toilet paper to draw">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-07T09:57:42.400Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="poj2411 Mondriaan&#39;s Dream">
-<meta name="twitter:description" content="###英文题面 Description Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his &apos;toilet series&apos; (where he had to use his toilet paper to d">
+<meta name="twitter:description" content="英文题面Description Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his ‘toilet series’ (where he had to use his toilet paper to draw">
 
 
 
@@ -322,42 +322,17 @@
       
 
       
-        <p>###英文题面
-Description</p>
-<p>Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his 'toilet series' (where he had to use his toilet paper to draw on, for all of his paper was filled with squares and rectangles), he dreamt of filling a large rectangle with small rectangles of width 2 and height 1 in varying ways.</p>
-<p>Expert as he was in this material, he saw at a glance that he'll need a computer to calculate the number of ways to fill the large rectangle whose dimensions were integer values, as well. Help him, so that his dream won't turn into a nightmare!
-Input</p>
-<p>The input contains several test cases. Each test case is made up of two integer numbers: the height h and the width w of the large rectangle. Input is terminated by h=w=0. Otherwise, 1&lt;=h,w&lt;=11.
-Output</p>
-<p>For each test case, output the number of different ways the given rectangle can be filled with small rectangles of size 2 times 1. Assume the given large rectangle is oriented, i.e. count symmetrical tilings multiple times.
-Sample Input</p>
-<p>1 2
-1 3
-1 4
-2 2
-2 3
-2 4
-2 11
-4 11
-0 0
-Sample Output</p>
-<p>1
-0
-1
-2
-3
-5
-144
-51205
-Source</p>
-<p>Ulm Local 2000
-###翻译
-给你一个n*m的棋盘，用1*2的多米诺骨牌去覆盖它，求方案数.
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll n,m,sta[<span class="number">1</span> &lt;&lt; <span class="number">12</span>],f[<span class="number">12</span>][<span class="number">1</span> &lt;&lt; <span class="number">12</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m) != EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span> &amp;&amp; m == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; m); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">bool</span> cnt = <span class="number">0</span>,odd = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> x = i,len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (x)</span><br><span class="line">            &#123;</span><br><span class="line">                len++;</span><br><span class="line">                x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (ll j = <span class="number">0</span>; j &lt; m; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (i &gt;&gt; j &amp; <span class="number">1</span>)</span><br><span class="line">                    odd |= cnt,cnt = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    cnt ^= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            odd |= cnt;</span><br><span class="line">            sta[i] = odd;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">        f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="keyword">for</span> (ll j = <span class="number">0</span>; j &lt; (<span class="number">1</span> &lt;&lt; m); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                f[i][j] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (ll k = <span class="number">0</span>; k &lt; (<span class="number">1</span> &lt;&lt; m); k++)</span><br><span class="line">                    <span class="keyword">if</span> ((j &amp; k) == <span class="number">0</span> &amp;&amp; sta[j | k] == <span class="number">0</span>)</span><br><span class="line">                        f[i][j] += f[i - <span class="number">1</span>][k];</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,f[n][<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  多米诺骨牌覆盖的套路题. 以行为阶段，状压. 若第i位为1，则说明这是竖着的多米诺骨牌的上面一片，否则是其他情况.  转移时需要检查第i-1行与第i行的状态之间是否合法. 若$sta[i]and sta[i - 1]=0$并且$sta[i] | sta[i - 1]$中的每一段连续的0的个数都是偶数个，那么它们就是合法的. 第一个判断是为了让上端出现的多米诺骨牌下端也出现，第二个判断是为了使横着放的多米诺骨牌合法.
-  一个坑点：千万在外层初始化每个状态中每一段连续的0的个数是不是偶数个，因为状态的位数与m有关. m对答案会有影响!</p>
+        <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p>Description</p>
+<p>Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his ‘toilet series’ (where he had to use his toilet paper to draw on, for all of his paper was filled with squares and rectangles), he dreamt of filling a large rectangle with small rectangles of width 2 and height 1 in varying ways. </p>
+<p>Expert as he was in this material, he saw at a glance that he’ll need a computer to calculate the number of ways to fill the large rectangle whose dimensions were integer values, as well. Help him, so that his dream won’t turn into a nightmare!<br>Input</p>
+<p>The input contains several test cases. Each test case is made up of two integer numbers: the height h and the width w of the large rectangle. Input is terminated by h=w=0. Otherwise, 1&lt;=h,w&lt;=11.<br>Output</p>
+<p>For each test case, output the number of different ways the given rectangle can be filled with small rectangles of size 2 times 1. Assume the given large rectangle is oriented, i.e. count symmetrical tilings multiple times.<br>Sample Input</p>
+<p>1 2<br>1 3<br>1 4<br>2 2<br>2 3<br>2 4<br>2 11<br>4 11<br>0 0<br>Sample Output</p>
+<p>1<br>0<br>1<br>2<br>3<br>5<br>144<br>51205<br>Source</p>
+<p>Ulm Local 2000</p>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>给你一个n*m的棋盘，用1*2的多米诺骨牌去覆盖它，求方案数.</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll n,m,sta[<span class="number">1</span> &lt;&lt; <span class="number">12</span>],f[<span class="number">12</span>][<span class="number">1</span> &lt;&lt; <span class="number">12</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m) != EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span> &amp;&amp; m == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; m); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">bool</span> cnt = <span class="number">0</span>,odd = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> x = i,len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (x)</span><br><span class="line">            &#123;</span><br><span class="line">                len++;</span><br><span class="line">                x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (ll j = <span class="number">0</span>; j &lt; m; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (i &gt;&gt; j &amp; <span class="number">1</span>)</span><br><span class="line">                    odd |= cnt,cnt = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    cnt ^= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            odd |= cnt;</span><br><span class="line">            sta[i] = odd;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">        f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="keyword">for</span> (ll j = <span class="number">0</span>; j &lt; (<span class="number">1</span> &lt;&lt; m); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                f[i][j] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (ll k = <span class="number">0</span>; k &lt; (<span class="number">1</span> &lt;&lt; m); k++)</span><br><span class="line">                    <span class="keyword">if</span> ((j &amp; k) == <span class="number">0</span> &amp;&amp; sta[j | k] == <span class="number">0</span>)</span><br><span class="line">                        f[i][j] += f[i - <span class="number">1</span>][k];</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,f[n][<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;多米诺骨牌覆盖的套路题. 以行为阶段，状压. 若第i位为1，则说明这是竖着的多米诺骨牌的上面一片，否则是其他情况.  转移时需要检查第i-1行与第i行的状态之间是否合法. 若$sta[i]and sta[i - 1]=0$并且$sta[i] | sta[i - 1]$中的每一段连续的0的个数都是偶数个，那么它们就是合法的. 第一个判断是为了让上端出现的多米诺骨牌下端也出现，第二个判断是为了使横着放的多米诺骨牌合法.<br>&emsp;&emsp;一个坑点：千万在外层初始化每个状态中每一段连续的0的个数是不是偶数个，因为状态的位数与m有关. m对答案会有影响!</p>
 
       
     </div>
@@ -452,8 +427,17 @@ Source</p>
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -513,6 +497,22 @@ Source</p>
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#英文题面"><span class="nav-number">1.</span> <span class="nav-text">英文题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译"><span class="nav-number">2.</span> <span class="nav-text">翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">4.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

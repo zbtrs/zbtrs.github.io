@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###中文题面 Description 你有n 个整数Ai和n 个整数Bi。你需要把它们配对，即每个Ai恰好对应一 个Bp[i]。要求所有配对的整数差的绝对值之和尽量小，但不允许两个相同的数配 对。例如A={5,6,8}，B={5,7,8}，则最优配对方案是5配8, 6配5, 8配7，配对整数 的差的绝对值分别为2, 2, 1，和为5。注意，5配5，6配7，8配8是不允许的，因 为相同的数不许配对">
+<meta name="description" content="中文题面Description你有n 个整数Ai和n 个整数Bi。你需要把它们配对，即每个Ai恰好对应一 个Bp[i]。要求所有配对的整数差的绝对值之和尽量小，但不允许两个相同的数配 对。例如A={5,6,8}，B={5,7,8}，则最优配对方案是5配8, 6配5, 8配7，配对整数 的差的绝对值分别为2, 2, 1，和为5。注意，5配5，6配7，8配8是不允许的，因 为相同的数不许配对。 Inp">
 <meta name="keywords" content="dp,bzoj,贪心">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bzoj1237 [SCOI2008]配对">
 <meta property="og:url" content="http://yoursite.com/2018/06/04/bzoj1237/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###中文题面 Description 你有n 个整数Ai和n 个整数Bi。你需要把它们配对，即每个Ai恰好对应一 个Bp[i]。要求所有配对的整数差的绝对值之和尽量小，但不允许两个相同的数配 对。例如A={5,6,8}，B={5,7,8}，则最优配对方案是5配8, 6配5, 8配7，配对整数 的差的绝对值分别为2, 2, 1，和为5。注意，5配5，6配7，8配8是不允许的，因 为相同的数不许配对">
+<meta property="og:description" content="中文题面Description你有n 个整数Ai和n 个整数Bi。你需要把它们配对，即每个Ai恰好对应一 个Bp[i]。要求所有配对的整数差的绝对值之和尽量小，但不允许两个相同的数配 对。例如A={5,6,8}，B={5,7,8}，则最优配对方案是5配8, 6配5, 8配7，配对整数 的差的绝对值分别为2, 2, 1，和为5。注意，5配5，6配7，8配8是不允许的，因 为相同的数不许配对。 Inp">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-04T10:37:25.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bzoj1237 [SCOI2008]配对">
-<meta name="twitter:description" content="###中文题面 Description 你有n 个整数Ai和n 个整数Bi。你需要把它们配对，即每个Ai恰好对应一 个Bp[i]。要求所有配对的整数差的绝对值之和尽量小，但不允许两个相同的数配 对。例如A={5,6,8}，B={5,7,8}，则最优配对方案是5配8, 6配5, 8配7，配对整数 的差的绝对值分别为2, 2, 1，和为5。注意，5配5，6配7，8配8是不允许的，因 为相同的数不许配对">
+<meta name="twitter:description" content="中文题面Description你有n 个整数Ai和n 个整数Bi。你需要把它们配对，即每个Ai恰好对应一 个Bp[i]。要求所有配对的整数差的绝对值之和尽量小，但不允许两个相同的数配 对。例如A={5,6,8}，B={5,7,8}，则最优配对方案是5配8, 6配5, 8配7，配对整数 的差的绝对值分别为2, 2, 1，和为5。注意，5配5，6配7，8配8是不允许的，因 为相同的数不许配对。 Inp">
 
 
 
@@ -322,30 +322,16 @@
       
 
       
-        <p>###中文题面
-Description
-你有n 个整数Ai和n 个整数Bi。你需要把它们配对，即每个Ai恰好对应一 个Bp[i]。要求所有配对的整数差的绝对值之和尽量小，但不允许两个相同的数配 对。例如A={5,6,8}，B={5,7,8}，则最优配对方案是5配8, 6配5, 8配7，配对整数 的差的绝对值分别为2, 2, 1，和为5。注意，5配5，6配7，8配8是不允许的，因 为相同的数不许配对。</p>
-<p>Input
-第一行为一个正整数n，接下来是n 行，每行两个整数Ai和Bi，保证所有 Ai各不相同，Bi也各不相同。</p>
-<p>Output
-输出一个整数，即配对整数的差的绝对值之和的最小值。如果无法配对，输 出-1。</p>
-<p>Sample Input
-3</p>
+        <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>Description<br>你有n 个整数Ai和n 个整数Bi。你需要把它们配对，即每个Ai恰好对应一 个Bp[i]。要求所有配对的整数差的绝对值之和尽量小，但不允许两个相同的数配 对。例如A={5,6,8}，B={5,7,8}，则最优配对方案是5配8, 6配5, 8配7，配对整数 的差的绝对值分别为2, 2, 1，和为5。注意，5配5，6配7，8配8是不允许的，因 为相同的数不许配对。</p>
+<p>Input<br>第一行为一个正整数n，接下来是n 行，每行两个整数Ai和Bi，保证所有 Ai各不相同，Bi也各不相同。</p>
+<p>Output<br>输出一个整数，即配对整数的差的绝对值之和的最小值。如果无法配对，输 出-1。</p>
+<p>Sample Input<br>3</p>
 <p>3 65</p>
 <p>45 10</p>
-<p>60 25
-Sample Output
-32
-HINT
-1 &lt;= n &lt;= 10^5，Ai和Bi均为1到10^6之间的整数。
-###提示
-  若没有限制该怎么做？为什么要这么做？这种做法满足什么原则？
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">100010</span>,inf = <span class="number">0x7fffffff</span>;</span><br><span class="line">ll n,a[maxn],b[maxn],f[maxn];</span><br><span class="line"> </span><br><span class="line"><span class="function">ll <span class="title">get</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == y)</span><br><span class="line">        <span class="keyword">return</span> inf;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(x - y);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;a[i],&amp;b[i]);</span><br><span class="line">    sort(a + <span class="number">1</span>,a + <span class="number">1</span> + n);</span><br><span class="line">    sort(b + <span class="number">1</span>,b + <span class="number">1</span> + n);</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    f[<span class="number">1</span>] = get(a[<span class="number">1</span>],b[<span class="number">1</span>]);</span><br><span class="line">    f[<span class="number">2</span>] = min(f[<span class="number">1</span>] + get(a[<span class="number">2</span>],b[<span class="number">2</span>]),get(a[<span class="number">1</span>],b[<span class="number">2</span>]) + get(a[<span class="number">2</span>],b[<span class="number">1</span>]));</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">3</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i] = min(f[i],f[i - <span class="number">1</span>] + get(a[i],b[i]));</span><br><span class="line">        f[i] = min(f[i],f[i - <span class="number">2</span>] + get(a[i - <span class="number">1</span>],b[i]) + get(a[i],b[i - <span class="number">1</span>]));</span><br><span class="line">        f[i] = min(f[i],f[i - <span class="number">3</span>] + get(a[i - <span class="number">2</span>],b[i - <span class="number">1</span>]) + get(a[i - <span class="number">1</span>],b[i]) + get(a[i],b[i - <span class="number">2</span>]));</span><br><span class="line">        f[i] = min(f[i],f[i - <span class="number">3</span>] + get(a[i - <span class="number">2</span>],b[i]) + get(a[i - <span class="number">1</span>],b[i - <span class="number">2</span>]) + get(a[i],b[i - <span class="number">1</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,f[n]);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  如果没有限制，将a,b两个序列的数分别从小到大排序后一一配对即可. 这体现了一个最优性原则：每个数都与离它尽可能近的数配对.
-  如果有限制，那么就会有数与离他不是最近的数配对. 比如a,b两个数与对应位置上的数冲突了，那么a可以匹配b对应位置上的数，b可以匹配a对应位置上的数,此时每个数与配对的数的最长距离为1.如果a,b,c三个数都与对应位置上的数冲突了,此时不管怎么交叉着匹配，最长距离的最小值一定为2.  如果a,b,c,d四个数都冲突了，那么可以拆分成两个a,b冲突的情况，最长距离为1. 由此可以得到一个结论：最优解中，每个数与匹配位置的距离≤2.
-  由此dp. 令$f_{i}$表示前i个数的答案，分类讨论4种转移，从$f_{i - 2}$或$f_{i - 3}$转移过来.</p>
+<p>60 25<br>Sample Output<br>32<br>HINT<br>1 &lt;= n &lt;= 10^5，Ai和Bi均为1到10^6之间的整数。</p>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>&emsp;&emsp;若没有限制该怎么做？为什么要这么做？这种做法满足什么原则？</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">100010</span>,inf = <span class="number">0x7fffffff</span>;</span><br><span class="line">ll n,a[maxn],b[maxn],f[maxn];</span><br><span class="line"> </span><br><span class="line"><span class="function">ll <span class="title">get</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == y)</span><br><span class="line">        <span class="keyword">return</span> inf;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">abs</span>(x - y);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;a[i],&amp;b[i]);</span><br><span class="line">    sort(a + <span class="number">1</span>,a + <span class="number">1</span> + n);</span><br><span class="line">    sort(b + <span class="number">1</span>,b + <span class="number">1</span> + n);</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    f[<span class="number">1</span>] = get(a[<span class="number">1</span>],b[<span class="number">1</span>]);</span><br><span class="line">    f[<span class="number">2</span>] = min(f[<span class="number">1</span>] + get(a[<span class="number">2</span>],b[<span class="number">2</span>]),get(a[<span class="number">1</span>],b[<span class="number">2</span>]) + get(a[<span class="number">2</span>],b[<span class="number">1</span>]));</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">3</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i] = min(f[i],f[i - <span class="number">1</span>] + get(a[i],b[i]));</span><br><span class="line">        f[i] = min(f[i],f[i - <span class="number">2</span>] + get(a[i - <span class="number">1</span>],b[i]) + get(a[i],b[i - <span class="number">1</span>]));</span><br><span class="line">        f[i] = min(f[i],f[i - <span class="number">3</span>] + get(a[i - <span class="number">2</span>],b[i - <span class="number">1</span>]) + get(a[i - <span class="number">1</span>],b[i]) + get(a[i],b[i - <span class="number">2</span>]));</span><br><span class="line">        f[i] = min(f[i],f[i - <span class="number">3</span>] + get(a[i - <span class="number">2</span>],b[i]) + get(a[i - <span class="number">1</span>],b[i - <span class="number">2</span>]) + get(a[i],b[i - <span class="number">1</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,f[n]);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;如果没有限制，将a,b两个序列的数分别从小到大排序后一一配对即可. 这体现了一个最优性原则：每个数都与离它尽可能近的数配对.<br>&emsp;&emsp;如果有限制，那么就会有数与离他不是最近的数配对. 比如a,b两个数与对应位置上的数冲突了，那么a可以匹配b对应位置上的数，b可以匹配a对应位置上的数,此时每个数与配对的数的最长距离为1.如果a,b,c三个数都与对应位置上的数冲突了,此时不管怎么交叉着匹配，最长距离的最小值一定为2.  如果a,b,c,d四个数都冲突了，那么可以拆分成两个a,b冲突的情况，最长距离为1. 由此可以得到一个结论：最优解中，每个数与匹配位置的距离≤2.<br>&emsp;&emsp;由此dp. 令$f_{i}$表示前i个数的答案，分类讨论4种转移，从$f_{i - 2}$或$f_{i - 3}$转移过来.</p>
 
       
     </div>
@@ -390,8 +376,8 @@ HINT
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/04/bzoj3174/" rel="prev" title="bzoj3174 [Tjoi2013]拯救小矮人">
-                bzoj3174 [Tjoi2013]拯救小矮人 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/04/bzoj1899/" rel="prev" title="bzoj1899 [Zjoi2004]Lunch 午餐">
+                bzoj1899 [Zjoi2004]Lunch 午餐 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -444,8 +430,17 @@ HINT
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -505,6 +500,22 @@ HINT
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中文题面"><span class="nav-number">1.</span> <span class="nav-text">中文题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提示"><span class="nav-number">2.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">4.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

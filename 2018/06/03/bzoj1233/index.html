@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###中文题面 Description 奶牛们讨厌黑暗。 为了调整牛棚顶的电灯的亮度，Bessie必须建一座干草堆使得她能够爬上去够到灯泡 。一共有N大包的干草（1&amp;lt;=N&amp;lt;=100000）(从1到N编号)依靠传送带连续的传输进牛棚来。第i包干草有一个 宽度W_i(1&amp;lt;=w_i&amp;lt;=10000)。所有的干草包的厚度和高度都为1. Bessie必须利用所有N包干草来建立起干草堆，">
+<meta name="description" content="中文题面Description奶牛们讨厌黑暗。 为了调整牛棚顶的电灯的亮度，Bessie必须建一座干草堆使得她能够爬上去够到灯泡 。一共有N大包的干草（1&amp;lt;=N&amp;lt;=100000）(从1到N编号)依靠传送带连续的传输进牛棚来。第i包干草有一个 宽度W_i(1&amp;lt;=w_i&amp;lt;=10000)。所有的干草包的厚度和高度都为1. Bessie必须利用所有N包干草来建立起干草堆，并且按照他">
 <meta name="keywords" content="dp,bzoj,贪心">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bzoj1233 [Usaco2009Open]干草堆tower">
 <meta property="og:url" content="http://yoursite.com/2018/06/03/bzoj1233/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###中文题面 Description 奶牛们讨厌黑暗。 为了调整牛棚顶的电灯的亮度，Bessie必须建一座干草堆使得她能够爬上去够到灯泡 。一共有N大包的干草（1&amp;lt;=N&amp;lt;=100000）(从1到N编号)依靠传送带连续的传输进牛棚来。第i包干草有一个 宽度W_i(1&amp;lt;=w_i&amp;lt;=10000)。所有的干草包的厚度和高度都为1. Bessie必须利用所有N包干草来建立起干草堆，">
+<meta property="og:description" content="中文题面Description奶牛们讨厌黑暗。 为了调整牛棚顶的电灯的亮度，Bessie必须建一座干草堆使得她能够爬上去够到灯泡 。一共有N大包的干草（1&amp;lt;=N&amp;lt;=100000）(从1到N编号)依靠传送带连续的传输进牛棚来。第i包干草有一个 宽度W_i(1&amp;lt;=w_i&amp;lt;=10000)。所有的干草包的厚度和高度都为1. Bessie必须利用所有N包干草来建立起干草堆，并且按照他">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-03T07:11:03.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bzoj1233 [Usaco2009Open]干草堆tower">
-<meta name="twitter:description" content="###中文题面 Description 奶牛们讨厌黑暗。 为了调整牛棚顶的电灯的亮度，Bessie必须建一座干草堆使得她能够爬上去够到灯泡 。一共有N大包的干草（1&amp;lt;=N&amp;lt;=100000）(从1到N编号)依靠传送带连续的传输进牛棚来。第i包干草有一个 宽度W_i(1&amp;lt;=w_i&amp;lt;=10000)。所有的干草包的厚度和高度都为1. Bessie必须利用所有N包干草来建立起干草堆，">
+<meta name="twitter:description" content="中文题面Description奶牛们讨厌黑暗。 为了调整牛棚顶的电灯的亮度，Bessie必须建一座干草堆使得她能够爬上去够到灯泡 。一共有N大包的干草（1&amp;lt;=N&amp;lt;=100000）(从1到N编号)依靠传送带连续的传输进牛棚来。第i包干草有一个 宽度W_i(1&amp;lt;=w_i&amp;lt;=10000)。所有的干草包的厚度和高度都为1. Bessie必须利用所有N包干草来建立起干草堆，并且按照他">
 
 
 
@@ -322,20 +322,14 @@
       
 
       
-        <p>###中文题面
-Description
-奶牛们讨厌黑暗。 为了调整牛棚顶的电灯的亮度，Bessie必须建一座干草堆使得她能够爬上去够到灯泡 。一共有N大包的干草（1&lt;=N&lt;=100000）(从1到N编号)依靠传送带连续的传输进牛棚来。第i包干草有一个 宽度W_i(1&lt;=w_i&lt;=10000)。所有的干草包的厚度和高度都为1. Bessie必须利用所有N包干草来建立起干草堆，并且按照他们进牛棚的顺序摆放。她可以相放多少包就放 多少包来建立起tower的地基（当然是紧紧的放在一行中）。接下来他可以放置下一个草包放在之前一级 的上方来建立新的一级。注意：每一级不能比下面的一级宽。她持续的这么放置，直到所有的草包都被安 置完成。她必须按顺序堆放，按照草包进入牛棚的顺序。说得更清楚一些：一旦她将一个草包放在第二级 ，她不能将接下来的草包放在地基上。 Bessie的目标是建立起最高的草包堆。</p>
-<p>Input
-第1行：一个单一的整数N。 第2~N+1行：一个单一的整数:W_i。</p>
-<p>Output
-第一行：一个单一的整数，表示Bessie可以建立的草包堆的最高高度。</p>
-<p>Sample Input
-3</p>
+        <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>Description<br>奶牛们讨厌黑暗。 为了调整牛棚顶的电灯的亮度，Bessie必须建一座干草堆使得她能够爬上去够到灯泡 。一共有N大包的干草（1&lt;=N&lt;=100000）(从1到N编号)依靠传送带连续的传输进牛棚来。第i包干草有一个 宽度W_i(1&lt;=w_i&lt;=10000)。所有的干草包的厚度和高度都为1. Bessie必须利用所有N包干草来建立起干草堆，并且按照他们进牛棚的顺序摆放。她可以相放多少包就放 多少包来建立起tower的地基（当然是紧紧的放在一行中）。接下来他可以放置下一个草包放在之前一级 的上方来建立新的一级。注意：每一级不能比下面的一级宽。她持续的这么放置，直到所有的草包都被安 置完成。她必须按顺序堆放，按照草包进入牛棚的顺序。说得更清楚一些：一旦她将一个草包放在第二级 ，她不能将接下来的草包放在地基上。 Bessie的目标是建立起最高的草包堆。</p>
+<p>Input<br>第1行：一个单一的整数N。 第2~N+1行：一个单一的整数:W_i。</p>
+<p>Output<br>第一行：一个单一的整数，表示Bessie可以建立的草包堆的最高高度。</p>
+<p>Sample Input<br>3</p>
 <p>1</p>
 <p>2</p>
 <p>3</p>
-<p>Sample Output
-2</p>
+<p>Sample Output<br>2</p>
 <p>输出说明：</p>
 <p>前两个（宽度为1和2的）放在底层，总宽度为3，在第二层放置宽度为3的。</p>
 <pre><code>       +----------+
@@ -347,18 +341,9 @@ Description
        | 1 |   2  |
 
        +---+------+
-</code></pre>
-<p>###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">int</span> n,w[maxn],sum[maxn],head,tail,q[maxn],f[maxn],g[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w[i]);</span><br><span class="line">        sum[i] = sum[i - <span class="number">1</span>] + w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sum[n + <span class="number">1</span>] = sum[n];</span><br><span class="line">    q[<span class="number">1</span>] = n + <span class="number">1</span>;</span><br><span class="line">    head = tail = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (head &lt; tail &amp;&amp; sum[q[head + <span class="number">1</span>] - <span class="number">1</span>] - f[q[head + <span class="number">1</span>]] &gt;= sum[i - <span class="number">1</span>])  <span class="comment">//注意是head + 1,若head + 1都满足要求了，那么j越小越好，故弹掉head</span></span><br><span class="line">            head++;</span><br><span class="line">        f[i] = sum[q[head] - <span class="number">1</span>] - sum[i - <span class="number">1</span>];</span><br><span class="line">        g[i] = g[q[head]] + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (head &lt; tail &amp;&amp; sum[q[tail] - <span class="number">1</span>] - f[q[tail]] &lt;= sum[i - <span class="number">1</span>] - f[i])</span><br><span class="line">            tail--;</span><br><span class="line">        q[++tail] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,g[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  很容易想到$O(n^3)$的dp.因为转移必须要知道当前考虑到了第几个干草包，上一层的宽度多少.所以可以令$f_{i,j}$表示前i个干草包中，上一层宽度为j的最大高度值，因为每一层所用的宽草包都是连续的，所以可以将j优化成上一层是从哪个干草包开始的.
-  这样dp的复杂度太高了，没办法对状态和转移进行化简，记录的信息没办法更简单了. 走投无路之下可以利用贪心将决策减少为一种，从而减少状态维数. 考虑如何使高度尽量高，肯定是每一层的宽度能少就尽量少，那么转移只需要从可能的宽度最小的状态转移过来即可. 那么令$f_i$表示前i个干草包中，当前层的最小宽度，再开一个数组$g_i$记录高度. $f_i$从$f_j$转移而来，状态转移方程后面接的多项式只与i,j中的一项有关，所以可以利用单调队列优化到$O(n)$. 这样做其实有一个问题：j的取值范围不符合单调队列的要求，并且不满足单调性. 回忆一下单调队列优化的原理：<strong>考虑k &lt; j的情况，若最优决策为j时，k一定是最优决策，而k是最优决策时j不一定是最有决策，那么就可以将k弹出</strong>. 解决这种问题的方法是换个顺序推，取值范围正好就变了回来，并且满足单调性.
-  令$f_i$表示后i个干草包的min值，$f_i = min{sum_{j - 1} - sum_{i - 1}}(f_j ≤ sum_{j - 1} - sum_{i - 1})$,将$sum_{j - 1} - f_j$看作一个整体，从可行性推最优决策是谁. $k &lt; j,sum_{k - 1} - f_k ≤ sum_{j - 1} - f_j$时，k就可以弹出了，因为决策j能使得i的取值范围更大.
-  注意队首元素的处理. 这里队首弹出元素不光要考虑是否满足要求，还要考虑最优性. 判断队首元素的下一个元素是否可行，如果可行则弹出队首元素，因为两个决策都可行的情况下，肯定是选j更小的决策.
-###总结
-  dp复杂度与要求复杂度差距悬殊，而状态和转移都无法化简时，考虑贪心，优化为一种转移方式，状态也可以随之改变.
-  单调队列优化的原理.不仅仅是最优性可以用单调队列优化，可行性也可以.
-  队尾排除非最优决策，队首排除不满足限制的决策，在满足可行性的前提下求最优解. 通常将出现在限制条件中的式子看作一个整体放到单调队列中，若和转移式中出现的式子不一样，可能要进行特殊处理. 比如在单调队列中枚举解，或者利用决策性质推出最优决策的位置.(在本题中就是不断取出满足条件的队首元素). 可以说：单调队列维护的是可能是最优决策的决策集合.</p>
+</code></pre><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">int</span> n,w[maxn],sum[maxn],head,tail,q[maxn],f[maxn],g[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w[i]);</span><br><span class="line">        sum[i] = sum[i - <span class="number">1</span>] + w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sum[n + <span class="number">1</span>] = sum[n];</span><br><span class="line">    q[<span class="number">1</span>] = n + <span class="number">1</span>;</span><br><span class="line">    head = tail = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (head &lt; tail &amp;&amp; sum[q[head + <span class="number">1</span>] - <span class="number">1</span>] - f[q[head + <span class="number">1</span>]] &gt;= sum[i - <span class="number">1</span>])  <span class="comment">//注意是head + 1,若head + 1都满足要求了，那么j越小越好，故弹掉head</span></span><br><span class="line">            head++;</span><br><span class="line">        f[i] = sum[q[head] - <span class="number">1</span>] - sum[i - <span class="number">1</span>];</span><br><span class="line">        g[i] = g[q[head]] + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (head &lt; tail &amp;&amp; sum[q[tail] - <span class="number">1</span>] - f[q[tail]] &lt;= sum[i - <span class="number">1</span>] - f[i])</span><br><span class="line">            tail--;</span><br><span class="line">        q[++tail] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,g[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;很容易想到$O(n^3)$的dp.因为转移必须要知道当前考虑到了第几个干草包，上一层的宽度多少.所以可以令$f_{i,j}$表示前i个干草包中，上一层宽度为j的最大高度值，因为每一层所用的宽草包都是连续的，所以可以将j优化成上一层是从哪个干草包开始的.<br>&emsp;&emsp;这样dp的复杂度太高了，没办法对状态和转移进行化简，记录的信息没办法更简单了. 走投无路之下可以利用贪心将决策减少为一种，从而减少状态维数. 考虑如何使高度尽量高，肯定是每一层的宽度能少就尽量少，那么转移只需要从可能的宽度最小的状态转移过来即可. 那么令$f_i$表示前i个干草包中，当前层的最小宽度，再开一个数组$g_i$记录高度. $f_i$从$f_j$转移而来，状态转移方程后面接的多项式只与i,j中的一项有关，所以可以利用单调队列优化到$O(n)$. 这样做其实有一个问题：j的取值范围不符合单调队列的要求，并且不满足单调性. 回忆一下单调队列优化的原理：<strong>考虑k &lt; j的情况，若最优决策为j时，k一定是最优决策，而k是最优决策时j不一定是最有决策，那么就可以将k弹出</strong>. 解决这种问题的方法是换个顺序推，取值范围正好就变了回来，并且满足单调性.<br>&emsp;&emsp;令$f_i$表示后i个干草包的min值，$f_i = min\{sum_{j - 1} - sum_{i - 1}\}(f_j ≤ sum_{j - 1} - sum_{i - 1})$,将$sum_{j - 1} - f_j$看作一个整体，从可行性推最优决策是谁. $k &lt; j,sum_{k - 1} - f_k ≤ sum_{j - 1} - f_j$时，k就可以弹出了，因为决策j能使得i的取值范围更大.<br>&emsp;&emsp;注意队首元素的处理. 这里队首弹出元素不光要考虑是否满足要求，还要考虑最优性. 判断队首元素的下一个元素是否可行，如果可行则弹出队首元素，因为两个决策都可行的情况下，肯定是选j更小的决策.</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&emsp;&emsp;dp复杂度与要求复杂度差距悬殊，而状态和转移都无法化简时，考虑贪心，优化为一种转移方式，状态也可以随之改变.<br>&emsp;&emsp;单调队列优化的原理.不仅仅是最优性可以用单调队列优化，可行性也可以.<br>&emsp;&emsp;队尾排除非最优决策，队首排除不满足限制的决策，在满足可行性的前提下求最优解. 通常将出现在限制条件中的式子看作一个整体放到单调队列中，若和转移式中出现的式子不一样，可能要进行特殊处理. 比如在单调队列中枚举解，或者利用决策性质推出最优决策的位置.(在本题中就是不断取出满足条件的队首元素). 可以说：单调队列维护的是可能是最优决策的决策集合.</p>
 
       
     </div>
@@ -457,8 +442,17 @@ Description
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,6 +512,22 @@ Description
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中文题面"><span class="nav-number">1.</span> <span class="nav-text">中文题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

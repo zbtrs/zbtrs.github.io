@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###英文题面 Description Given a n × n matrix A and a positive integer k, find the sum $S = A + A^2 + A^3 + … + A^k.$ Input The input contains exactly one test case. The first line of input contains three">
+<meta name="description" content="英文题面Description Given a n × n matrix A and a positive integer k, find the sum $S = A + A^2 + A^3 + … + A^k.$ Input The input contains exactly one test case. The first line of input contains three posi">
 <meta name="keywords" content="矩阵快速幂,分治">
 <meta property="og:type" content="article">
 <meta property="og:title" content="poj3233 Matrix Power Series">
 <meta property="og:url" content="http://yoursite.com/2018/05/11/poj3233/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###英文题面 Description Given a n × n matrix A and a positive integer k, find the sum $S = A + A^2 + A^3 + … + A^k.$ Input The input contains exactly one test case. The first line of input contains three">
+<meta property="og:description" content="英文题面Description Given a n × n matrix A and a positive integer k, find the sum $S = A + A^2 + A^3 + … + A^k.$ Input The input contains exactly one test case. The first line of input contains three posi">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-07T09:57:57.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="poj3233 Matrix Power Series">
-<meta name="twitter:description" content="###英文题面 Description Given a n × n matrix A and a positive integer k, find the sum $S = A + A^2 + A^3 + … + A^k.$ Input The input contains exactly one test case. The first line of input contains three">
+<meta name="twitter:description" content="英文题面Description Given a n × n matrix A and a positive integer k, find the sum $S = A + A^2 + A^3 + … + A^k.$ Input The input contains exactly one test case. The first line of input contains three posi">
 
 
 
@@ -322,31 +322,18 @@
       
 
       
-        <p>###英文题面
-Description</p>
+        <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p>Description</p>
 <p>Given a n × n matrix A and a positive integer k, find the sum $S = A + A^2 + A^3 + … + A^k.$</p>
 <p>Input</p>
 <p>The input contains exactly one test case. The first line of input contains three positive integers n (n ≤ 30), k (k ≤ 109) and m (m &lt; 104). Then follow n lines each containing n nonnegative integers below 32,768, giving A’s elements in row-major order.</p>
 <p>Output</p>
 <p>Output the elements of S modulo m in the same way as A is given.</p>
 <p>Sample Input</p>
-<p>2 2 4
-0 1
-1 1
-Sample Output</p>
-<p>1 2
-2 3
-Source</p>
-<p>POJ Monthly--2007.06.03, Huang, Jinsong
-###翻译
-求一个矩阵的等比数列和.
-###分析
-  求等比数列可以利用公式，也可以分治. 在本题中采用分治的方式.  一些问题需要注意：
-  1.尽量减少不必要的取模.
-  2.能不用long long就尽量不用long long.
-  3.读入了数据后要取模.
-  有了这3个优化，程序就能在规定时间内跑完啦. 如果取模只涉及到加减运算，那么就可以将取模操作变成减法操作. 用long long会非常耗费时间.
-  求等比数列时要对n分奇偶性讨论. 数学老师CKM曾在课堂上讲过：对于要奇偶分类讨论的题，先求出偶数的情况，那么奇数的情况就能通过-1从偶数的情况上推导过来. 正好可以应用在本题上.</p>
+<p>2 2 4<br>0 1<br>1 1<br>Sample Output</p>
+<p>1 2<br>2 3<br>Source</p>
+<p>POJ Monthly—2007.06.03, Huang, Jinsong</p>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>求一个矩阵的等比数列和.</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;求等比数列可以利用公式，也可以分治. 在本题中采用分治的方式.  一些问题需要注意：<br>&emsp;&emsp;1.尽量减少不必要的取模.<br>&emsp;&emsp;2.能不用long long就尽量不用long long.<br>&emsp;&emsp;3.读入了数据后要取模.<br>&emsp;&emsp;有了这3个优化，程序就能在规定时间内跑完啦. 如果取模只涉及到加减运算，那么就可以将取模操作变成减法操作. 用long long会非常耗费时间.<br>&emsp;&emsp;求等比数列时要对n分奇偶性讨论. 数学老师CKM曾在课堂上讲过：对于要奇偶分类讨论的题，先求出偶数的情况，那么奇数的情况就能通过-1从偶数的情况上推导过来. 正好可以应用在本题上.</p>
 
       
     </div>
@@ -443,8 +430,17 @@ Source</p>
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -504,6 +500,22 @@ Source</p>
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#英文题面"><span class="nav-number">1.</span> <span class="nav-text">英文题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译"><span class="nav-number">2.</span> <span class="nav-text">翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

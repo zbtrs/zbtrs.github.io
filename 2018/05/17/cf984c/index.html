@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="###英文题面  ###翻译 问p/q在b进制下是不是有限小数. ###提示   先考虑十进制. ###代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &amp;lt;map&amp;gt;#include &amp;lt;cstdio&amp;gt;#include">
+<meta name="description" content="英文题面 翻译问p/q在b进制下是不是有限小数. 提示&amp;emsp;&amp;emsp;先考虑十进制. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &amp;lt;map&amp;gt;#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cs">
 <meta name="keywords" content="数学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Codeforces 984 C. Finite or not?">
 <meta property="og:url" content="http://yoursite.com/2018/05/17/cf984c/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###英文题面  ###翻译 问p/q在b进制下是不是有限小数. ###提示   先考虑十进制. ###代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &amp;lt;map&amp;gt;#include &amp;lt;cstdio&amp;gt;#include">
+<meta property="og:description" content="英文题面 翻译问p/q在b进制下是不是有限小数. 提示&amp;emsp;&amp;emsp;先考虑十进制. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &amp;lt;map&amp;gt;#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cs">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/zbtrs/1218078/o_sb.PNG">
 <meta property="og:updated_time" content="2018-06-07T09:56:52.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Codeforces 984 C. Finite or not?">
-<meta name="twitter:description" content="###英文题面  ###翻译 问p/q在b进制下是不是有限小数. ###提示   先考虑十进制. ###代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &amp;lt;map&amp;gt;#include &amp;lt;cstdio&amp;gt;#include">
+<meta name="twitter:description" content="英文题面 翻译问p/q在b进制下是不是有限小数. 提示&amp;emsp;&amp;emsp;先考虑十进制. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &amp;lt;map&amp;gt;#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cs">
 <meta name="twitter:image" content="http://images.cnblogs.com/cnblogs_com/zbtrs/1218078/o_sb.PNG">
 
 
@@ -324,18 +324,11 @@
       
 
       
-        <p>###英文题面
-<img src="http://images.cnblogs.com/cnblogs_com/zbtrs/1218078/o_sb.PNG" alt="Markdown">
-###翻译
-问p/q在b进制下是不是有限小数.
-###提示
-  先考虑十进制.
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll n;</span><br><span class="line">ll p,q,b;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">gcd</span><span class="params">(ll a,ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b)</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">return</span> gcd(b,a % b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>,&amp;p,&amp;q,&amp;b);</span><br><span class="line">    <span class="keyword">if</span> (p % q == <span class="number">0</span> || p == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    ll d = gcd(p,q);</span><br><span class="line">    q /= d;</span><br><span class="line">    <span class="keyword">while</span> (gcd(q,b) != <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ll temp = gcd(q,b);</span><br><span class="line">        <span class="keyword">while</span> (q % temp == <span class="number">0</span>)</span><br><span class="line">            q /= temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (q == <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">while</span> (n--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (solve())</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Finite"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Infinite"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  一个结论：在十进制下，若p/q化成最简分数后，q的质因子只有2和5，那么p/q就是一个有限小数，否则就是无限小数.
-  证明：在十进制下，一个有限小数一定可以表示成$p/10^k$的形式,而$10^k$只含有2和5两种质因子，故q要能变成$10^k$,就必须只能含有2和5. 同样的，对于b进制下的p/q,若最简分数q的质因子在b中都出现过，那么p/q就可以表示成一个有限小数.
-  怎么知道q的质因子在b中是否都出现过呢？ 求出它的所有质因子？复杂度太高了！可以利用唯一分解定律和gcd. 因为$gcd(a,b) = p_1^{min(a_1,b_1)}p_2^{min(a_2,b_2)}......p_k^{min(a_k,b_k)}$. 求q与b的gcd,并将q除去它. 一直除下去，知道gcd = 1,那么q中含有的b的质因数一定都被除完了，剩下的就是b没有的质因数，只需要判断q是否等于1即可.</p>
+        <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p><img src="http://images.cnblogs.com/cnblogs_com/zbtrs/1218078/o_sb.PNG" alt="Markdown"></p>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>问p/q在b进制下是不是有限小数.</p>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>&emsp;&emsp;先考虑十进制.</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll n;</span><br><span class="line">ll p,q,b;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">gcd</span><span class="params">(ll a,ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b)</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">return</span> gcd(b,a % b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>,&amp;p,&amp;q,&amp;b);</span><br><span class="line">    <span class="keyword">if</span> (p % q == <span class="number">0</span> || p == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    ll d = gcd(p,q);</span><br><span class="line">    q /= d;</span><br><span class="line">    <span class="keyword">while</span> (gcd(q,b) != <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ll temp = gcd(q,b);</span><br><span class="line">        <span class="keyword">while</span> (q % temp == <span class="number">0</span>)</span><br><span class="line">            q /= temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (q == <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">while</span> (n--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (solve())</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Finite"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Infinite"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;一个结论：在十进制下，若p/q化成最简分数后，q的质因子只有2和5，那么p/q就是一个有限小数，否则就是无限小数.<br>&emsp;&emsp;证明：在十进制下，一个有限小数一定可以表示成$p/10^k$的形式,而$10^k$只含有2和5两种质因子，故q要能变成$10^k$,就必须只能含有2和5. 同样的，对于b进制下的p/q,若最简分数q的质因子在b中都出现过，那么p/q就可以表示成一个有限小数.<br>&emsp;&emsp;怎么知道q的质因子在b中是否都出现过呢？ 求出它的所有质因子？复杂度太高了！可以利用唯一分解定律和gcd. 因为$gcd(a,b) = p_1^{min(a_1,b_1)}p_2^{min(a_2,b_2)}……p_k^{min(a_k,b_k)}$. 求q与b的gcd,并将q除去它. 一直除下去，知道gcd = 1,那么q中含有的b的质因数一定都被除完了，剩下的就是b没有的质因数，只需要判断q是否等于1即可.</p>
 
       
     </div>
@@ -366,8 +359,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/17/cf975c/" rel="next" title="Codeforces 975 C. Valhalla Siege">
-                <i class="fa fa-chevron-left"></i> Codeforces 975 C. Valhalla Siege
+              <a href="/2018/05/17/cf975d/" rel="next" title="Codeforces 975 D. Valhalla Siege">
+                <i class="fa fa-chevron-left"></i> Codeforces 975 D. Valhalla Siege
               </a>
             
           </div>
@@ -430,8 +423,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -491,6 +493,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#英文题面"><span class="nav-number">1.</span> <span class="nav-text">英文题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译"><span class="nav-number">2.</span> <span class="nav-text">翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提示"><span class="nav-number">3.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">5.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

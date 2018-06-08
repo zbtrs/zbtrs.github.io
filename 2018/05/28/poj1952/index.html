@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###题目大意   求最长严格下降子序列的长度及个数，两个子序列不同当且仅当元素不同，下标不是影响因素. ###提示   先考虑标准为：下标不同而序列不同时该怎么计数.伴随更新法. ###代码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include &amp;lt;cstdi">
+<meta name="description" content="题目大意&amp;emsp;&amp;emsp;求最长严格下降子序列的长度及个数，两个子序列不同当且仅当元素不同，下标不是影响因素. 提示&amp;emsp;&amp;emsp;先考虑标准为：下标不同而序列不同时该怎么计数.伴随更新法. 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include &amp;">
 <meta name="keywords" content="dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="poj1952 BUY LOW, BUY LOWER">
 <meta property="og:url" content="http://yoursite.com/2018/05/28/poj1952/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###题目大意   求最长严格下降子序列的长度及个数，两个子序列不同当且仅当元素不同，下标不是影响因素. ###提示   先考虑标准为：下标不同而序列不同时该怎么计数.伴随更新法. ###代码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include &amp;lt;cstdi">
+<meta property="og:description" content="题目大意&amp;emsp;&amp;emsp;求最长严格下降子序列的长度及个数，两个子序列不同当且仅当元素不同，下标不是影响因素. 提示&amp;emsp;&amp;emsp;先考虑标准为：下标不同而序列不同时该怎么计数.伴随更新法. 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include &amp;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-05-28T15:54:14.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="poj1952 BUY LOW, BUY LOWER">
-<meta name="twitter:description" content="###题目大意   求最长严格下降子序列的长度及个数，两个子序列不同当且仅当元素不同，下标不是影响因素. ###提示   先考虑标准为：下标不同而序列不同时该怎么计数.伴随更新法. ###代码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include &amp;lt;cstdi">
+<meta name="twitter:description" content="题目大意&amp;emsp;&amp;emsp;求最长严格下降子序列的长度及个数，两个子序列不同当且仅当元素不同，下标不是影响因素. 提示&amp;emsp;&amp;emsp;先考虑标准为：下标不同而序列不同时该怎么计数.伴随更新法. 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include &amp;">
 
 
 
@@ -322,17 +322,11 @@
       
 
       
-        <p>###题目大意
-  求最长严格下降子序列的长度及个数，两个子序列不同当且仅当元素不同，下标不是影响因素.
-###提示
-  先考虑标准为：下标不同而序列不同时该怎么计数.伴随更新法.
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5010</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[maxn],f[maxn],g[maxn],maxx,ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">        f[i] = g[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i - <span class="number">1</span>; j &gt;= <span class="number">1</span>; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j] &gt; a[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (f[j] + <span class="number">1</span> &gt; f[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    f[i] = f[j] + <span class="number">1</span>;</span><br><span class="line">                    g[i] = g[j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (f[j] + <span class="number">1</span> == f[i])</span><br><span class="line">                    g[i] += g[j];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (a[j] == a[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (f[i] == <span class="number">1</span>)</span><br><span class="line">                    g[i] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        maxx = max(maxx,f[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">if</span> (f[i] == maxx)</span><br><span class="line">            ans += g[i];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,maxx,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  如果仅仅考虑下标不同而导致子序列不同，那么这道题就很好做. 统计个数利用伴随更新法，即若从最优解更新，则覆盖掉方案数，若从相同的最优解更新，则累加方案数.
-  非常麻烦的一个问题是数值重复要怎么解决？有一点很容易想到：如果元素$a_i$前面有一个相同的元素，那么计数到前一个$a_i$就可以停止计数.  因为它们数值相同，可能造成区别的位置只有它们之间的位置.  对于序列654654,如果从第二个5向左边扩展，计数到第一个5就不继续进行计数了，但是还是会重复计数，因为65会被重复计数两次. 而第二个5的答案是从第二个6的答案转移而来的，于是可以想到:若一个数为最长下降子序列的第一个元素，并且它的前面有与他相同的数，那么这个数的方案数为0，这样用它来更新后面的数，方案数自然就都是0了. 非常奇妙.
-###总结
-  限制枚举顺序，<strong>若要求数值上不同，则将所有的计数方案变到左边第一个数上.</strong> 利用伴随转移，可以将重复计数的答案赋值为0.</p>
+        <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>&emsp;&emsp;求最长严格下降子序列的长度及个数，两个子序列不同当且仅当元素不同，下标不是影响因素.</p>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>&emsp;&emsp;先考虑标准为：下标不同而序列不同时该怎么计数.伴随更新法.</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5010</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[maxn],f[maxn],g[maxn],maxx,ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">        f[i] = g[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i - <span class="number">1</span>; j &gt;= <span class="number">1</span>; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j] &gt; a[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (f[j] + <span class="number">1</span> &gt; f[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    f[i] = f[j] + <span class="number">1</span>;</span><br><span class="line">                    g[i] = g[j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (f[j] + <span class="number">1</span> == f[i])</span><br><span class="line">                    g[i] += g[j];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (a[j] == a[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (f[i] == <span class="number">1</span>)</span><br><span class="line">                    g[i] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        maxx = max(maxx,f[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">if</span> (f[i] == maxx)</span><br><span class="line">            ans += g[i];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,maxx,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;如果仅仅考虑下标不同而导致子序列不同，那么这道题就很好做. 统计个数利用伴随更新法，即若从最优解更新，则覆盖掉方案数，若从相同的最优解更新，则累加方案数.<br>&emsp;&emsp;非常麻烦的一个问题是数值重复要怎么解决？有一点很容易想到：如果元素$a_i$前面有一个相同的元素，那么计数到前一个$a_i$就可以停止计数.  因为它们数值相同，可能造成区别的位置只有它们之间的位置.  对于序列654654,如果从第二个5向左边扩展，计数到第一个5就不继续进行计数了，但是还是会重复计数，因为65会被重复计数两次. 而第二个5的答案是从第二个6的答案转移而来的，于是可以想到:若一个数为最长下降子序列的第一个元素，并且它的前面有与他相同的数，那么这个数的方案数为0，这样用它来更新后面的数，方案数自然就都是0了. 非常奇妙.</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&emsp;&emsp;限制枚举顺序，<strong>若要求数值上不同，则将所有的计数方案变到左边第一个数上.</strong> 利用伴随转移，可以将重复计数的答案赋值为0.</p>
 
       
     </div>
@@ -427,8 +421,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -488,6 +491,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目大意"><span class="nav-number">1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提示"><span class="nav-number">2.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">4.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

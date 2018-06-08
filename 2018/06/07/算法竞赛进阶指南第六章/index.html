@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言   花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. ###1.一些思考成果   线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/   为什么使用dp? http://www.zbtrs.top/2018/05/23/why%2">
+<meta name="description" content="前言&amp;emsp;&amp;emsp;花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. 1.一些思考成果&amp;emsp;&amp;emsp;线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/&amp;emsp;&amp;emsp;为什么使用dp?http://www.zbt">
 <meta name="keywords" content="总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法竞赛进阶指南第六章">
 <meta property="og:url" content="http://yoursite.com/2018/06/07/算法竞赛进阶指南第六章/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言   花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. ###1.一些思考成果   线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/   为什么使用dp? http://www.zbtrs.top/2018/05/23/why%2">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. 1.一些思考成果&amp;emsp;&amp;emsp;线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/&amp;emsp;&amp;emsp;为什么使用dp?http://www.zbt">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-07T10:43:52.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法竞赛进阶指南第六章">
-<meta name="twitter:description" content="前言   花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. ###1.一些思考成果   线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/   为什么使用dp? http://www.zbtrs.top/2018/05/23/why%2">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了. 1.一些思考成果&amp;emsp;&amp;emsp;线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/&amp;emsp;&amp;emsp;为什么使用dp?http://www.zbt">
 
 
 
@@ -322,62 +322,20 @@
       
 
       
-        <h3>前言</h3>
-<p>  花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了.
-###1.一些思考成果
-  线性dp总结：  http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/
-  为什么使用dp?
-http://www.zbtrs.top/2018/05/23/why%20uses%20dp/
-  一类基准点划分计数dp:
-http://www.zbtrs.top/2018/05/27/%E4%B8%80%E7%B1%BB%E5%9F%BA%E5%87%86%E7%82%B9%E5%88%92%E5%88%86%E8%AE%A1%E6%95%B0dp/
-###2.不满足最优子结构性导致dp出错的例子
-  做这种题不是很多，遇到过两种比较常见的例子.
-  1.位运算的最值问题. 一般不能对整体进行dp,而言按位贪心，对每一位进行dp.
-  2.求乘积最值，但有负数. 两个绝对值大的负数相乘可能会得到一个更大的正数，而如果仅记录最大值，是无法进行这种转移的，因此还需要记录最小值.
-###3.背包问题
-  0-1背包就不说了，想说一下多重背包的可行性问题. 原则：迫不得已时再用. 对于每一个物品，如果当前体积拼不出来，但是用上这个物品后当前体积能拼出来，并且物品数不会超，就用这个物品，物品数--. 每一轮只考虑当前物品对体积的贡献.
-  多重背包的二进制拆分法和单调队列优化. 注意：二进制拆分法只能适用于物品数为正整数的情况.
-  还有一类神奇的分治背包问题. 见https://www.cnblogs.com/zbtrs/p/8708099.html (分治，控制边界，不让第i个物品插入背包，插入背包用单调队列优化，还是基于单调队列优化的多重背包问题).
-  多重背包问题一定要先枚举余数再来优化. 有时候也可以用斜率优化，见http://www.zbtrs.top/2018/04/13/bzoj4073%20%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96+%E8%B4%AA%E5%BF%83/
-###4.区间dp的两种类型
-  1.计算操作的影响时，可以只考虑区间内部或与区间端点相邻的点的值.
-  2.需要考虑区间外的影响.
-  如何看出用区间dp? $O(n^3)$的复杂度，并且数字会被消掉(挪动).
-  对于第一类问题，一般的状态就是$f_{l,r}$,枚举中间点k来转移. 可能还要考虑端点的转移，因此转移可能会分多种情况讨论. 如果需要考虑的信息比较多，可能要多加一维. 见http://www.cnblogs.com/zbtrs/p/8454935.html
-  对于第二类问题，通常需要多加一维表示向右/左扩展多少位. 见poj1390
-###5.换根与二次扫描法
-  先从下往上dfs一次，再从上往下更新. 一般要用到两个数组.注意递归与更新子节点的先后顺序.
-###6.环形dp与环形状态转移方程
-  环形dp的两种处理方法：
-  1.强行经过分界点，处理分界点的情况.
-  2.复制一份，在链上处理.
-  一般是选用第二种方法，不仅状态转移方程唯一，还能知道环是从哪里断开的. 如果用第二种方法不能使得状态转移方程唯一(或者是有特殊情况，必须枚举起点，使得复杂度特别高),就必须使用第一种方法了. 通过改变边界条件进行两次dp实现目的.
-  后效性的处理方法：列出状态转移方程，高斯消元求解. 注意特殊的矩阵.
-###7.状压dp
-  需要知道一些元素的信息. 不仅可以用二进制状压，还可以用三进制状压.......十进制状压就和普通的记录信息没什么区别了.
-  可能会有大量的无用状态，处理无用状态的方法是预处理出有用状态(对于每一阶段而言约束条件都一样)或是利用刷表法，只扩展有用状态.(配合dfs转移).
-###8.倍增优化dp转移
-  状态转移具有单一重复性. 你可以手动模拟状态转移，发现转移的方向是确定的，在一维上转移量比较大，转移可以叠加，那么就可以用倍增来优化dp转移.一般都是先预处理出倍增数组，然后从高位到低位拼凑.
-  常见模型：1.拼数. 2.树上往祖先节点跳.
-###9.数据结构优化dp转移
-  这类优化针对的是对决策的权值有要求、决策点的位置有要求的状态转移方程. 如果仅仅只是对决策点的位置有要求，可以用单调队列，单调栈之类的单调数据结构进行维护. 这类优化还是很好看出来的.
-###10.单调队列的神级应用
-  1.最简单的一类应用：决策点的范围随着i的增大而上下界同时增大. 可以认为决策点和i是连在一起的.
-  2.比较容易写错的一类应用：决策点和i不连在一起，每次加入队列的不是第i个元素，而是第i-k个元素.
-  3.放入单调队列的不仅仅是$f_j$,而是关于j的整个多项式.
-  4.利用贪心思想，数学证明找到最优决策点的特征，发现正好可以用单调队列维护. 此时，单调队列维护的仅仅是<strong>可能</strong>的最优决策点，找最优决策点还需要在队列中枚举判断，可以用set加速.或者利用单调队列维护的元素的性质，可以直接从队尾/队首找到最优决策点.<br>
-  5.若决策点位置满足的多项式与转移代价多项式不同，将哪一个放入单调队列中取决于用单调队列维护什么. 若维护可能的最优决策点，则将决策点位置满足的多项式放入单调队列中，否则放入转移代价多项式.
-详见poj3071,bzoj1233.
-###11.费用提前计算思想
-  不知道它之前的具体代价，但知道它对以后的代价的影响. 比如物品加工的等待时间，不知道前面有多少组物品加工对当前物品的等待时间有影响，但是知道当前物品加工对后面物品的等待时间一定有影响，将影响加入到转移的代价中，就消除了后效性.
-###12.斜率优化与四边形不等式
-  原则：优先选择斜率优化，不行再用四边形不等式优化.
-  斜率优化的两种形式，一种是$f_i = f_j + ......$一种是$f_j = f_i + ......$,第一种是直接计算，第二种是将$f_i$变成截距，反解得到. 一般采用第一种形式，如果第一种形式的斜率不单调，则采用第二种形式，保留整个凸包(不进行队首的操作)，二分找斜率分界点.
-  四边形不等式优化的两种类型：
-  1.一维状态dp. $w_{i,j + 1} + w_{i + 1,j} ≥ w_{i,j} + w_{i + 1,j + 1}$.
-  2.二维状态dp. 满足上述式子的同时，还要满足$w_{i,j + 1} ≥ w_{i + 1,j}$.这样二维状态dp也满足四边形不等式，决策位置$pos_{i,j - 1}≤pos_{i,j}≤pos_{i + 1,j}$.注意枚举顺序.
-###13.数位dp
-  前导0的处理. dfs的所有参数都丢到状态中记录.</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&emsp;&emsp;花了三个星期才干完这一章，最主要的原因是我的dp水平不过关，加上最近复课了,花在oi上的时间也变少了.</p>
+<h3 id="1-一些思考成果"><a href="#1-一些思考成果" class="headerlink" title="1.一些思考成果"></a>1.一些思考成果</h3><p>&emsp;&emsp;线性dp总结：  <a href="http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">http://www.zbtrs.top/2018/05/17/%E7%BA%BF%E6%80%A7dp%E6%80%BB%E7%BB%93/</a><br>&emsp;&emsp;为什么使用dp?<br><a href="http://www.zbtrs.top/2018/05/23/why%20uses%20dp/" target="_blank" rel="noopener">http://www.zbtrs.top/2018/05/23/why%20uses%20dp/</a><br>&emsp;&emsp;一类基准点划分计数dp:<br><a href="http://www.zbtrs.top/2018/05/27/%E4%B8%80%E7%B1%BB%E5%9F%BA%E5%87%86%E7%82%B9%E5%88%92%E5%88%86%E8%AE%A1%E6%95%B0dp/" target="_blank" rel="noopener">http://www.zbtrs.top/2018/05/27/%E4%B8%80%E7%B1%BB%E5%9F%BA%E5%87%86%E7%82%B9%E5%88%92%E5%88%86%E8%AE%A1%E6%95%B0dp/</a></p>
+<h3 id="2-不满足最优子结构性导致dp出错的例子"><a href="#2-不满足最优子结构性导致dp出错的例子" class="headerlink" title="2.不满足最优子结构性导致dp出错的例子"></a>2.不满足最优子结构性导致dp出错的例子</h3><p>&emsp;&emsp;做这种题不是很多，遇到过两种比较常见的例子.<br>&emsp;&emsp;1.位运算的最值问题. 一般不能对整体进行dp,而言按位贪心，对每一位进行dp.<br>&emsp;&emsp;2.求乘积最值，但有负数. 两个绝对值大的负数相乘可能会得到一个更大的正数，而如果仅记录最大值，是无法进行这种转移的，因此还需要记录最小值.</p>
+<h3 id="3-背包问题"><a href="#3-背包问题" class="headerlink" title="3.背包问题"></a>3.背包问题</h3><p>&emsp;&emsp;0-1背包就不说了，想说一下多重背包的可行性问题. 原则：迫不得已时再用. 对于每一个物品，如果当前体积拼不出来，但是用上这个物品后当前体积能拼出来，并且物品数不会超，就用这个物品，物品数—. 每一轮只考虑当前物品对体积的贡献.<br>&emsp;&emsp;多重背包的二进制拆分法和单调队列优化. 注意：二进制拆分法只能适用于物品数为正整数的情况.<br>&emsp;&emsp;还有一类神奇的分治背包问题. 见<a href="https://www.cnblogs.com/zbtrs/p/8708099.html" target="_blank" rel="noopener">https://www.cnblogs.com/zbtrs/p/8708099.html</a> (分治，控制边界，不让第i个物品插入背包，插入背包用单调队列优化，还是基于单调队列优化的多重背包问题).<br>&emsp;&emsp;多重背包问题一定要先枚举余数再来优化. 有时候也可以用斜率优化，见<a href="http://www.zbtrs.top/2018/04/13/bzoj4073%20%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96+%E8%B4%AA%E5%BF%83/" target="_blank" rel="noopener">http://www.zbtrs.top/2018/04/13/bzoj4073%20%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96+%E8%B4%AA%E5%BF%83/</a></p>
+<h3 id="4-区间dp的两种类型"><a href="#4-区间dp的两种类型" class="headerlink" title="4.区间dp的两种类型"></a>4.区间dp的两种类型</h3><p>&emsp;&emsp;1.计算操作的影响时，可以只考虑区间内部或与区间端点相邻的点的值.<br>&emsp;&emsp;2.需要考虑区间外的影响.<br>&emsp;&emsp;如何看出用区间dp? $O(n^3)$的复杂度，并且数字会被消掉(挪动).<br>&emsp;&emsp;对于第一类问题，一般的状态就是$f_{l,r}$,枚举中间点k来转移. 可能还要考虑端点的转移，因此转移可能会分多种情况讨论. 如果需要考虑的信息比较多，可能要多加一维. 见<a href="http://www.cnblogs.com/zbtrs/p/8454935.html" target="_blank" rel="noopener">http://www.cnblogs.com/zbtrs/p/8454935.html</a><br>&emsp;&emsp;对于第二类问题，通常需要多加一维表示向右/左扩展多少位. 见poj1390</p>
+<h3 id="5-换根与二次扫描法"><a href="#5-换根与二次扫描法" class="headerlink" title="5.换根与二次扫描法"></a>5.换根与二次扫描法</h3><p>&emsp;&emsp;先从下往上dfs一次，再从上往下更新. 一般要用到两个数组.注意递归与更新子节点的先后顺序.</p>
+<h3 id="6-环形dp与环形状态转移方程"><a href="#6-环形dp与环形状态转移方程" class="headerlink" title="6.环形dp与环形状态转移方程"></a>6.环形dp与环形状态转移方程</h3><p>&emsp;&emsp;环形dp的两种处理方法：<br>&emsp;&emsp;1.强行经过分界点，处理分界点的情况.<br>&emsp;&emsp;2.复制一份，在链上处理.<br>&emsp;&emsp;一般是选用第二种方法，不仅状态转移方程唯一，还能知道环是从哪里断开的. 如果用第二种方法不能使得状态转移方程唯一(或者是有特殊情况，必须枚举起点，使得复杂度特别高),就必须使用第一种方法了. 通过改变边界条件进行两次dp实现目的.<br>&emsp;&emsp;后效性的处理方法：列出状态转移方程，高斯消元求解. 注意特殊的矩阵.</p>
+<h3 id="7-状压dp"><a href="#7-状压dp" class="headerlink" title="7.状压dp"></a>7.状压dp</h3><p>&emsp;&emsp;需要知道一些元素的信息. 不仅可以用二进制状压，还可以用三进制状压…….十进制状压就和普通的记录信息没什么区别了.<br>&emsp;&emsp;可能会有大量的无用状态，处理无用状态的方法是预处理出有用状态(对于每一阶段而言约束条件都一样)或是利用刷表法，只扩展有用状态.(配合dfs转移).</p>
+<h3 id="8-倍增优化dp转移"><a href="#8-倍增优化dp转移" class="headerlink" title="8.倍增优化dp转移"></a>8.倍增优化dp转移</h3><p>&emsp;&emsp;状态转移具有单一重复性. 你可以手动模拟状态转移，发现转移的方向是确定的，在一维上转移量比较大，转移可以叠加，那么就可以用倍增来优化dp转移.一般都是先预处理出倍增数组，然后从高位到低位拼凑.<br>&emsp;&emsp;常见模型：1.拼数. 2.树上往祖先节点跳.</p>
+<h3 id="9-数据结构优化dp转移"><a href="#9-数据结构优化dp转移" class="headerlink" title="9.数据结构优化dp转移"></a>9.数据结构优化dp转移</h3><p>&emsp;&emsp;这类优化针对的是对决策的权值有要求、决策点的位置有要求的状态转移方程. 如果仅仅只是对决策点的位置有要求，可以用单调队列，单调栈之类的单调数据结构进行维护. 这类优化还是很好看出来的.</p>
+<h3 id="10-单调队列的神级应用"><a href="#10-单调队列的神级应用" class="headerlink" title="10.单调队列的神级应用"></a>10.单调队列的神级应用</h3><p>&emsp;&emsp;1.最简单的一类应用：决策点的范围随着i的增大而上下界同时增大. 可以认为决策点和i是连在一起的.<br>&emsp;&emsp;2.比较容易写错的一类应用：决策点和i不连在一起，每次加入队列的不是第i个元素，而是第i-k个元素.<br>&emsp;&emsp;3.放入单调队列的不仅仅是$f_j$,而是关于j的整个多项式.<br>&emsp;&emsp;4.利用贪心思想，数学证明找到最优决策点的特征，发现正好可以用单调队列维护. 此时，单调队列维护的仅仅是<strong>可能</strong>的最优决策点，找最优决策点还需要在队列中枚举判断，可以用set加速.或者利用单调队列维护的元素的性质，可以直接从队尾/队首找到最优决策点.<br>&emsp;&emsp;5.若决策点位置满足的多项式与转移代价多项式不同，将哪一个放入单调队列中取决于用单调队列维护什么. 若维护可能的最优决策点，则将决策点位置满足的多项式放入单调队列中，否则放入转移代价多项式.<br>详见poj3071,bzoj1233.</p>
+<h3 id="11-费用提前计算思想"><a href="#11-费用提前计算思想" class="headerlink" title="11.费用提前计算思想"></a>11.费用提前计算思想</h3><p>&emsp;&emsp;不知道它之前的具体代价，但知道它对以后的代价的影响. 比如物品加工的等待时间，不知道前面有多少组物品加工对当前物品的等待时间有影响，但是知道当前物品加工对后面物品的等待时间一定有影响，将影响加入到转移的代价中，就消除了后效性.</p>
+<h3 id="12-斜率优化与四边形不等式"><a href="#12-斜率优化与四边形不等式" class="headerlink" title="12.斜率优化与四边形不等式"></a>12.斜率优化与四边形不等式</h3><p>&emsp;&emsp;原则：优先选择斜率优化，不行再用四边形不等式优化.<br>&emsp;&emsp;斜率优化的两种形式，一种是$f_i = f_j + ……$一种是$f_j = f_i + ……$,第一种是直接计算，第二种是将$f_i$变成截距，反解得到. 一般采用第一种形式，如果第一种形式的斜率不单调，则采用第二种形式，保留整个凸包(不进行队首的操作)，二分找斜率分界点.<br>&emsp;&emsp;四边形不等式优化的两种类型：<br>&emsp;&emsp;1.一维状态dp. $w_{i,j + 1} + w_{i + 1,j} ≥ w_{i,j} + w_{i + 1,j + 1}$.<br>&emsp;&emsp;2.二维状态dp. 满足上述式子的同时，还要满足$w_{i,j + 1} ≥ w_{i + 1,j}$.这样二维状态dp也满足四边形不等式，决策位置$pos_{i,j - 1}≤pos_{i,j}≤pos_{i + 1,j}$.注意枚举顺序.</p>
+<h3 id="13-数位dp"><a href="#13-数位dp" class="headerlink" title="13.数位dp"></a>13.数位dp</h3><p>&emsp;&emsp;前导0的处理. dfs的所有参数都丢到状态中记录.</p>
 
       
     </div>
@@ -552,7 +510,7 @@ http://www.zbtrs.top/2018/05/27/%E4%B8%80%E7%B1%BB%E5%9F%BA%E5%87%86%E7%82%B9%E5
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-一些思考成果"><span class="nav-number">2.</span> <span class="nav-text">1.一些思考成果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-不满足最优子结构性导致dp出错的例子"><span class="nav-number">3.</span> <span class="nav-text">2.不满足最优子结构性导致dp出错的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-背包问题"><span class="nav-number">4.</span> <span class="nav-text">3.背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-区间dp的两种类型"><span class="nav-number">5.</span> <span class="nav-text">4.区间dp的两种类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-换根与二次扫描法"><span class="nav-number">6.</span> <span class="nav-text">5.换根与二次扫描法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-环形dp与环形状态转移方程"><span class="nav-number">7.</span> <span class="nav-text">6.环形dp与环形状态转移方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-状压dp"><span class="nav-number">8.</span> <span class="nav-text">7.状压dp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-倍增优化dp转移"><span class="nav-number">9.</span> <span class="nav-text">8.倍增优化dp转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-数据结构优化dp转移"><span class="nav-number">10.</span> <span class="nav-text">9.数据结构优化dp转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-单调队列的神级应用"><span class="nav-number">11.</span> <span class="nav-text">10.单调队列的神级应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-费用提前计算思想"><span class="nav-number">12.</span> <span class="nav-text">11.费用提前计算思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-斜率优化与四边形不等式"><span class="nav-number">13.</span> <span class="nav-text">12.斜率优化与四边形不等式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-数位dp"><span class="nav-number">14.</span> <span class="nav-text">13.数位dp</span></a></li></ol></div>
             
 
           </div>

@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="###英文题面 Description Georgia and Bob decide to play a self-invented game. They draw a row of grids on paper, number the grids from left to right by 1, 2, 3, ..., and place N chessmen on different grids">
+<meta name="description" content="英文题面Description Georgia and Bob decide to play a self-invented game. They draw a row of grids on paper, number the grids from left to right by 1, 2, 3, …, and place N chessmen on different grids, as s">
 <meta name="keywords" content="博弈论">
 <meta property="og:type" content="article">
 <meta property="og:title" content="poj1704 Georgia and Bob">
 <meta property="og:url" content="http://yoursite.com/2018/05/12/poj1704/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###英文题面 Description Georgia and Bob decide to play a self-invented game. They draw a row of grids on paper, number the grids from left to right by 1, 2, 3, ..., and place N chessmen on different grids">
+<meta property="og:description" content="英文题面Description Georgia and Bob decide to play a self-invented game. They draw a row of grids on paper, number the grids from left to right by 1, 2, 3, …, and place N chessmen on different grids, as s">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://poj.org/images/1704_1.jpg">
 <meta property="og:updated_time" content="2018-06-07T09:51:50.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="poj1704 Georgia and Bob">
-<meta name="twitter:description" content="###英文题面 Description Georgia and Bob decide to play a self-invented game. They draw a row of grids on paper, number the grids from left to right by 1, 2, 3, ..., and place N chessmen on different grids">
+<meta name="twitter:description" content="英文题面Description Georgia and Bob decide to play a self-invented game. They draw a row of grids on paper, number the grids from left to right by 1, 2, 3, …, and place N chessmen on different grids, as s">
 <meta name="twitter:image" content="http://poj.org/images/1704_1.jpg">
 
 
@@ -324,32 +324,16 @@
       
 
       
-        <p>###英文题面
-Description</p>
-<p>Georgia and Bob decide to play a self-invented game. They draw a row of grids on paper, number the grids from left to right by 1, 2, 3, ..., and place N chessmen on different grids, as shown in the following figure for example:
-<img src="http://poj.org/images/1704_1.jpg" alt="a">
-Georgia and Bob move the chessmen in turn. Every time a player will choose a chessman, and move it to the left without going over any other chessmen or across the left edge. The player can freely choose number of steps the chessman moves, with the constraint that the chessman must be moved at least ONE step and one grid can at most contains ONE single chessman. The player who cannot make a move loses the game.</p>
-<p>Georgia always plays first since &quot;Lady first&quot;. Suppose that Georgia and Bob both do their best in the game, i.e., if one of them knows a way to win the game, he or she will be able to carry it out.</p>
-<p>Given the initial positions of the n chessmen, can you predict who will finally win the game?
-Input</p>
-<p>The first line of the input contains a single integer T (1 &lt;= T &lt;= 20), the number of test cases. Then T cases follow. Each test case contains two lines. The first line consists of one integer N (1 &lt;= N &lt;= 1000), indicating the number of chessmen. The second line contains N different integers P1, P2 ... Pn (1 &lt;= Pi &lt;= 10000), which are the initial positions of the n chessmen.
-Output</p>
-<p>For each test case, prints a single line, &quot;Georgia will win&quot;, if Georgia will win the game; &quot;Bob will win&quot;, if Bob will win the game; otherwise 'Not sure'.
-Sample Input</p>
-<p>2
-3
-1 2 3
-8
-1 5 6 7 9 12 14 17
-Sample Output</p>
-<p>Bob will win
-Georgia will win
-Source</p>
-<p>POJ Monthly--2004.07.18
-###分析
-  经典的阶梯博弈问题.
-  将n个棋两两分成一组. 若n为奇数，则将第一个棋和位置0分为一组. 接下来考虑两种不同的移动方式：
-  若对手移动一组中前面的棋x步，那么你可以移该组后面的棋x步，两个棋的相对位置不变. 若对手移动一组中后面的棋. 你可以选择一组中前面的移动，也可以选择后面的. 若你选择了前面的，对手就会选择相应的后面的，和你挪相同的步数，一组中的棋的相对位置不变,并且接下来又轮到你行动. 若你选择了后面的，则一定会有一组棋的相对位置发生改变. 也就是说：<strong>只有每一组内的两个棋子的距离会对答案产生影响，组与组之间的距离是没有影响的</strong>.那么可以把每一组看作一堆石子，石子的个数为组内两个棋子的距离-1，这样就转化为经典的nim问题了.</p>
+        <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p>Description</p>
+<p>Georgia and Bob decide to play a self-invented game. They draw a row of grids on paper, number the grids from left to right by 1, 2, 3, …, and place N chessmen on different grids, as shown in the following figure for example:<br><img src="http://poj.org/images/1704_1.jpg" alt="a"><br>Georgia and Bob move the chessmen in turn. Every time a player will choose a chessman, and move it to the left without going over any other chessmen or across the left edge. The player can freely choose number of steps the chessman moves, with the constraint that the chessman must be moved at least ONE step and one grid can at most contains ONE single chessman. The player who cannot make a move loses the game. </p>
+<p>Georgia always plays first since “Lady first”. Suppose that Georgia and Bob both do their best in the game, i.e., if one of them knows a way to win the game, he or she will be able to carry it out. </p>
+<p>Given the initial positions of the n chessmen, can you predict who will finally win the game?<br>Input</p>
+<p>The first line of the input contains a single integer T (1 &lt;= T &lt;= 20), the number of test cases. Then T cases follow. Each test case contains two lines. The first line consists of one integer N (1 &lt;= N &lt;= 1000), indicating the number of chessmen. The second line contains N different integers P1, P2 … Pn (1 &lt;= Pi &lt;= 10000), which are the initial positions of the n chessmen.<br>Output</p>
+<p>For each test case, prints a single line, “Georgia will win”, if Georgia will win the game; “Bob will win”, if Bob will win the game; otherwise ‘Not sure’.<br>Sample Input</p>
+<p>2<br>3<br>1 2 3<br>8<br>1 5 6 7 9 12 14 17<br>Sample Output</p>
+<p>Bob will win<br>Georgia will win<br>Source</p>
+<p>POJ Monthly—2004.07.18</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;经典的阶梯博弈问题.<br>&emsp;&emsp;将n个棋两两分成一组. 若n为奇数，则将第一个棋和位置0分为一组. 接下来考虑两种不同的移动方式：<br>&emsp;&emsp;若对手移动一组中前面的棋x步，那么你可以移该组后面的棋x步，两个棋的相对位置不变. 若对手移动一组中后面的棋. 你可以选择一组中前面的移动，也可以选择后面的. 若你选择了前面的，对手就会选择相应的后面的，和你挪相同的步数，一组中的棋的相对位置不变,并且接下来又轮到你行动. 若你选择了后面的，则一定会有一组棋的相对位置发生改变. 也就是说：<strong>只有每一组内的两个棋子的距离会对答案产生影响，组与组之间的距离是没有影响的</strong>.那么可以把每一组看作一堆石子，石子的个数为组内两个棋子的距离-1，这样就转化为经典的nim问题了.</p>
 
       
     </div>
@@ -444,8 +428,17 @@ Source</p>
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -505,6 +498,22 @@ Source</p>
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#英文题面"><span class="nav-number">1.</span> <span class="nav-text">英文题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###中文题面 Description 给定整数N，求1&amp;lt;=x,y&amp;lt;=N且Gcd(x,y)为素数的 数对(x,y)有多少对. Input 一个整数N Output 如题 Sample Input 4 Sample Output 4 HINT hint 对于样例(2,2),(2,4),(3,3),(4,2) 1&amp;lt;=N&amp;lt;=10^7 Source 湖北省队互测 ###代码 123">
+<meta name="description" content="中文题面Description给定整数N，求1&amp;lt;=x,y&amp;lt;=N且Gcd(x,y)为素数的数对(x,y)有多少对. Input一个整数N Output如题 Sample Input4 Sample Output4HINThint 对于样例(2,2),(2,4),(3,3),(4,2) 1&amp;lt;=N&amp;lt;=10^7 Source湖北省队互测 代码12345678910111213141">
 <meta name="keywords" content="bzoj,欧拉函数,莫比乌斯反演">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bzoj2818 Gcd">
 <meta property="og:url" content="http://yoursite.com/2018/05/11/bzoj2818/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###中文题面 Description 给定整数N，求1&amp;lt;=x,y&amp;lt;=N且Gcd(x,y)为素数的 数对(x,y)有多少对. Input 一个整数N Output 如题 Sample Input 4 Sample Output 4 HINT hint 对于样例(2,2),(2,4),(3,3),(4,2) 1&amp;lt;=N&amp;lt;=10^7 Source 湖北省队互测 ###代码 123">
+<meta property="og:description" content="中文题面Description给定整数N，求1&amp;lt;=x,y&amp;lt;=N且Gcd(x,y)为素数的数对(x,y)有多少对. Input一个整数N Output如题 Sample Input4 Sample Output4HINThint 对于样例(2,2),(2,4),(3,3),(4,2) 1&amp;lt;=N&amp;lt;=10^7 Source湖北省队互测 代码12345678910111213141">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-07T09:35:11.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bzoj2818 Gcd">
-<meta name="twitter:description" content="###中文题面 Description 给定整数N，求1&amp;lt;=x,y&amp;lt;=N且Gcd(x,y)为素数的 数对(x,y)有多少对. Input 一个整数N Output 如题 Sample Input 4 Sample Output 4 HINT hint 对于样例(2,2),(2,4),(3,3),(4,2) 1&amp;lt;=N&amp;lt;=10^7 Source 湖北省队互测 ###代码 123">
+<meta name="twitter:description" content="中文题面Description给定整数N，求1&amp;lt;=x,y&amp;lt;=N且Gcd(x,y)为素数的数对(x,y)有多少对. Input一个整数N Output如题 Sample Input4 Sample Output4HINThint 对于样例(2,2),(2,4),(3,3),(4,2) 1&amp;lt;=N&amp;lt;=10^7 Source湖北省队互测 代码12345678910111213141">
 
 
 
@@ -322,29 +322,16 @@
       
 
       
-        <p>###中文题面
-Description
-给定整数N，求1&lt;=x,y&lt;=N且Gcd(x,y)为素数的
-数对(x,y)有多少对.</p>
-<p>Input
-一个整数N</p>
-<p>Output
-如题</p>
-<p>Sample Input
-4</p>
-<p>Sample Output
-4
-HINT
-hint</p>
+        <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>Description<br>给定整数N，求1&lt;=x,y&lt;=N且Gcd(x,y)为素数的<br>数对(x,y)有多少对.</p>
+<p>Input<br>一个整数N</p>
+<p>Output<br>如题</p>
+<p>Sample Input<br>4</p>
+<p>Sample Output<br>4<br>HINT<br>hint</p>
 <p>对于样例(2,2),(2,4),(3,3),(4,2)</p>
 <p>1&lt;=N&lt;=10^7</p>
-<p>Source
-湖北省队互测
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">10000010</span>;</span><br><span class="line"><span class="keyword">int</span> n,prime[maxn],tot,vis[maxn],phi[maxn];</span><br><span class="line">ll sum[maxn],ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    phi[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!vis[i])</span><br><span class="line">        &#123;</span><br><span class="line">            prime[++tot] = i;</span><br><span class="line">            phi[i] = i - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (ll j = <span class="number">1</span>; j &lt;= tot; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            ll t = prime[j] * i;</span><br><span class="line">            <span class="keyword">if</span> (t &gt; n)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            vis[t] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % prime[j] == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                phi[t] = phi[i] * prime[j];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            phi[t] = phi[i] * (prime[j] - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        sum[i] = sum[i - <span class="number">1</span>] + phi[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= tot; i++)</span><br><span class="line">        ans += sum[n / prime[i]] * <span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  很经典的转化. 将$gcd(x,y) == p$转化成$gcd(x / p,y / p) == 1$.因为n的范围比较小，所以可以预处理出n以内所有的质数，枚举每个质数p,求$2*φ(n / p) - 1$的和，即是答案.
-  当n比较大的时候就要用莫比乌斯反演来做，具体不再说明，详情可见博客园.</p>
+<p>Source<br>湖北省队互测</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">10000010</span>;</span><br><span class="line"><span class="keyword">int</span> n,prime[maxn],tot,vis[maxn],phi[maxn];</span><br><span class="line">ll sum[maxn],ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    phi[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!vis[i])</span><br><span class="line">        &#123;</span><br><span class="line">            prime[++tot] = i;</span><br><span class="line">            phi[i] = i - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (ll j = <span class="number">1</span>; j &lt;= tot; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            ll t = prime[j] * i;</span><br><span class="line">            <span class="keyword">if</span> (t &gt; n)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            vis[t] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % prime[j] == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                phi[t] = phi[i] * prime[j];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            phi[t] = phi[i] * (prime[j] - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        sum[i] = sum[i - <span class="number">1</span>] + phi[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= tot; i++)</span><br><span class="line">        ans += sum[n / prime[i]] * <span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;很经典的转化. 将$gcd(x,y) == p$转化成$gcd(x / p,y / p) == 1$.因为n的范围比较小，所以可以预处理出n以内所有的质数，枚举每个质数p,求$2*φ(n / p) - 1$的和，即是答案.<br>&emsp;&emsp;当n比较大的时候就要用莫比乌斯反演来做，具体不再说明，详情可见博客园.</p>
 
       
     </div>
@@ -443,8 +430,17 @@ hint</p>
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -504,6 +500,22 @@ hint</p>
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中文题面"><span class="nav-number">1.</span> <span class="nav-text">中文题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

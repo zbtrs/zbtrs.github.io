@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="计数,dp,总结," />
+  <meta name="keywords" content="dp,计数,总结," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###方法总结   划分对象：一个特定的对象所在的集合. 这个对象一般是取最&amp;quot;小&amp;quot;的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算. ###划分规律   划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划分在">
-<meta name="keywords" content="计数,dp,总结">
+<meta name="description" content="方法总结&amp;emsp;&amp;emsp;划分对象：一个特定的对象所在的集合. 这个对象一般是取最”小”的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算. 划分规律&amp;emsp;&amp;emsp;划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划">
+<meta name="keywords" content="dp,计数,总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一类基准点划分计数dp">
 <meta property="og:url" content="http://yoursite.com/2018/05/27/一类基准点划分计数dp/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###方法总结   划分对象：一个特定的对象所在的集合. 这个对象一般是取最&amp;quot;小&amp;quot;的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算. ###划分规律   划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划分在">
+<meta property="og:description" content="方法总结&amp;emsp;&amp;emsp;划分对象：一个特定的对象所在的集合. 这个对象一般是取最”小”的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算. 划分规律&amp;emsp;&amp;emsp;划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-05-27T15:47:14.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一类基准点划分计数dp">
-<meta name="twitter:description" content="###方法总结   划分对象：一个特定的对象所在的集合. 这个对象一般是取最&amp;quot;小&amp;quot;的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算. ###划分规律   划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划分在">
+<meta name="twitter:description" content="方法总结&amp;emsp;&amp;emsp;划分对象：一个特定的对象所在的集合. 这个对象一般是取最”小”的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算. 划分规律&amp;emsp;&amp;emsp;划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划">
 
 
 
@@ -322,28 +322,14 @@
       
 
       
-        <p>###方法总结
-  划分对象：一个<strong>特定</strong>的对象<strong>所在的集合</strong>. 这个对象一般是取最&quot;小&quot;的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算.
-###划分规律
-  划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划分在上一次的划分的基础上进行,表示的状态和划分条件越来越严格.
-###应用
-  分析几道例题是如何应用上面的规律的.
-####1.金字塔
-  划分对象：第一棵子树，满足对象最小性.
-  划分规律：从整棵树变成了一棵子树，呈现递进式，因为子树可以通过dp计数，所以不需要再次划分.
-####2.cf559C
-  划分对象：第一个经过的黑点.
-  划分规律：从不经过黑点到经过黑点. 加上了限定条件.
-####3.poj1737
-  划分对象：第一个节点所在的连通块.
-  划分规律：从无向图变成连通块.
-####4.boss题
-#####题目大意
-  求n个点割边不超过m的无向连通图的数量，节点有标号.
-#####分析
-  因为多了割边的限制，所以dp有两维状态：$f_{i,j}$表示i个点组成的割边数量为j的无向连通图的数量. 如何划分？基准点肯定是编号最小的点所在的连通块，那么限制条件呢？ 与割边有关并且条件比无向连通图更严苛的是什么？双连通分量！那么就以编号最小的点所在的双连通分量作为基准点来考虑.<br>
-  双连通分量内部没有割边，所以只需要枚举划分成的双连通分量的点数即可.  剩下的点的条件就可以放松了，只需要是无向图即可. 需要枚举和划分出来的双连通分量有多少条割边相连. 令$g_{i,j,k}$表示i个点划分成j个连通分量有k条割边的方案数. 那么$f_{i,j} = Σ(f_{k,0}*C(i-1,k-1) *Σg_{i-k,x,j-x}*k^x)$, x是枚举划分出来的双连通分量有多少条割边与外界相连，每条割边有k个点可以选择. 一定要注意：<strong>编号最小的点是已经被选出来的，所以组合数上下标都要-1</strong>
-  同理，计算$g_{i,j,k}$，基准点是编号最小的点所在的连通分量. $g_{i,j,k} = ΣΣf_{p,q} * C(i - 1,p - 1) * p * g_{i - p,j - 1,k - q}$. 注意划分出来的连通分量和一开始划分出来的双连通分量的割边的点的选择也要算入方案数中. 这一步算的是从连通分量选点的方案数.</p>
+        <h3 id="方法总结"><a href="#方法总结" class="headerlink" title="方法总结"></a>方法总结</h3><p>&emsp;&emsp;划分对象：一个<strong>特定</strong>的对象<strong>所在的集合</strong>. 这个对象一般是取最”小”的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算.</p>
+<h3 id="划分规律"><a href="#划分规律" class="headerlink" title="划分规律"></a>划分规律</h3><p>&emsp;&emsp;划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划分在上一次的划分的基础上进行,表示的状态和划分条件越来越严格. </p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>&emsp;&emsp;分析几道例题是如何应用上面的规律的.</p>
+<h4 id="1-金字塔"><a href="#1-金字塔" class="headerlink" title="1.金字塔"></a>1.金字塔</h4><p>&emsp;&emsp;划分对象：第一棵子树，满足对象最小性.<br>&emsp;&emsp;划分规律：从整棵树变成了一棵子树，呈现递进式，因为子树可以通过dp计数，所以不需要再次划分.</p>
+<h4 id="2-cf559C"><a href="#2-cf559C" class="headerlink" title="2.cf559C"></a>2.cf559C</h4><p>&emsp;&emsp;划分对象：第一个经过的黑点.<br>&emsp;&emsp;划分规律：从不经过黑点到经过黑点. 加上了限定条件.</p>
+<h4 id="3-poj1737"><a href="#3-poj1737" class="headerlink" title="3.poj1737"></a>3.poj1737</h4><p>&emsp;&emsp;划分对象：第一个节点所在的连通块.<br>&emsp;&emsp;划分规律：从无向图变成连通块.</p>
+<h4 id="4-boss题"><a href="#4-boss题" class="headerlink" title="4.boss题"></a>4.boss题</h4><h5 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h5><p>&emsp;&emsp;求n个点割边不超过m的无向连通图的数量，节点有标号.</p>
+<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>&emsp;&emsp;因为多了割边的限制，所以dp有两维状态：$f_{i,j}$表示i个点组成的割边数量为j的无向连通图的数量. 如何划分？基准点肯定是编号最小的点所在的连通块，那么限制条件呢？ 与割边有关并且条件比无向连通图更严苛的是什么？双连通分量！那么就以编号最小的点所在的双连通分量作为基准点来考虑.<br>&emsp;&emsp;双连通分量内部没有割边，所以只需要枚举划分成的双连通分量的点数即可.  剩下的点的条件就可以放松了，只需要是无向图即可. 需要枚举和划分出来的双连通分量有多少条割边相连. 令$g_{i,j,k}$表示i个点划分成j个连通分量有k条割边的方案数. 那么$f_{i,j} = Σ(f_{k,0}*C(i-1,k-1) *Σg_{i-k,x,j-x}*k^x)$, x是枚举划分出来的双连通分量有多少条割边与外界相连，每条割边有k个点可以选择. 一定要注意：<strong>编号最小的点是已经被选出来的，所以组合数上下标都要-1</strong><br>&emsp;&emsp;同理，计算$g_{i,j,k}$，基准点是编号最小的点所在的连通分量. $g_{i,j,k} = ΣΣf_{p,q} * C(i - 1,p - 1) * p * g_{i - p,j - 1,k - q}$. 注意划分出来的连通分量和一开始划分出来的双连通分量的割边的点的选择也要算入方案数中. 这一步算的是从连通分量选点的方案数.</p>
 
       
     </div>
@@ -361,9 +347,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计数/" rel="tag"># 计数</a>
-          
             <a href="/tags/dp/" rel="tag"># dp</a>
+          
+            <a href="/tags/计数/" rel="tag"># 计数</a>
           
             <a href="/tags/总结/" rel="tag"># 总结</a>
           
@@ -378,8 +364,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/27/poj1737/" rel="next" title="poj1737 Connected Graph">
-                <i class="fa fa-chevron-left"></i> poj1737 Connected Graph
+              <a href="/2018/05/27/poj1037/" rel="next" title="poj1037 A decorative fence">
+                <i class="fa fa-chevron-left"></i> poj1037 A decorative fence
               </a>
             
           </div>
@@ -388,8 +374,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/28/cf959f/" rel="prev" title="Codeforces 959 F. Mahmoud and Ehab and yet another xor task">
-                Codeforces 959 F. Mahmoud and Ehab and yet another xor task <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/27/poj1737/" rel="prev" title="poj1737 Connected Graph">
+                poj1737 Connected Graph <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -442,8 +428,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -503,6 +498,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法总结"><span class="nav-number">1.</span> <span class="nav-text">方法总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#划分规律"><span class="nav-number">2.</span> <span class="nav-text">划分规律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-金字塔"><span class="nav-number">3.1.</span> <span class="nav-text">1.金字塔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-cf559C"><span class="nav-number">3.2.</span> <span class="nav-text">2.cf559C</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-poj1737"><span class="nav-number">3.3.</span> <span class="nav-text">3.poj1737</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-boss题"><span class="nav-number">3.4.</span> <span class="nav-text">4.boss题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目大意"><span class="nav-number">3.4.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析"><span class="nav-number">3.4.2.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

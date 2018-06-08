@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###前言   历时5天终于干掉了这一章. 码量之巨，技巧之多，无不使人见之而走. ###1.bitset的应用   一般用于可达性统计. 想要统计一张图上某一个点对于其它点的到达情况，仅仅只关心它能否到达，可以用bitset统计.  如果自己用二进制状压在n很大的情况下是写不了的. ###2.剪枝方法   1.每次找分支最少的状态去搜，也就是找“最难符合要求”的状态去搜.   2.若搜索的多种决">
+<meta name="description" content="前言&amp;emsp;&amp;emsp;历时5天终于干掉了这一章. 码量之巨，技巧之多，无不使人见之而走. 1.bitset的应用&amp;emsp;&amp;emsp;一般用于可达性统计. 想要统计一张图上某一个点对于其它点的到达情况，仅仅只关心它能否到达，可以用bitset统计.  如果自己用二进制状压在n很大的情况下是写不了的. 2.剪枝方法&amp;emsp;&amp;emsp;1.每次找分支最少的状态去搜，也就是找“最难符合要求”">
 <meta name="keywords" content="总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法竞赛进阶指南第三章">
 <meta property="og:url" content="http://yoursite.com/2018/05/08/算法竞赛进阶指南第三章/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###前言   历时5天终于干掉了这一章. 码量之巨，技巧之多，无不使人见之而走. ###1.bitset的应用   一般用于可达性统计. 想要统计一张图上某一个点对于其它点的到达情况，仅仅只关心它能否到达，可以用bitset统计.  如果自己用二进制状压在n很大的情况下是写不了的. ###2.剪枝方法   1.每次找分支最少的状态去搜，也就是找“最难符合要求”的状态去搜.   2.若搜索的多种决">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;历时5天终于干掉了这一章. 码量之巨，技巧之多，无不使人见之而走. 1.bitset的应用&amp;emsp;&amp;emsp;一般用于可达性统计. 想要统计一张图上某一个点对于其它点的到达情况，仅仅只关心它能否到达，可以用bitset统计.  如果自己用二进制状压在n很大的情况下是写不了的. 2.剪枝方法&amp;emsp;&amp;emsp;1.每次找分支最少的状态去搜，也就是找“最难符合要求”">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-07T09:35:11.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法竞赛进阶指南第三章">
-<meta name="twitter:description" content="###前言   历时5天终于干掉了这一章. 码量之巨，技巧之多，无不使人见之而走. ###1.bitset的应用   一般用于可达性统计. 想要统计一张图上某一个点对于其它点的到达情况，仅仅只关心它能否到达，可以用bitset统计.  如果自己用二进制状压在n很大的情况下是写不了的. ###2.剪枝方法   1.每次找分支最少的状态去搜，也就是找“最难符合要求”的状态去搜.   2.若搜索的多种决">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;历时5天终于干掉了这一章. 码量之巨，技巧之多，无不使人见之而走. 1.bitset的应用&amp;emsp;&amp;emsp;一般用于可达性统计. 想要统计一张图上某一个点对于其它点的到达情况，仅仅只关心它能否到达，可以用bitset统计.  如果自己用二进制状压在n很大的情况下是写不了的. 2.剪枝方法&amp;emsp;&amp;emsp;1.每次找分支最少的状态去搜，也就是找“最难符合要求”">
 
 
 
@@ -322,31 +322,13 @@
       
 
       
-        <p>###前言
-  历时5天终于干掉了这一章. 码量之巨，技巧之多，无不使人见之而走.
-###1.bitset的应用
-  一般用于可达性统计. 想要统计一张图上某一个点对于其它点的到达情况，仅仅只关心它能否到达，可以用bitset统计.  如果自己用二进制状压在n很大的情况下是写不了的.
-###2.剪枝方法
-  1.每次找分支最少的状态去搜，也就是找“最难符合要求”的状态去搜.
-  2.若搜索的多种决策会导向同一种状态，应确定决策的先后顺序. 若一种决策的后继状态包含了另一种决策的后继状态，可以只选择前一种决策.
-  3.可行性剪枝.
-  4.最优化剪枝.
-  5.记忆化，若能记忆化最好写成递推的形式(dp).
-###3.边权为0,1的BFS
-  通过双端队列广搜来使得队列中的状态满足步数单调性. 若决策转移的代价为0，则将扩展状态放到队首，否则放到队尾.
-###4.两种DFS类型
-  1.可行性dfs,返回类型为bool型.
-  2.最优性dfs,要求出一个最优解.
-  这两种dfs的区别是剪枝和回溯的不同. 对于可行性dfs,没有最优性剪枝. 若失败了才回溯（还原历史状态）. 对于最优性dfs,两种剪枝都可以有，并且不论成功与否，都要还原历史状态.
-###5.迭代加深搜索与DFS的关系
-  1.迭代加深搜索实质上就是可行性dfs.
-  2.与迭代加深搜索功能相对应的就是最优性dfs.
-###6.搜索方法的选择
-  1.优先考虑最优化搜索算法(A*,IDA*).
-  2.若期望步数比较小，状态能存下.优先选择BFS类搜索.
-  3.若期望步数较大，决策单一，优先选择DFS类搜索.
-  4.若搜索树有的节点深度非常大（搜不到底，或者要搜特别多次），选择迭代加深类搜索.
-  5.若能优化(BFS优化成优先队列BFS,优先队列BFS优化成A*,迭代加深搜索优化成IDA*),选择优化算法.</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&emsp;&emsp;历时5天终于干掉了这一章. 码量之巨，技巧之多，无不使人见之而走.</p>
+<h3 id="1-bitset的应用"><a href="#1-bitset的应用" class="headerlink" title="1.bitset的应用"></a>1.bitset的应用</h3><p>&emsp;&emsp;一般用于可达性统计. 想要统计一张图上某一个点对于其它点的到达情况，仅仅只关心它能否到达，可以用bitset统计.  如果自己用二进制状压在n很大的情况下是写不了的.</p>
+<h3 id="2-剪枝方法"><a href="#2-剪枝方法" class="headerlink" title="2.剪枝方法"></a>2.剪枝方法</h3><p>&emsp;&emsp;1.每次找分支最少的状态去搜，也就是找“最难符合要求”的状态去搜.<br>&emsp;&emsp;2.若搜索的多种决策会导向同一种状态，应确定决策的先后顺序. 若一种决策的后继状态包含了另一种决策的后继状态，可以只选择前一种决策.<br>&emsp;&emsp;3.可行性剪枝.<br>&emsp;&emsp;4.最优化剪枝.<br>&emsp;&emsp;5.记忆化，若能记忆化最好写成递推的形式(dp).</p>
+<h3 id="3-边权为0-1的BFS"><a href="#3-边权为0-1的BFS" class="headerlink" title="3.边权为0,1的BFS"></a>3.边权为0,1的BFS</h3><p>&emsp;&emsp;通过双端队列广搜来使得队列中的状态满足步数单调性. 若决策转移的代价为0，则将扩展状态放到队首，否则放到队尾.</p>
+<h3 id="4-两种DFS类型"><a href="#4-两种DFS类型" class="headerlink" title="4.两种DFS类型"></a>4.两种DFS类型</h3><p>&emsp;&emsp;1.可行性dfs,返回类型为bool型.<br>&emsp;&emsp;2.最优性dfs,要求出一个最优解.<br>&emsp;&emsp;这两种dfs的区别是剪枝和回溯的不同. 对于可行性dfs,没有最优性剪枝. 若失败了才回溯（还原历史状态）. 对于最优性dfs,两种剪枝都可以有，并且不论成功与否，都要还原历史状态.</p>
+<h3 id="5-迭代加深搜索与DFS的关系"><a href="#5-迭代加深搜索与DFS的关系" class="headerlink" title="5.迭代加深搜索与DFS的关系"></a>5.迭代加深搜索与DFS的关系</h3><p>&emsp;&emsp;1.迭代加深搜索实质上就是可行性dfs.<br>&emsp;&emsp;2.与迭代加深搜索功能相对应的就是最优性dfs.</p>
+<h3 id="6-搜索方法的选择"><a href="#6-搜索方法的选择" class="headerlink" title="6.搜索方法的选择"></a>6.搜索方法的选择</h3><p>&emsp;&emsp;1.优先考虑最优化搜索算法(A*,IDA*).<br>&emsp;&emsp;2.若期望步数比较小，状态能存下.优先选择BFS类搜索.<br>&emsp;&emsp;3.若期望步数较大，决策单一，优先选择DFS类搜索.<br>&emsp;&emsp;4.若搜索树有的节点深度非常大（搜不到底，或者要搜特别多次），选择迭代加深类搜索.<br>&emsp;&emsp;5.若能优化(BFS优化成优先队列BFS,优先队列BFS优化成A*,迭代加深搜索优化成IDA*),选择优化算法.</p>
 
       
     </div>
@@ -441,8 +423,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -502,6 +493,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-bitset的应用"><span class="nav-number">2.</span> <span class="nav-text">1.bitset的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-剪枝方法"><span class="nav-number">3.</span> <span class="nav-text">2.剪枝方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-边权为0-1的BFS"><span class="nav-number">4.</span> <span class="nav-text">3.边权为0,1的BFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-两种DFS类型"><span class="nav-number">5.</span> <span class="nav-text">4.两种DFS类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-迭代加深搜索与DFS的关系"><span class="nav-number">6.</span> <span class="nav-text">5.迭代加深搜索与DFS的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-搜索方法的选择"><span class="nav-number">7.</span> <span class="nav-text">6.搜索方法的选择</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
