@@ -187,6 +187,36 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -196,11 +226,79 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
 
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
       
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -1552,7 +1650,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/poj1737/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/一类基准点划分计数dp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1571,7 +1669,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/27/poj1737/" itemprop="url">poj1737 Connected Graph</a></h1>
+                <a class="post-title-link" href="/2018/05/27/一类基准点划分计数dp/" itemprop="url">一类基准点划分计数dp</a></h1>
         
 
         <div class="post-meta">
@@ -1645,10 +1743,14 @@
       
         
           
-            <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>求n个节点的无向连通图有多少个，节点有标号.</p>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>&emsp;&emsp;考虑以什么为基准进行划分来计数.</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> cnt,a[<span class="number">1010</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    &#125;</span><br><span class="line">&#125; f[<span class="number">60</span>],c[<span class="number">60</span>][<span class="number">60</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(node a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = a.cnt; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>,a.a[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">node <span class="keyword">operator</span> + (node a,node b)</span><br><span class="line">&#123;</span><br><span class="line">    node c;</span><br><span class="line">    c.clear();</span><br><span class="line">    c.cnt = max(a.cnt,b.cnt);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= c.cnt; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c.a[i] += a.a[i] + b.a[i];</span><br><span class="line">        <span class="keyword">while</span> (c.a[i] &gt;= <span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            c.a[i + <span class="number">1</span>]++;</span><br><span class="line">            c.a[i] -= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (c.a[c.cnt + <span class="number">1</span>])</span><br><span class="line">        c.cnt++;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">node <span class="keyword">operator</span> * (node a,node b)</span><br><span class="line">&#123;</span><br><span class="line">    node c;</span><br><span class="line">    c.clear();</span><br><span class="line">    c.cnt = a.cnt + b.cnt - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= a.cnt; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= b.cnt; j++)</span><br><span class="line">            c.a[i + j - <span class="number">1</span>] += a.a[i] * b.a[j];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= c.cnt; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c.a[i + <span class="number">1</span>] += c.a[i] / <span class="number">10</span>;</span><br><span class="line">        c.a[i] %= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (c.a[c.cnt + <span class="number">1</span>])</span><br><span class="line">        c.cnt++;</span><br><span class="line">    <span class="keyword">while</span> (c.a[c.cnt] &gt;= <span class="number">10</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        c.a[c.cnt + <span class="number">1</span>] += c.a[c.cnt] / <span class="number">10</span>;</span><br><span class="line">        c.a[c.cnt] %= <span class="number">10</span>;</span><br><span class="line">        c.cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">node <span class="title">qpow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    node res;</span><br><span class="line">    res.clear();</span><br><span class="line">    res.cnt = <span class="number">1</span>;</span><br><span class="line">    res.a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    node ta;</span><br><span class="line">    ta.clear();</span><br><span class="line">    ta.cnt = <span class="number">1</span>;</span><br><span class="line">    ta.a[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>)</span><br><span class="line">            res = res * ta;</span><br><span class="line">        ta = ta * ta;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">node <span class="keyword">operator</span> - (node a,node b)</span><br><span class="line">&#123;</span><br><span class="line">    node c;</span><br><span class="line">    c.clear();</span><br><span class="line">    c.cnt = max(a.cnt,b.cnt);</span><br><span class="line">    <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= c.cnt; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c.a[i] = a.a[i] - b.a[i] - temp;</span><br><span class="line">        temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (c.a[i] &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp++;</span><br><span class="line">            c.a[i] += <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!c.a[c.cnt])</span><br><span class="line">        c.cnt--;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f[<span class="number">1</span>].clear();</span><br><span class="line">    f[<span class="number">1</span>].cnt = <span class="number">1</span>;</span><br><span class="line">    f[<span class="number">1</span>].a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    c[<span class="number">0</span>][<span class="number">0</span>].clear();</span><br><span class="line">    c[<span class="number">0</span>][<span class="number">0</span>].cnt = <span class="number">1</span>;</span><br><span class="line">    c[<span class="number">0</span>][<span class="number">0</span>].a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">50</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c[i][<span class="number">0</span>].clear();</span><br><span class="line">        c[i][<span class="number">0</span>].cnt = <span class="number">1</span>;</span><br><span class="line">        c[i][<span class="number">0</span>].a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            c[i][j].clear();</span><br><span class="line">            c[i][j] = c[i - <span class="number">1</span>][j] + c[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    f[<span class="number">1</span>].clear();</span><br><span class="line">    f[<span class="number">1</span>].cnt = <span class="number">1</span>;</span><br><span class="line">    f[<span class="number">1</span>].a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">50</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i].clear();</span><br><span class="line">        f[i] = qpow(<span class="number">2</span>,i*(i - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i - <span class="number">1</span>; j++)</span><br><span class="line">            f[i] = f[i] - f[j] * c[i - <span class="number">1</span>][j - <span class="number">1</span>] * qpow(<span class="number">2</span>,(i - j)*(i - j - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) != EOF &amp;&amp; n)</span><br><span class="line">        print(f[n]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;连通图不容易计数，考虑计算不连通图的数量，再用总的图的数量减去不连通图的数量即为答案.<br>&emsp;&emsp;以<strong>标号为1的节点所在的连通块</strong>为基准进行划分. 令$f_i$表示i个节点的无向连通图的个数，枚举选j个点构成第一个连通子图，那么方案数就是$f_j * C(i - 1,j - 1) * 2^{(i - j)(i - j - 1) / 2}$,即从剩下的i-1个点中选出j-1个点构成标号为1的节点所在的连通块. 剩下的点与第一个连通块都是不连通的，它们之间的连通情况任意. 总的方案数是$2^{i*(i - 1) / 2}$. $f_i = 2^{i*(i - 1) / 2} - Σf_j * C(i - 1,j - 1) * 2^{(i - j)(i - j - 1) / 2}$.<br>&emsp;&emsp;比较毒瘤的是没有取模操作，需要手写高精度.</p>
+            <h3 id="方法总结"><a href="#方法总结" class="headerlink" title="方法总结"></a>方法总结</h3><p>&emsp;&emsp;划分对象：一个<strong>特定</strong>的对象<strong>所在的集合</strong>. 这个对象一般是取最”小”的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算.</p>
+<h3 id="划分规律"><a href="#划分规律" class="headerlink" title="划分规律"></a>划分规律</h3><p>&emsp;&emsp;划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划分在上一次的划分的基础上进行,表示的状态和划分条件越来越严格. </p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>&emsp;&emsp;分析几道例题是如何应用上面的规律的.</p>
+<h4 id="1-金字塔"><a href="#1-金字塔" class="headerlink" title="1.金字塔"></a>1.金字塔</h4><p>&emsp;&emsp;划分对象：第一棵子树，满足对象最小性.<br>&emsp;&emsp;划分规律：从整棵树变成了一棵子树，呈现递进式，因为子树可以通过dp计数，所以不需要再次划分.</p>
+<h4 id="2-cf559C"><a href="#2-cf559C" class="headerlink" title="2.cf559C"></a>2.cf559C</h4><p>&emsp;&emsp;划分对象：第一个经过的黑点.<br>&emsp;&emsp;划分规律：从不经过黑点到经过黑点. 加上了限定条件.</p>
+<h4 id="3-poj1737"><a href="#3-poj1737" class="headerlink" title="3.poj1737"></a>3.poj1737</h4><p>&emsp;&emsp;划分对象：第一个节点所在的连通块.<br>&emsp;&emsp;划分规律：从无向图变成连通块.</p>
+<h4 id="4-boss题"><a href="#4-boss题" class="headerlink" title="4.boss题"></a>4.boss题</h4><h5 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h5><p>&emsp;&emsp;求n个点割边不超过m的无向连通图的数量，节点有标号.</p>
+<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>&emsp;&emsp;因为多了割边的限制，所以dp有两维状态：$f_{i,j}$表示i个点组成的割边数量为j的无向连通图的数量. 如何划分？基准点肯定是编号最小的点所在的连通块，那么限制条件呢？ 与割边有关并且条件比无向连通图更严苛的是什么？双连通分量！那么就以编号最小的点所在的双连通分量作为基准点来考虑.<br>&emsp;&emsp;双连通分量内部没有割边，所以只需要枚举划分成的双连通分量的点数即可.  剩下的点的条件就可以放松了，只需要是无向图即可. 需要枚举和划分出来的双连通分量有多少条割边相连. 令$g_{i,j,k}$表示i个点划分成j个连通分量有k条割边的方案数. 那么$f_{i,j} = Σ(f_{k,0}*C(i-1,k-1) *Σg_{i-k,x,j-x}*k^x)$, x是枚举划分出来的双连通分量有多少条割边与外界相连，每条割边有k个点可以选择. 一定要注意：<strong>编号最小的点是已经被选出来的，所以组合数上下标都要-1</strong><br>&emsp;&emsp;同理，计算$g_{i,j,k}$，基准点是编号最小的点所在的连通分量. $g_{i,j,k} = ΣΣf_{p,q} * C(i - 1,p - 1) * p * g_{i - p,j - 1,k - q}$. 注意划分出来的连通分量和一开始划分出来的双连通分量的割边的点的选择也要算入方案数中. 这一步算的是从连通分量选点的方案数.</p>
 
           
         
@@ -1744,10 +1846,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -1755,10 +1857,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">81</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -1956,6 +2058,19 @@
   
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 
