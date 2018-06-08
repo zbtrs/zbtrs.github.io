@@ -229,6 +229,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/19/poj1179/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/19/poj1179/" itemprop="url">poj1179 Polygon</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-19T18:57:53+08:00">
+                2018-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###英文题面
+Description</p>
+<p>Polygon is a game for one player that starts on a polygon with N vertices, like the one in Figure 1, where N=4. Each vertex is labelled with an integer and each edge is labelled with either the symbol + (addition) or the symbol * (product). The edges are numbered from 1 to N.</p>
+<p>On the first move, one of the edges is removed. Subsequent moves involve the following steps:
+�pick an edge E and the two vertices V1 and V2 that are linked by E; and
+�replace them by a new vertex, labelled with the result of performing the operation indicated in E on the labels of V1 and V2.
+The game ends when there are no more edges, and its score is the label of the single vertex remaining.</p>
+<p>Consider the polygon of Figure 1. The player started by removing edge 3. After that, the player picked edge 1, then edge 4, and, finally, edge 2. The score is 0.</p>
+<p>Write a program that, given a polygon, computes the highest possible score and lists all the edges that, if removed on the first move, can lead to a game with that score.
+Input</p>
+<p>Your program is to read from standard input. The input describes a polygon with N vertices. It contains two lines. On the first line is the number N. The second line contains the labels of edges 1, ..., N, interleaved with the vertices' labels (first that of the vertex between edges 1 and 2, then that of the vertex between edges 2 and 3, and so on, until that of the vertex between edges N and 1), all separated by one space. An edge label is either the letter t (representing +) or the letter x (representing *).</p>
+<p>3 &lt;= N &lt;= 50
+For any sequence of moves, vertex labels are in the range [-32768,32767].
+Output</p>
+<p>Your program is to write to standard output. On the first line your program must write the highest score one can get for the input polygon. On the second line it must write the list of all edges that, if removed on the first move, can lead to a game with that score. Edges must be written in increasing order, separated by one space.
+Sample Input</p>
+<p>4
+t -7 t 4 x 2 x 5
+Sample Output</p>
+<p>33
+1 2
+Source</p>
+<p>IOI 1998
+###翻译
+一个图，点上标有数字，边上表有运算符号，第一轮选择一条边删掉，然后每次选两个相邻的点，将其合并为1个点，点的数字为两个点原来的数字做所连的边上的运算得到的数字. 问怎样操作能使得最后剩下的那一个数尽量大.
+###提示
+  求最值、环形、数字的数量每次减少1，能想到什么？
+###代码
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll inf = <span class="number">0x7fffffff</span>;</span><br><span class="line">ll n,f[<span class="number">110</span>][<span class="number">110</span>][<span class="number">2</span>],op[<span class="number">110</span>],a[<span class="number">110</span>],ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> s[<span class="number">2</span>];</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);</span><br><span class="line">        <span class="keyword">if</span> (s[<span class="number">0</span>] == <span class="string">'t'</span>)</span><br><span class="line">            op[i] = op[i + n] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            op[i] = op[i + n] = <span class="number">2</span>;</span><br><span class="line">        a[i + n] = a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= <span class="number">2</span> * n; i++)</span><br><span class="line">        <span class="keyword">for</span> (ll j = <span class="number">1</span>; j &lt;= <span class="number">2</span> * n; j++)</span><br><span class="line">            <span class="keyword">for</span> (ll k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (k == <span class="number">0</span>)</span><br><span class="line">                    f[i][j][k] = -inf;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    f[i][j][k] = inf;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= <span class="number">2</span> * n; i++)</span><br><span class="line">        f[i][i][<span class="number">0</span>] = f[i][i][<span class="number">1</span>] = a[i];</span><br><span class="line">    <span class="keyword">for</span> (ll len = <span class="number">2</span>; len &lt;= n; len++)</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i + len - <span class="number">1</span> &lt;= <span class="number">2</span> * n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ll j = i + len - <span class="number">1</span>;</span><br><span class="line">            ll &amp;temp0 = f[i][j][<span class="number">0</span>];</span><br><span class="line">            ll &amp;temp1 = f[i][j][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span> (ll k = i; k &lt; j; k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (op[k + <span class="number">1</span>] == <span class="number">2</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    temp0 = max(temp0,f[i][k][<span class="number">0</span>] * f[k + <span class="number">1</span>][j][<span class="number">0</span>]);</span><br><span class="line">                    temp0 = max(temp0,f[i][k][<span class="number">1</span>] * f[k + <span class="number">1</span>][j][<span class="number">1</span>]);</span><br><span class="line">                    temp1 = min(temp1,f[i][k][<span class="number">1</span>] * f[k + <span class="number">1</span>][j][<span class="number">1</span>]);</span><br><span class="line">                    temp1 = min(temp1,f[i][k][<span class="number">1</span>] * f[k + <span class="number">1</span>][j][<span class="number">0</span>]);</span><br><span class="line">                    temp1 = min(temp1,f[i][k][<span class="number">0</span>] * f[k + <span class="number">1</span>][j][<span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    temp0 = max(temp0,f[i][k][<span class="number">0</span>] + f[k + <span class="number">1</span>][j][<span class="number">0</span>]);</span><br><span class="line">                    temp1 = min(temp1,f[i][k][<span class="number">1</span>] + f[k + <span class="number">1</span>][j][<span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        ans = max(ans,f[i][i + n - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">if</span> (ans == f[i][i + n - <span class="number">1</span>][<span class="number">0</span>])</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld "</span>,i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###分析
+  首先这道题很容易看出来要用区间dp做. 对于环，有两种处理方法：要么枚举删掉哪一条边，要么任意选取一条边删掉并复制一份接在后面变成一条长链. 比较好的是第二种方法，因为在这条新链上考虑一条长为n的子链，就相当于割掉了一条边，并且起点已知，不用再额外话$O(n)$的时间去枚举割掉哪条边.
+  状态转移方程也很显然，就是令$f_{i,j}$为区间[i,j]的最大值，枚举中间点k,$f_{i,j} = max{f_{i,k} op f_{k + 1,j}}$ . 最后枚举起点i为哪一个即可. <strong>事实上这种做法是错误的.因为有负数的情况，该状态设计不具备最优子结构性</strong>.那么还要维护最小值，加一维$f_{i,j,0/1}$表示区间[i,j]的最大值/最小值. 分别维护即可.
+###总结
+  环的两种处理方法，以及数的乘除运算求最值问题要考虑负数与0的情况.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/19/poj1742/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1182,7 +1357,7 @@ Source</p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/cf967d/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/cf967/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1201,7 +1376,7 @@ Source</p>
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/18/cf967d/" itemprop="url">Codeforces 967 D. Resource Distribution</a></h1>
+                <a class="post-title-link" href="/2018/05/18/cf967/" itemprop="url">Codeforces 967 D. Resource Distribution</a></h1>
         
 
         <div class="post-meta">
@@ -1329,7 +1504,7 @@ Source</p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/cf967/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/cf967d/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1348,7 +1523,7 @@ Source</p>
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/18/cf967/" itemprop="url">Codeforces 967 D. Resource Distribution</a></h1>
+                <a class="post-title-link" href="/2018/05/18/cf967d/" itemprop="url">Codeforces 967 D. Resource Distribution</a></h1>
         
 
         <div class="post-meta">
@@ -1802,160 +1977,6 @@ m个饼干给n个人，对于第i个人，若有x个人得到的饼干比它多�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/cf984d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/17/cf984d/" itemprop="url">Codeforces 984 D. XOR-pyramid</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T17:54:53+08:00">
-                2018-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计划/" itemprop="url" rel="index">
-                    <span itemprop="name">计划</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###英文题面
-<img src="http://images.cnblogs.com/cnblogs_com/zbtrs/1218078/o_a.PNG" alt="Markdown">
-###翻译
-求区间[l,r]的f(l',r')的最大值. $l ≤ l' ≤ r' ≤ r$
-###提示
-  询问特别多，区间总长度却非常小，甚至可以用数组存下，能想到什么？
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5010</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[maxn],d[maxn][maxn],f[maxn][maxn],Q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == y)</span><br><span class="line">        <span class="keyword">return</span> d[x][y] = a[x];</span><br><span class="line">    <span class="keyword">if</span> (d[x][y] != <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> d[x][y];</span><br><span class="line">    <span class="keyword">return</span> d[x][y] = (solve(x + <span class="number">1</span>,y) ^ solve(x,y - <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve2</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == y)</span><br><span class="line">        <span class="keyword">return</span> f[x][y] = a[x];</span><br><span class="line">    <span class="keyword">if</span> (f[x][y] != <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> f[x][y];</span><br><span class="line">    <span class="keyword">return</span> f[x][y] = max(solve2(x + <span class="number">1</span>,y),max(solve2(x,y - <span class="number">1</span>),d[x][y]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(d,<span class="number">-1</span>,<span class="keyword">sizeof</span>(d));</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n; j++)</span><br><span class="line">            solve(i,j);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n; j++)</span><br><span class="line">            solve2(i,j);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;Q);</span><br><span class="line">    <span class="keyword">while</span> (Q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> l,r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;l,&amp;r);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[l][r]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  因为n只有5000,我们可以把$f_{l,r}$预处理出来，然后做一次dp,O(1)可完成查询操作，难点就在于怎么预处理.
-  观察f函数，它是由相邻的两项异或而组成一个新的序列. 联想到杨辉三角，将$f_{l,r}$看作杨辉三角的最后一行，往上递推，一定能递推到一行只剩一个数. 预处理f函数的关键在于找到规律. 没有直接能表达出$f_{l,r}$的式子，就要找递推式. f函数构成的杨辉三角的每一个数是由它下面的数和它下面的右边的数异或得到的. 那么可以得到：$f_{l,r} = f_{l + 1,r} ^ f_{l,r - 1}$. 用记忆化搜索，即可$O(n^2)$预处理得到所有的f值. 接下来的dp就很容易了.
-###经验
-  一个函数是递归定义的，并且与每一对相邻的数有关，那么可以联想到杨辉三角.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2006,7 +2027,7 @@ m个饼干给n个人，对于第i个人，若有x个人得到的饼干比它多�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

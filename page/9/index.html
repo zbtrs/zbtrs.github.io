@@ -229,6 +229,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/cf984d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/17/cf984d/" itemprop="url">Codeforces 984 D. XOR-pyramid</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T17:54:53+08:00">
+                2018-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计划/" itemprop="url" rel="index">
+                    <span itemprop="name">计划</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###英文题面
+<img src="http://images.cnblogs.com/cnblogs_com/zbtrs/1218078/o_a.PNG" alt="Markdown">
+###翻译
+求区间[l,r]的f(l',r')的最大值. $l ≤ l' ≤ r' ≤ r$
+###提示
+  询问特别多，区间总长度却非常小，甚至可以用数组存下，能想到什么？
+###代码
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5010</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[maxn],d[maxn][maxn],f[maxn][maxn],Q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == y)</span><br><span class="line">        <span class="keyword">return</span> d[x][y] = a[x];</span><br><span class="line">    <span class="keyword">if</span> (d[x][y] != <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> d[x][y];</span><br><span class="line">    <span class="keyword">return</span> d[x][y] = (solve(x + <span class="number">1</span>,y) ^ solve(x,y - <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve2</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == y)</span><br><span class="line">        <span class="keyword">return</span> f[x][y] = a[x];</span><br><span class="line">    <span class="keyword">if</span> (f[x][y] != <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> f[x][y];</span><br><span class="line">    <span class="keyword">return</span> f[x][y] = max(solve2(x + <span class="number">1</span>,y),max(solve2(x,y - <span class="number">1</span>),d[x][y]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(d,<span class="number">-1</span>,<span class="keyword">sizeof</span>(d));</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n; j++)</span><br><span class="line">            solve(i,j);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n; j++)</span><br><span class="line">            solve2(i,j);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;Q);</span><br><span class="line">    <span class="keyword">while</span> (Q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> l,r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;l,&amp;r);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[l][r]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###分析
+  因为n只有5000,我们可以把$f_{l,r}$预处理出来，然后做一次dp,O(1)可完成查询操作，难点就在于怎么预处理.
+  观察f函数，它是由相邻的两项异或而组成一个新的序列. 联想到杨辉三角，将$f_{l,r}$看作杨辉三角的最后一行，往上递推，一定能递推到一行只剩一个数. 预处理f函数的关键在于找到规律. 没有直接能表达出$f_{l,r}$的式子，就要找递推式. f函数构成的杨辉三角的每一个数是由它下面的数和它下面的右边的数异或得到的. 那么可以得到：$f_{l,r} = f_{l + 1,r} ^ f_{l,r - 1}$. 用记忆化搜索，即可$O(n^2)$预处理得到所有的f值. 接下来的dp就很容易了.
+###经验
+  一个函数是递归定义的，并且与每一对相邻的数有关，那么可以联想到杨辉三角.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/cf984c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -987,169 +1141,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/算法竞赛进阶指南第五章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/16/算法竞赛进阶指南第五章/" itemprop="url">算法竞赛进阶指南第五章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T16:47:53+08:00">
-                2018-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###前言
-  历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用.
-###1.并查集
-  无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).
-  几个经典的用并查集维护的关系：
-  1.对立集合.
-  2.同类集合.
-###2.树状数组
-  树状数组区间修改+区间查询,思想是将整体求和转化为统计单点贡献.
-###3.线段树
-  线段树维护一段数的gcd,利用定理$gcd(x,y) = gcd(x,y - x)$,维护序列首位元素以及差分数组.
-###4.扫描线
-  将无法“准确”计算的矩形变成对称的线段. <strong>因为对称，所以不用pushdown,pushdown是为了处理查询的区间是修改区间的子区间这种情况.</strong>,维护区间内的点是否被完全覆盖. 一个长度为2的区间不可再分，而在线段树中可以，故要将右端点-1.
-  求一类有限制的极值问题，<strong>要搞清楚到底是什么产生了极值，针对它设计算法,对限制进行转化</strong>.比如选点连通问题、机器任务问题、矩形星星问题等等.
-###5.分块
-  分块的常用方法:
-  1.整体排序，块内排序.
-  2.块内二分求值.
-  3.对变量大小进行分类讨论，采取不同的方法. 比如若变量小，数组能开的下，就维护块的前缀和. 否则暴力统计.
-  4.解决二维偏序的“which”问题.
-###6.一类从后往前依次确定的题.
-  poj2828,poj2182. 最后一个数可以立马确定. 并且前面的数可以通过后面的数以及自身的值来确定.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/poj3580/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1280,6 +1271,169 @@ Source</p>
   就是一些splay的基本操作，需要说一下的是第三种操作. 将一个序列旋转T次，先让T对(y - x + 1)取模，旋转操作实际上就是把后面的一段序列提到前面来.一次插入+删除操作即可搞定.
 ###教训
   老是写错我也很绝望.一开始是add操作没有把当前点自身的值给加上，只加了最小值和标记. 然后是删除操作，删了一段序列而不是一个点.插入操作的位置也搞错了,splay数组开小了导致一直TLE!!!这都是什么奇葩错误......</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/算法竞赛进阶指南第五章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/16/算法竞赛进阶指南第五章/" itemprop="url">算法竞赛进阶指南第五章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T16:47:53+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###前言
+  历时3天时间完成了这一章的学习. 有一些数据结构有很好的应用.
+###1.并查集
+  无向图连通情况，传递关系，位置占用(连成一片),带权并查集，扩展域并查集. 当位置连成一片可以跳过时，可以利用并查集维护每个点往右边跳能跳到哪个点.(跳过一整段连续的区域).
+  几个经典的用并查集维护的关系：
+  1.对立集合.
+  2.同类集合.
+###2.树状数组
+  树状数组区间修改+区间查询,思想是将整体求和转化为统计单点贡献.
+###3.线段树
+  线段树维护一段数的gcd,利用定理$gcd(x,y) = gcd(x,y - x)$,维护序列首位元素以及差分数组.
+###4.扫描线
+  将无法“准确”计算的矩形变成对称的线段. <strong>因为对称，所以不用pushdown,pushdown是为了处理查询的区间是修改区间的子区间这种情况.</strong>,维护区间内的点是否被完全覆盖. 一个长度为2的区间不可再分，而在线段树中可以，故要将右端点-1.
+  求一类有限制的极值问题，<strong>要搞清楚到底是什么产生了极值，针对它设计算法,对限制进行转化</strong>.比如选点连通问题、机器任务问题、矩形星星问题等等.
+###5.分块
+  分块的常用方法:
+  1.整体排序，块内排序.
+  2.块内二分求值.
+  3.对变量大小进行分类讨论，采取不同的方法. 比如若变量小，数组能开的下，就维护块的前缀和. 否则暴力统计.
+  4.解决二维偏序的“which”问题.
+###6.一类从后往前依次确定的题.
+  poj2828,poj2182. 最后一个数可以立马确定. 并且前面的数可以通过后面的数以及自身的值来确定.</p>
 
           
         
@@ -1673,185 +1827,6 @@ Source</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/bzoj2821/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/13/bzoj2821/" itemprop="url">bzoj2821 作诗</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T18:36:53+08:00">
-                2018-05-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###中文题面
-Description
-神犇SJY虐完HEOI之后给傻×LYD出了一题：SHY是T国的公主，平时的一大爱好是作诗。由于时间紧迫，SHY作完诗
-之后还要虐OI，于是SHY找来一篇长度为N的文章，阅读M次，每次只阅读其中连续的一段[l,r]，从这一段中选出一
-些汉字构成诗。因为SHY喜欢对偶，所以SHY规定最后选出的每个汉字都必须在[l,r]里出现了正偶数次。而且SHY认
-为选出的汉字的种类数（两个一样的汉字称为同一种）越多越好（为了拿到更多的素材！）。于是SHY请LYD安排选
-法。LYD这种傻×当然不会了，于是向你请教……问题简述：N个数，M组询问，每次问[l,r]中有多少个数出现正偶
-数次。
-Input
-输入第一行三个整数n、c以及m。表示文章字数、汉字的种类数、要选择M次。第二行有n个整数，每个数Ai在[1, c
-]间，代表一个编码为Ai的汉字。接下来m行每行两个整数l和r，设上一个询问的答案为ans(第一个询问时ans=0)，
-令L=(l+ans)mod n+1, R=(r+ans)mod n+1，若L&gt;R，交换L和R，则本次询问为[L,R]。
-Output
-输出共m行，每行一个整数，第i个数表示SHY第i次能选出的汉字的最多种类数。</p>
-<p>Sample Input
-5 3 5</p>
-<p>1 2 2 3 1</p>
-<p>0 4</p>
-<p>1 2</p>
-<p>2 2</p>
-<p>2 3</p>
-<p>3 5
-Sample Output
-2</p>
-<p>0</p>
-<p>0</p>
-<p>0</p>
-<p>1
-HINT
-对于100%的数据，1&lt;=n,c,m&lt;=10^5
-Source
-By lydrainbowcat
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">int</span> n,C,Q,a[maxn],block,pos[maxn],L[maxn],R[maxn],cnt,f[<span class="number">1510</span>][<span class="number">1510</span>],ans,Time,vis[maxn];</span><br><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt;c[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre</span><span class="params">(<span class="keyword">int</span> p,<span class="keyword">int</span> st)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> vis[maxn],res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = st; i &lt;= n; i++)</span><br><span class="line">        vis[a[i]] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = st; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (vis[a[i]] % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">            res++;</span><br><span class="line">        <span class="keyword">if</span> (vis[a[i]] % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; vis[a[i]] != <span class="number">0</span>)</span><br><span class="line">            res--;</span><br><span class="line">        vis[a[i]]++;</span><br><span class="line">        <span class="keyword">if</span> (i % block == <span class="number">0</span>)</span><br><span class="line">            f[p][pos[i]] = res;</span><br><span class="line">        <span class="keyword">if</span> (i == n)</span><br><span class="line">            f[p][pos[i]] = res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    Time++;</span><br><span class="line">    <span class="keyword">if</span> (pos[l] == pos[r])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= r; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = upper_bound(c[a[i]].begin(),c[a[i]].end(),r) - lower_bound(c[a[i]].begin(),c[a[i]].end(),l);</span><br><span class="line">            <span class="keyword">if</span> (temp % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (vis[a[i]] != Time)</span><br><span class="line">                &#123;</span><br><span class="line">                    vis[a[i]] = Time;</span><br><span class="line">                    res++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> p = pos[l],q = pos[r];</span><br><span class="line">    res = f[p + <span class="number">1</span>][q - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= R[p]; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = upper_bound(c[a[i]].begin(),c[a[i]].end(),r) - lower_bound(c[a[i]].begin(),c[a[i]].end(),l);</span><br><span class="line">        <span class="keyword">int</span> temp2 = upper_bound(c[a[i]].begin(),c[a[i]].end(),R[q - <span class="number">1</span>]) - lower_bound(c[a[i]].begin(),c[a[i]].end(),L[p + <span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span> (temp % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[a[i]] == Time)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            vis[a[i]] = Time;</span><br><span class="line">            <span class="keyword">if</span> (temp2 % <span class="number">2</span> == <span class="number">1</span> || temp2 == <span class="number">0</span>)</span><br><span class="line">                res++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (temp % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[a[i]] == Time)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            vis[a[i]] = Time;</span><br><span class="line">            <span class="keyword">if</span> (temp2 % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; temp2 != <span class="number">0</span>)</span><br><span class="line">                res--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = L[q]; i &lt;= r; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = upper_bound(c[a[i]].begin(),c[a[i]].end(),r) - lower_bound(c[a[i]].begin(),c[a[i]].end(),l);</span><br><span class="line">        <span class="keyword">int</span> temp2 = upper_bound(c[a[i]].begin(),c[a[i]].end(),R[q - <span class="number">1</span>]) - lower_bound(c[a[i]].begin(),c[a[i]].end(),L[p + <span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span> (temp % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[a[i]] == Time)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            vis[a[i]] = Time;</span><br><span class="line">            <span class="keyword">if</span> (temp2 % <span class="number">2</span> == <span class="number">1</span> || temp2 == <span class="number">0</span>)</span><br><span class="line">                res++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (temp % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[a[i]] == Time)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            vis[a[i]] = Time;</span><br><span class="line">            <span class="keyword">if</span> (temp2 % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; temp2 != <span class="number">0</span>)</span><br><span class="line">                res--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;C,&amp;Q);</span><br><span class="line">     block=<span class="built_in">sqrt</span>((<span class="keyword">double</span>)n/<span class="built_in">log</span>((<span class="keyword">double</span>)n)*<span class="built_in">log</span>(<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">        c[a[i]].push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        pos[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">    cnt = pos[n];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">        L[i] = R[i - <span class="number">1</span>] + <span class="number">1</span>,R[i] = min(n,i * block);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">        pre(i,L[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= Q; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> l,r;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;l,&amp;r);</span><br><span class="line">        l = (l + ans) % n + <span class="number">1</span>;</span><br><span class="line">        r = (r + ans) % n + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (l &gt; r)</span><br><span class="line">            swap(l,r);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans = solve(l,r));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  如果做过蒲公英那道题，很容易就能想到这道题可以用分块来做.  记录一个数组$f_{i,j}$表示第i个块到第j个块内出现次数为偶数的数有多少个. 可以通过$O(sqrt(n)n)$预处理得到.然后用一个vector存储每个数值在哪些位置出现了.
-  对于查询操作，先查整块内的值：若l属于块p,r属于块q,$ans = f_{p + 1,q - 1}$,然后暴力统计不在整块内的数在给定区间内是否出现了偶数次，利用vector对区间的左右端点进行lower_bound和upper_bound运算.  为了避免重复统计，可以利用vis数组标记已经统计过的值，因为值域很小，不需要离散化. 查询操作很多，利用时间戳来替代vis的清空. 这样做会出现一个问题：可能有的数在整块内出现了偶数次，在区间[l,r]内出现了奇数次，那么这个数对应的答案就要减掉;或者在整块内出现了奇数次，在[l,r]内出现了偶数次，这个数对应的答案就要加上. 对这两种情况进行特殊判断即可.
-  需要注意的是题目要求的出现偶数次是正偶数次，统计的时候特判出现0次的情况!</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1902,7 +1877,7 @@ By lydrainbowcat
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

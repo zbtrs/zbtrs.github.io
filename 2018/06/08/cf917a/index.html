@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="搜索," />
+  <meta name="keywords" content="贪心," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###题目大意   m个点，每个点的权值都在[0,2^n - 1]内，两个点x,y有边当且仅当x and y = 0,求图中有多少个连通块. ###提示   联想一下在普通的无向图中找连通块的方法. ###代码 12345678910111213141516171819202122232425262728293031323334353637383940#include &amp;lt;cstdio&amp;gt;">
-<meta name="keywords" content="搜索">
+<meta name="description" content="题目大意&amp;emsp;&amp;emsp;给定一个括号序列，包含”(“,”)”和”?”. “?”可以变成”(“或”)”,求有多少个合法的子括号序列. 代码1234567891011121314151617181920212223242526272829303132333435363738#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;i">
+<meta name="keywords" content="贪心">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Codeforces 986 C. AND Graph">
-<meta property="og:url" content="http://yoursite.com/2018/05/31/cf986c/index.html">
+<meta property="og:title" content="Codeforces 917.A The Monster">
+<meta property="og:url" content="http://yoursite.com/2018/06/08/cf917a/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="###题目大意   m个点，每个点的权值都在[0,2^n - 1]内，两个点x,y有边当且仅当x and y = 0,求图中有多少个连通块. ###提示   联想一下在普通的无向图中找连通块的方法. ###代码 12345678910111213141516171819202122232425262728293031323334353637383940#include &amp;lt;cstdio&amp;gt;">
+<meta property="og:description" content="题目大意&amp;emsp;&amp;emsp;给定一个括号序列，包含”(“,”)”和”?”. “?”可以变成”(“或”)”,求有多少个合法的子括号序列. 代码1234567891011121314151617181920212223242526272829303132333435363738#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;i">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-31T11:45:51.054Z">
+<meta property="og:updated_time" content="2018-06-08T11:59:48.551Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Codeforces 986 C. AND Graph">
-<meta name="twitter:description" content="###题目大意   m个点，每个点的权值都在[0,2^n - 1]内，两个点x,y有边当且仅当x and y = 0,求图中有多少个连通块. ###提示   联想一下在普通的无向图中找连通块的方法. ###代码 12345678910111213141516171819202122232425262728293031323334353637383940#include &amp;lt;cstdio&amp;gt;">
+<meta name="twitter:title" content="Codeforces 917.A The Monster">
+<meta name="twitter:description" content="题目大意&amp;emsp;&amp;emsp;给定一个括号序列，包含”(“,”)”和”?”. “?”可以变成”(“或”)”,求有多少个合法的子括号序列. 代码1234567891011121314151617181920212223242526272829303132333435363738#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;i">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/31/cf986c/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/08/cf917a/"/>
 
 
 
 
 
-  <title>Codeforces 986 C. AND Graph | Hexo</title>
+  <title>Codeforces 917.A The Monster | Hexo</title>
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/cf986c/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/cf917a/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Codeforces 986 C. AND Graph</h1>
+          <h1 class="post-title" itemprop="name headline">Codeforces 917.A The Monster</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T19:33:53+08:00">
-                2018-05-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T19:46:53+08:00">
+                2018-06-08
               </time>
             
 
@@ -322,18 +322,9 @@
       
 
       
-        <p>###题目大意
-  m个点，每个点的权值都在[0,2^n - 1]内，两个点x,y有边当且仅当x and y = 0,求图中有多少个连通块.
-###提示
-  联想一下在普通的无向图中找连通块的方法.
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> maxx,n,vis[<span class="number">5000010</span>],f[<span class="number">5000010</span>],ans,a[<span class="number">5000010</span>],t;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (f[x])</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    f[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (vis[x])</span><br><span class="line">        dfs(t ^ x);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = maxx; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">if</span> (x &gt;&gt; i &amp; <span class="number">1</span>)</span><br><span class="line">            dfs(x ^ (<span class="number">1</span> &lt;&lt; i));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;maxx,&amp;n);</span><br><span class="line">    t = (<span class="number">1</span> &lt;&lt; maxx) - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">        vis[a[i]] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">if</span> (!f[a[i]])</span><br><span class="line">        &#123;</span><br><span class="line">            ans++;</span><br><span class="line">            dfs(t ^ a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  读错题意就像吃了翔一样难受. 一开始看成了有多少条边，只能想到$O(m^2)$的算法.
-  对于一个数，如何找到所有与它and起来等于0的数？首先确定查找的方向：找比它小的与它and起来等于0的最大的数. 每次从这个数中消掉一个0,若出现了给定的数，则找比这个数小且and起来等于0的最大的数，并且继续消1. 加上记忆化，就能在$O(2^n)$的复杂度内搜完.
-###总结
-  1.有限集合的双向关系(由A可以推导B,由B也可以推导A),可以只考虑一个方向，例如本题中只考虑比x小的数.
-  2.先找最大元，然后消1枚举子集法.</p>
+        <h3 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h3><p>&emsp;&emsp;给定一个括号序列，包含”(“,”)”和”?”. “?”可以变成”(“或”)”,求有多少个合法的子括号序列.</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5010</span>;</span><br><span class="line"><span class="keyword">char</span> s[maxn];</span><br><span class="line"><span class="keyword">int</span> n,res,cnt,ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s + <span class="number">1</span>);</span><br><span class="line">    n = <span class="built_in">strlen</span>(s + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        res = cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[j] == <span class="string">'('</span>)</span><br><span class="line">                res++;</span><br><span class="line">            <span class="keyword">if</span> (s[j] == <span class="string">')'</span>)</span><br><span class="line">                res--;</span><br><span class="line">            <span class="keyword">if</span> (s[j] == <span class="string">'?'</span>)</span><br><span class="line">                res--,cnt++;</span><br><span class="line">            <span class="keyword">while</span> (res &lt; <span class="number">0</span> &amp;&amp; cnt)</span><br><span class="line">                res += <span class="number">2</span>,cnt--;</span><br><span class="line">            <span class="keyword">if</span> (res &lt; <span class="number">0</span> &amp;&amp; cnt &lt;= <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span> (res == <span class="number">0</span>)</span><br><span class="line">                ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;根据数据范围，很显然可以$O^2$暴力枚举，再来判断该子序列行不行.如何判断呢？固定左端点，每次右端点往右挪一位，记录两个变量res和cnt,res用来判断当前括号序列是否合法，cnt用来记录有多少个?,一开始令所有的?都为),如果出现(不够匹配)的情况，就把?变成(. 如果已经遇到不合法的情况了，就退出循环.</p>
 
       
     </div>
@@ -351,7 +342,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/搜索/" rel="tag"># 搜索</a>
+            <a href="/tags/贪心/" rel="tag"># 贪心</a>
           
         </div>
       
@@ -364,8 +355,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/31/cf986a/" rel="next" title="Codeforces 986 A. Fair">
-                <i class="fa fa-chevron-left"></i> Codeforces 986 A. Fair
+              <a href="/2018/06/07/算法竞赛进阶指南第六章/" rel="next" title="算法竞赛进阶指南第六章">
+                <i class="fa fa-chevron-left"></i> 算法竞赛进阶指南第六章
               </a>
             
           </div>
@@ -373,10 +364,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/31/poj1722/" rel="prev" title="poj1722 SUBTRACT">
-                poj1722 SUBTRACT <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -428,8 +415,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -489,6 +485,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目大意"><span class="nav-number">1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

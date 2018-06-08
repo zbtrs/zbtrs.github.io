@@ -229,6 +229,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/03/bzoj3117/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/03/bzoj3117/" itemprop="url">bzoj3117 [Noi1999]内存分配</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-03T23:54:53+08:00">
+                2018-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###中文题面
+Description
+内存是计算机重要的资源之一，程序运行的过程中必须对内存进行分配。
+经典的内存分配过程是这样进行的：</p>
+<ol>
+<li>内存以内存单元为基本单位，每个内存单元用一个固定的整数作为标识，称为地址。地址从0开始连续排列，地
+址相邻的内存单元被认为是逻辑上连续的。我们把从地址i开始的s个连续的内存单元称为首地址为i长度为s的地址
+片。</li>
+<li>运行过程中有若干进程需要占用内存，对于每个进程有一个申请时刻T，需要内存单元数M及运行时间P。在运行
+时间P内（即T时刻开始，T+P时刻结束），这M个被占用的内存单元不能再被其他进程使用。
+3、假设在T时刻有一个进程申请M个单元，且运行时间为P，则：</li>
+<li>若T时刻内存中存在长度为M的空闲地址片，则系统将这M个空闲单元分配给该进程。若存在多个长度为M个空闲
+地址片，则系统将首地址最小的那个空闲地址片分配给该进程。</li>
+<li>如果T时刻不存在长度为M的空闲地址片，则该进程被放入一个等待队列。对于处于等待队列队头的进程，只要
+在任一时刻，存在长度为M的空闲地址片，系统马上将该进程取出队列，并为它分配内存单元。注意，在进行内存
+分配处理过程中，处于等待队列队头的进程的处理优先级最高，队列中的其它进程不能先于队头进程被处理。
+现在给出一系列描述进程的数据，请编写一程序模拟系统分配内存的过程。
+Input
+第一行是一个数N，表示总内存单元数（即地址范围从0到N-1）。
+从第二行开始每行描述一个进程的三个整数T、M、P（M &lt;= N）。
+最后一行用三个0表示结束。
+数据已按T从小到大排序。
+输入文件最多10000行，且所有数据都小于109。
+输入文件中同一行相邻两项之间用一个或多个空格隔开。
+Output
+包括2行。
+第一行是全部进程都运行完毕的时刻。
+第二行是被放入过等待队列的进程总数。
+Sample Input
+10</li>
+</ol>
+<p>1 3 10</p>
+<p>2 4 3</p>
+<p>3 4 4</p>
+<p>4 1 4</p>
+<p>5 3 4</p>
+<p>0 0 0
+Sample Output
+12</p>
+<p>2
+<img src="https://www.lydsy.com/JudgeOnline/upload/201803/vv1.jpg" alt="Alt text">
+###提示
+  时间与内存要用什么来处理？
+###代码
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">10010</span>,inf = <span class="number">0x7fffffff</span>;</span><br><span class="line"><span class="keyword">int</span> n,T[maxn],M[maxn],P[maxn],head,tail,q[maxn],Time,root,nextt[maxn],S[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cha</span><span class="params">(<span class="keyword">int</span> pos,<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//首--中间--尾部，依次试探看能否插入</span></span><br><span class="line">    <span class="keyword">if</span> (!root || S[root] &gt;= M[pos])  <span class="comment">//S[root]这个位置已经被占用了</span></span><br><span class="line">    &#123;</span><br><span class="line">        nextt[pos] = root;</span><br><span class="line">        root = pos;</span><br><span class="line">        S[pos] = <span class="number">0</span>;  <span class="comment">//下标从0开始</span></span><br><span class="line">        T[pos] = t;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = root; nextt[i] != <span class="number">0</span>; i = nextt[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = nextt[i];</span><br><span class="line">        <span class="keyword">if</span> (S[i] + M[i] + M[pos] - <span class="number">1</span> &lt; S[v])</span><br><span class="line">        &#123;</span><br><span class="line">            nextt[pos] = v;</span><br><span class="line">            nextt[i] = pos;</span><br><span class="line">            S[pos] = S[i] + M[i];</span><br><span class="line">            T[pos] = t;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n - (S[i] + M[i]) &gt;= M[pos])</span><br><span class="line">    &#123;</span><br><span class="line">        nextt[i] = pos;</span><br><span class="line">        nextt[pos] = <span class="number">0</span>;</span><br><span class="line">        S[pos] = S[i] + M[i];</span><br><span class="line">        T[pos] = t;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pre = root,temp = inf;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = root; i;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (T[i] + P[i] == Time)  <span class="comment">//找到了要被弹出的点</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == root)</span><br><span class="line">            &#123;</span><br><span class="line">                root = nextt[root];</span><br><span class="line">                i = root;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>  <span class="comment">//实际上就是删点</span></span><br><span class="line">               i = nextt[pre] = nextt[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp = min(temp,T[i] + P[i]);  <span class="comment">//不能被弹出，说明完成时间＞Time,更新弹掉点后的时间</span></span><br><span class="line">            pre = i;</span><br><span class="line">            i = nextt[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (head &lt; tail)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!cha(q[head],Time))</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        temp = min(temp,T[q[head]] + P[q[head]]);</span><br><span class="line">        head++;</span><br><span class="line">    &#125;</span><br><span class="line">    Time = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> pos)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (T[pos] &gt;= Time)  <span class="comment">//注意有等于号，因为Time表示的意思是这个点"可以"插入</span></span><br><span class="line">        Pop();</span><br><span class="line">    <span class="keyword">if</span> (!cha(pos,T[pos]))</span><br><span class="line">        q[tail++] = pos;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        Time = min(Time,T[pos] + P[pos]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (head &lt; tail)</span><br><span class="line">        Pop();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = root; i; i = nextt[i])</span><br><span class="line">        Time = max(Time,T[i] + P[i]);</span><br><span class="line">    <span class="keyword">return</span> Time;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Time = inf;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;T[i],&amp;M[i],&amp;P[i]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (T[i] == <span class="number">0</span> &amp;&amp; M[i] == <span class="number">0</span> &amp;&amp; P[i] == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        insert(i);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,solve());</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,tail);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###分析
+  比较坑的一道题.
+  首先对于时间，我们可以设一个时间基点$Time$.在$Time$之前的任务必须要被完成，每次用当前任务完成的时间去更新$Time$.
+  内存段要怎么处理？每个进程所占用的内存都是一段，可以用链表/并查集来维护，本题涉及到删除操作，故用链表来维护.
+  分析清楚了用什么做？为什么用这个做？基本上就做完了，剩下的就是实现和细节问题了.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/03/poj2185/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2065,200 +2256,6 @@ Sample Output
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/bzoj1720/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/01/bzoj1720/" itemprop="url">bzoj1720 [Usaco2006 Jan]Corral the Cows 奶牛围栏</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T17:51:53+08:00">
-                2018-05-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###中文题面
-Description
-Farmer John wishes to build a corral for his cows. Being finicky beasts, they demand that the corral be square and that the corral contain at least C (1 &lt;= C &lt;= 500) clover fields for afternoon treats. The corral's edges must be parallel to the X,Y axes. FJ's land contains a total of N (C &lt;= N &lt;= 500) clover fields, each a block of size 1 x 1 and located at with its lower left corner at integer X and Y coordinates each in the range 1..10,000. Sometimes more than one clover field grows at the same location; such a field would have its location appear twice (or more) in the input. A corral surrounds a clover field if the field is entirely located inside the corral's borders. Help FJ by telling him the side length of the smallest square containing C clover fields.</p>
-<pre><code>约翰打算建一个围栏来圈养他的奶牛．作为最挑剔的兽类，奶牛们要求这个围栏必须是正方形的，而且围栏里至少要有C(1≤C≤500)个草场，来供应她们的午餐．
-约翰的土地上共有N(C≤N≤500)个草场，每个草场在一块lxl的方格内，而且这个方格的坐标不会超过10000.有时候，会有多个草场在同一个方格内，那他们的坐标就会相同．
-告诉约翰，最小的围栏的边长是多少？
-</code></pre>
-<p>Input</p>
-<ul>
-<li>
-<p>Line 1: Two space-separated integers: C and N</p>
-</li>
-<li>
-<p>Lines 2..N+1: Each line contains two space-separated integers that are the X,Y coordinates of a clover field.</p>
-<p>第1行输入C和N，接下来N行每行输入一对整数，表示一个草场所在方格的坐标
-Output</p>
-</li>
-<li>
-<p>Line 1: A single line with a single integer that is length of one edge of the minimum size square that contains at least C clover fields.</p>
-<p>输入最小边长．
-Sample Input
-3 4</p>
-</li>
-</ul>
-<p>1 2</p>
-<p>2 1</p>
-<p>4 1</p>
-<p>5 2</p>
-<p>Sample Output
-4</p>
-<p>OUTPUT DETAILS:</p>
-<p>Below is one 4x4 solution (C's show most of the corral's area); many</p>
-<p>others exist.</p>
-<p>|CCCC</p>
-<p>|CCCC</p>
-<p>|<em>CCC</em></p>
-<p>|C<em>C</em></p>
-<p>+------
-HINT
-Source
-Gold
-###提示
-  1.能用二维数组直接存图吗？
-  2.怎么求长度？
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">int</span> c, n, ans, cnt;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line">&#125;e[maxn], p[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.x &lt; b.x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp2</span><span class="params">(node a, node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.y &lt; b.y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check2</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r,<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (r - l + <span class="number">1</span> &lt; c)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= r; i++)</span><br><span class="line">		p[++cnt] = e[i];</span><br><span class="line">	sort(p + <span class="number">1</span>, p + <span class="number">1</span> + cnt, cmp2);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = c; i &lt;= cnt; i++)</span><br><span class="line">		<span class="keyword">if</span> (p[i].y - p[i - c + <span class="number">1</span>].y &lt;= len)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> l = <span class="number">1</span>, r = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (r &lt;= n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (e[r].x - e[l].x &gt; len)</span><br><span class="line">			<span class="keyword">if</span> (check2(l, r - <span class="number">1</span>,len))</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">while</span> (e[r].x - e[l].x &gt; len)</span><br><span class="line">			l++;</span><br><span class="line">		r++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> check2(l, n,len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;c, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;e[i].x, &amp;e[i].y);</span><br><span class="line">	sort(e + <span class="number">1</span>, e + <span class="number">1</span> + n, cmp);</span><br><span class="line">	<span class="keyword">int</span> l = <span class="number">0</span>, r = <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">while</span> (l &lt;= r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (check(mid))</span><br><span class="line">		&#123;</span><br><span class="line">			ans = mid;</span><br><span class="line">			r = mid - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			l = mid + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  求<strong>具体</strong>的答案，要么解出来，要么<strong>枚举并判定</strong>，显然边长不可能直接解出来，那么就二分咯.
-  点的坐标存不下怎么办？离散化即可. 判定是否可行根本不需要知道具体的坐标的值.
-  如何判定？根据要满足的条件：1.点在以二分出来的边长为x的正方形内. 2.点的个数要≥c. 假定已经满足其中一条，判断另一条是否合法.<br>
-  对于x轴上的判定，将所有的边长不超过二分出的x的极大正方形提出来，判断横坐标在正方形之内的点的纵坐标是否满足要求. 由于不太好求纵坐标范围在[l,r]的点有多少个，改为判断第i个点与第i+c个点的纵坐标之差是否≤x.
-###总结
-  满足多个条件的二分的判定一定要会.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2309,7 +2306,7 @@ Gold
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

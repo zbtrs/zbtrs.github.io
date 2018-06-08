@@ -229,6 +229,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/bzoj3054/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/10/bzoj3054/" itemprop="url">bzoj3054 Rainbow的信号</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T22:58:53+08:00">
+                2018-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###中文题面
+Description
+Freda发明了传呼机之后，rainbow进一步改进了传呼机发送信息所使用的信号。由于现在是数字、信息时代，rainbow发明的信号用N个自然数表示。为了避免两个人的对话被大坏蛋VariantF偷听T_T，rainbow把对话分成A、B、C三部分，分别用a、b、c三个密码加密。现在Freda接到了rainbow的信息，她的首要工作就是解密。Freda了解到，这三部分的密码计算方式如下：
+在1~N这N个数中，等概率地选取两个数l、r，如果l&gt;r，则交换l、r。把信号中的第l个数到第r个数取出来，构成一个数列P。
+A部分对话的密码是数列P的xor和的数学期望值。xor和就是数列P中各个数异或之后得到的数； xor和的期望就是对于所有可能选取的l、r，所得到的数列的xor和的平均数。
+B部分对话的密码是数列P的and和的期望，定义类似于xor和。
+C部分对话的密码是数列P的or和的期望，定义类似于xor和。</p>
+<p>Input
+第一行一个正整数N。
+第二行N个自然数，表示Freda接到的信号。</p>
+<p>Output
+一行三个实数，分别表示xor和、and和、or和的期望，四舍五入保留3位小数，相邻两个实数之间用一个空格隔开。</p>
+<p>Sample Input
+样例输入1
+2
+4 5
+样例输入2
+3
+1 0 1
+Sample Output
+样例输出1
+2.750 4.250 4.750
+样例输出2
+0.667 0.222 0.889
+###提示
+  如何求权值和？如何求对应的概率？
+###代码
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">100010</span>;</span><br><span class="line">ll n,a[maxn],l[maxn][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">double</span> ans1,ans2,ans3;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(ll p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll c1 = <span class="number">0</span>,c2 = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(l,<span class="number">0</span>,<span class="keyword">sizeof</span>(l));</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt;&gt; p &amp; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            l[i][<span class="number">1</span>] = i;</span><br><span class="line">            l[i][<span class="number">0</span>] = l[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            l[i][<span class="number">0</span>] = i;</span><br><span class="line">            l[i][<span class="number">1</span>] = l[i - <span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt;&gt; p &amp; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans1 += (<span class="keyword">double</span>)(<span class="number">1</span> &lt;&lt; p) / (<span class="keyword">double</span>)(n * n);</span><br><span class="line">            ans2 += (<span class="keyword">double</span>)(<span class="number">1</span> &lt;&lt; p) / (<span class="keyword">double</span>)(n * n);</span><br><span class="line">            ans3 += (<span class="keyword">double</span>)(<span class="number">1</span> &lt;&lt; p) / (<span class="keyword">double</span>)(n * n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt;&gt; p &amp; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans1 += (<span class="keyword">double</span>)((<span class="number">1</span> &lt;&lt; (p + <span class="number">1</span>)) * c1) / (<span class="keyword">double</span>)(n * n);</span><br><span class="line">            c1++;</span><br><span class="line">            swap(c1,c2);</span><br><span class="line">            ans2 += (<span class="keyword">double</span>)((<span class="number">1</span> &lt;&lt; (p + <span class="number">1</span>)) * (i - l[i][<span class="number">0</span>] - <span class="number">1</span>)) / (<span class="keyword">double</span>)(n * n);</span><br><span class="line">            ans3 += (<span class="keyword">double</span>)((<span class="number">1</span> &lt;&lt; (p + <span class="number">1</span>)) * (i - <span class="number">1</span>)) / (<span class="keyword">double</span>)(n * n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans1 += (<span class="keyword">double</span>)((<span class="number">1</span> &lt;&lt; (p + <span class="number">1</span>)) * c2) / (<span class="keyword">double</span>)(n * n);</span><br><span class="line">            c1++;</span><br><span class="line">            ans3 += (<span class="keyword">double</span>)((<span class="number">1</span> &lt;&lt; (p + <span class="number">1</span>)) * l[i][<span class="number">1</span>]) / (<span class="keyword">double</span>)(n * n);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">0</span>; i &lt;= <span class="number">31</span>; i++)</span><br><span class="line">        solve(i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.3lf %.3lf %.3lf\n"</span>,ans1,ans2,ans3);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###分析
+  这道题虽然披上了期望的外衣，实质上就是求出所有区间的xor,and,or和.
+  涉及二进制运算的问题一般怎么快速求和？ 对每一位分别求和，若第i位有cnt种方案满足其为1，则它对答案的贡献为$2^i * cnt$.将每一位的贡献加起来就是答案了.
+  涉及到所有区间的值，通常的方法是固定一个端点，令另一个端点快速移动. and和or运算都具有“单调性”，可以很容易地确定对答案有贡献的区间的个数. 具体方法是：设当前处理的是二进制的第p位，枚举区间的右端点r. 若第r个数的第p位为1，则找到r左边第一个第p位为0的数，记其位置为pos,那么左端点在[pos + 1,r - 1]的区间的and值都对答案有影响. 对于or操作同理.
+  比较难处理的是xor操作. 有一个性质：<strong>在xor操作中，遇到0异或值不变.遇到1会变成对应的数</strong>.那么序列就可以被分成若干段，每一段的端点由1个0和1个1组成. 对这些段进行黑白染色. 若当前的右端点是第r位，那么要么是左端点在黑色段的区间产生贡献，要么是左端点在白色段的区间产生贡献.具体怎么维护见代码.
+  上面所提到的区间都没有涉及l = r的情况. 这是因为当l = r时，区间出现的概率是$1 / n^2$,而l != r时，区间出现的概率是$2 / n^2$,故要单独处理l=r的情况.
+###总结
+  xor操作求区间和分成一段一段来维护.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/bzoj3036/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1311,181 +1488,6 @@ Day2
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/bzoj4004/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/09/bzoj4004/" itemprop="url">bzoj4004 [JLOI2015]装备购买</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T15:11:53+08:00">
-                2018-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###中文题面
-Description
-脸哥最近在玩一款神奇的游戏，这个游戏里有 n 件装备，每件装备有 m 个属性，用向量zi(aj ,.....,am) 表示
-(1 &lt;= i &lt;= n; 1 &lt;= j &lt;= m)，每个装备需要花费 ci，现在脸哥想买一些装备，但是脸哥很穷，所以总是盘算着
-怎样才能花尽量少的钱买尽量多的装备。对于脸哥来说，如果一件装备的属性能用购买的其他装备组合出（也就是
-说脸哥可以利用手上的这些装备组合出这件装备的效果），那么这件装备就没有买的必要了。严格的定义是，如果
-脸哥买了 zi1,.....zip这 p 件装备，那么对于任意待决定的 zh，不存在 b1,....,bp 使得 b1zi1 + ... + bpzi
-p = zh（b 是实数），那么脸哥就会买 zh，否则 zh 对脸哥就是无用的了，自然不必购买。举个例子,z1 =(1; 2;
-3);z2 =(3; 4; 5);zh =(2; 3; 4)，b1 =1/2，b2 =1/2，就有 b1z1 + b2z2 = zh，那么如果脸哥买了 z1 和 z2
-就不会再买 zh 了。脸哥想要在买下最多数量的装备的情况下花最少的钱，你能帮他算一下吗？
-Input
-第一行两个数 n;m。接下来 n 行，每行 m 个数，其中第 i 行描述装备 i 的各项属性值。接下来一行 n 个数，
-其中 ci 表示购买第 i 件装备的花费。
-Output
-一行两个数，第一个数表示能够购买的最多装备数量，第二个数表示在购买最多数量的装备的情况下的最小花费</p>
-<p>Sample Input
-3 3</p>
-<p>1 2 3</p>
-<p>3 4 5</p>
-<p>2 3 4</p>
-<p>1 1 2
-Sample Output
-2 2
-HINT
-如题目中描述，选择装备 1 装备 2，装备 1 装备 3，装备 2 装备 3 均可，但选择装备 1 和装备 2 的花费最小，为 2。对于 100% 的数据, 1 &lt;= n;m &lt;= 500; 0 &lt;= aj &lt;= 1000。</p>
-<p>新加数据三组--2016.5.13
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">510</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-5</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,vis[maxn],cnt,ans;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">double</span> t[maxn];</span><br><span class="line">    <span class="keyword">int</span> w;</span><br><span class="line">&#125; e[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.w &lt; b.w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">guess</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">fabs</span>(e[i].t[j]) &gt; eps)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (vis[j])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">long</span> <span class="keyword">double</span> temp = e[i].t[j] / e[vis[j]].t[j];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= n; k++)</span><br><span class="line">                        e[i].t[k] -= temp * e[vis[j]].t[k];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    vis[j] = i;</span><br><span class="line">                    cnt++;</span><br><span class="line">                    ans += e[i].w;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">double</span> x;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;x);</span><br><span class="line">            e[i].t[j] = x;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;e[i].w);</span><br><span class="line">    sort(e + <span class="number">1</span>,e + <span class="number">1</span> + n,cmp);</span><br><span class="line">    guess();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,cnt,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  线性基的模板题
-  将每个装备的属性看作行向量，进行高斯消元. 最后有多少不全为0的行，就说明基由多少个向量组成. 基的数量即是最多购买装备的数量.
-  如何使得购买的费用最少？结合高斯消元的原理和贪心思想. 先将所有的装备按照代价从小到大排序. 一行行地考虑. <strong>因为代价是从小到大排好序的，我们尽量让当前装备成为基中的一元，为了满足高斯消元的要求，令其最高位为t,将其它的t位不为0的行给消掉,实质上就是将当前行放到了第m - t + 1行(上三角矩阵)，但是为了满足贪心策略，我们并不改变矩阵.</strong> 这就是高斯消元的妙处. 知道了原理，可以写出许多种不同的高斯消元模板来.
-###总结
-  线性基中，基的向量的数量是一定的. 若想使得第i行成为基中的一元，就要消光其它的在i的最高位上不为0的行,那么i因为其最高位不为0，在以后的过程中，就不会被消掉, 这样就让i占据了基中的一个位置，而基的向量的数量是一定的，故代价大的不会成为基中的一元.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/hdu3949/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1632,6 +1634,181 @@ xubiao
   1.xor问题一定要转化为二进制数再去思考.
   2.高斯消元后的主元下标单调性，基与行之间的关系.
   3.xor问题有0的情况.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/bzoj4004/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/09/bzoj4004/" itemprop="url">bzoj4004 [JLOI2015]装备购买</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T15:11:53+08:00">
+                2018-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###中文题面
+Description
+脸哥最近在玩一款神奇的游戏，这个游戏里有 n 件装备，每件装备有 m 个属性，用向量zi(aj ,.....,am) 表示
+(1 &lt;= i &lt;= n; 1 &lt;= j &lt;= m)，每个装备需要花费 ci，现在脸哥想买一些装备，但是脸哥很穷，所以总是盘算着
+怎样才能花尽量少的钱买尽量多的装备。对于脸哥来说，如果一件装备的属性能用购买的其他装备组合出（也就是
+说脸哥可以利用手上的这些装备组合出这件装备的效果），那么这件装备就没有买的必要了。严格的定义是，如果
+脸哥买了 zi1,.....zip这 p 件装备，那么对于任意待决定的 zh，不存在 b1,....,bp 使得 b1zi1 + ... + bpzi
+p = zh（b 是实数），那么脸哥就会买 zh，否则 zh 对脸哥就是无用的了，自然不必购买。举个例子,z1 =(1; 2;
+3);z2 =(3; 4; 5);zh =(2; 3; 4)，b1 =1/2，b2 =1/2，就有 b1z1 + b2z2 = zh，那么如果脸哥买了 z1 和 z2
+就不会再买 zh 了。脸哥想要在买下最多数量的装备的情况下花最少的钱，你能帮他算一下吗？
+Input
+第一行两个数 n;m。接下来 n 行，每行 m 个数，其中第 i 行描述装备 i 的各项属性值。接下来一行 n 个数，
+其中 ci 表示购买第 i 件装备的花费。
+Output
+一行两个数，第一个数表示能够购买的最多装备数量，第二个数表示在购买最多数量的装备的情况下的最小花费</p>
+<p>Sample Input
+3 3</p>
+<p>1 2 3</p>
+<p>3 4 5</p>
+<p>2 3 4</p>
+<p>1 1 2
+Sample Output
+2 2
+HINT
+如题目中描述，选择装备 1 装备 2，装备 1 装备 3，装备 2 装备 3 均可，但选择装备 1 和装备 2 的花费最小，为 2。对于 100% 的数据, 1 &lt;= n;m &lt;= 500; 0 &lt;= aj &lt;= 1000。</p>
+<p>新加数据三组--2016.5.13
+###代码
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">510</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-5</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,vis[maxn],cnt,ans;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">double</span> t[maxn];</span><br><span class="line">    <span class="keyword">int</span> w;</span><br><span class="line">&#125; e[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.w &lt; b.w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">guess</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">fabs</span>(e[i].t[j]) &gt; eps)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (vis[j])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">long</span> <span class="keyword">double</span> temp = e[i].t[j] / e[vis[j]].t[j];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= n; k++)</span><br><span class="line">                        e[i].t[k] -= temp * e[vis[j]].t[k];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    vis[j] = i;</span><br><span class="line">                    cnt++;</span><br><span class="line">                    ans += e[i].w;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">double</span> x;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;x);</span><br><span class="line">            e[i].t[j] = x;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;e[i].w);</span><br><span class="line">    sort(e + <span class="number">1</span>,e + <span class="number">1</span> + n,cmp);</span><br><span class="line">    guess();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,cnt,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###分析
+  线性基的模板题
+  将每个装备的属性看作行向量，进行高斯消元. 最后有多少不全为0的行，就说明基由多少个向量组成. 基的数量即是最多购买装备的数量.
+  如何使得购买的费用最少？结合高斯消元的原理和贪心思想. 先将所有的装备按照代价从小到大排序. 一行行地考虑. <strong>因为代价是从小到大排好序的，我们尽量让当前装备成为基中的一元，为了满足高斯消元的要求，令其最高位为t,将其它的t位不为0的行给消掉,实质上就是将当前行放到了第m - t + 1行(上三角矩阵)，但是为了满足贪心策略，我们并不改变矩阵.</strong> 这就是高斯消元的妙处. 知道了原理，可以写出许多种不同的高斯消元模板来.
+###总结
+  线性基中，基的向量的数量是一定的. 若想使得第i行成为基中的一元，就要消光其它的在i的最高位上不为0的行,那么i因为其最高位不为0，在以后的过程中，就不会被消掉, 这样就让i占据了基中的一个位置，而基的向量的数量是一定的，故代价大的不会成为基中的一元.</p>
 
           
         
@@ -1859,203 +2036,6 @@ Round 1 感谢yts1999上传
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/poj1830/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/08/poj1830/" itemprop="url">poj1830 开关问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T23:15:53+08:00">
-                2018-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###中文题面
-Description</p>
-<p>有N个相同的开关，每个开关都与某些开关有着联系，每当你打开或者关闭某个开关的时候，其他的与此开关相关联的开关也会相应地发生变化，即这些相联系的开关的状态如果原来为开就变为关，如果为关就变为开。你的目标是经过若干次开关操作后使得最后N个开关达到一个特定的状态。对于任意一个开关，最多只能进行一次开关操作。你的任务是，计算有多少种可以达到指定状态的方法。（不计开关操作的顺序）
-Input</p>
-<p>输入第一行有一个数K，表示以下有K组测试数据。
-每组测试数据的格式如下：
-第一行 一个数N（0 &lt; N &lt; 29）
-第二行 N个0或者1的数，表示开始时N个开关状态。
-第三行 N个0或者1的数，表示操作结束后N个开关的状态。
-接下来 每行两个数I J，表示如果操作第 I 个开关，第J个开关的状态也会变化。每组数据以 0 0 结束。
-Output</p>
-<p>如果有可行方法，输出总数，否则输出“Oh,it's impossible~!!” 不包括引号
-Sample Input</p>
-<p>2
-3
-0 0 0
-1 1 1
-1 2
-1 3
-2 1
-2 3
-3 1
-3 2
-0 0
-3
-0 0 0
-1 0 1
-1 2
-2 1
-0 0
-Sample Output</p>
-<p>4
-Oh,it's impossible~!!
-Hint</p>
-<p>第一组数据的说明：
-一共以下四种方法：
-操作开关1
-操作开关2
-操作开关3
-操作开关1、2、3 （不记顺序）
-Source</p>
-<p>LIANGLIANG@POJ
-###提示
-  列出每盏灯初始状态到终止状态的关系式.
-###代码
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">int</span> T,n,s[maxn],t[maxn],a[maxn][maxn],sta[maxn],ans = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">guess</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span> (sta[j] &gt; sta[i])</span><br><span class="line">                swap(sta[i],sta[j]);</span><br><span class="line">        <span class="keyword">if</span> (sta[i] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans = (<span class="number">1</span> &lt;&lt; (n - i + <span class="number">1</span>));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sta[i] == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = n; k &gt;= <span class="number">1</span>; k--)</span><br><span class="line">            <span class="keyword">if</span> ((sta[i] &gt;&gt; k) &amp; <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">                    <span class="keyword">if</span> (i != j &amp;&amp; ((sta[j] &gt;&gt; k) &amp; <span class="number">1</span>))</span><br><span class="line">                        sta[j] ^= sta[i];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;s[i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t[i]);</span><br><span class="line">        <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">        <span class="built_in">memset</span>(sta,<span class="number">0</span>,<span class="keyword">sizeof</span>(sta));</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y) != EOF)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            a[x][y] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sta[i] |= (<span class="number">1</span> &lt;&lt; (n - i + <span class="number">1</span>));</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">                sta[i] |= (a[j][i] &lt;&lt; (n - j + <span class="number">1</span>));</span><br><span class="line">            sta[i] |= (s[i] ^ t[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        ans = <span class="number">-1</span>;</span><br><span class="line">        guess();</span><br><span class="line">        <span class="keyword">if</span> (ans == <span class="number">-1</span>)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Oh,it's impossible~!!\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###分析
-  对于第i个开关，可以列出方程（以第1个为例）：
-$a_{1,1}x_1  xor  a_{2,1}x_2  xor ...... xor  a_{n,1}x_1 = s_1  xor  t_1$
-  其中$a_{i,j} = 1$表示操作开关i对开关j有影响.  $x_i$表示第i个开关有没有被操作. $s_i$表示第i盏灯的初始状态, $t_i$表示终止状态. 特殊地，我们令$a_{i,i} = 1$
-  n元n个方程，挺好的. 题目没有说一定会存在唯一解，可能会出现无解或是多解的情况. <strong>一般情况下，若有m个方程n个未知数，将方程看作系数向量+结果向量，若最大线性无关组的大小为k,则存在n-k个自由元. 若存在方程0 = x(x不为0)，则方程无解. 方程的解的个数和自由元的个数有关</strong> 在本题中，自由元可以任意取值0或1，若有cnt个自由元，则答案为$2^{cnt}$. 利用高斯消元求解.
-  <strong>因为每个系数只有0,1两种取值，故可以用二进制数存储</strong>,当前扫到了第i行，若$sta_i = 0$,说明出现了自由元，答案为$2^{n - i + 1}$,若$sta_i = 1$,说明无解. 利用二进制数可以快速判断方程左边与右边的关系，并且能够快速按位异或，不用逐位操作. 高斯消元的具体步骤是找一个二进制表示下最大的数，找到它的最高位k,将其他的第k位不为0的数异或上这个最大的数. 类似普通方程的高斯消元，只不过加减法变成了异或.
-###总结
-  1.遇到的新题型--xor方程组. 利用每一个变量的初始状态，最终状态，以及对它有影响的变量列方程. 方程的左边枚举j,对i是否有影响取决于是否操作j以及如果操作j是否会对i有影响. 方程的右边就是初始状态xor最终状态.
-  2.二进制表示状态的方法很值得学习.
-  3.高斯消元的一般步骤：找最高位不为0的，让其它最高位变成0，判断无解和自由元的情况.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2106,7 +2086,7 @@ $a_{1,1}x_1  xor  a_{2,1}x_2  xor ...... xor  a_{n,1}x_1 = s_1  xor �
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-count">157</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
