@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,13 +79,16 @@
 
 
 
+<meta name="description" content="You can&apos;t be beaten">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/page/11/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="You can&apos;t be beaten">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="You can&apos;t be beaten">
 
 
 
@@ -93,7 +96,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -327,12 +330,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/poj3904/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zbtrs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/12/poj3904/" itemprop="url">poj3904 Sky Code</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T13:32:53+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/12/poj3904/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/12/poj3904/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p>Description</p>
+<p>Stancu likes space travels but he is a poor software developer and will never be able to buy his own spacecraft. That is why he is preparing to steal the spacecraft of Petru. There is only one problem – Petru has locked the spacecraft with a sophisticated cryptosystem based on the ID numbers of the stars from the Milky Way Galaxy. For breaking the system Stancu has to check each subset of four stars such that the only common divisor of their numbers is 1. Nasty, isn’t it? Fortunately, Stancu has succeeded to limit the number of the interesting stars to N but, any way, the possible subsets of four stars can be too many. Help him to find their number and to decide if there is a chance to break the system.<br>Input</p>
+<p>In the input file several test cases are given. For each test case on the first line the number N of interesting stars is given (1 ≤ N ≤ 10000). The second line of the test case contains the list of ID numbers of the interesting stars, separated by spaces. Each ID is a positive integer which is no greater than 10000. The input data terminate with the end of file.<br>Output</p>
+<p>For each test case the program should print one line with the number of subsets with the asked property.<br>Sample Input</p>
+<p>4<br>2 3 4 5<br>4<br>2 4 6 8<br>7<br>2 3 4 5 7 6 8<br>Sample Output</p>
+<p>1<br>0<br>34<br>Source</p>
+<p>Southeastern European Regional Programming Contest 2008</p>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>求多少个四元组的gcd为1</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">10010</span>;</span><br><span class="line">ll n,a[maxn],num[maxn],cnt[maxn],maxx;</span><br><span class="line">ll ans,c[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">4</span>; i &lt;= <span class="number">10000</span>; i++)</span><br><span class="line">        c[i] = i * (i - <span class="number">1</span>) * (i - <span class="number">2</span>) * (i - <span class="number">3</span>) / <span class="number">24</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll prime[<span class="number">30</span>],tot = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(prime,<span class="number">0</span>,<span class="keyword">sizeof</span>(prime));</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">2</span>; i * i &lt;= x; i++)</span><br><span class="line">        <span class="keyword">if</span> (x % i == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            prime[++tot] = i;</span><br><span class="line">            <span class="keyword">while</span>(x % i == <span class="number">0</span>)</span><br><span class="line">                x /= i;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; <span class="number">1</span>)</span><br><span class="line">        prime[++tot] = x;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt; (<span class="number">1</span> &lt;&lt; tot); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll temp = <span class="number">1</span>,res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (ll j = <span class="number">0</span>; j &lt; tot; j++)</span><br><span class="line">            <span class="keyword">if</span> (i &gt;&gt; j &amp; <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                temp *= prime[j + <span class="number">1</span>];</span><br><span class="line">                res++;</span><br><span class="line">            &#125;</span><br><span class="line">        num[temp]++;</span><br><span class="line">        cnt[temp] = res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n) != EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        maxx = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(num,<span class="number">0</span>,<span class="keyword">sizeof</span>(num));</span><br><span class="line">        <span class="built_in">memset</span>(cnt,<span class="number">0</span>,<span class="keyword">sizeof</span>(cnt));</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);</span><br><span class="line">            solve(a[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= <span class="number">10000</span>; i++)</span><br><span class="line">            <span class="keyword">if</span> (num[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (cnt[i] &amp; <span class="number">1</span>)</span><br><span class="line">                    ans += c[num[i]];</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    ans -= c[num[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,c[n] - ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;直接计数gcd = 1的四元组的数量很难. 一个思路是求gcd != 1的四元组数量，用总数量减掉它就是答案了. 求gcd != 1的n元组问题有一个很经典的解法：容斥原理. 枚举所有可能出现在$a_i$的质因子p,求gcd为p的倍数的四元组数量. 可以先求出有多少个数是p的倍数，再利用组合公式可以计算出来. 可能会有四元组同时被p和q计数，那么就要减掉gcd同时是p和q的倍数的四元组的数量. 以此类推，奇+偶-即可.<br>容斥原理要分析清楚把状态空间分为哪几种集合，有哪些集合可能相交.找相交关系，不要找包含关系！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/ch磁力块/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="zbtrs">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/a.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -393,6 +558,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/12/ch磁力块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/12/ch磁力块/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -476,12 +652,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/poj2482/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zbtrs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/12/poj2482/" itemprop="url">poj2482 Stars in Your Window</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T13:28:53+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/12/poj2482/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/12/poj2482/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p>Description</p>
+<p>Fleeting time does not blur my memory of you. Can it really be 4 years since I first saw you? I still remember, vividly, on the beautiful Zhuhai Campus, 4 years ago, from the moment I saw you smile, as you were walking out of the classroom and turned your head back, with the soft sunset glow shining on your rosy cheek, I knew, I knew that I was already drunk on you. Then, after several months’ observation and prying, your grace and your wisdom, your attitude to life and your aspiration for future were all strongly impressed on my memory. You were the glamorous and sunny girl whom I always dream of to share the rest of my life with. Alas, actually you were far beyond my wildest dreams and I had no idea about how to bridge that gulf between you and me. So I schemed nothing but to wait, to wait for an appropriate opportunity. Till now — the arrival of graduation, I realize I am such an idiot that one should create the opportunity and seize it instead of just waiting. </p>
+<p>These days, having parted with friends, roommates and classmates one after another, I still cannot believe the fact that after waving hands, these familiar faces will soon vanish from our life and become no more than a memory. I will move out from school tomorrow. And you are planning to fly far far away, to pursue your future and fulfill your dreams. Perhaps we will not meet each other any more if without fate and luck. So tonight, I was wandering around your dormitory building hoping to meet you there by chance. But contradictorily, your appearance must quicken my heartbeat and my clumsy tongue might be not able to belch out a word. I cannot remember how many times I have passed your dormitory building both in Zhuhai and Guangzhou, and each time aspired to see you appear in the balcony or your silhouette that cast on the window. I cannot remember how many times this idea comes to my mind: call her out to have dinner or at least a conversation. But each time, thinking of your excellence and my commonness, the predominance of timidity over courage drove me leave silently. </p>
+<p>Graduation, means the end of life in university, the end of these glorious, romantic years. Your lovely smile which is my original incentive to work hard and this unrequited love will be both sealed as a memory in the deep of my heart and my mind. Graduation, also means a start of new life, a footprint on the way to bright prospect. I truly hope you will be happy everyday abroad and everything goes well. Meanwhile, I will try to get out from puerility and become more sophisticated. To pursue my own love and happiness here in reality will be my ideal I never desert. </p>
+<p>Farewell, my princess! </p>
+<p>If someday, somewhere, we have a chance to gather, even as gray-haired man and woman, at that time, I hope we can be good friends to share this memory proudly to relight the youthful and joyful emotions. If this chance never comes, I wish I were the stars in the sky and twinkling in your window, to bless you far away, as friends, to accompany you every night, sharing the sweet dreams or going through the nightmares together. </p>
+<p><img src="http://poj.org/images/2482_1.jpg" alt="a"><br>Here comes the problem: Assume the sky is a flat plane. All the stars lie on it with a location (x, y). for each star, there is a grade ranging from 1 to 100, representing its brightness, where 100 is the brightest and 1 is the weakest. The window is a rectangle whose edges are parallel to the x-axis or y-axis. Your task is to tell where I should put the window in order to maximize the sum of the brightness of the stars within the window. Note, the stars which are right on the edge of the window does not count. The window can be translated but rotation is not allowed.<br>Input</p>
+<p>There are several test cases in the input. The first line of each case contains 3 integers: n, W, H, indicating the number of stars, the horizontal length and the vertical height of the rectangle-shaped window. Then n lines follow, with 3 integers each: x, y, c, telling the location (x, y) and the brightness of each star. No two stars are on the same point. </p>
+<p>There are at least 1 and at most 10000 stars in the sky. 1&lt;=W，H&lt;=1000000, 0&lt;=x，y&lt;2^31.<br>Output</p>
+<p>For each test case, output the maximum brightness in a single line.<br>Sample Input</p>
+<p>3 5 4<br>1 2 3<br>2 3 2<br>6 3 1<br>3 5 4<br>1 2 3<br>2 3 2<br>5 3 1<br>Sample Output</p>
+<p>5<br>6<br>Source</p>
+<p>POJ Contest,Author:kinfkong@ZSU</p>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>每个星星都有亮度，用一个长为w,宽为h的矩形圈星星，要求圈的星星的亮度总和最大. 位于矩形边界上的星星不算.</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;已经知道了矩形的长和宽，还需要知道什么就能确定一个矩形？</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">20010</span>;</span><br><span class="line"></span><br><span class="line">ll n,w,h,cnt,a[maxn * <span class="number">2</span>],p,ans,maxx[maxn &lt;&lt; <span class="number">2</span>],add[maxn &lt;&lt; <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll x,y3,y4,c;</span><br><span class="line">&#125;e[maxn * <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a.x == b.x)</span><br><span class="line">        <span class="keyword">return</span> a.c &gt; b.c;</span><br><span class="line">    <span class="keyword">return</span> a.x &lt; b.x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(ll o)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    maxx[o] = max(maxx[o * <span class="number">2</span>],maxx[o * <span class="number">2</span> + <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(ll o)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (add[o])</span><br><span class="line">    &#123;</span><br><span class="line">        add[o * <span class="number">2</span>] += add[o];</span><br><span class="line">        add[o * <span class="number">2</span> + <span class="number">1</span>] += add[o];</span><br><span class="line">        maxx[o * <span class="number">2</span>] += add[o];</span><br><span class="line">        maxx[o * <span class="number">2</span> + <span class="number">1</span>] += add[o];</span><br><span class="line">        add[o] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(ll o,ll l,ll r,ll x,ll y,ll v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &lt;= l &amp;&amp; r &lt;= y)</span><br><span class="line">    &#123;</span><br><span class="line">        add[o] += v;</span><br><span class="line">        maxx[o] += v;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown(o);</span><br><span class="line">    ll mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (x &lt;= mid)</span><br><span class="line">        update(o * <span class="number">2</span>,l,mid,x,y,v);</span><br><span class="line">    <span class="keyword">if</span> (y &gt; mid)</span><br><span class="line">        update(o * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r,x,y,v);</span><br><span class="line">    pushup(o);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>,&amp;n,&amp;w,&amp;h) != EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(maxx,<span class="number">0</span>,<span class="keyword">sizeof</span>(maxx));</span><br><span class="line">        <span class="built_in">memset</span>(add,<span class="number">0</span>,<span class="keyword">sizeof</span>(add));</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ll x,y,c;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>,&amp;x,&amp;y,&amp;c);</span><br><span class="line">            e[++cnt].c = c;</span><br><span class="line">            e[cnt].x = x;</span><br><span class="line">            e[cnt].y3 = y;</span><br><span class="line">            e[cnt].y4 = y + h - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            e[++cnt].c = -c;</span><br><span class="line">            e[cnt].x = x + w - <span class="number">1</span>;</span><br><span class="line">            e[cnt].y3 = y;</span><br><span class="line">            e[cnt].y4 = y + h - <span class="number">1</span>;</span><br><span class="line">            a[cnt - <span class="number">1</span>] = y;</span><br><span class="line">            a[cnt] = y + h - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(e + <span class="number">1</span>,e + <span class="number">1</span> + cnt,cmp);</span><br><span class="line">        sort(a + <span class="number">1</span>,a + <span class="number">1</span> + cnt);</span><br><span class="line">        p = unique(a + <span class="number">1</span>,a + <span class="number">1</span> + cnt) - a - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ll x = lower_bound(a + <span class="number">1</span>,a + <span class="number">1</span> + p,e[i].y3) - a;</span><br><span class="line">            ll y = lower_bound(a + <span class="number">1</span>,a + <span class="number">1</span> + p,e[i].y4) - a;</span><br><span class="line">            update(<span class="number">1</span>,<span class="number">1</span>,p,x,y,e[i].c);</span><br><span class="line">            ans = max(ans,maxx[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;知道了矩形的长和宽，只需要知道矩形的一个边角的坐标即可确定这个矩形的位置. 为了避免坐标出现负数的情况，我们选取右上角.<br>&emsp;&emsp;对于一个星星，矩形的右上角在一个固定的区域内就能够覆盖这颗星星.边界情况比较难处理. 如果边界上不能有星星，那么这个固定的区域对应的横坐标和纵坐标的取值就是开区间，坐标可能取到浮点数. 那么将所有的星星往左移x,下移y$(0 &lt;x,y&lt;1)$,那么矩形顶点的坐标就是整数了(否则我们可以改变x,y的大小，将矩形顶点的坐标调整为整数). 因此，矩形右上角能取到的区域的左下角的点为(x,y),右上角的点为(x + w - 1,y + h - 1).<br>&emsp;&emsp;对每一个星星求得这么一个矩形. 这些矩形都有权值(星星的亮度). 矩形重叠的部分的权值是重叠的这些矩形的权值和. 现在的任务就是求权值和最大的一个区域.做到这已经不难想到用扫描线去求了，线段树维护最大值即可.</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&emsp;&emsp;不要陷入思维的死胡同. 星星是产生贡献的，故从星星的角度去考虑，而不是考虑矩形应该放在哪.和hdu4864有异曲同工之妙.<br>&emsp;&emsp;若干矩形堆在一起求某个值是扫描线的应用.<br>&emsp;&emsp;矩形边界情况的处理.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/poj2182/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="zbtrs">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/a.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -542,6 +888,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/12/poj2182/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/12/poj2182/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -639,9 +996,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/bzoj3105/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="zbtrs">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/a.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -702,6 +1059,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/12/bzoj3105/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/12/bzoj3105/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -789,9 +1157,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/poj2947/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="zbtrs">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/a.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -852,6 +1220,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/11/poj2947/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/11/poj2947/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -945,9 +1324,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/hdu5015/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="zbtrs">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/a.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1008,6 +1387,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/11/hdu5015/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/11/hdu5015/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1096,9 +1486,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/poj3233/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="zbtrs">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/a.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1159,6 +1549,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/11/poj3233/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/11/poj3233/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1249,9 +1650,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/bzoj2818/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="zbtrs">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/a.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1312,6 +1713,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/11/bzoj2818/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/11/bzoj2818/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1400,9 +1812,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/poj2311/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="zbtrs">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/a.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1464,6 +1876,17 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/11/poj2311/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/11/poj2311/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1500,318 +1923,6 @@
 <h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>一张n*m的矩形网格纸，两名玩家轮流行动。在每一次行动中，可以任选一张矩形网格纸，沿着某一行或者某一列的格线，把它剪成两部分。首先剪出1*1的玩家获胜.问先手能否必胜.</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,f[<span class="number">210</span>][<span class="number">210</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sg</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (f[x][y] != <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> f[x][y];</span><br><span class="line">    <span class="keyword">if</span> ((x == <span class="number">2</span> &amp;&amp; y == <span class="number">2</span>) || (x == <span class="number">2</span> &amp;&amp; y == <span class="number">3</span>) || (x == <span class="number">3</span> &amp;&amp; y == <span class="number">2</span>))</span><br><span class="line">        <span class="keyword">return</span> f[x][y] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> vis[<span class="number">1010</span>];</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; x - <span class="number">1</span>; i++)</span><br><span class="line">        vis[sg(i,y) ^ sg(x - i,y)] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; y - <span class="number">1</span>; i++)</span><br><span class="line">        vis[sg(x,i) ^ sg(x,y - i)] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;;i++)</span><br><span class="line">        <span class="keyword">if</span> (vis[i] == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> f[x][y] = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m) != EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> t = sg(n,m);</span><br><span class="line">        <span class="keyword">if</span> (t == <span class="number">0</span>)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"LOSE\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"WIN\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;很显然是要用sg来做. 但是这道题和一般的博弈论的题不太一样. 这道题是谁不能动谁就赢了，而利用sg函数求解的博弈论的题要求谁不能动谁就输了. 需要对问题进行转化.<br>&emsp;&emsp;<strong>遇到这种情况，我们先找到必败的边界状态，将其转化为题目的边界状态</strong>.比如这道题中，若剪成了2*2,2*3,3*2,那么接下来行动的人必败. 那么这三种情况的sg值为0.<br>&emsp;&emsp;如何算sg值？ 根据原则<strong>多游戏异或，后继求mex</strong>,即$sg(n,m) = mex(\{sg(i,m) \^ sg(n-i,m)\} U \{sg(n,i) \^ sg(n,m - i)\})$.<br>&emsp;&emsp;这么做可能会有问题：在dfs计算sg值的时候可能会走到边界1,1,这样就会得到错误的答案. 为了防止这种情况发生，<strong>强制让dfs走到新边界而不是原边界</strong>,只需要对决策做一点点改动即可.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/poj2976/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/11/poj2976/" itemprop="url">poj2976 Dropping tests</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T12:54:53+08:00">
-                2018-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p>Description</p>
-<p>In a certain course, you take n tests. If you get ai out of bi questions correct on test i, your cumulative average is defined to be</p>
-<p>Given your test scores and a positive integer k, determine how high you can make your cumulative average if you are allowed to drop any k of your test scores.</p>
-<p>Suppose you take 3 tests with scores of 5/5, 0/1, and 2/6. Without dropping any tests, your cumulative average is . However, if you drop the third test, your cumulative average becomes .</p>
-<p>Input</p>
-<p>The input test file will contain multiple test cases, each containing exactly three lines. The first line contains two integers, 1 ≤ n ≤ 1000 and 0 ≤ k &lt; n. The second line contains n integers indicating ai for all i. The third line contains n positive integers indicating bi for all i. It is guaranteed that 0 ≤ ai ≤ bi ≤ 1, 000, 000, 000. The end-of-file is marked by a test case with n = k = 0 and should not be processed.</p>
-<p>Output</p>
-<p>For each test case, write a single line with the highest cumulative average possible after dropping k of the given test scores. The average should be rounded to the nearest integer.</p>
-<p>Sample Input</p>
-<p>3 1<br>5 0 2<br>5 1 6<br>4 2<br>1 2 7 9<br>5 6 7 9<br>0 0<br>Sample Output</p>
-<p>83<br>100<br>Hint</p>
-<p>To avoid ambiguities due to rounding errors, the judge tests have been constructed so that all answers are at least 0.001 away from a decision boundary (i.e., you can assume that the average is never 83.4997).</p>
-<p>Source</p>
-<p>Stanford Local 2005</p>
-<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>选n-k个数，使得$Σa_i  / Σb_i$最大.</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">double</span> a[maxn],b[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">check</span><span class="params">(<span class="keyword">double</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> c[maxn],res = <span class="number">0.0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        c[i] = (a[i] - x * b[i]);</span><br><span class="line">    sort(c + <span class="number">1</span>,c + <span class="number">1</span> + n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = k + <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        res += c[i];</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k) != EOF &amp;&amp; (n || k))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;a[i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;b[i]);</span><br><span class="line">        <span class="keyword">double</span> l = <span class="number">0.0</span>,r = <span class="number">1000000</span>+<span class="number">50</span>,mid = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (r + l) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (check(mid) &gt; <span class="number">0.0</span>)</span><br><span class="line">                l = mid;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,(<span class="keyword">int</span>)(mid * <span class="number">100</span> + <span class="number">0.5</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;01分数规划模板题. 二分最后的答案. 若$Σa_i - ans*Σb_i &gt; 0$,则l = ans否则r = ans.<br>&emsp;&emsp;实现的细节问题需要注意一下. 最好通过限制迭代次数来二分，而不是限制r-l的精度. 求出来的答案不能太精确！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/joyoi扑克牌/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/11/joyoi扑克牌/" itemprop="url">tyvj2002 扑克牌</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T11:29:53+08:00">
-                2018-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>题目背景<br>Admin生日那天，Rainbow来找Admin玩扑克牌……<br>玩着玩着Rainbow觉得太没意思了,于是决定给Admin一个考验~~~</p>
-<p>题目描述<br>Rainbow把一副扑克牌(54张)随机洗开，倒扣着放成一摞。然后Admin从上往下依次翻开每张牌，每翻开一张黑桃、红桃、梅花或者方块，就把它放到对应花色的堆里去。<br>Rainbow想问问Admin，得到A张黑桃、B张红桃、C张梅花、D张方块需要翻开的牌的张数的期望值E是多少？<br>特殊地，如果翻开的牌是大王或者小王，Admin将会把它作为某种花色的牌放入对应堆中,使得放入之后E的值尽可能小。<br>由于Admin和Rainbow还在玩扑克，所以这个程序就交给你来写了~</p>
-<p>输入格式<br>输入仅由一行，包含四个用空格隔开的整数，A,B,C,D。</p>
-<p>输出格式<br>输出需要翻开的牌数的期望值E，四舍五入保留3位小数。<br>如果不可能达到输入的状态，输出-1.000。</p>
-<p>提示<br>对于100%的数据，0&lt;=A,B,C,D&lt;=15</p>
-<p>lydrainbowcat - “Admin生日”杯NOIP模拟赛 第三题<br>Blog: www.lydrainbowcat.tk  Email: lyd@tyvj.cn</p>
-<p>样例数据<br>输入样例 #1    输出样例 #1<br>样例输入1<br>1 2 3 4</p>
-<p>样例输入2<br>15 15 15 15</p>
-<p>样例输出1<br>16.393</p>
-<p>样例输出2<br>-1.000</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> inf = <span class="number">1e9</span>;</span><br><span class="line"><span class="keyword">int</span> A,B,C,D,vis[<span class="number">20</span>][<span class="number">20</span>][<span class="number">20</span>][<span class="number">20</span>][<span class="number">5</span>][<span class="number">5</span>];</span><br><span class="line"><span class="keyword">double</span> f[<span class="number">20</span>][<span class="number">20</span>][<span class="number">20</span>][<span class="number">20</span>][<span class="number">5</span>][<span class="number">5</span>];</span><br><span class="line"><span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c,<span class="keyword">int</span> d,<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt1 = a + (p == <span class="number">0</span>) + (q == <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> cnt2 = b + (p == <span class="number">1</span>) + (q == <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> cnt3 = c + (p == <span class="number">2</span>) + (q == <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">int</span> cnt4 = d + (p == <span class="number">3</span>) + (q == <span class="number">3</span>);</span><br><span class="line">    <span class="keyword">if</span> (cnt1 &gt;= A &amp;&amp; cnt2 &gt;= B &amp;&amp; cnt3 &gt;= C &amp;&amp; cnt4 &gt;= D)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c,<span class="keyword">int</span> d,<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (check(a,b,c,d,p,q))</span><br><span class="line">    &#123;</span><br><span class="line">        flag = <span class="literal">true</span>;</span><br><span class="line">        vis[a][b][c][d][p][q] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> f[a][b][c][d][p][q] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (vis[a][b][c][d][p][q])</span><br><span class="line">        <span class="keyword">return</span> f[a][b][c][d][p][q];</span><br><span class="line">    <span class="keyword">int</span> sum = a + b + c + d + (p != <span class="number">4</span>) + (q != <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">double</span> res = <span class="number">0.0</span>;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">13</span>)</span><br><span class="line">        res += (<span class="keyword">double</span>)(<span class="number">13</span> - a) / (<span class="keyword">double</span>)(<span class="number">54</span> - sum) * (<span class="keyword">double</span>)(dfs(a + <span class="number">1</span>,b,c,d,p,q) + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (b &lt; <span class="number">13</span>)</span><br><span class="line">        res += (<span class="keyword">double</span>)(<span class="number">13</span> - b) / (<span class="keyword">double</span>)(<span class="number">54</span> - sum) * (<span class="keyword">double</span>)(dfs(a,b + <span class="number">1</span>,c,d,p,q) + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (c &lt; <span class="number">13</span>)</span><br><span class="line">        res += (<span class="keyword">double</span>)(<span class="number">13</span> - c) / (<span class="keyword">double</span>)(<span class="number">54</span> - sum) * (<span class="keyword">double</span>)(dfs(a,b,c + <span class="number">1</span>,d,p,q) + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (d &lt; <span class="number">13</span>)</span><br><span class="line">        res += (<span class="keyword">double</span>)(<span class="number">13</span> - d) / (<span class="keyword">double</span>)(<span class="number">54</span> - sum) * (<span class="keyword">double</span>)(dfs(a,b,c,d + <span class="number">1</span>,p,q) + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="number">4</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">double</span> temp = <span class="number">1000000000.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">3</span>; i++)</span><br><span class="line">            temp = min(temp,dfs(a,b,c,d,i,q));</span><br><span class="line">        res += (temp + <span class="number">1</span>) / (<span class="keyword">double</span>)(<span class="number">54</span> - sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (q == <span class="number">4</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">double</span> temp = <span class="number">1000000000.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">3</span>; i++)</span><br><span class="line">            temp = min(temp,dfs(a,b,c,d,p,i));</span><br><span class="line">        res += (temp + <span class="number">1</span>) / (<span class="keyword">double</span>)(<span class="number">54</span> - sum);</span><br><span class="line">    &#125;</span><br><span class="line">    vis[a][b][c][d][p][q] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> f[a][b][c][d][p][q] = res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;A,&amp;B,&amp;C,&amp;D);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= A; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= B; j++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= C; k++)</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt;= D; l++)</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> p = <span class="number">0</span>; p &lt;= <span class="number">4</span>; p++)</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> q = <span class="number">0</span>; q &lt;= <span class="number">4</span>; q++)</span><br><span class="line">                            f[i][j][k][l][p][q] = <span class="number">-1.0</span>;</span><br><span class="line">    flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">double</span> ans = dfs(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span> (!flag)</span><br><span class="line">        ans = <span class="number">-1.0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.3lf\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;期望dp,状态很好设计：$f_{a,b,c,d,e,f}$表示4种花色的牌分别被翻开了a,b,c,d张，小王，大王的状态为e,f的期望值. 若e = f = 4,则小王，大王没有被翻开. 若e &lt;= 3,则对应的小王表示哪一张牌.<br>&emsp;&emsp;转移很好想. 关键是怎么实现. 最终局面的期望步数都为0. 如果采用递推的方法实现，则要枚举最终状态，比较麻烦. 一个更好的做法是记忆化搜索,达到边界返回0即可.</p>
-<h3 id="坑点"><a href="#坑点" class="headerlink" title="坑点"></a>坑点</h3><p>&emsp;&emsp;1.每次转移时要看转移到的状态是否合法.<br>&emsp;&emsp;2.用一个bool变量记录是否已经搜到了合法状态.</p>
 
           
         
@@ -1886,8 +1997,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">John Doe</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/a.jpg"
+                alt="zbtrs" />
+            
+              <p class="site-author-name" itemprop="name">zbtrs</p>
+              <p class="site-description motion-element" itemprop="description">You can't be beaten</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1897,7 +2012,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">157</span>
+                  <span class="site-state-item-count">159</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1919,7 +2034,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">84</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1960,7 +2075,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">zbtrs</span>
 
   
 </div>
@@ -1974,7 +2089,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
@@ -2021,6 +2136,8 @@
   
 
 
+  
+
 
 
 
@@ -2061,6 +2178,11 @@
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
 
   
 
@@ -2074,6 +2196,13 @@
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
   
 
   
@@ -2085,6 +2214,14 @@
 
   
 
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zbtrs.disqus.com/count.js" async></script>
+    
+
+    
 
   
 
@@ -2103,10 +2240,6 @@
 
 
 
-  
-
-
-
 
 
 
@@ -2117,6 +2250,323 @@
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 
