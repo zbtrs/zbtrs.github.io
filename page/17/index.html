@@ -330,6 +330,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/bzoj3032/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zbtrs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/01/bzoj3032/" itemprop="url">bzoj3032 七夕祭</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T16:09:53+08:00">
+                2018-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/01/bzoj3032/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/01/bzoj3032/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>3032: 七夕祭<br>Time Limit: 2 Sec  Memory Limit: 128 MB<br>Submit: 403  Solved: 207<br>[Submit][Status][Discuss]<br>Description<br>　　七夕节因牛郎织女的传说而被扣上了「情人节」的帽子。于是TYVJ今年举办了一次线下七夕祭。Vani同学今年成功邀请到了cl同学陪他来共度七夕，于是他们决定去TYVJ七夕祭游玩。　　<br>TYVJ七夕祭和11区的夏祭的形式很像。矩形的祭典会场由N排M列共计N×M个摊点组成。虽然摊点种类繁多，不过cl只对其中的一部分摊点感兴趣，比如章鱼烧、苹果糖、棉花糖、射的屋……什么的。Vani预先联系了七夕祭的负责人zhq，希望能够通过恰当地布置会场，使得各行中cl感兴趣的摊点数一样多，并且各列中cl感兴趣的摊点数也一样多。<br>    不过zhq告诉Vani，摊点已经随意布置完毕了，如果想满足cl的要求，唯一的调整方式就是交换两个相邻的摊点。两个摊点相邻，当且仅当他们处在同一行或者同一列的相邻位置上。由于zhq率领的TYVJ开发小组成功地扭曲了空间，每一行或每一列的第一个位置和最后一个位置也算作相邻。现在Vani想知道他的两个要求最多能满足多少个。在此前提下，至少需要交换多少次摊点。<br>Input<br>　第一行包含三个整数N和M和T。T表示cl对多少个摊点感兴趣。<br>　　接下来T行，每行两个整数x, y，表示cl对处在第x行第y列的摊点感兴趣。<br>Output<br>　首先输出一个字符串。如果能满足Vani的全部两个要求，输出both；如果通过调整只能使得各行中cl感兴趣的摊点数一样多，输出row；如果只能使各列中cl感兴趣的摊点数一样多，输出column；如果均不能满足，输出impossible。<br>　　如果输出的字符串不是impossible， 接下来输出最小交换次数，与字符串之间用一个空格隔开。</p>
+<p>Sample Input<br>样例输入1</p>
+<p>2 3 4</p>
+<p>1 3</p>
+<p>2 1</p>
+<p>2 2</p>
+<p>2 3</p>
+<p>样例输入2</p>
+<p>3 3 3</p>
+<p>1 3</p>
+<p>2 2</p>
+<p>2 3<br>Sample Output<br>样例输出1<br>row 1<br>样例输出2<br>both 2<br>HINT<br>对于100% 的数据，1≤N, M≤100000，0≤T≤min(NM, 100000)，1≤x≤N，1≤y≤M。<br>Source<br>Poetize2</p>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>&emsp;&emsp;1.如何判断是否合法？<br>&emsp;&emsp;2.行列之间必须要一起处理吗？<br>&emsp;&emsp;3.什么模型？<br>&emsp;&emsp;4.环能变成链吗？</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">100010</span>;</span><br><span class="line">ll n, m, T, hang[maxn], lie[maxn], ans, a[maxn], sum[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll t = T / n;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		a[i] = hang[i] - t;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">	sort(sum + <span class="number">1</span>, sum + <span class="number">1</span> + n);</span><br><span class="line">	ll k = sum[n / <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		ans += <span class="built_in">abs</span>(sum[i] - k);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll t = T / m;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">		a[i] = lie[i] - t;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">		sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">	sort(sum + <span class="number">1</span>, sum + <span class="number">1</span> + m);</span><br><span class="line">	ll k = sum[m / <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">		ans += <span class="built_in">abs</span>(sum[i] - k);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>, &amp;n, &amp;m, &amp;T);</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= T; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		ll x, y;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>, &amp;x, &amp;y);</span><br><span class="line">		hang[x]++;</span><br><span class="line">		lie[y]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (T % n == <span class="number">0</span> &amp;&amp; T % m == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"both "</span>);</span><br><span class="line">		solve1();</span><br><span class="line">		solve2();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span> (T % n == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"row "</span>);</span><br><span class="line">			solve1();</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">if</span> (T % m == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"column "</span>);</span><br><span class="line">				solve2();</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"impossible"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;首先判断是否合法. 记摊点的总数为$num$,若$num | n$,则在行上合法，若$num | m$,则在列上合法.<br>&emsp;&emsp;我们判断是否合法是依次判断行和列，这启发我们<strong>行列单独处理</strong>. 先看列上的情况.如果不考虑首尾相邻的话，实质上就是分摊纸牌问题：第i个人有$ai$张牌，每个人最终的牌数位$Σai / m$,每个人给相邻的人一张牌，问最少操作次数. 解决方法是从头到尾依次考虑.若$a1 &gt; Σai / m$,则第一个人需要给第二个人$a1 - Σai / m$张纸牌，若$a1 &lt; Σai / m$,那么就是第二个人给第一个人. 期间可能会出现负数，但是不要紧，牌的总量是那么多,求出来的答案一定也是正确的.令$T = Σai$,那么$ans = Σ|i * T / m - si|, si = Σaj, (1 ≤ j ≤ i) $.<br>&emsp;&emsp;涉及到平均数，一个常见的处理技巧是让所有数减去这个平均数，剩下的数就可以以0为基准了. 令$ai = ai - T / m,ans = Σsi$.<br>&emsp;&emsp;考虑最后一个问题：环该怎么处理？ 一般的处理方法是把环在复制一份，变成一条链，或者是把环从某一个位置断开，证明断开后的环和链求出来的答案是相同的. 在这道题中，可以证明：<strong>一定存在一种最优解的方案，环上某两个相邻的人之间没有发生纸牌交换操作. </strong><br>&emsp;&emsp;怎么证明？做一点小小的转换：B给A x张牌相当于A给B -x张牌，如果把整个局面的给牌关系看作一个图，若环上所有相邻的人之间发生纸牌交换操作，那么这个图一定会存在一个环. 类似网络流中的消圈定理，这个环一定是可以被消掉的！（例如所有人给出的牌数+1）,那么最优方案中一定不存在环！<br>&emsp;&emsp;如果在第k个人处断开，那么这m个人对于答案的贡献分别是：<br>$a[k + 1] : s[k + 1] - s[k]$<br>$a[k + 2] : s[k + 2] - s[k]$<br>$……$<br>$a[m] : s[m] - s[k]$<br>$a[1] : s[1] + s[m] - s[k]$<br>&emsp;&emsp;因为之前将所有的数都减去了$T  / m$，所以$s[m] = 0$,那么每一个人的贡献都可以看作$s[i] - s[k]$. 这就是货仓选址问题了. 将s排序，k取中位数即可.</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&emsp;&emsp;行列无关 —&gt; 纸牌分摊（抽象出模型） —&gt; 平均数的处理技巧 —&gt; 破环成链 —&gt; 中位数.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/28/poj3889/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1008,7 +1176,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">164</span>
+                  <span class="site-state-item-count">165</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

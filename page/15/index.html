@@ -330,6 +330,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/poj1084/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zbtrs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/06/poj1084/" itemprop="url">poj1084 Square Destroyer</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T14:02:53+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/06/poj1084/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/06/poj1084/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p>Description</p>
+<p>The left figure below shows a complete 3<em>3 grid made with 2</em>(3*4) (=24) matchsticks. The lengths of all matchsticks are one. You can find many squares of different sizes in the grid. The size of a square is the length of its side. In the grid shown in the left figure, there are 9 squares of size one, 4 squares of size two, and 1 square of size three. </p>
+<p>Each matchstick of the complete grid is identified with a unique number which is assigned from left to right and from top to bottom as shown in the left figure. If you take some matchsticks out from the complete grid, then some squares in the grid will be destroyed, which results in an incomplete 3<em>3 grid. The right figure illustrates an incomplete 3</em>3 grid after removing three matchsticks numbered with 12, 17 and 23. This removal destroys 5 squares of size one, 3 squares of size two, and 1 square of size three. Consequently, the incomplete grid does not have squares of size three, but still has 4 squares of size one and 1 square of size two.<br><img src="http://poj.org/images/1084/1084.gif" alt="a"><br>As input, you are given a (complete or incomplete) n<em>n grid made with no more than 2n(n+1) matchsticks for a natural number 5 &lt;= n . Your task is to compute the minimum number of matchsticks taken<br>out to destroy all the squares existing in the input n</em>n grid.<br>Input</p>
+<p>The input consists of T test cases. The number of test cases (T ) is given in the first line of the input file.<br>Each test case consists of two lines: The first line contains a natural number n , not greater than 5, which implies you are given a (complete or incomplete) n<em>n grid as input, and the second line begins with a nonnegative integer k , the number of matchsticks that are missing from the complete n</em>n grid, followed by<br>k numbers specifying the matchsticks. Note that if k is equal to zero, then the input grid is a complete n<em>n grid; otherwise, the input grid is an incomplete n</em>n grid such that the specified k matchsticks are missing from the complete n*n grid.<br>Output</p>
+<p>Print exactly one line for each test case. The line should contain the minimum number of matchsticks that have to be taken out to destroy all the squares in the input grid.<br>Sample Input</p>
+<p>2<br>2<br>0<br>3<br>3 12 17 23<br>Sample Output</p>
+<p>3<br>3<br>Source</p>
+<p>Taejon 2001</p>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>一个边长为n的网格，去掉几条边后，问你：最少要删掉多少条边才能使得网格中没有正方形？</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T,n,heng[<span class="number">10</span>][<span class="number">10</span>],shu[<span class="number">10</span>][<span class="number">10</span>],len;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">H</span><span class="params">(<span class="keyword">int</span> xiaxian)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> theng[<span class="number">10</span>][<span class="number">10</span>],tshu[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">memset</span>(theng,<span class="number">0</span>,<span class="keyword">sizeof</span>(theng));</span><br><span class="line">    <span class="built_in">memset</span>(tshu,<span class="number">0</span>,<span class="keyword">sizeof</span>(tshu));</span><br><span class="line">    <span class="built_in">memcpy</span>(theng,heng,<span class="keyword">sizeof</span>(heng));</span><br><span class="line">    <span class="built_in">memcpy</span>(tshu,shu,<span class="keyword">sizeof</span>(shu));</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len = xiaxian; len &lt;= n; len++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i + len - <span class="number">1</span> &lt;= n; i++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j + len - <span class="number">1</span> &lt;= n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= i + len - <span class="number">1</span>; k++)</span><br><span class="line">                    <span class="keyword">if</span> (tshu[k][j] == <span class="number">0</span> || tshu[k][j + len] == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        flag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= j + len - <span class="number">1</span>; k++)</span><br><span class="line">                    <span class="keyword">if</span> (theng[i][k] == <span class="number">0</span> || theng[i + len][k] == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        flag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">if</span> (!flag)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                res++;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= i + len - <span class="number">1</span>; k++)</span><br><span class="line">                    tshu[k][j] = tshu[k][j + len] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= j + len - <span class="number">1</span>; k++)</span><br><span class="line">                    theng[i][k] = theng[i + len][k] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> dep,<span class="keyword">int</span> limit,<span class="keyword">int</span> xiaxian)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = H(xiaxian);</span><br><span class="line">    <span class="keyword">if</span> (temp + dep &gt; limit + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (temp == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len = xiaxian; len &lt;= n; len++)  <span class="comment">//从正方形边长的下限开始枚举</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i + len - <span class="number">1</span> &lt;= n; i++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j + len - <span class="number">1</span> &lt;= n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//先判断以(i,j)为左上角，边长为len的正方形是否存在.</span></span><br><span class="line">                <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= i + len - <span class="number">1</span>; k++)</span><br><span class="line">                    <span class="keyword">if</span> (shu[k][j] == <span class="number">0</span> || shu[k][j + len] == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        flag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= j + len - <span class="number">1</span>; k++)</span><br><span class="line">                    <span class="keyword">if</span> (heng[i][k] == <span class="number">0</span> || heng[i + len][k] == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        flag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">if</span> (!flag)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= i + len - <span class="number">1</span>; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    shu[k][j] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">bool</span> flagg = dfs(dep + <span class="number">1</span>,limit,len);</span><br><span class="line">                    <span class="keyword">if</span> (flagg)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    shu[k][j] = <span class="number">1</span>;</span><br><span class="line">                    shu[k][j + len] = <span class="number">0</span>;</span><br><span class="line">                    flagg = dfs(dep + <span class="number">1</span>,limit,len);</span><br><span class="line">                    <span class="keyword">if</span> (flagg)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    shu[k][j + len] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt;= j + len - <span class="number">1</span>; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    heng[i][k] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">bool</span> flagg = dfs(dep + <span class="number">1</span>,limit,len);</span><br><span class="line">                    <span class="keyword">if</span> (flagg)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    heng[i][k] = <span class="number">1</span>;</span><br><span class="line">                    heng[i + len][k] = <span class="number">0</span>;</span><br><span class="line">                    flagg = dfs(dep + <span class="number">1</span>,limit,len);</span><br><span class="line">                    <span class="keyword">if</span> (flagg)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    heng[i + len][k] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">goto</span> endd;  <span class="comment">//到这里，若边长最小的正方形都不行，边长大的肯定都不行</span></span><br><span class="line">            &#125;</span><br><span class="line">    endd:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) <span class="comment">//以(i,j)为左端点、上端点的边</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">                heng[i][j] = shu[i][j] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">            <span class="keyword">int</span> hang = (x - <span class="number">1</span>) / (<span class="number">2</span> * n + <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> temp = (hang - <span class="number">1</span>) * (<span class="number">2</span> * n + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (x - temp &lt;= n)  <span class="comment">//将序号转化到坐标</span></span><br><span class="line">                heng[hang][x - temp] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                shu[hang][x - n - temp] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (H(<span class="number">1</span>) == <span class="number">0</span>) <span class="comment">//如果已经满足题意了</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (len = <span class="number">1</span>;; len++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (dfs(<span class="number">1</span>,len,<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;很显然是一道搜索题. BFS?状态记录不下. DFS?边数太多，容易进入不是最优解的搜索树中,而搜索树节点的扩展速度超级快.  那么将这两种做法综合起来，就是迭代加深搜索.<br>&emsp;&emsp;迭代加深搜索可以限制一个搜索的深度，使得DFS函数的返回类型是bool型，这样一旦搜索失败就可以不用继续搜了. 而普通的DFS不行，不知道具体要搜多少层，求最优解，只能将所有的可能都给搜遍，最坏的结果是将所有边都给枚举一遍.<br>&emsp;&emsp;为了避免多次搜到同一局面，规定一个搜索顺序：每次只搜当前网格图中边长最小的正方形. 枚举这个正方形上的每一条边，删掉这条边后继续递归下去. 如果边长最小的正方形都不行，那么其它的正方形肯定不行. 可以用“决策包容性”来证明. 这种策略所能到达的后继局面一定包含了搜其它正方形所能到达的后继局面. 破坏了当前局面的最小正方形，后继局面的最小正方形的边长一定不小于当前局面的最小正方形的边长,这样相当于把所有的正方形都给考虑到了，并且每种局面最多只会被考虑一次.<br>&emsp;&emsp;想到了优先队列的BFS就要想到A*,想到了迭代加深搜索就要想到IDA* ,估价函数设计为：每次找到一个边长最小的正方形，砍掉它的所有边，计数器+1，直到找不到正方形为止. 这个估价函数一定满足估价函数的设计要求，因为对于一个正方形，我们只需要砍掉它的一条边就能破坏它，在估价函数中砍掉了它的所有边，将这个正方形可能影响到的所有正方形都考虑进去了. 所以$H()≤g()$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/bzoj1975/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1823,170 +1986,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/bzoj1150/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zbtrs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/a.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/02/bzoj1150/" itemprop="url">bzoj1150 [CTSC2007]数据备份Backup</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T18:43:53+08:00">
-                2018-05-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/02/bzoj1150/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/02/bzoj1150/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>Description<br>　　你在一家 IT 公司为大型写字楼或办公楼（offices）的计算机数据做备份。然而数据备份的工作是枯燥乏味<br>的，因此你想设计一个系统让不同的办公楼彼此之间互相备份，而你则坐在家中尽享计算机游戏的乐趣。已知办公<br>楼都位于同一条街上。你决定给这些办公楼配对（两个一组）。每一对办公楼可以通过在这两个建筑物之间铺设网<br>络电缆使得它们可以互相备份。然而，网络电缆的费用很高。当地电信公司仅能为你提供 K 条网络电缆，这意味<br>着你仅能为 K 对办公楼（或总计2K个办公楼）安排备份。任一个办公楼都属于唯一的配对组（换句话说，这 2K<br>个办公楼一定是相异的）。此外，电信公司需按网络电缆的长度（公里数）收费。因而，你需要选择这 K 对办公<br>楼使得电缆的总长度尽可能短。换句话说，你需要选择这 K 对办公楼，使得每一对办公楼之间的距离之和（总距<br>离）尽可能小。下面给出一个示例，假定你有 5 个客户，其办公楼都在一条街上，如下图所示。这 5 个办公楼分<br>别位于距离大街起点 1km, 3km, 4km, 6km 和 12km 处。电信公司仅为你提供 K=2 条电缆。<br><img src="https://www.lydsy.com/JudgeOnline/upload/201604/1111.png" alt="Alt text"><br>　　上例中最好的配对方案是将第 1 个和第 2 个办公楼相连，第 3 个和第 4 个办公楼相连。这样可按要求使用<br> K=2 条电缆。第 1 条电缆的长度是 3km-1km=2km ，第 2 条电缆的长度是 6km-4km=2km。这种配对方案需要总长<br> 4km 的网络电缆，满足距离之和最小的要求。<br>Input<br>第一行包含整数n和k<br>其中n（2≤n≤100000）表示办公楼的数目，k（1≤k≤n/2）表示可利用的网络电缆的数目。<br>接下来的n行每行仅包含一个整数（0≤s≤1000000000）,表示每个办公楼到大街起点处的距离。<br>这些整数将按照从小到大的顺序依次出现。<br>Output<br>输出应由一个正整数组成，给出将2K个相异的办公楼连成k对所需的网络电缆的最小总长度。</p>
-<p>Sample Input<br>5 2 </p>
-<p>1</p>
-<p>3</p>
-<p>4</p>
-<p>6</p>
-<p>12<br>Sample Output<br>4</p>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>&emsp;&emsp;1.电线一定架在什么样的房子之间？</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">100010</span>;</span><br><span class="line">ll n,k,a[maxn],d[maxn],pre[maxn],nextt[maxn],cnt,ans,vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll x,pos;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> node &amp;b) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> x &gt; b.x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">priority_queue &lt;node&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;k);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">        d[i] = a[i + <span class="number">1</span>] - a[i];</span><br><span class="line">    n--;</span><br><span class="line">    d[<span class="number">0</span>] = d[n + <span class="number">1</span>] = <span class="number">1000000000</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n;i++)</span><br><span class="line">        pre[i] = i - <span class="number">1</span>,nextt[i] = i + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        node temp;</span><br><span class="line">        temp.x = d[i];</span><br><span class="line">        temp.pos = i;</span><br><span class="line">        q.push(temp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (cnt &lt; k)</span><br><span class="line">    &#123;</span><br><span class="line">        node u = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span> (vis[u.pos])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        ll pos = u.pos;</span><br><span class="line">        ans += u.x;  </span><br><span class="line">        node v;</span><br><span class="line">        v.x = d[pre[pos]] + d[nextt[pos]] - u.x;  <span class="comment">//替换后的新点</span></span><br><span class="line">        d[pos] = v.x;  <span class="comment">//该点的权值一定要变！！</span></span><br><span class="line">        v.pos = u.pos;  <span class="comment">//点还是在原来的位置，只是合并了</span></span><br><span class="line">        vis[pre[pos]] = vis[nextt[pos]] = <span class="number">1</span>;  </span><br><span class="line">        nextt[pre[pre[pos]]] = pos;  <span class="comment">//链表的删点操作，一定要注意操作顺序！</span></span><br><span class="line">        pre[nextt[nextt[pos]]] = pos;</span><br><span class="line">        nextt[pos] = nextt[nextt[pos]];</span><br><span class="line">        pre[pos] = pre[pre[pos]];</span><br><span class="line">        q.push(v);</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;首先可以观察样例猜出一个结论：电线一定架在相邻的两个房子间.  那么差分一下，记$d[i] = a[i + 1] - a[i]$,现在的任务就是从$d$中选出k个数来，使得它们之间两两不相邻.<br>&emsp;&emsp;显然是可以用dp来做的. 令$f[i][j][0/1]$表示前i个点中选了j个点，第i个点选/不选的最小代价. 不过k太大，不行.  数据这么大，还能用什么办法呢？二分？不会判定;贪心？有不能选相邻点的限制，不好做.<br>&emsp;&emsp;正解就是贪心！很容易想到每次都选最小值，然后把相邻两个点给去掉，接着选最小值，可以用优先队列来实现. 事实上这样是错的. 令最小值的点为$x$,$x$左边的点为$l$,右边的点为$r$,能选$x$的前提是$l$和$r$都没有被选. 有可能选了$l$和$r$的其中一个，或者$l$和$r$都选比选$x$要优.这就是决策了，贪心没办法直接处理决策.好在我们可以忽略其中一种情况：选了$l$和$r$中的某一个，因为只选一个的话还不如选$x$. 可还是有两种决策，怎么办？<br>&emsp;&emsp;<strong>贪心虽然不能直接处理决策，但它可以反悔！</strong>，我可以先选其中一个看上去优的决策，如果不好，我就选另一种决策将其抵消掉. 在本题中，每次先选最小的点$x$,然后删掉点$l,x,r$,将点$x$的权值变成$d[l] + d[r] - d[x]$,如果再次选到了$x$这个点，就将一开始选择点$x$的代价$d[x]$给抵消掉了，相当于选了$l,r$,选的点的个数依旧是$2$，删了$4$个点.最后正好能删掉$2k$个点.<br>&emsp;&emsp;边界怎么处理？贪心的策略是<strong>每次选权值最小的点</strong>,如果这个点正好是左端点or右端点该怎么办呢？假设删的点$x$是左端点，如果按照上面说的那样处理的话，最后删的点的数量就会小于$2k$,出现这种原因是因为可能会选择删掉$x$右边的点而不是删掉$x$. 其实仔细想想就能发现，这种情况在贪心中绝对不会被考虑到，因为$x$是最小值，又在最左边，受到限制的点数最少，要删肯定是删它. 为了避免<strong>下一步</strong>删掉其右边的点造成最终删掉的点数不对，我们将$d[0]$和$d[n + 1]$设置为$INF$.</p>
-<h3 id="一些智障错误"><a href="#一些智障错误" class="headerlink" title="一些智障错误"></a>一些智障错误</h3><p>&emsp;&emsp;1.链表删边后$pre,next$数组的变换顺序弄反了. 应先边相邻的点，再变自己.<br>&emsp;&emsp;2.忘了删掉点$x$后还会合并出点$x$,以致于$x$相邻的点的$pre,next$弄错.<br>&emsp;&emsp;3.只变了优先队列中保存的结构体的值，没有变对应位置上的值.</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&emsp;&emsp;dp的复杂度太高要想到优化或者是其他算法. 一般而言如果数据庞大到一维dp都做不了，那么肯定是其他的巧妙方法. 贪心和dp的关联挺大的，一个是单一决策，一个是多种决策.<br>&emsp;&emsp;贪心可以利用决策作用效果的抵消性来反悔，从而实现“贪心选择”来取代“决策转移”.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2041,7 +2040,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">164</span>
+                  <span class="site-state-item-count">165</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

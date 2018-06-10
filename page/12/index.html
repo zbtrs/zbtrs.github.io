@@ -330,6 +330,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/bzoj3105/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zbtrs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/12/bzoj3105/" itemprop="url">bzoj3105 [cqoi2013]新Nim游戏</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T10:08:53+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/12/bzoj3105/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/12/bzoj3105/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>Description<br>传统的Nim游戏是这样的：有一些火柴堆，每堆都有若干根火柴（不同堆的火柴数量可以不同）。两个游戏者轮流操作，每次可以选一个火柴堆拿走若干根火柴。可以只拿一根，也可以拿走整堆火柴，但不能同时从超过一堆火柴中拿。拿走最后一根火柴的游戏者胜利。<br>本题的游戏稍微有些不同：在第一个回合中，第一个游戏者可以直接拿走若干个整堆的火柴。可以一堆都不拿，但不可以全部拿走。第二回合也一样，第二个游戏者也有这样一次机会。从第三个回合（又轮到第一个游戏者）开始，规则和Nim游戏一样。<br>如果你先拿，怎样才能保证获胜？如果可以获胜的话，还要让第一回合拿的火柴总数尽量小。</p>
+<p>Input<br>第一行为整数k。即火柴堆数。第二行包含k个不超过109的正整数，即各堆的火柴个数。</p>
+<p>Output</p>
+<p>输出第一回合拿的火柴数目的最小值。如果不能保证取胜，输出-1。<br>Sample Input<br>6</p>
+<p>5 5 6 6 5 5</p>
+<p>Sample Output<br>21<br>HINT<br>k&lt;=100</p>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>&emsp;&emsp;在普通的nim游戏中，先手必胜的条件是什么？</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line">ll a[<span class="number">110</span>],b[<span class="number">60</span>],ans,sum;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &gt; y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);</span><br><span class="line">        ans += a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sum = ans;</span><br><span class="line">    sort(a + <span class="number">1</span>,a + <span class="number">1</span> + n,cmp);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> t = a[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">31</span>; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[i] &gt;&gt; j &amp; <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (b[j])</span><br><span class="line">                    a[i] ^= b[j];</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    b[j] = a[i];</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (a[i])</span><br><span class="line">            ans -= t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ans == sum)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;尽量让先手取胜. 若第一轮操作后，存在若干堆石子，使得它们的数量的异或和为0，则先手必输. 因为后手可以取出其它的石子使得异或和变为0，则变成必输局面.  线性基中，无论取多少个数异或起来都不会等于0，故求出石子个数最多的线性基即可.按照石子个数从大到小排序，动态维护线性基即可.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/poj2947/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1797,166 +1958,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/IPSC2016C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zbtrs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/a.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/10/IPSC2016C/" itemprop="url">IPSC2016C Counting Swaps</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T16:16:53+08:00">
-                2018-05-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/10/IPSC2016C/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/10/IPSC2016C/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>给定你一个 1∼n 的排列 ${p_i}$ ，可进行若干次操作，每次选择两个整数 x,y，交换 $p_x,p_y$。<br>请你告诉穰子，用最少的操作次数将给定排列变成单调上升的序列 1,2,…,n，有多少种方式呢？请输出方式数对 ${10^9+9}$ 取模的结果。<br>输入格式<br>第一行一个整数 T 代表数据组数。</p>
-<p>每一组测试数据，第一行是一个整数 n 代表排列中的元素个数，第二行 n 个整数，是这个排列。</p>
-<p>输入数据中测试数据间也许存在空行，请务必注意。</p>
-<p>输出格式<br>T 行，一行一个整数，代表这组测试数据的答案。</p>
-<p>样例一<br>input<br>1<br>3<br>2 3 1<br>output<br>3<br>explanation<br>至少需要两步，有三种操作方式。</p>
-<p>先换 2,3，再换 3,1。<br>先换 2,1，再换 3,2。<br>先换 3,1，再换 2,1。<br>数据范围与约定<br>对于 50% 的数据，1≤n≤10。<br>对于 100% 的数据，1≤n≤100000，T=100。</p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;真是神题一道.<br>&emsp;&emsp;题目先是限制了操作步数最少，在此基础上求方案数. 一步一步来. 先考虑怎么让操作步数最少. 我一开始以为是逆序对数，其实并不是. 逆序对数要求交换操作只能是相邻的元素,而本题中可以是任意元素. 将序列转化到图上去思考.<br>&emsp;&emsp;每个元素的最终位置我们是知道的. 对于第i个位置上的数$p_i$,从i向$p_i$连一条边. 可以发现最终构出来的图会形成许多的环,每个点只会有一条出边. 最终局面就是图上只有自环.单独考虑每一个环，任意交换环上两个点的出边，可以发现环被分成了两个环，边的总数不会变. 继续分下去，一定都会变成自环，统计操作次数，可以发现一个结论：<strong>把一个长度为n的环变成n个自环，最少需要n-1次操作</strong>.<br>&emsp;&emsp;知道了最少操作次数，同时也知道了怎么操作：单独考虑每一个环，每次任选两个点交换出边，一定可以将大环分成两个小环. 那么我们可以统计出将一个大环分成两个小环游多少种方案数，在来考虑怎么分小环,以此来计数.<br>&emsp;&emsp;上面只考虑了将环分成哪两种的方案数，没有考虑具体怎么分. 实际上根据分的环的大小不同，方案数也是不同的，因此要用递推的方法.记$f_i$为把长度为n的环变成n个自环的方案数，枚举分成的一个小环的长度x,那么另一个小环的长度就是n-x.记将环分成长度为x,y的两个小环的方案数为$T_{x,y}$,那么$f_n = ΣT(x,y) * f_x * f_y *?$,这个问号是我们要考虑的.<br>&emsp;&emsp;每一种分法，顺序不同，不会影响结果，但是会影响计数的结果. $f_x$的步数为x - 1,$f_y$的步数为y-1,那么总的步数就是n - 2. <strong>$f_x$的x-1步取n-1中的哪x-1步？这x-1步先进行哪一步，后进行哪一步都是我们要考虑的</strong>,根据多重排列数公式:$(n - 2)! / [(x - 1)! * (y-1)!]$.这就是问号那一部分的式子.<br>&emsp;&emsp;如何算$T_{x,y}$?,找规律啦！对于一个长度为n的环，如果x == y,那么n必定是偶数，长度为x的环的起点可以是大环中的左半部分(如果是有半部分，因为是一个环，并且x=y,就会造成重复统计)，所以此时$T_{x,y} = n/2$,否则$T_{x,y} = n$.<br>&emsp;&emsp;要求出所有的环的f值，复杂度是$O(n^2)$的，这个时候就要打表找规律啦！$f_n = n^{n - 2}$.</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&emsp;&emsp;1.最优策略下的计数问题，先要找到最优策略是什么，再来计数. 关键是要找到最优策略的特征!<br>&emsp;&emsp;2.当取值不同而使得方案数不同时，枚举这个取值，定义函数来计算方案数.<br>&emsp;&emsp;3.<strong>考虑清楚在分解成子问题计算方案数时，是否要考虑分配的方案数.</strong><br>&emsp;&emsp;4.和jloi成绩公布那道题结合起来看.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2011,7 +2012,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">164</span>
+                  <span class="site-state-item-count">165</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
