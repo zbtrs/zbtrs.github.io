@@ -21,8 +21,8 @@
       </categories>
       <tags>
         <tag>bzoj</tag>
-        <tag>仙人掌</tag>
         <tag>tarjan</tag>
+        <tag>仙人掌</tag>
       </tags>
   </entry>
   <entry>
@@ -33,8 +33,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>bzoj</tag>
         <tag>dp</tag>
+        <tag>bzoj</tag>
         <tag>基环树</tag>
       </tags>
   </entry>
@@ -50,6 +50,35 @@
         <tag>单调队列</tag>
         <tag>基环树</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[bzoj1123 [POI2008]BLO]]></title>
+    <url>%2F2018%2F06%2F13%2Fbzoj1123%2F</url>
+    <content type="text"><![CDATA[中文题面DescriptionByteotia城市有n个 towns m条双向roads. 每条 road 连接 两个不同的 towns ,没有重复的road. 所有towns连通。 Input输入n&lt;=100000 m&lt;=500000及m条边 Output输出n个数，代表如果把第i个点的所有边去掉，将有多少对点不能互通。(有序点对) Sample Input5 5 1 2 2 3 1 3 3 4 4 5Sample Output8 8 16 14 8 提示写出答案的表达式. 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const ll maxn = 100010,maxm = 1000010;ll n,m,head[maxn],to[maxm],nextt[maxm],tot = 1,pre[maxn],low[maxn],dfs_clock,sizee[maxn],ans[maxn],root,cut[maxn];void add(ll x,ll y)&#123; to[tot] = y; nextt[tot] = head[x]; head[x] = tot++;&#125;void tarjan(ll u)&#123; pre[u] = low[u] = ++dfs_clock; sizee[u] = 1; ll flag = 0,sum = 0; for (ll i = head[u];i;i = nextt[i]) &#123; ll v = to[i]; if (!pre[v]) &#123; tarjan(v); sizee[u] += sizee[v]; low[u] = min(low[u],low[v]); if (low[v] &gt;= pre[u]) &#123; flag++; if (u != root || flag &gt; 1) cut[u] = 1; ans[u] += (n - sizee[v]) * sizee[v]; sum += sizee[v]; &#125; &#125; else low[u] = min(low[u],pre[v]); &#125; if (cut[u]) ans[u] += (n - sum - 1) * (1 + sum) + (n - 1); else ans[u] = (n - 1) * 2;&#125;int main()&#123; scanf("%lld%lld",&amp;n,&amp;m); for (ll i = 1; i &lt;= m; i++) &#123; ll a,b; scanf("%lld%lld",&amp;a,&amp;b); add(a,b); add(b,a); &#125; for (ll i = 1; i &lt;= n; i++) if (!pre[i]) &#123; root = i; tarjan(i); &#125; for (ll i = 1; i &lt;= n; i++) printf("%lld\n",ans[i]); return 0;&#125; 分析&emsp;&emsp;最后答案是删掉所有边后形成的连通块大小两两相乘累加得到的结果.&emsp;&emsp;如果x不是割点，那么只有x与其它n-1个点不连通，所以答案为$2*(n - 1)$.&emsp;&emsp;如果x是割点，那么删掉x的所有边后，原图就会形成若干个连通块. 若x有k条边，那么最多就会有k+2个连通块,这些连通块有三种类型：&emsp;&emsp;1.x自身构成一个连通块.&emsp;&emsp;2.某些x的子节点v所在的搜索树的子树构成的连通块.&emsp;&emsp;3.其余点.&emsp;&emsp;考虑如何才能形成第二类连通块. 只有当$low_v ≥ pre_x$时,才行，这时v以及其子树内所有点都不能到x之前的点,就是一个独立的连通块. 如果$low_v &lt; pre_x$呢？可以证明，所有这样的v及其子树形成一个连通块. 因为题目给的图是连通图，如果存在两个点$v_1,v_2$,它们连到x之前的点不连通，那么其中一个点一定在x之后被递归到，然而它们的pre值都小于x的pre值，矛盾.&emsp;&emsp;那么就比较好做了，在tarjan时记录下以每个点为根的子树的大小，对于第二类子节点，贡献是$size_v * (n - size_v)$,令$sum = Σsize_v$,那么第三类点的贡献就是$(n - sum - 1) * (sum + 1)$. 小结&emsp;&emsp;删除割点后形成连通块的种类要记住.]]></content>
+      <categories>
+        <category>算法竞赛进阶指南</category>
+      </categories>
+      <tags>
+        <tag>bzoj</tag>
+        <tag>tarjan</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[poj3694 Network]]></title>
+    <url>%2F2018%2F06%2F13%2Fpoj3694%2F</url>
+    <content type="text"><![CDATA[英文题面Description A network administrator manages a large network. The network consists of N computers and M links between pairs of computers. Any pair of computers are connected directly or indirectly by successive links, so data can be transformed between any two computers. The administrator finds that some links are vital to the network, because failure of any one of them can cause that data can’t be transformed between some computers. He call such a link a bridge. He is planning to add some new links one by one to eliminate all bridges. You are to help the administrator by reporting the number of bridges in the network after each new link is added. Input The input consists of multiple test cases. Each test case starts with a line containing two integers N(1 ≤ N ≤ 100,000) and M(N - 1 ≤ M ≤ 200,000).Each of the following M lines contains two integers A and B ( 1≤ A ≠ B ≤ N), which indicates a link between computer A and B. Computers are numbered from 1 to N. It is guaranteed that any two computers are connected in the initial network.The next line contains a single integer Q ( 1 ≤ Q ≤ 1,000), which is the number of new links the administrator plans to add to the network one by one.The i-th line of the following Q lines contains two integer A and B (1 ≤ A ≠ B ≤ N), which is the i-th added new link connecting computer A and B. The last test case is followed by a line containing two zeros. Output For each test case, print a line containing the test case number( beginning with 1) and Q lines, the i-th of which contains a integer indicating the number of bridges in the network after the first i new links are added. Print a blank line after the output for each test case. Sample Input 3 21 22 321 21 34 41 22 12 31 421 23 40 0Sample Output Case 1:10 Case 2:20Source 2008 Asia Hefei Regional Contest Online by USTC 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 100010,maxm = 400010;int n,m,head[maxn],to[maxm],nextt[maxm],dep[maxn],tot = 1,pre[maxn],low[maxn],dfs_clock,f[maxn],fa[maxn],last[maxm],flag[maxm],ans,Q,cas;void add(int x,int y)&#123; last[++tot] = x; to[tot] = y; nextt[tot] = head[x]; head[x] = tot;&#125;int find(int x)&#123; if (x == fa[x]) return x; return fa[x] = find(fa[x]);&#125;void tarjan(int u,int last)&#123; pre[u] = low[u] = ++dfs_clock; for (int i = head[u]; i; i = nextt[i]) &#123; int v = to[i]; if (!pre[v]) &#123; dep[v] = dep[u] + 1; f[v] = u; tarjan(v,i); low[u] = min(low[u],low[v]); if (low[v] &gt;= pre[u]) flag[i] = flag[i ^ 1] = 1; &#125; else if (i != (last ^ 1)) low[u] = min(low[u],pre[v]); &#125;&#125;void update(int x)&#123; int y = f[x]; int fx = find(x),fy = find(y); if (fx != fy) &#123; fa[fx] = fy; ans--; &#125;&#125;void lca(int x,int y)&#123; if (dep[x] &lt; dep[y]) swap(x,y); while (dep[x] &gt; dep[y]) &#123; update(x); x = find(x); &#125; while (dep[y] &gt; dep[x]) &#123; update(y); y = find(y); &#125; while (x != y) &#123; update(x); update(y); x = find(x); y = find(y); &#125;&#125;int main()&#123; while (scanf("%d%d",&amp;n,&amp;m) == 2 &amp;&amp; n + m) &#123; ans = 0; memset(head,0,sizeof(head)); memset(flag,0,sizeof(flag)); memset(pre,0,sizeof(pre)); memset(low,0,sizeof(low)); memset(f,0,sizeof(f)); for (int i = 1; i &lt;= n; i++) fa[i] = i; dfs_clock = 0; tot = 1; for (int i = 1; i &lt;= m; i++) &#123; int x,y; scanf("%d%d",&amp;x,&amp;y); add(x,y); add(y,x); &#125; tarjan(1,0); for (int i = 2; i &lt;= tot; i++) if (!flag[i]) &#123; int x = last[i],y = to[i]; int fx = find(x),fy = find(y); if (dep[fx] &lt; dep[fy]) swap(fx,fy); if (fx != fy) fa[fx] = fy; &#125; for (int i = 2; i &lt;= tot; i += 2) &#123; int x = last[i],y = to[i]; int fx = find(x),fy = find(y); if (fx != fy) ans++; &#125; printf("Case %d:\n",++cas); scanf("%d",&amp;Q); while (Q--) &#123; int x,y; scanf("%d%d",&amp;x,&amp;y); lca(x,y); printf("%d\n",ans); &#125; printf("\n"); &#125; return 0;&#125; 分析&emsp;&emsp;自始至终都感觉这道题非常奇怪.&emsp;&emsp;给出的图是一个连通图，这就比较好处理，每次加一条边，就可能将一个连通块变成一个双连通分量，那么用并查集来维护双连通分量. 在搜索树上处理，若加一条边(u,v)，则相当于将搜索树上u到v的路径上的桥全部去掉了，路径上所有的点合并成一个双连通分量，利用并查集进行合并. 注意合并不改变树的结构，只是在求LCA的时候可以一下子跳到连通块的顶部.&emsp;&emsp;细节：不要认为搜索树的深度是pre数组，要在tarjan算法中求每个点在搜索树中的深度. 求LCA也要注意，要先跳一边，再跳一边，最后一起跳. 小结&emsp;&emsp;合并操作不要改变树的形态!不光对这道题而言，对于所有的题，修改操作都不要随意改变数据结构的结构.]]></content>
+      <categories>
+        <category>算法竞赛进阶指南</category>
+      </categories>
+      <tags>
+        <tag>tarjan</tag>
+        <tag>并查集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2018%2F06%2F13%2Fpoj3684%2F</url>
+    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[noip2012 疫情控制]]></title>
@@ -121,8 +150,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>bzoj</tag>
         <tag>dp</tag>
+        <tag>bzoj</tag>
         <tag>搜索</tag>
       </tags>
   </entry>
@@ -268,18 +297,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[斜率优化题犯的一个小错误]]></title>
-    <url>%2F2018%2F06%2F06%2F%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E9%A2%98%E7%8A%AF%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E9%94%99%E8%AF%AF%2F</url>
-    <content type="text"><![CDATA[what?&emsp;&emsp;本来想对队尾元素进行操作，结果取出来tail指针，而不是q[tail],真tm脑残. 本来想入队第i - k + 1个元素，结果却让第i个元素与队尾元素比较. 和当年写左偏树题目一样，把下标和表示的真实值弄混.]]></content>
-      <categories>
-        <category>算法竞赛进阶指南</category>
-      </categories>
-      <tags>
-        <tag>斜率优化</tag>
-        <tag>错误</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[poj1160 Post Office]]></title>
     <url>%2F2018%2F06%2F06%2Fpoj1160%2F</url>
     <content type="text"><![CDATA[英文题面Description There is a straight highway with villages alongside the highway. The highway is represented as an integer axis, and the position of each village is identified with a single integer coordinate. There are no two villages in the same position. The distance between two positions is the absolute value of the difference of their integer coordinates. Post offices will be built in some, but not necessarily all of the villages. A village and the post office in it have the same position. For building the post offices, their positions should be chosen so that the total sum of all distances between each village and its nearest post office is minimum. You are to write a program which, given the positions of the villages and the number of post offices, computes the least possible sum of all distances between each village and its nearest post office.Input Your program is to read from standard input. The first line contains two integers: the first is the number of villages V, 1 &lt;= V &lt;= 300, and the second is the number of post offices P, 1 &lt;= P &lt;= 30, P &lt;= V. The second line contains V integers in increasing order. These V integers are the positions of the villages. For each position X it holds that 1 &lt;= X &lt;= 10000.Output The first line contains one integer S, which is the sum of all distances between each village and its nearest post office.Sample Input 10 51 2 3 6 7 9 11 22 44 50Sample Output 9Source IOI 2000 翻译&emsp;&emsp;n个村庄，要求选k个村庄设置邮局，令每一个村庄的距离值为这个村庄到离它最近的邮局的距离，求最小距离值的和. 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 310,inf = 0x7ffffff;int n,k,a[maxn],f[40][maxn],w[maxn][maxn];void init()&#123; for (int i = 1; i &lt;= n; i++) for (int j = i; j &lt;= n; j++) &#123; int sum = 0; for (int k = i; k &lt;= j; k++) &#123; if (a[k] - a[i] &lt; a[j] - a[k]) sum += a[k] - a[i]; else sum += a[j] - a[k]; &#125; w[i][j] = sum; &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;k); for (int i = 1; i &lt;= n; i++) scanf("%d",&amp;a[i]); a[++n] = inf; a[0] = inf; k++; init(); memset(f,0x3f,sizeof(f)); for (int i = 1; i &lt;= n; i++) &#123; int sum = 0; for (int j = 1; j &lt; i; j++) sum += a[i] - a[j]; f[1][i] = sum; &#125; for (int i = 2; i &lt;= k; i++) for (int j = 1; j &lt;= n; j++) for (int p = 0; p &lt; j; p++) f[i][j] = min(f[i][j],f[i - 1][p] + w[p][j]); printf("%d\n",f[k][n]); return 0;&#125; 分析&emsp;&emsp;我的dp方法和网上的大部分方法都不一样. 令$f_{i,j}$表示已经设置了i个邮局，考虑了前j个村庄，并且第j个村庄必须设邮局的答案. 因为最后一个村庄在实际答案中可能不设邮局，所以加一个虚拟村庄n + 1,位置为inf. 最后的答案为$f_{k + 1,n + 1}$.可以先$O(n^3)$预处理出转移代价$w_{i,j}$.&emsp;&emsp;这个dp方程不能进行优化，虽然可以通过原题，但是比较慢. 换一种dp方法：不再强制令第j个村庄设置邮局，而是在第k个村庄和第j个村庄中间设置邮局，利用中位数原理. 其中k是转移到j的决策位置. 如果在比赛中，状态不能简化，但是需要优化dp时，考虑优化状态转移方程. 优化状态转移方程考虑5种方法，要么是只增不减求最值的决策集合，利用一个变量维护即可，要么可以用数据结构优化，要么转移多项式只与一项有关，可以用单调队列优化.要么与两项有关，斜率优化. 都不行的话，就考虑四边形不等式了. 四边形不等式的证明比较难，大胆猜想，对拍验证即可.$f_{i,j}$转移的区间范围在$f_{i - 1,j}$到$f_{i,j + 1}$的区间范围内，倒序枚举j即可.]]></content>
@@ -289,6 +306,18 @@
       <tags>
         <tag>dp</tag>
         <tag>四边形不等式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[斜率优化题犯的一个小错误]]></title>
+    <url>%2F2018%2F06%2F06%2F%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E9%A2%98%E7%8A%AF%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E9%94%99%E8%AF%AF%2F</url>
+    <content type="text"><![CDATA[what?&emsp;&emsp;本来想对队尾元素进行操作，结果取出来tail指针，而不是q[tail],真tm脑残. 本来想入队第i - k + 1个元素，结果却让第i个元素与队尾元素比较. 和当年写左偏树题目一样，把下标和表示的真实值弄混.]]></content>
+      <categories>
+        <category>算法竞赛进阶指南</category>
+      </categories>
+      <tags>
+        <tag>斜率优化</tag>
+        <tag>错误</tag>
       </tags>
   </entry>
   <entry>
@@ -333,9 +362,9 @@
         <category>计划</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>bzoj</tag>
         <tag>贪心</tag>
-        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -346,9 +375,9 @@
         <category>计划</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>bzoj</tag>
         <tag>贪心</tag>
-        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -359,9 +388,9 @@
         <category>计划</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>bzoj</tag>
         <tag>贪心</tag>
-        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -383,8 +412,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>bzoj</tag>
         <tag>dp</tag>
+        <tag>bzoj</tag>
         <tag>单调队列</tag>
       </tags>
   </entry>
@@ -396,9 +425,9 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>bzoj</tag>
         <tag>贪心</tag>
-        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -457,8 +486,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>计数</tag>
         <tag>dp</tag>
+        <tag>计数</tag>
       </tags>
   </entry>
   <entry>
@@ -482,8 +511,8 @@
         <category>计划</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>dp</tag>
+        <tag>贪心</tag>
         <tag>位运算</tag>
       </tags>
   </entry>
@@ -581,8 +610,8 @@
   </entry>
   <entry>
     <title><![CDATA[Codeforces 919 D. Substring]]></title>
-    <url>%2F2018%2F05%2F29%2Fcf919e%2F</url>
-    <content type="text"><![CDATA[题目大意给定a,b,p,x,求$n*a^n=b(modp)$,(1≤n≤x),n的个数. 提示&emsp;&emsp;怎样才能使得统计的范围变小？ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;typedef long long ll;const int maxn = 1000010;ll a,b,p,n,jie[maxn],ans,inv[maxn];ll qpow(ll a,ll b)&#123; ll res = 1; while (b) &#123; if (b &amp; 1) res = (res * a) % p; a = (a * a) % p; b &gt;&gt;= 1; &#125; return res;&#125;int main()&#123; scanf("%lld%lld%lld%lld",&amp;a,&amp;b,&amp;p,&amp;n); jie[0] = 1; jie[1] = a % p; inv[0] = inv[1] = 1; for (ll i = 2; i &lt;= p; i++) &#123; jie[i] = jie[i - 1] * a % p; inv[i] = (p - p / i) * inv[p % i] % p; &#125; for (ll i = 1; i &lt;= p - 1; i++) &#123; ll temp = i * jie[i] % p; temp = ((b - temp) % p + p) % p; ll temp2 = (p - 1) * jie[i] % p; temp2 = inv[temp2]; temp = temp * temp2 % p; if (i + temp * (p - 1) &gt; n) continue; ll maxx = (n - i) / (p - 1); ans += (maxx - temp) / p + 1; &#125; printf("%lld\n",ans); return 0;&#125; 分析&emsp;&emsp;最朴素的做法是从1到x枚举n,这样复杂度就与x有关. 观察题目的数据范围，发现p的数据范围刚好符合要求. 做法肯定是与p有关. 联想到bsgs算法，我们可以把x换一种方式表示：$x = y*(p - 1) + i$, (i ≤ p - 1),这样只需要枚举i,统计y的个数即可. 而根据费马小定理，$a^{p-1} = 1(mod p)$. 所以可以将$a^{p - 1}$约掉，最后求出y的式子$y = (b - i*a^i)((p - 1)*a^i)^{-1}(mod p)$,y的上限知道(n不能超过x),下限就是这个同余式右边一项，那么y的个数自然也很好统计了. 总结&emsp;&emsp;利用费马小定理将同余式指数的枚举的复杂度变成与P相关.]]></content>
+    <url>%2F2018%2F05%2F29%2Fcf919d%2F</url>
+    <content type="text"><![CDATA[题目大意n个点m条边的有向图，每个点都有一个字母，定义一条路径的权值为这条路径经过的所有字母的出现次数最多的字母的出现次数. 求最大路径权值. 如果可以无限大，就输出-1. 提示&emsp;&emsp; noip2017 d1t3. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;queue&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 300010;int n,m,f[maxn][30],cnt,head[maxn],to[maxn],nextt[maxn],tot = 1,du[maxn],vis[maxn],ans;bool flag = false;char s[maxn];struct node&#123; int x,y;&#125; e[maxn];void add(int x,int y)&#123; to[tot] = y; nextt[tot] = head[x]; head[x] = tot++;&#125;bool cmp(node a,node b)&#123; if (a.x == b.x) return a.y &lt; b.y; return a.x &lt; b.x;&#125;void dfs(int u)&#123; vis[u] = 1; if (flag) return; for (int i = head[u];i;i = nextt[i]) &#123; int v = to[i]; if (vis[v] == 1) &#123; flag = true; return; &#125; else if (!vis[v]) dfs(v); &#125; vis[u] = 2;&#125;void topo()&#123; queue &lt;int&gt; q; for (int i = 1; i &lt;= n; i++) if (!du[i]) q.push(i); while (!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = head[u];i;i = nextt[i]) &#123; int v = to[i]; for (int j = 0; j &lt; 26; j++) f[v][j] = max(f[v][j],f[u][j] + (s[v] - 'a' == j)); if (--du[v] == 0) q.push(v); &#125; &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); scanf("%s",s + 1); for (int i = 1; i &lt;= n; i++) f[i][s[i] - 'a'] = 1; for (int i = 1; i &lt;= m; i++) &#123; int x,y; scanf("%d%d",&amp;x,&amp;y); if (x == y) &#123; flag = true; continue; &#125; e[++cnt].x = x; e[cnt].y = y; &#125; if (flag) puts("-1"); else &#123; sort(e + 1,e + 1 + cnt,cmp); for (int i = 1; i &lt;= cnt; i++) &#123; if (e[i].x == e[i - 1].x &amp;&amp; e[i].y == e[i - 1].y) continue; add(e[i].x,e[i].y); du[e[i].y]++; &#125; flag = false; for (int i = 1; i &lt;= n; i++) if (!vis[i] &amp;&amp; !flag) dfs(i); if (flag) puts("-1"); else &#123; topo(); for (int i = 1; i &lt;= n; i++) for (int j = 0; j &lt; 26; j++) ans = max(ans,f[i][j]); printf("%d\n",ans); &#125; &#125; return 0;&#125; 分析&emsp;&emsp;非常标准的一道拓扑排序+dp题.&emsp;&emsp;首先判断是否无解，用dfs判环即可. 注意vis = 1和vis = 2的区别. 因为原图可能有多个连通块，所以要以每个没有被访问过的点作为起点做一次dfs.&emsp;&emsp;因为字母最多只有26个，可以记录路径到i号点第j个单词的最大数量，拓扑排序时根据边转移即可.&emsp;&emsp;注意：重边会影响答案，要先将所有边排序去重后再连边.]]></content>
       <categories>
         <category>计划</category>
       </categories>
@@ -593,8 +622,8 @@
   </entry>
   <entry>
     <title><![CDATA[Codeforces 919 D. Substring]]></title>
-    <url>%2F2018%2F05%2F29%2Fcf919d%2F</url>
-    <content type="text"><![CDATA[题目大意n个点m条边的有向图，每个点都有一个字母，定义一条路径的权值为这条路径经过的所有字母的出现次数最多的字母的出现次数. 求最大路径权值. 如果可以无限大，就输出-1. 提示&emsp;&emsp; noip2017 d1t3. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;queue&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 300010;int n,m,f[maxn][30],cnt,head[maxn],to[maxn],nextt[maxn],tot = 1,du[maxn],vis[maxn],ans;bool flag = false;char s[maxn];struct node&#123; int x,y;&#125; e[maxn];void add(int x,int y)&#123; to[tot] = y; nextt[tot] = head[x]; head[x] = tot++;&#125;bool cmp(node a,node b)&#123; if (a.x == b.x) return a.y &lt; b.y; return a.x &lt; b.x;&#125;void dfs(int u)&#123; vis[u] = 1; if (flag) return; for (int i = head[u];i;i = nextt[i]) &#123; int v = to[i]; if (vis[v] == 1) &#123; flag = true; return; &#125; else if (!vis[v]) dfs(v); &#125; vis[u] = 2;&#125;void topo()&#123; queue &lt;int&gt; q; for (int i = 1; i &lt;= n; i++) if (!du[i]) q.push(i); while (!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = head[u];i;i = nextt[i]) &#123; int v = to[i]; for (int j = 0; j &lt; 26; j++) f[v][j] = max(f[v][j],f[u][j] + (s[v] - 'a' == j)); if (--du[v] == 0) q.push(v); &#125; &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); scanf("%s",s + 1); for (int i = 1; i &lt;= n; i++) f[i][s[i] - 'a'] = 1; for (int i = 1; i &lt;= m; i++) &#123; int x,y; scanf("%d%d",&amp;x,&amp;y); if (x == y) &#123; flag = true; continue; &#125; e[++cnt].x = x; e[cnt].y = y; &#125; if (flag) puts("-1"); else &#123; sort(e + 1,e + 1 + cnt,cmp); for (int i = 1; i &lt;= cnt; i++) &#123; if (e[i].x == e[i - 1].x &amp;&amp; e[i].y == e[i - 1].y) continue; add(e[i].x,e[i].y); du[e[i].y]++; &#125; flag = false; for (int i = 1; i &lt;= n; i++) if (!vis[i] &amp;&amp; !flag) dfs(i); if (flag) puts("-1"); else &#123; topo(); for (int i = 1; i &lt;= n; i++) for (int j = 0; j &lt; 26; j++) ans = max(ans,f[i][j]); printf("%d\n",ans); &#125; &#125; return 0;&#125; 分析&emsp;&emsp;非常标准的一道拓扑排序+dp题.&emsp;&emsp;首先判断是否无解，用dfs判环即可. 注意vis = 1和vis = 2的区别. 因为原图可能有多个连通块，所以要以每个没有被访问过的点作为起点做一次dfs.&emsp;&emsp;因为字母最多只有26个，可以记录路径到i号点第j个单词的最大数量，拓扑排序时根据边转移即可.&emsp;&emsp;注意：重边会影响答案，要先将所有边排序去重后再连边.]]></content>
+    <url>%2F2018%2F05%2F29%2Fcf919e%2F</url>
+    <content type="text"><![CDATA[题目大意给定a,b,p,x,求$n*a^n=b(modp)$,(1≤n≤x),n的个数. 提示&emsp;&emsp;怎样才能使得统计的范围变小？ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;typedef long long ll;const int maxn = 1000010;ll a,b,p,n,jie[maxn],ans,inv[maxn];ll qpow(ll a,ll b)&#123; ll res = 1; while (b) &#123; if (b &amp; 1) res = (res * a) % p; a = (a * a) % p; b &gt;&gt;= 1; &#125; return res;&#125;int main()&#123; scanf("%lld%lld%lld%lld",&amp;a,&amp;b,&amp;p,&amp;n); jie[0] = 1; jie[1] = a % p; inv[0] = inv[1] = 1; for (ll i = 2; i &lt;= p; i++) &#123; jie[i] = jie[i - 1] * a % p; inv[i] = (p - p / i) * inv[p % i] % p; &#125; for (ll i = 1; i &lt;= p - 1; i++) &#123; ll temp = i * jie[i] % p; temp = ((b - temp) % p + p) % p; ll temp2 = (p - 1) * jie[i] % p; temp2 = inv[temp2]; temp = temp * temp2 % p; if (i + temp * (p - 1) &gt; n) continue; ll maxx = (n - i) / (p - 1); ans += (maxx - temp) / p + 1; &#125; printf("%lld\n",ans); return 0;&#125; 分析&emsp;&emsp;最朴素的做法是从1到x枚举n,这样复杂度就与x有关. 观察题目的数据范围，发现p的数据范围刚好符合要求. 做法肯定是与p有关. 联想到bsgs算法，我们可以把x换一种方式表示：$x = y*(p - 1) + i$, (i ≤ p - 1),这样只需要枚举i,统计y的个数即可. 而根据费马小定理，$a^{p-1} = 1(mod p)$. 所以可以将$a^{p - 1}$约掉，最后求出y的式子$y = (b - i*a^i)((p - 1)*a^i)^{-1}(mod p)$,y的上限知道(n不能超过x),下限就是这个同余式右边一项，那么y的个数自然也很好统计了. 总结&emsp;&emsp;利用费马小定理将同余式指数的枚举的复杂度变成与P相关.]]></content>
       <categories>
         <category>计划</category>
       </categories>
@@ -633,8 +662,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>bzoj</tag>
         <tag>dp</tag>
+        <tag>bzoj</tag>
         <tag>数位dp</tag>
         <tag>模板</tag>
       </tags>
@@ -674,18 +703,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[poj1737 Connected Graph]]></title>
-    <url>%2F2018%2F05%2F27%2Fpoj1737%2F</url>
-    <content type="text"><![CDATA[题目大意求n个节点的无向连通图有多少个，节点有标号. 提示&emsp;&emsp;考虑以什么为基准进行划分来计数. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;int n;struct node&#123; int cnt,a[1010]; void clear() &#123; cnt = 0; memset(a,0,sizeof(a)); &#125;&#125; f[60],c[60][60];void print(node a)&#123; for (int i = a.cnt; i &gt;= 1; i--) printf("%d",a.a[i]); printf("\n");&#125;node operator + (node a,node b)&#123; node c; c.clear(); c.cnt = max(a.cnt,b.cnt); for (int i = 1; i &lt;= c.cnt; i++) &#123; c.a[i] += a.a[i] + b.a[i]; while (c.a[i] &gt;= 10) &#123; c.a[i + 1]++; c.a[i] -= 10; &#125; &#125; while (c.a[c.cnt + 1]) c.cnt++; return c;&#125;node operator * (node a,node b)&#123; node c; c.clear(); c.cnt = a.cnt + b.cnt - 1; for (int i = 1; i &lt;= a.cnt; i++) for (int j = 1; j &lt;= b.cnt; j++) c.a[i + j - 1] += a.a[i] * b.a[j]; for (int i = 1; i &lt;= c.cnt; i++) &#123; c.a[i + 1] += c.a[i] / 10; c.a[i] %= 10; &#125; if (c.a[c.cnt + 1]) c.cnt++; while (c.a[c.cnt] &gt;= 10) &#123; c.a[c.cnt + 1] += c.a[c.cnt] / 10; c.a[c.cnt] %= 10; c.cnt++; &#125; return c;&#125;node qpow(int a,int b)&#123; node res; res.clear(); res.cnt = 1; res.a[1] = 1; node ta; ta.clear(); ta.cnt = 1; ta.a[1] = 2; while (b) &#123; if (b &amp; 1) res = res * ta; ta = ta * ta; b &gt;&gt;= 1; &#125; return res;&#125;node operator - (node a,node b)&#123; node c; c.clear(); c.cnt = max(a.cnt,b.cnt); int temp = 0; for (int i = 1; i &lt;= c.cnt; i++) &#123; c.a[i] = a.a[i] - b.a[i] - temp; temp = 0; while (c.a[i] &lt; 0) &#123; temp++; c.a[i] += 10; &#125; &#125; while (!c.a[c.cnt]) c.cnt--; return c;&#125;void init()&#123; f[1].clear(); f[1].cnt = 1; f[1].a[1] = 1; c[0][0].clear(); c[0][0].cnt = 1; c[0][0].a[1] = 1; for (int i = 1; i &lt;= 50; i++) &#123; c[i][0].clear(); c[i][0].cnt = 1; c[i][0].a[1] = 1; for (int j = 1; j &lt;= i; j++) &#123; c[i][j].clear(); c[i][j] = c[i - 1][j] + c[i - 1][j - 1]; &#125; &#125; f[1].clear(); f[1].cnt = 1; f[1].a[1] = 1; for (int i = 2; i &lt;= 50; i++) &#123; f[i].clear(); f[i] = qpow(2,i*(i - 1) / 2); for (int j = 1; j &lt;= i - 1; j++) f[i] = f[i] - f[j] * c[i - 1][j - 1] * qpow(2,(i - j)*(i - j - 1) / 2); &#125;&#125;int main()&#123; init(); while (scanf("%d",&amp;n) != EOF &amp;&amp; n) print(f[n]); return 0;&#125; 分析&emsp;&emsp;连通图不容易计数，考虑计算不连通图的数量，再用总的图的数量减去不连通图的数量即为答案.&emsp;&emsp;以标号为1的节点所在的连通块为基准进行划分. 令$f_i$表示i个节点的无向连通图的个数，枚举选j个点构成第一个连通子图，那么方案数就是$f_j * C(i - 1,j - 1) * 2^{(i - j)(i - j - 1) / 2}$,即从剩下的i-1个点中选出j-1个点构成标号为1的节点所在的连通块. 剩下的点与第一个连通块都是不连通的，它们之间的连通情况任意. 总的方案数是$2^{i*(i - 1) / 2}$. $f_i = 2^{i*(i - 1) / 2} - Σf_j * C(i - 1,j - 1) * 2^{(i - j)(i - j - 1) / 2}$.&emsp;&emsp;比较毒瘤的是没有取模操作，需要手写高精度.]]></content>
-      <categories>
-        <category>算法竞赛进阶指南</category>
-      </categories>
-      <tags>
-        <tag>计数</tag>
-        <tag>dp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[一类基准点划分计数dp]]></title>
     <url>%2F2018%2F05%2F27%2F%E4%B8%80%E7%B1%BB%E5%9F%BA%E5%87%86%E7%82%B9%E5%88%92%E5%88%86%E8%AE%A1%E6%95%B0dp%2F</url>
     <content type="text"><![CDATA[方法总结&emsp;&emsp;划分对象：一个特定的对象所在的集合. 这个对象一般是取最”小”的，即“第一个经过”，“编号最小”等等. 利用dp处理划分出来的这么一个集合,需要考虑各种情况，剩下的直接利用数学公式算，特殊情况不用考虑,如果数学公式不能算，就用dp来算. 划分规律&emsp;&emsp;划分是呈递进式的，多数题目只需要进行一次划分，但是有的题目要进行多次划分. 一步一步划分，每一次划分在上一次的划分的基础上进行,表示的状态和划分条件越来越严格. 应用&emsp;&emsp;分析几道例题是如何应用上面的规律的. 1.金字塔&emsp;&emsp;划分对象：第一棵子树，满足对象最小性.&emsp;&emsp;划分规律：从整棵树变成了一棵子树，呈现递进式，因为子树可以通过dp计数，所以不需要再次划分. 2.cf559C&emsp;&emsp;划分对象：第一个经过的黑点.&emsp;&emsp;划分规律：从不经过黑点到经过黑点. 加上了限定条件. 3.poj1737&emsp;&emsp;划分对象：第一个节点所在的连通块.&emsp;&emsp;划分规律：从无向图变成连通块. 4.boss题题目大意&emsp;&emsp;求n个点割边不超过m的无向连通图的数量，节点有标号. 分析&emsp;&emsp;因为多了割边的限制，所以dp有两维状态：$f_{i,j}$表示i个点组成的割边数量为j的无向连通图的数量. 如何划分？基准点肯定是编号最小的点所在的连通块，那么限制条件呢？ 与割边有关并且条件比无向连通图更严苛的是什么？双连通分量！那么就以编号最小的点所在的双连通分量作为基准点来考虑.&emsp;&emsp;双连通分量内部没有割边，所以只需要枚举划分成的双连通分量的点数即可. 剩下的点的条件就可以放松了，只需要是无向图即可. 需要枚举和划分出来的双连通分量有多少条割边相连. 令$g_{i,j,k}$表示i个点划分成j个连通分量有k条割边的方案数. 那么$f_{i,j} = Σ(f_{k,0}*C(i-1,k-1) *Σg_{i-k,x,j-x}*k^x)$, x是枚举划分出来的双连通分量有多少条割边与外界相连，每条割边有k个点可以选择. 一定要注意：编号最小的点是已经被选出来的，所以组合数上下标都要-1&emsp;&emsp;同理，计算$g_{i,j,k}$，基准点是编号最小的点所在的连通分量. $g_{i,j,k} = ΣΣf_{p,q} * C(i - 1,p - 1) * p * g_{i - p,j - 1,k - q}$. 注意划分出来的连通分量和一开始划分出来的双连通分量的割边的点的选择也要算入方案数中. 这一步算的是从连通分量选点的方案数.]]></content>
@@ -693,9 +710,21 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>计数</tag>
         <tag>dp</tag>
+        <tag>计数</tag>
         <tag>总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[poj1737 Connected Graph]]></title>
+    <url>%2F2018%2F05%2F27%2Fpoj1737%2F</url>
+    <content type="text"><![CDATA[题目大意求n个节点的无向连通图有多少个，节点有标号. 提示&emsp;&emsp;考虑以什么为基准进行划分来计数. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;int n;struct node&#123; int cnt,a[1010]; void clear() &#123; cnt = 0; memset(a,0,sizeof(a)); &#125;&#125; f[60],c[60][60];void print(node a)&#123; for (int i = a.cnt; i &gt;= 1; i--) printf("%d",a.a[i]); printf("\n");&#125;node operator + (node a,node b)&#123; node c; c.clear(); c.cnt = max(a.cnt,b.cnt); for (int i = 1; i &lt;= c.cnt; i++) &#123; c.a[i] += a.a[i] + b.a[i]; while (c.a[i] &gt;= 10) &#123; c.a[i + 1]++; c.a[i] -= 10; &#125; &#125; while (c.a[c.cnt + 1]) c.cnt++; return c;&#125;node operator * (node a,node b)&#123; node c; c.clear(); c.cnt = a.cnt + b.cnt - 1; for (int i = 1; i &lt;= a.cnt; i++) for (int j = 1; j &lt;= b.cnt; j++) c.a[i + j - 1] += a.a[i] * b.a[j]; for (int i = 1; i &lt;= c.cnt; i++) &#123; c.a[i + 1] += c.a[i] / 10; c.a[i] %= 10; &#125; if (c.a[c.cnt + 1]) c.cnt++; while (c.a[c.cnt] &gt;= 10) &#123; c.a[c.cnt + 1] += c.a[c.cnt] / 10; c.a[c.cnt] %= 10; c.cnt++; &#125; return c;&#125;node qpow(int a,int b)&#123; node res; res.clear(); res.cnt = 1; res.a[1] = 1; node ta; ta.clear(); ta.cnt = 1; ta.a[1] = 2; while (b) &#123; if (b &amp; 1) res = res * ta; ta = ta * ta; b &gt;&gt;= 1; &#125; return res;&#125;node operator - (node a,node b)&#123; node c; c.clear(); c.cnt = max(a.cnt,b.cnt); int temp = 0; for (int i = 1; i &lt;= c.cnt; i++) &#123; c.a[i] = a.a[i] - b.a[i] - temp; temp = 0; while (c.a[i] &lt; 0) &#123; temp++; c.a[i] += 10; &#125; &#125; while (!c.a[c.cnt]) c.cnt--; return c;&#125;void init()&#123; f[1].clear(); f[1].cnt = 1; f[1].a[1] = 1; c[0][0].clear(); c[0][0].cnt = 1; c[0][0].a[1] = 1; for (int i = 1; i &lt;= 50; i++) &#123; c[i][0].clear(); c[i][0].cnt = 1; c[i][0].a[1] = 1; for (int j = 1; j &lt;= i; j++) &#123; c[i][j].clear(); c[i][j] = c[i - 1][j] + c[i - 1][j - 1]; &#125; &#125; f[1].clear(); f[1].cnt = 1; f[1].a[1] = 1; for (int i = 2; i &lt;= 50; i++) &#123; f[i].clear(); f[i] = qpow(2,i*(i - 1) / 2); for (int j = 1; j &lt;= i - 1; j++) f[i] = f[i] - f[j] * c[i - 1][j - 1] * qpow(2,(i - j)*(i - j - 1) / 2); &#125;&#125;int main()&#123; init(); while (scanf("%d",&amp;n) != EOF &amp;&amp; n) print(f[n]); return 0;&#125; 分析&emsp;&emsp;连通图不容易计数，考虑计算不连通图的数量，再用总的图的数量减去不连通图的数量即为答案.&emsp;&emsp;以标号为1的节点所在的连通块为基准进行划分. 令$f_i$表示i个节点的无向连通图的个数，枚举选j个点构成第一个连通子图，那么方案数就是$f_j * C(i - 1,j - 1) * 2^{(i - j)(i - j - 1) / 2}$,即从剩下的i-1个点中选出j-1个点构成标号为1的节点所在的连通块. 剩下的点与第一个连通块都是不连通的，它们之间的连通情况任意. 总的方案数是$2^{i*(i - 1) / 2}$. $f_i = 2^{i*(i - 1) / 2} - Σf_j * C(i - 1,j - 1) * 2^{(i - j)(i - j - 1) / 2}$.&emsp;&emsp;比较毒瘤的是没有取模操作，需要手写高精度.]]></content>
+      <categories>
+        <category>算法竞赛进阶指南</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>计数</tag>
       </tags>
   </entry>
   <entry>
@@ -706,8 +735,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>计数</tag>
         <tag>dp</tag>
+        <tag>计数</tag>
       </tags>
   </entry>
   <entry>
@@ -718,8 +747,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>计数</tag>
         <tag>dp</tag>
+        <tag>计数</tag>
       </tags>
   </entry>
   <entry>
@@ -735,18 +764,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Codeforces 311 B. Cats Transport]]></title>
-    <url>%2F2018%2F05%2F26%2Fcf311b%2F</url>
-    <content type="text"><![CDATA[题目大意&emsp;&emsp; p个人,m只猫,n座山，告诉每座山距离前一座山的距离，和每只猫在哪座山上，等待时间. 所有人一开始都在一号山，每单位时间挪动距离为1，求如何安排这些人的出发时间使得所有的猫的等待时间总和最少？ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;typedef long long ll;const ll maxn = 200010;ll n,sum[maxn],m,p,dsum[maxn],h[maxn],t[maxn],a[maxn],f[maxn],g[maxn],head,tail,q[maxn];ll k(ll x)&#123; return -x;&#125;ll b(ll x)&#123; return sum[x] + g[x];&#125;ll y(ll i,ll x)&#123; return k(i) * a[x] + b(i);&#125;bool check(ll y1,ll y2,ll y3)&#123; ll temp1 = (k(y1) - k(y3)) * (b(y2) - b(y1)); ll temp2 = (k(y1) - k(y2)) * (b(y3) - b(y1)); return temp1 &gt;= temp2;&#125;int main()&#123; scanf("%lld%lld%lld",&amp;n,&amp;m,&amp;p); for (ll i = 2; i &lt;= n; i++) &#123; scanf("%lld",&amp;dsum[i]); dsum[i] += dsum[i - 1]; &#125; for (ll i = 1; i &lt;= m; i++) scanf("%lld%lld",&amp;h[i],&amp;t[i]); for (ll i = 1; i &lt;= m; i++) a[i] = t[i] - dsum[h[i]]; sort(a + 1,a + 1 + m); for (ll i = 1; i &lt;= m; i++) sum[i] = sum[i - 1] + a[i]; for (ll i = 1; i &lt;= m; i++) g[i] = 1e15; for (ll i = 1; i &lt;= p; i++) &#123; head = tail = 0; for (ll j = 1; j &lt;= m; j++) &#123; while (head &lt; tail &amp;&amp; y(q[head],j) &gt;= y(q[head + 1],j)) head++; f[j] = y(q[head],j) + j * a[j] - sum[j]; while (head &lt; tail &amp;&amp; check(j,q[tail - 1],q[tail])) tail--; q[++tail] = j; &#125; for (ll j = 1; j &lt;= m; j++) g[j] = f[j]; &#125; printf("%lld\n",g[m]); return 0;&#125; 分析&emsp;&emsp;首先要知道猫在什么条件下才能被接到. 对于每只猫，设$A_i = T_i - ΣD_j(1≤j≤H_i)$.只有当人的出发时间在$A_i$之后时，这只猫才能被接到，等待时间为$t - A_i$,t是出发时间.&emsp;&emsp;将所有猫按照A从小到大排好序后，就能够分配人去接猫了. 每个人接的猫对应的A一定是连续的一段. 因为要考虑有多少个人，接了多少只猫，因此状态定义为：$f_{i,j}表示前i个人，带走第k+1~j$的费用，枚举k,即可得到状态转移方程：$f_{i,j} = min\{f_{i - 1,k} + A_j *(j - k) - (S_j - S_k)\}$,其中S是A排好序后的前缀和. 斜率优化就能过. 坑点&emsp;&emsp;一定要注意初始化！]]></content>
-      <categories>
-        <category>算法竞赛进阶指南</category>
-      </categories>
-      <tags>
-        <tag>dp</tag>
-        <tag>斜率优化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[bzoj1563 [NOI2009]诗人小G]]></title>
     <url>%2F2018%2F05%2F26%2Fbzoj1563%2F</url>
     <content type="text"><![CDATA[中文题面题目描述小G是一个出色的诗人，经常作诗自娱自乐。但是，他一直被一件事情所困扰，那就是诗的排版问题。 一首诗包含了若干个句子，对于一些连续的短句，可以将它们用空格隔开并放在一行中，注意一行中可以放的句子数目是没有限制的。小G给每首诗定义了一个行标准长度（行的长度为一行中符号的总个数），他希望排版后每行的长度都和行标准长度相差不远。显然排版时，不应改变原有的句子顺序，并且小G不允许把一个句子分在两行或者更多的行内。在满足上面两个条件的情况下，小G对于排版中的每行定义了一个不协调度, 为这行的实际长度与行标准长度差值绝对值的P次方，而一个排版的不协调度为所有行不协调度的总和。 小G最近又作了几首诗，现在请你对这首诗进行排版，使得排版后的诗尽量协调（即不协调度尽量小），并把排版的结果告诉他。 输入输出格式输入格式：输入文件中的第一行为一个整数T，表示诗的数量。 接下来为T首诗，这里一首诗即为一组测试数据。每组测试数据中的第一行为三个由空格分隔的正整数N，L，P，其中：N表示这首诗句子的数目，L表示这首诗的行标准长度，P的含义见问题描述。 从第二行开始，每行为一个句子，句子由英文字母、数字、标点符号等符号组成（ASCII码33～127，但不包含’-‘）。 输出格式：于每组测试数据，若最小的不协调度不超过10^18，则第一行为一个数，表示不协调度。接下来若干行，表示你排版之后的诗。注意：在同一行的相邻两个句子之间需要用一个空格分开。 如果有多个可行解，它们的不协调度都是最小值，则输出任意一个解均可。若最小的不协调度超过10^18，则输出“Too hard to arrange”（不含引号）。每组测试数据结束后输出“——————————”（不含引号），共20个“-”，“-”的ASCII码为45，请勿输出多余的空行或者空格。 输入输出样例输入样例#1：44 9 3brysj,hhrhl.yqqlm,gsycl.4 9 2brysj,hhrhl.yqqlm,gsycl.1 1005 6poet1 1004 6poet输出样例#1：108brysj,hhrhl.yqqlm, gsycl.32brysj, hhrhl. yqqlm, gsycl.Too hard to arrange1000000000000000000 poet说明【样例说明】 前两组输入数据中每行的实际长度均为6，后两组输入数据每行的实际长度均为4。一个排版方案中每行相邻两个句子之间的空格也算在这行的长度中（可参见样例中第二组数据）。每行末尾没有空格。 提示&emsp;&emsp;实现上怎么判断答案是否会大于1e18? 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;cmath&gt;using namespace std;typedef long long ll;const ll maxn = 100010;ll T,n,l,p,len[maxn],sum[maxn],tot,pos[maxn],biaoji[maxn],nextt[maxn];long double f[maxn];char s[maxn][40];struct node&#123; ll l,r,p;&#125; e[maxn];long double qpow(ll a,ll b)&#123; long double res = 1.0; long double ta = a; while (b) &#123; if (b &amp; 1) res *= ta; ta *= ta; b &gt;&gt;= 1; &#125; return res;&#125;long double calc(ll x,ll y)&#123; return f[x] + qpow(abs(sum[y] - sum[x] + y - x - 1 - l),p);&#125;ll find(node x,ll y)&#123; ll l = x.l,r = x.r,p = x.p,res = r + 1; while (l &lt;= r) &#123; ll mid = (l + r) &gt;&gt; 1; if (calc(y,mid) &lt; calc(p,mid)) &#123; res = mid; r = mid - 1; &#125; else l = mid + 1; &#125; return res;&#125;void solve()&#123; memset(pos,0,sizeof(pos)); tot = 0; node temp; temp.l = 1; temp.r = n; temp.p = 0; e[++tot] = temp; ll cur = 1; for (ll i = 1; i &lt;= n; i++) &#123; if (e[cur].r &lt; i) cur++; f[i] = calc(e[cur].p,i); pos[i] = e[cur].p; while (1) &#123; if (calc(i,e[tot].r) &lt; calc(e[tot].p,e[tot].r)) &#123; if (calc(i,e[tot].l) &lt; calc(e[tot].p,e[tot].l)) tot--; else &#123; ll x = find(e[tot],i); e[tot].r = x - 1; break; &#125; &#125; else break; &#125; if (e[tot].r &lt; n) &#123; node temp; temp.l = e[tot].r + 1; temp.r = n; temp.p = i; e[++tot] = temp; &#125; &#125;&#125;void print()&#123; memset(nextt,0,sizeof(nextt)); for (ll i = n; i;i = pos[i]) nextt[pos[i]] = i; for (ll i = 1,cur = 0; i &lt;= n;i = cur + 1) &#123; cur = nextt[cur]; for (ll j = i; j &lt; cur; j++) printf("%s ",s[j]); printf("%s\n",s[cur]); &#125;&#125;int main()&#123; scanf("%lld",&amp;T); while (T--) &#123; scanf("%lld%lld%lld",&amp;n,&amp;l,&amp;p); for (ll i = 1; i &lt;= n; i++) &#123; scanf("%s",s[i]); len[i] = strlen(s[i]); sum[i] = sum[i - 1] + len[i]; &#125; solve(); if (f[n] &gt; 1e18) puts("Too hard to arrange"); else &#123; printf("%lld\n",(long long)(f[n] + 0.5)); print(); &#125; puts("--------------------"); &#125; return 0;&#125; 分析&emsp;&emsp;这道题的本质就是序列划分问题.考虑代价函数$val(x,y) = |sum_i - sum_j + i - j - 1 - L|^p$,因为p很大，所以肯定是不能展开的. 如果要优化dp，就必须要在状态上或代价函数上下功夫. 状态已经最简了，只有一维。那么考虑这个代价函数有什么特点. 很容易想到它满足四边形不等式(因为其它的优化方法都已经无效了). 分情况讨论p的奇偶性，x的大小，去掉绝对值符号，利用导数很容易证明. 那么套用四边形不等式优化模板即可。&emsp;&emsp;我感觉这道题的难点不在dp上，而在细节处理上. 怎么样才能知道答案是否超过1e18呢？ 肯定不能用long long存答案，难道用高精？一个比较好的方法是用long double类型. 最后输出要注意四舍五入转化为long long才行. 这种方法也可以推广到可能会爆long long的数之间比大小等精度要求不高的操作. 本题是因为答案小于1e18,所以才能用long double存精确答案.]]></content>
@@ -756,6 +773,18 @@
       <tags>
         <tag>dp</tag>
         <tag>四边形不等式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Codeforces 311 B. Cats Transport]]></title>
+    <url>%2F2018%2F05%2F26%2Fcf311b%2F</url>
+    <content type="text"><![CDATA[题目大意&emsp;&emsp; p个人,m只猫,n座山，告诉每座山距离前一座山的距离，和每只猫在哪座山上，等待时间. 所有人一开始都在一号山，每单位时间挪动距离为1，求如何安排这些人的出发时间使得所有的猫的等待时间总和最少？ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;typedef long long ll;const ll maxn = 200010;ll n,sum[maxn],m,p,dsum[maxn],h[maxn],t[maxn],a[maxn],f[maxn],g[maxn],head,tail,q[maxn];ll k(ll x)&#123; return -x;&#125;ll b(ll x)&#123; return sum[x] + g[x];&#125;ll y(ll i,ll x)&#123; return k(i) * a[x] + b(i);&#125;bool check(ll y1,ll y2,ll y3)&#123; ll temp1 = (k(y1) - k(y3)) * (b(y2) - b(y1)); ll temp2 = (k(y1) - k(y2)) * (b(y3) - b(y1)); return temp1 &gt;= temp2;&#125;int main()&#123; scanf("%lld%lld%lld",&amp;n,&amp;m,&amp;p); for (ll i = 2; i &lt;= n; i++) &#123; scanf("%lld",&amp;dsum[i]); dsum[i] += dsum[i - 1]; &#125; for (ll i = 1; i &lt;= m; i++) scanf("%lld%lld",&amp;h[i],&amp;t[i]); for (ll i = 1; i &lt;= m; i++) a[i] = t[i] - dsum[h[i]]; sort(a + 1,a + 1 + m); for (ll i = 1; i &lt;= m; i++) sum[i] = sum[i - 1] + a[i]; for (ll i = 1; i &lt;= m; i++) g[i] = 1e15; for (ll i = 1; i &lt;= p; i++) &#123; head = tail = 0; for (ll j = 1; j &lt;= m; j++) &#123; while (head &lt; tail &amp;&amp; y(q[head],j) &gt;= y(q[head + 1],j)) head++; f[j] = y(q[head],j) + j * a[j] - sum[j]; while (head &lt; tail &amp;&amp; check(j,q[tail - 1],q[tail])) tail--; q[++tail] = j; &#125; for (ll j = 1; j &lt;= m; j++) g[j] = f[j]; &#125; printf("%lld\n",g[m]); return 0;&#125; 分析&emsp;&emsp;首先要知道猫在什么条件下才能被接到. 对于每只猫，设$A_i = T_i - ΣD_j(1≤j≤H_i)$.只有当人的出发时间在$A_i$之后时，这只猫才能被接到，等待时间为$t - A_i$,t是出发时间.&emsp;&emsp;将所有猫按照A从小到大排好序后，就能够分配人去接猫了. 每个人接的猫对应的A一定是连续的一段. 因为要考虑有多少个人，接了多少只猫，因此状态定义为：$f_{i,j}表示前i个人，带走第k+1~j$的费用，枚举k,即可得到状态转移方程：$f_{i,j} = min\{f_{i - 1,k} + A_j *(j - k) - (S_j - S_k)\}$,其中S是A排好序后的前缀和. 斜率优化就能过. 坑点&emsp;&emsp;一定要注意初始化！]]></content>
+      <categories>
+        <category>算法竞赛进阶指南</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>斜率优化</tag>
       </tags>
   </entry>
   <entry>
@@ -857,8 +886,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>bzoj</tag>
         <tag>dp</tag>
+        <tag>bzoj</tag>
         <tag>线段树</tag>
       </tags>
   </entry>
@@ -911,8 +940,8 @@
   </entry>
   <entry>
     <title><![CDATA[Codeforces 957 C. Three-level Laser]]></title>
-    <url>%2F2018%2F05%2F22%2Fcf957d%2F</url>
-    <content type="text"><![CDATA[题目大意n天中，在每一天的水位处打上标记，并统计该天位于标记之上的标记数量是多少(标记重叠算一个)，求每天位于标记之下的标记数量的和. 代码1234567891011121314151617181920212223242526272829#include &lt;string&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 100010;int n,b[maxn],maxx[maxn];long long ans;int main()&#123; scanf("%d",&amp;n); for (int i = 1; i &lt;= n; i++) &#123; scanf("%d",&amp;b[i]); maxx[i] = max(maxx[i - 1],b[i]); &#125; for (int i = n - 1; i &gt;= 1; i--) if (maxx[i + 1] - 2 &gt;= maxx[i]) maxx[i] = maxx[i + 1] - 1; for (int i = 1; i &lt;= n; i++) ans += maxx[i] - b[i]; printf("%lld\n",ans); return 0;&#125; 分析&emsp;&emsp;解决这道题最好的方法是对着第一个样例手动模拟一遍. 在手动模拟的过程中，会想到一个问题：如何确定当前有多少个不重叠的标记？ 然后发现数量为0的时候比较难以处理.有可能水位到了最高点，又有可能多了一个标记. 怎么确定是哪一种情况呢？ 从后往前判断!&emsp;&emsp;倒着处理. 因为每一天最多只会增加一个标记，所以需要满足$m_{i + 1} ≤ m_i + 1$,如果出现了不满足限制的情况，说明中间出现的0的情况是多了一个标记. 为了使得答案最小，取$m_i$的最大值作为最后的标记数，从后往前，若出现$m_{i + 1} ≥ m_i + 2$这种情况，就将$m_i$改成$m_{i + 1} - 1$. 最后$m_i$就是到第i天的标记数.]]></content>
+    <url>%2F2018%2F05%2F22%2Fcf957c%2F</url>
+    <content type="text"><![CDATA[题目大意&emsp;&emsp;从一个序列中选3个递增的数，使得$(E_k - E_j) / (E_k - E_i)$最大. 代码12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;string&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 100010;int n,u,a[maxn];double ans = -1.0;int main()&#123; scanf("%d%d",&amp;n,&amp;u); for (int i = 1; i &lt;= n; i++) scanf("%d",&amp;a[i]); sort(a + 1,a + 1 + n); for (int i = 1; i &lt;= n - 2; i++) &#123; if (a[i + 2] - a[i] &gt; u) continue; int l = i + 2,r = n,res = 0; while (l &lt;= r) &#123; int mid = (l + r) &gt;&gt; 1; if (a[mid] - a[i] &lt;= u) &#123; res = mid; l = mid + 1; &#125; else r = mid - 1; &#125; ans = max(ans,(double)(a[res] - a[i + 1]) / (double)(a[res] - a[i])); &#125; if (ans &lt; -0.5) printf("-1"); else printf("%.9lf\n",ans); return 0;&#125; 分析&emsp;&emsp;很显然的结论：j = i + 1.&emsp;&emsp;有了这个结论以后，就可以把j和i看作一个数. 那么实际上只需要确定两个数的位置即可. 我一开始的想法是二分比值大小，但是二分了后不知道怎么去判定. 于是想着枚举一个数，枚举哪一个呢？ k比较特殊，就尝试枚举k,二分i. 但$a_{i + 1} - a_i$的值是不一样的，答案不具备单调性! 那么就只要枚举i,二分k. 容易证明，k越大，比值越大. 只需要保证k在上界内即可.]]></content>
       <categories>
         <category>计划</category>
       </categories>
@@ -922,8 +951,8 @@
   </entry>
   <entry>
     <title><![CDATA[Codeforces 957 C. Three-level Laser]]></title>
-    <url>%2F2018%2F05%2F22%2Fcf957c%2F</url>
-    <content type="text"><![CDATA[题目大意&emsp;&emsp;从一个序列中选3个递增的数，使得$(E_k - E_j) / (E_k - E_i)$最大. 代码12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;string&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 100010;int n,u,a[maxn];double ans = -1.0;int main()&#123; scanf("%d%d",&amp;n,&amp;u); for (int i = 1; i &lt;= n; i++) scanf("%d",&amp;a[i]); sort(a + 1,a + 1 + n); for (int i = 1; i &lt;= n - 2; i++) &#123; if (a[i + 2] - a[i] &gt; u) continue; int l = i + 2,r = n,res = 0; while (l &lt;= r) &#123; int mid = (l + r) &gt;&gt; 1; if (a[mid] - a[i] &lt;= u) &#123; res = mid; l = mid + 1; &#125; else r = mid - 1; &#125; ans = max(ans,(double)(a[res] - a[i + 1]) / (double)(a[res] - a[i])); &#125; if (ans &lt; -0.5) printf("-1"); else printf("%.9lf\n",ans); return 0;&#125; 分析&emsp;&emsp;很显然的结论：j = i + 1.&emsp;&emsp;有了这个结论以后，就可以把j和i看作一个数. 那么实际上只需要确定两个数的位置即可. 我一开始的想法是二分比值大小，但是二分了后不知道怎么去判定. 于是想着枚举一个数，枚举哪一个呢？ k比较特殊，就尝试枚举k,二分i. 但$a_{i + 1} - a_i$的值是不一样的，答案不具备单调性! 那么就只要枚举i,二分k. 容易证明，k越大，比值越大. 只需要保证k在上界内即可.]]></content>
+    <url>%2F2018%2F05%2F22%2Fcf957d%2F</url>
+    <content type="text"><![CDATA[题目大意n天中，在每一天的水位处打上标记，并统计该天位于标记之上的标记数量是多少(标记重叠算一个)，求每天位于标记之下的标记数量的和. 代码1234567891011121314151617181920212223242526272829#include &lt;string&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 100010;int n,b[maxn],maxx[maxn];long long ans;int main()&#123; scanf("%d",&amp;n); for (int i = 1; i &lt;= n; i++) &#123; scanf("%d",&amp;b[i]); maxx[i] = max(maxx[i - 1],b[i]); &#125; for (int i = n - 1; i &gt;= 1; i--) if (maxx[i + 1] - 2 &gt;= maxx[i]) maxx[i] = maxx[i + 1] - 1; for (int i = 1; i &lt;= n; i++) ans += maxx[i] - b[i]; printf("%lld\n",ans); return 0;&#125; 分析&emsp;&emsp;解决这道题最好的方法是对着第一个样例手动模拟一遍. 在手动模拟的过程中，会想到一个问题：如何确定当前有多少个不重叠的标记？ 然后发现数量为0的时候比较难以处理.有可能水位到了最高点，又有可能多了一个标记. 怎么确定是哪一种情况呢？ 从后往前判断!&emsp;&emsp;倒着处理. 因为每一天最多只会增加一个标记，所以需要满足$m_{i + 1} ≤ m_i + 1$,如果出现了不满足限制的情况，说明中间出现的0的情况是多了一个标记. 为了使得答案最小，取$m_i$的最大值作为最后的标记数，从后往前，若出现$m_{i + 1} ≥ m_i + 2$这种情况，就将$m_i$改成$m_{i + 1} - 1$. 最后$m_i$就是到第i天的标记数.]]></content>
       <categories>
         <category>计划</category>
       </categories>
@@ -1196,7 +1225,7 @@
   </entry>
   <entry>
     <title><![CDATA[Codeforces 975 A. Aramic script]]></title>
-    <url>%2F2018%2F05%2F17%2Fcf975%2F</url>
+    <url>%2F2018%2F05%2F17%2Fcf975a%2F</url>
     <content type="text"><![CDATA[英文题面 翻译将所有字符串内的相同字母去重，问有多少种不一样的字符串. 代码12345678910111213141516171819202122232425262728293031#include &lt;cstdio&gt;#include &lt;set&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;int n;char str[1010];string s;set&lt;string&gt; S;int main()&#123; scanf("%d",&amp;n); while (n--) &#123; cin &gt;&gt; s; sort(s.begin(),s.end()); int len = unique(s.begin(),s.end()) - s.begin(); for (int i = 0; i &lt; len; i++) str[i] = s[i]; str[len] = '\0'; S.insert(str); &#125; printf("%d\n",S.size()); return 0;&#125; 分析&emsp;&emsp;对于每一个字符串内的排序+去重，string更好处理一些. 问有多少种字符串，可以将所有字符串放到同一个string数组中排序,也可以直接放到set中. 经验&emsp;&emsp;string可以实现和普通的int数组一样的功能. char数组可以直接变成string, string一开始是有规定长度的，不能直接赋值s[i] = p. 要s += p. char转换成string要在末尾加一个’\0’.]]></content>
       <categories>
         <category>计划</category>
@@ -1208,7 +1237,7 @@
   </entry>
   <entry>
     <title><![CDATA[Codeforces 975 A. Aramic script]]></title>
-    <url>%2F2018%2F05%2F17%2Fcf975a%2F</url>
+    <url>%2F2018%2F05%2F17%2Fcf975%2F</url>
     <content type="text"><![CDATA[英文题面 翻译将所有字符串内的相同字母去重，问有多少种不一样的字符串. 代码12345678910111213141516171819202122232425262728293031#include &lt;cstdio&gt;#include &lt;set&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;int n;char str[1010];string s;set&lt;string&gt; S;int main()&#123; scanf("%d",&amp;n); while (n--) &#123; cin &gt;&gt; s; sort(s.begin(),s.end()); int len = unique(s.begin(),s.end()) - s.begin(); for (int i = 0; i &lt; len; i++) str[i] = s[i]; str[len] = '\0'; S.insert(str); &#125; printf("%d\n",S.size()); return 0;&#125; 分析&emsp;&emsp;对于每一个字符串内的排序+去重，string更好处理一些. 问有多少种字符串，可以将所有字符串放到同一个string数组中排序,也可以直接放到set中. 经验&emsp;&emsp;string可以实现和普通的int数组一样的功能. char数组可以直接变成string, string一开始是有规定长度的，不能直接赋值s[i] = p. 要s += p. char转换成string要在末尾加一个’\0’.]]></content>
       <categories>
         <category>计划</category>
@@ -1351,8 +1380,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>bzoj</tag>
         <tag>dp</tag>
+        <tag>bzoj</tag>
         <tag>概率</tag>
       </tags>
   </entry>
@@ -1517,8 +1546,8 @@
         <category>算法竞赛进阶指南</category>
       </categories>
       <tags>
-        <tag>bzoj</tag>
         <tag>dp</tag>
+        <tag>bzoj</tag>
         <tag>期望</tag>
       </tags>
   </entry>
@@ -1757,8 +1786,8 @@
         <category>计划</category>
       </categories>
       <tags>
-        <tag>bzoj</tag>
         <tag>dp</tag>
+        <tag>bzoj</tag>
         <tag>数学</tag>
         <tag>拉格朗日插值法</tag>
       </tags>
@@ -1789,6 +1818,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[poj3076 Sudoku]]></title>
+    <url>%2F2018%2F05%2F05%2Fpoj3076%2F</url>
+    <content type="text"><![CDATA[英文题面Description A Sudoku grid is a 16x16 grid of cells grouped in sixteen 4x4 squares, where some cells are filled with letters from A to P (the first 16 capital letters of the English alphabet), as shown in figure 1a. The game is to fill all the empty grid cells with letters from A to P such that each letter from the grid occurs once only in the line, the column, and the 4x4 square it occupies. The initial content of the grid satisfies the constraints mentioned above and guarantees a unique solution. Write a Sudoku playing program that reads data sets from a text file.Input Each data set encodes a grid and contains 16 strings on 16 consecutive lines as shown in figure 2. The i-th string stands for the i-th line of the grid, is 16 characters long, and starts from the first position of the line. String characters are from the set {A,B,…,P,-}, where – (minus) designates empty grid cells. The data sets are separated by single empty lines and terminate with an end of file.Output The program prints the solution of the input encoded grids in the same format and order as used for input.Sample Input —A——C——-O-I-J—A-B-P-CGF-H-—D—F-I-E——P--G-EL-H——M-J———E——C—G—--I—K-GA-B—-E-JD-GP—J-F——A—-E—-C-B—DP—O-E—F-M—D—L-K-A-C————O-I-L-H-P-C—F-A—B—-—-G-OD—-J——HK—-J——H-A-P-L—B—P—E—K—A--H—B—K—FI-C——F—-C—D—H-N-Sample Output FPAHMJECNLBDKOGIOJMIANBDPKCGFLHELNDKGFOIJEAHMBPCBGCELKHPOFIMAJDNMFHBELPOACKJGNIDCILNKDGAHBMOPEFJDOGPIHJMFNLECAKBJEKAFCNBGIDPLHOMEBOFPMIJDGHLNKCANCJDHBAEKMOFIGLPHMPLCGKFIAENBDJOAKIGNODLBPJCEFMHKDEMJIFNCHGAOPBLGLBCDPMHEONKJIAFPHNOBALKMJFIDCEGIAFJOECGLDPBHMNKSource Southeastern Europe 2006 翻译填一个16*16的字母数独. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208209210211212213214215216217218219220221222223224225226227#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;char s[20];int a[20][20],filled,zhuangtai[20][20];void cover(int i,int j,int k) //更新行/列/十六宫格的点能取到的格子状态&#123; filled++; a[i][j] = k; for (int p = 1; p &lt;= 16; p++) &#123; zhuangtai[i][p] |= (1 &lt;&lt; k); zhuangtai[p][j] |= (1 &lt;&lt; k); &#125; int x = ((i - 1) / 4) * 4 + 1; int y = ((j - 1) / 4) * 4 + 1; for (int p = x; p &lt;= x + 3; p++) for (int q = y; q &lt;= y + 3; q++) zhuangtai[p][q] |= (1 &lt;&lt; k);&#125;bool dfs()&#123; if (filled == 256) return true; for (int i = 1; i &lt;= 16; i++) //先判断每一个格子 for (int j = 1; j &lt;= 16; j++) &#123; if (a[i][j]) continue; int r = -1; //状态变量，为-1则表示没有格子能填，为-2表示多于1个格子能填 for (int k = 1; k &lt;= 16; k++) &#123; int temp = (1 &lt;&lt; k); if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r == -1) r = k; else if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r != -1) &#123; r = -2; break; &#125; &#125; if (r == -1) return false; if (r != -2) cover(i,j,r); &#125; for (int i = 1; i &lt;= 16; i++) &#123; for (int k = 1; k &lt;= 16; k++) &#123; int r = -1; int temp = (1 &lt;&lt; k); for (int j = 1; j &lt;= 16; j++) &#123; if (a[i][j] == k) //如果已经填上了，就不必考虑这个数了 &#123; r = -2; break; &#125; if (a[i][j]) continue; if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r == -1) r = j; else if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r != -1) &#123; r = -2; break; &#125; &#125; if (r == -1) return false; if (r != -2) cover(i,r,k); &#125; &#125; for (int j = 1; j &lt;= 16; j++) &#123; for (int k = 1; k &lt;= 16; k++) &#123; int r = -1; int temp = (1 &lt;&lt; k); for (int i = 1; i &lt;= 16; i++) &#123; if (a[i][j] == k) &#123; r = -2; break; &#125; if (a[i][j]) continue; if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r == -1) r = i; else if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r != -1) &#123; r = -2; break; &#125; &#125; if (r == -1) return false; if (r != -2) cover(r,j,k); &#125; &#125; for (int i = 1; i &lt;= 16; i += 4) for (int j = 1; j &lt;= 16; j += 4) for (int k = 1; k &lt;= 16; k++) &#123; int r1 = -1,r2 = -1; int temp = (1 &lt;&lt; k); for (int p = i; p &lt;= i + 3; p++) for (int q = j; q &lt;= j + 3; q++) &#123; if (a[p][q] == k) &#123; r1 = r2 = -2; goto outt; &#125; if (a[p][q]) continue; if ((zhuangtai[p][q] &amp; temp) == 0 &amp;&amp; r1 == -1) //注意不要写错，是p,q不是i,j. &#123; r1 = p; r2 = q; &#125; else if ((zhuangtai[p][q] &amp; temp) == 0 &amp;&amp; r1 != -1) &#123; r1 = r2 = -2; goto outt; &#125; &#125;outt: if (r1 == -1) return false; if (r1 != -2) cover(r1,r2,k); &#125; if (filled == 256) //看是否已经填完了 return true; int curx,cury,minn = 20; for (int i = 16; i &gt;= 1; i--) //找能填的最少的格子 for (int j = 16; j &gt;= 1; j--) &#123; if (a[i][j]) continue; int res = 0; for (int k = 1; k &lt;= 16; k++) &#123; if ((zhuangtai[i][j] &amp; (1 &lt;&lt; k)) == 0) res++; if (res &gt;= minn) break; &#125; if (res &lt; minn) &#123; minn = res; curx = i; cury = j; &#125; &#125; int tzhuangtai[20][20],ta[20][20],tfilled; for (int i = 1; i &lt;= 16; i++) //保存历史状态 for (int j = 1; j &lt;= 16; j++) &#123; tzhuangtai[i][j] = zhuangtai[i][j]; ta[i][j] = a[i][j]; &#125; tfilled = filled; for (int k = 1; k &lt;= 16; k++) if ((zhuangtai[curx][cury] &amp; (1 &lt;&lt; k)) == 0) &#123; cover(curx,cury,k); bool flag = dfs(); if (flag) //若成功了，则不需要回溯 return true; for (int i = 1; i &lt;= 16; i++) for (int j = 1; j &lt;= 16; j++) &#123; zhuangtai[i][j] = tzhuangtai[i][j]; a[i][j] = ta[i][j]; &#125; filled = tfilled; &#125; return false;&#125;int main()&#123; while (scanf("%s",s + 1) != EOF) &#123; filled = 0; memset(a,0,sizeof(a)); memset(zhuangtai,0,sizeof(zhuangtai)); for (int i = 1; i &lt;= 16; i++) &#123; if (i != 1) scanf("%s",s + 1); //已经读入了一行 for (int j = 1; j &lt;= 16; j++) &#123; if (s[j] == '-') a[i][j] = 0; else &#123; a[i][j] = s[j] - 'A' + 1; cover(i,j,a[i][j]); &#125; &#125; &#125; dfs(); for (int i = 1; i &lt;= 16; i++) &#123; for (int j = 1; j &lt;= 16; j++) printf("%c",a[i][j] + 'A' - 1); printf("\n"); &#125; printf("\n"); &#125; return 0;&#125; 分析&emsp;&emsp;一个叫DLX的算法可以完美地解决此题. 尝试用搜索解决.&emsp;&emsp;对于9*9的数独，我们可以每次找能填的数最少的格子去填，但是对于一个16*16的数独，这样做会TLE. 数独的大小变大了，不合法的状态也就会变多对搜索进行剪枝，因为不能最优化剪枝，就进行可行性剪枝.&emsp;&emsp;考虑不合法的局面和只能填一个特定的数的格子. 先遍历所有的空格，若某个位置A~P都不能填，那么局面不合法，若某个位置只能填一个字母，填上去，不要递归.&emsp;&emsp;再遍历所有的行，若某个字母在这一行上没有出现，并且不能填在任何一个空位上，不合法. 若某个字母只能填在该行的一个空位上，填上去.&emsp;&emsp;对于每一列和十六宫格而言都是这样.&emsp;&emsp;然后判断一下数独是否已经填好了. 如果没有，就找可填字母最少的格子，枚举填哪一个字母. 递归下去. 如果成功了，返回true,否则就要还原以前的局面.为了方便还原，在递归之前将当前局面记录下来，如果失败了，覆盖即可. 总结&emsp;&emsp;可行性剪枝，考虑不合法的局面和必须的局面. 如果dfs不是用来求最优值，而是用来求是否可行（一种局面），那么成功了就不必还原以前的局面. 一个知识盲点.]]></content>
+      <categories>
+        <category>算法竞赛进阶指南</category>
+      </categories>
+      <tags>
+        <tag>搜索</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bzoj1143 [CTSC2008]祭祀river]]></title>
     <url>%2F2018%2F05%2F05%2Fbzoj1143%2F</url>
     <content type="text"><![CDATA[中文题面Description 在遥远的东方，有一个神秘的民族，自称Y族。他们世代居住在水面上，奉龙王为神。每逢重大庆典， Y族都会在水面上举办盛大的祭祀活动。我们可以把Y族居住地水系看成一个由岔口和河道组成的网络。每条河道连接着两个岔口，并且水在河道内按照一个固定的方向流动。显然，水系中不会有环流（下图描述一个环流的例子）。 由于人数众多的原因，Y族的祭祀活动会在多个岔口上同时举行。出于对龙王的尊重，这些祭祀地点的选择必须非常慎重。准确地说，Y族人认为，如果水流可以从一个祭祀点流到另外一个祭祀点，那么祭祀就会失去它神圣的意义。族长希望在保持祭祀神圣性的基础上，选择尽可能多的祭祀的地点。Input第一行包含两个用空格隔开的整数N、M，分别表示岔口和河道的数目，岔口从1到N编号。接下来M行，每行包含两个用空格隔开的整数u、v，描述一条连接岔口u和岔口v的河道，水流方向为自u向v。N≤100M≤1000Output第一行包含一个整数K，表示最多能选取的祭祀点的个数。 Sample Input4 4 1 2 3 4 3 2 4 2Sample Output2 【样例说明】 在样例给出的水系中，不存在一种方法能够选择三个或者三个以上的祭祀点。包含两个祭祀点的测试点的方案有两种： 选择岔口1与岔口3（如样例输出第二行），选择岔口1与岔口4。 水流可以从任意岔口流至岔口2。如果在岔口2建立祭祀点，那么任意其他岔口都不能建立祭祀点 但是在最优的一种祭祀点的选取方案中我们可以建立两个祭祀点，所以岔口2不能建立祭祀点。对于其他岔口 至少存在一个最优方案选择该岔口为祭祀点，所以输出为1011。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 1010;int n,m,a[maxn][maxn],pipei[maxn],flag[maxn],ans;bool dfs(int u)&#123; for (int i = 1; i &lt;= n; i++) &#123; if (!a[u][i]) continue; if (flag[i]) continue; flag[i] = 1; if (!pipei[i] || dfs(pipei[i])) &#123; pipei[i] = u; return true; &#125; &#125; return false;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); for (int i = 1; i &lt;= m; i++) &#123; int x,y; scanf("%d%d",&amp;x,&amp;y); a[x][y] = 1; &#125; for (int k = 1; k &lt;= n; k++) for (int i = 1; i &lt;= n; i++) for (int j = 1; j &lt;= n; j++) if (a[i][k] &amp;&amp; a[k][j]) a[i][j] = 1; for (int i = 1; i &lt;= n; i++) &#123; memset(flag,0,sizeof(flag)); if (dfs(i)) ans++; &#125; printf("%d\n",n - ans); return 0;&#125; 分析&emsp;&emsp;如果是无向图，那么就是求最大独立集了，没有方向一说. 在有向图上构成了是偏序关系. 定义$≤$关系为x能到达y. 那么这道题就是求最长反链了. 在偏序集上，最长反链=最小链覆盖数，而最小链覆盖数=点数-二分图匹配数. 用floyd传递闭包处理一下偏序关系，然后二分图匹配即可. 总结&emsp;&emsp;能想到这是偏序集非常重要. 主要是看出$≤$关系，如果是要求最优化问题，$≤$关系是限制条件，要求最优化答案，那么就是线性规划or差分约束？（其它的算法也有可能）。这道题要求点数最多，就要转化为经典问题来做.]]></content>
@@ -1798,17 +1838,6 @@
       <tags>
         <tag>bzoj</tag>
         <tag>二分图匹配</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[poj3076 Sudoku]]></title>
-    <url>%2F2018%2F05%2F05%2Fpoj3076%2F</url>
-    <content type="text"><![CDATA[英文题面Description A Sudoku grid is a 16x16 grid of cells grouped in sixteen 4x4 squares, where some cells are filled with letters from A to P (the first 16 capital letters of the English alphabet), as shown in figure 1a. The game is to fill all the empty grid cells with letters from A to P such that each letter from the grid occurs once only in the line, the column, and the 4x4 square it occupies. The initial content of the grid satisfies the constraints mentioned above and guarantees a unique solution. Write a Sudoku playing program that reads data sets from a text file.Input Each data set encodes a grid and contains 16 strings on 16 consecutive lines as shown in figure 2. The i-th string stands for the i-th line of the grid, is 16 characters long, and starts from the first position of the line. String characters are from the set {A,B,…,P,-}, where – (minus) designates empty grid cells. The data sets are separated by single empty lines and terminate with an end of file.Output The program prints the solution of the input encoded grids in the same format and order as used for input.Sample Input —A——C——-O-I-J—A-B-P-CGF-H-—D—F-I-E——P--G-EL-H——M-J———E——C—G—--I—K-GA-B—-E-JD-GP—J-F——A—-E—-C-B—DP—O-E—F-M—D—L-K-A-C————O-I-L-H-P-C—F-A—B—-—-G-OD—-J——HK—-J——H-A-P-L—B—P—E—K—A--H—B—K—FI-C——F—-C—D—H-N-Sample Output FPAHMJECNLBDKOGIOJMIANBDPKCGFLHELNDKGFOIJEAHMBPCBGCELKHPOFIMAJDNMFHBELPOACKJGNIDCILNKDGAHBMOPEFJDOGPIHJMFNLECAKBJEKAFCNBGIDPLHOMEBOFPMIJDGHLNKCANCJDHBAEKMOFIGLPHMPLCGKFIAENBDJOAKIGNODLBPJCEFMHKDEMJIFNCHGAOPBLGLBCDPMHEONKJIAFPHNOBALKMJFIDCEGIAFJOECGLDPBHMNKSource Southeastern Europe 2006 翻译填一个16*16的字母数独. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208209210211212213214215216217218219220221222223224225226227#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;char s[20];int a[20][20],filled,zhuangtai[20][20];void cover(int i,int j,int k) //更新行/列/十六宫格的点能取到的格子状态&#123; filled++; a[i][j] = k; for (int p = 1; p &lt;= 16; p++) &#123; zhuangtai[i][p] |= (1 &lt;&lt; k); zhuangtai[p][j] |= (1 &lt;&lt; k); &#125; int x = ((i - 1) / 4) * 4 + 1; int y = ((j - 1) / 4) * 4 + 1; for (int p = x; p &lt;= x + 3; p++) for (int q = y; q &lt;= y + 3; q++) zhuangtai[p][q] |= (1 &lt;&lt; k);&#125;bool dfs()&#123; if (filled == 256) return true; for (int i = 1; i &lt;= 16; i++) //先判断每一个格子 for (int j = 1; j &lt;= 16; j++) &#123; if (a[i][j]) continue; int r = -1; //状态变量，为-1则表示没有格子能填，为-2表示多于1个格子能填 for (int k = 1; k &lt;= 16; k++) &#123; int temp = (1 &lt;&lt; k); if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r == -1) r = k; else if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r != -1) &#123; r = -2; break; &#125; &#125; if (r == -1) return false; if (r != -2) cover(i,j,r); &#125; for (int i = 1; i &lt;= 16; i++) &#123; for (int k = 1; k &lt;= 16; k++) &#123; int r = -1; int temp = (1 &lt;&lt; k); for (int j = 1; j &lt;= 16; j++) &#123; if (a[i][j] == k) //如果已经填上了，就不必考虑这个数了 &#123; r = -2; break; &#125; if (a[i][j]) continue; if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r == -1) r = j; else if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r != -1) &#123; r = -2; break; &#125; &#125; if (r == -1) return false; if (r != -2) cover(i,r,k); &#125; &#125; for (int j = 1; j &lt;= 16; j++) &#123; for (int k = 1; k &lt;= 16; k++) &#123; int r = -1; int temp = (1 &lt;&lt; k); for (int i = 1; i &lt;= 16; i++) &#123; if (a[i][j] == k) &#123; r = -2; break; &#125; if (a[i][j]) continue; if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r == -1) r = i; else if ((zhuangtai[i][j] &amp; temp) == 0 &amp;&amp; r != -1) &#123; r = -2; break; &#125; &#125; if (r == -1) return false; if (r != -2) cover(r,j,k); &#125; &#125; for (int i = 1; i &lt;= 16; i += 4) for (int j = 1; j &lt;= 16; j += 4) for (int k = 1; k &lt;= 16; k++) &#123; int r1 = -1,r2 = -1; int temp = (1 &lt;&lt; k); for (int p = i; p &lt;= i + 3; p++) for (int q = j; q &lt;= j + 3; q++) &#123; if (a[p][q] == k) &#123; r1 = r2 = -2; goto outt; &#125; if (a[p][q]) continue; if ((zhuangtai[p][q] &amp; temp) == 0 &amp;&amp; r1 == -1) //注意不要写错，是p,q不是i,j. &#123; r1 = p; r2 = q; &#125; else if ((zhuangtai[p][q] &amp; temp) == 0 &amp;&amp; r1 != -1) &#123; r1 = r2 = -2; goto outt; &#125; &#125;outt: if (r1 == -1) return false; if (r1 != -2) cover(r1,r2,k); &#125; if (filled == 256) //看是否已经填完了 return true; int curx,cury,minn = 20; for (int i = 16; i &gt;= 1; i--) //找能填的最少的格子 for (int j = 16; j &gt;= 1; j--) &#123; if (a[i][j]) continue; int res = 0; for (int k = 1; k &lt;= 16; k++) &#123; if ((zhuangtai[i][j] &amp; (1 &lt;&lt; k)) == 0) res++; if (res &gt;= minn) break; &#125; if (res &lt; minn) &#123; minn = res; curx = i; cury = j; &#125; &#125; int tzhuangtai[20][20],ta[20][20],tfilled; for (int i = 1; i &lt;= 16; i++) //保存历史状态 for (int j = 1; j &lt;= 16; j++) &#123; tzhuangtai[i][j] = zhuangtai[i][j]; ta[i][j] = a[i][j]; &#125; tfilled = filled; for (int k = 1; k &lt;= 16; k++) if ((zhuangtai[curx][cury] &amp; (1 &lt;&lt; k)) == 0) &#123; cover(curx,cury,k); bool flag = dfs(); if (flag) //若成功了，则不需要回溯 return true; for (int i = 1; i &lt;= 16; i++) for (int j = 1; j &lt;= 16; j++) &#123; zhuangtai[i][j] = tzhuangtai[i][j]; a[i][j] = ta[i][j]; &#125; filled = tfilled; &#125; return false;&#125;int main()&#123; while (scanf("%s",s + 1) != EOF) &#123; filled = 0; memset(a,0,sizeof(a)); memset(zhuangtai,0,sizeof(zhuangtai)); for (int i = 1; i &lt;= 16; i++) &#123; if (i != 1) scanf("%s",s + 1); //已经读入了一行 for (int j = 1; j &lt;= 16; j++) &#123; if (s[j] == '-') a[i][j] = 0; else &#123; a[i][j] = s[j] - 'A' + 1; cover(i,j,a[i][j]); &#125; &#125; &#125; dfs(); for (int i = 1; i &lt;= 16; i++) &#123; for (int j = 1; j &lt;= 16; j++) printf("%c",a[i][j] + 'A' - 1); printf("\n"); &#125; printf("\n"); &#125; return 0;&#125; 分析&emsp;&emsp;一个叫DLX的算法可以完美地解决此题. 尝试用搜索解决.&emsp;&emsp;对于9*9的数独，我们可以每次找能填的数最少的格子去填，但是对于一个16*16的数独，这样做会TLE. 数独的大小变大了，不合法的状态也就会变多对搜索进行剪枝，因为不能最优化剪枝，就进行可行性剪枝.&emsp;&emsp;考虑不合法的局面和只能填一个特定的数的格子. 先遍历所有的空格，若某个位置A~P都不能填，那么局面不合法，若某个位置只能填一个字母，填上去，不要递归.&emsp;&emsp;再遍历所有的行，若某个字母在这一行上没有出现，并且不能填在任何一个空位上，不合法. 若某个字母只能填在该行的一个空位上，填上去.&emsp;&emsp;对于每一列和十六宫格而言都是这样.&emsp;&emsp;然后判断一下数独是否已经填好了. 如果没有，就找可填字母最少的格子，枚举填哪一个字母. 递归下去. 如果成功了，返回true,否则就要还原以前的局面.为了方便还原，在递归之前将当前局面记录下来，如果失败了，覆盖即可. 总结&emsp;&emsp;可行性剪枝，考虑不合法的局面和必须的局面. 如果dfs不是用来求最优值，而是用来求是否可行（一种局面），那么成功了就不必还原以前的局面. 一个知识盲点.]]></content>
-      <categories>
-        <category>算法竞赛进阶指南</category>
-      </categories>
-      <tags>
-        <tag>搜索</tag>
       </tags>
   </entry>
   <entry>
@@ -1968,19 +1997,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[bzoj1271 [BeiJingWc2008]秦腾与教学评估]]></title>
-    <url>%2F2018%2F05%2F01%2Fbzoj1271%2F</url>
-    <content type="text"><![CDATA[中文题面Description在秦腾进入北京大学学习的第一个学期，就不幸遇到了前所未有的教学评估。在教学评估期间，同学们被要求八点起床，十一点回宿舍睡觉，不准旷课，上课不准迟到，上课不准睡觉……甚至连著名的北大三角地也在教学评估期间被以影响校容的理由被拆除。这些“变态”规定令习惯了自由自在随性生活学习的北大同学叫苦不迭。这一天又到了星期五，一大早就是秦腾最不喜欢的高等代数课。可是因为是教学评估时期，不能迟到，于是他在八点五分的时候挣扎着爬出了宿舍，希望能赶快混进在八点钟已经上课了的教室。可是，刚一出宿舍楼门他就傻眼了:从宿舍到教学楼的路上已经站满了教学评估团的成员。他们的目的就是抓住像他这样迟到的学生，扣除学校的分数。秦腾当然不能让评估团得逞。他经过观察发现，整个评估团分成了N个小组，每个小组的成员都分布在从宿舍楼到教学楼的路上的某一段，并且同一小组的成员间的距离是相等的。于是，我们可以用三个整数S,E,D来描述评估团的小组:既该小组的成员在从宿舍到教学楼的路上的:S,S+D,S+2D,…,S+KD(K∈Z,S+KD≤E,S+(K+1)D&gt;E)位置。观察到了教学评估团的这一特点，又经过了认真的思考，秦腾想出了对策:如果在路上的某一位置有奇数个教学评估团成员，他就可以运用调虎离山，声东击西，隔山打牛，暗度陈仓……等方法，以这一地点为突破口到达教学楼。但是由于教学评估团的成员的十分狡猾，成员位置安排的设计极其精妙，导致在整条路上几乎没有这样的位置出现。即使由于安排不慎重出现了这样的位置，最多也仅有一个。现在秦腾观察出了所有小组的安排，但是由于整个教学评估团的人数太多，他实在看不出这样的位置是否存在。现在，你的任务是写一个程序，帮助他做出判断。Input第一行为T代表测试数据组数每组第一行为N接下来N行，每行三个整数Si,Ei,DiN&lt;=2000000&lt;=Si,Ei,Di&lt;=2^31-1输入文件不大于2048KOutput对于每组数据如果所求位置不存在，则输出Poor Qin Teng:(否则输出两个整数Posi,Count,代表在唯一位置Posi,有Count个教学评估图的成员Count为奇数,注意输出的所有符号为英文半号Sample Input3 2 1 10 1 2 10 1 2 1 10 1 1 10 1 4 1 10 1 4 4 1 1 5 1 6 10 1Sample Output1 1 Poor QIN Teng:( 4 3 提示&emsp;&emsp;1.能否对每条线段单独分析？&emsp;&emsp;2.最多只有一个奇数说明了什么？ 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;queue&gt;#include &lt;functional&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;typedef long long ll;const ll maxn = 200010;ll T, n;struct node&#123; ll s, e, d;&#125;e[maxn];bool check(ll x)&#123; ll res = 0; for (ll i = 1; i &lt;= n; i++) &#123; if (x &lt; e[i].s) continue; if (x &gt; e[i].e) &#123; ll temp = (e[i].e - e[i].s) / e[i].d; res += temp + 1; &#125; else &#123; ll temp = (x - e[i].s) / e[i].d; res += temp + 1; &#125; &#125; if (res % 2 == 0) return true; return false;&#125;ll solvee(ll x)&#123; ll res = 0; for (ll i = 1; i &lt;= n; i++) &#123; if (x &lt; e[i].s || x &gt; e[i].e) continue; if (x == e[i].s) &#123; res++; continue; &#125; if ((x - e[i].s) % e[i].d == 0) res++; &#125; return res;&#125;void solve()&#123; scanf("%lld", &amp;n); for (ll i = 1; i &lt;= n; i++) scanf("%lld%lld%lld", &amp;e[i].s, &amp;e[i].e, &amp;e[i].d); ll l = 0, r = (1LL &lt;&lt; 31) - 1, ans = 0; if (check(r)) &#123; printf("Poor QIN Teng:(\n"); return; &#125; while (l &lt;= r) &#123; ll mid = (l + r) &gt;&gt; 1; if (check(mid)) l = mid + 1; else &#123; ans = mid; r = mid - 1; &#125; &#125; printf("%lld %lld\n", ans,solvee(ans));&#125;int main()&#123; scanf("%lld", &amp;T); while (T--) solve(); return 0;&#125; 分析&emsp;&emsp;这道题显然不能直接对每一条线段上的点进行分析. 要确定点的位置必须要更快的方法. 可以考虑二分.&emsp;&emsp;想要二分确定这个位置，肯定要慢慢逼近. 看似没有任何单调性，没有依据去逼近. 利用题目中给的信息：最多只有一个奇数点!&emsp;&emsp;这有毛用？新的思路：奇偶前缀和.利用奇数+偶数=奇数，偶数+偶数=偶数来二分. 求出每一个位置的前缀的奇偶性，则可根据此来二分出位置. 总结&emsp;&emsp;如何求得一个具体的答案？可以通过其他题目中给出的变量来解出这个答案，也可以通过枚举的方法判定这个答案是否成立. 道理用哪一种方法？依据数据规模来定.这是从大的方面来想如何解这一类题.&emsp;&emsp;碰到了奇数/偶数这些词，与数的奇偶性联系在一起.]]></content>
-      <categories>
-        <category>算法竞赛进阶指南</category>
-      </categories>
-      <tags>
-        <tag>bzoj</tag>
-        <tag>二分</tag>
-        <tag>奇偶性</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[bzoj1720 [Usaco2006 Jan]Corral the Cows 奶牛围栏]]></title>
     <url>%2F2018%2F05%2F01%2Fbzoj1720%2F</url>
     <content type="text"><![CDATA[中文题面DescriptionFarmer John wishes to build a corral for his cows. Being finicky beasts, they demand that the corral be square and that the corral contain at least C (1 &lt;= C &lt;= 500) clover fields for afternoon treats. The corral’s edges must be parallel to the X,Y axes. FJ’s land contains a total of N (C &lt;= N &lt;= 500) clover fields, each a block of size 1 x 1 and located at with its lower left corner at integer X and Y coordinates each in the range 1..10,000. Sometimes more than one clover field grows at the same location; such a field would have its location appear twice (or more) in the input. A corral surrounds a clover field if the field is entirely located inside the corral’s borders. Help FJ by telling him the side length of the smallest square containing C clover fields. 约翰打算建一个围栏来圈养他的奶牛．作为最挑剔的兽类，奶牛们要求这个围栏必须是正方形的，而且围栏里至少要有C(1≤C≤500)个草场，来供应她们的午餐． 约翰的土地上共有N(C≤N≤500)个草场，每个草场在一块lxl的方格内，而且这个方格的坐标不会超过10000.有时候，会有多个草场在同一个方格内，那他们的坐标就会相同． 告诉约翰，最小的围栏的边长是多少？ Input Line 1: Two space-separated integers: C and N Lines 2..N+1: Each line contains two space-separated integers that are the X,Y coordinates of a clover field. 第1行输入C和N，接下来N行每行输入一对整数，表示一个草场所在方格的坐标Output Line 1: A single line with a single integer that is length of one edge of the minimum size square that contains at least C clover fields. 输入最小边长．Sample Input3 4 1 2 2 1 4 1 5 2 Sample Output4 OUTPUT DETAILS: Below is one 4x4 solution (C’s show most of the corral’s area); many others exist. |CCCC |CCCC |CCC |CC +———HINTSourceGold 提示&emsp;&emsp;1.能用二维数组直接存图吗？&emsp;&emsp;2.怎么求长度？ 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879#include &lt;queue&gt;#include &lt;functional&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 1010;int c, n, ans, cnt;struct node&#123; int x, y;&#125;e[maxn], p[maxn];bool cmp(node a, node b)&#123; return a.x &lt; b.x;&#125;bool cmp2(node a, node b)&#123; return a.y &lt; b.y;&#125;bool check2(int l, int r,int len)&#123; if (r - l + 1 &lt; c) return false; cnt = 0; for (int i = l; i &lt;= r; i++) p[++cnt] = e[i]; sort(p + 1, p + 1 + cnt, cmp2); for (int i = c; i &lt;= cnt; i++) if (p[i].y - p[i - c + 1].y &lt;= len) return true; return false;&#125;bool check(int len)&#123; int l = 1, r = 1; while (r &lt;= n) &#123; if (e[r].x - e[l].x &gt; len) if (check2(l, r - 1,len)) return true; while (e[r].x - e[l].x &gt; len) l++; r++; &#125; return check2(l, n,len);&#125;int main()&#123; scanf("%d%d", &amp;c, &amp;n); for (int i = 1; i &lt;= n; i++) scanf("%d%d", &amp;e[i].x, &amp;e[i].y); sort(e + 1, e + 1 + n, cmp); int l = 0, r = 10000; while (l &lt;= r) &#123; int mid = (l + r) &gt;&gt; 1; if (check(mid)) &#123; ans = mid; r = mid - 1; &#125; else l = mid + 1; &#125; printf("%d\n", ans + 1); return 0;&#125; 分析&emsp;&emsp;求具体的答案，要么解出来，要么枚举并判定，显然边长不可能直接解出来，那么就二分咯.&emsp;&emsp;点的坐标存不下怎么办？离散化即可. 判定是否可行根本不需要知道具体的坐标的值.&emsp;&emsp;如何判定？根据要满足的条件：1.点在以二分出来的边长为x的正方形内. 2.点的个数要≥c. 假定已经满足其中一条，判断另一条是否合法.&emsp;&emsp;对于x轴上的判定，将所有的边长不超过二分出的x的极大正方形提出来，判断横坐标在正方形之内的点的纵坐标是否满足要求. 由于不太好求纵坐标范围在[l,r]的点有多少个，改为判断第i个点与第i+c个点的纵坐标之差是否≤x. 总结&emsp;&emsp;满足多个条件的二分的判定一定要会.]]></content>
@@ -1991,6 +2007,19 @@
         <tag>bzoj</tag>
         <tag>二分</tag>
         <tag>离散化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[bzoj1271 [BeiJingWc2008]秦腾与教学评估]]></title>
+    <url>%2F2018%2F05%2F01%2Fbzoj1271%2F</url>
+    <content type="text"><![CDATA[中文题面Description在秦腾进入北京大学学习的第一个学期，就不幸遇到了前所未有的教学评估。在教学评估期间，同学们被要求八点起床，十一点回宿舍睡觉，不准旷课，上课不准迟到，上课不准睡觉……甚至连著名的北大三角地也在教学评估期间被以影响校容的理由被拆除。这些“变态”规定令习惯了自由自在随性生活学习的北大同学叫苦不迭。这一天又到了星期五，一大早就是秦腾最不喜欢的高等代数课。可是因为是教学评估时期，不能迟到，于是他在八点五分的时候挣扎着爬出了宿舍，希望能赶快混进在八点钟已经上课了的教室。可是，刚一出宿舍楼门他就傻眼了:从宿舍到教学楼的路上已经站满了教学评估团的成员。他们的目的就是抓住像他这样迟到的学生，扣除学校的分数。秦腾当然不能让评估团得逞。他经过观察发现，整个评估团分成了N个小组，每个小组的成员都分布在从宿舍楼到教学楼的路上的某一段，并且同一小组的成员间的距离是相等的。于是，我们可以用三个整数S,E,D来描述评估团的小组:既该小组的成员在从宿舍到教学楼的路上的:S,S+D,S+2D,…,S+KD(K∈Z,S+KD≤E,S+(K+1)D&gt;E)位置。观察到了教学评估团的这一特点，又经过了认真的思考，秦腾想出了对策:如果在路上的某一位置有奇数个教学评估团成员，他就可以运用调虎离山，声东击西，隔山打牛，暗度陈仓……等方法，以这一地点为突破口到达教学楼。但是由于教学评估团的成员的十分狡猾，成员位置安排的设计极其精妙，导致在整条路上几乎没有这样的位置出现。即使由于安排不慎重出现了这样的位置，最多也仅有一个。现在秦腾观察出了所有小组的安排，但是由于整个教学评估团的人数太多，他实在看不出这样的位置是否存在。现在，你的任务是写一个程序，帮助他做出判断。Input第一行为T代表测试数据组数每组第一行为N接下来N行，每行三个整数Si,Ei,DiN&lt;=2000000&lt;=Si,Ei,Di&lt;=2^31-1输入文件不大于2048KOutput对于每组数据如果所求位置不存在，则输出Poor Qin Teng:(否则输出两个整数Posi,Count,代表在唯一位置Posi,有Count个教学评估图的成员Count为奇数,注意输出的所有符号为英文半号Sample Input3 2 1 10 1 2 10 1 2 1 10 1 1 10 1 4 1 10 1 4 4 1 1 5 1 6 10 1Sample Output1 1 Poor QIN Teng:( 4 3 提示&emsp;&emsp;1.能否对每条线段单独分析？&emsp;&emsp;2.最多只有一个奇数说明了什么？ 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;queue&gt;#include &lt;functional&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;typedef long long ll;const ll maxn = 200010;ll T, n;struct node&#123; ll s, e, d;&#125;e[maxn];bool check(ll x)&#123; ll res = 0; for (ll i = 1; i &lt;= n; i++) &#123; if (x &lt; e[i].s) continue; if (x &gt; e[i].e) &#123; ll temp = (e[i].e - e[i].s) / e[i].d; res += temp + 1; &#125; else &#123; ll temp = (x - e[i].s) / e[i].d; res += temp + 1; &#125; &#125; if (res % 2 == 0) return true; return false;&#125;ll solvee(ll x)&#123; ll res = 0; for (ll i = 1; i &lt;= n; i++) &#123; if (x &lt; e[i].s || x &gt; e[i].e) continue; if (x == e[i].s) &#123; res++; continue; &#125; if ((x - e[i].s) % e[i].d == 0) res++; &#125; return res;&#125;void solve()&#123; scanf("%lld", &amp;n); for (ll i = 1; i &lt;= n; i++) scanf("%lld%lld%lld", &amp;e[i].s, &amp;e[i].e, &amp;e[i].d); ll l = 0, r = (1LL &lt;&lt; 31) - 1, ans = 0; if (check(r)) &#123; printf("Poor QIN Teng:(\n"); return; &#125; while (l &lt;= r) &#123; ll mid = (l + r) &gt;&gt; 1; if (check(mid)) l = mid + 1; else &#123; ans = mid; r = mid - 1; &#125; &#125; printf("%lld %lld\n", ans,solvee(ans));&#125;int main()&#123; scanf("%lld", &amp;T); while (T--) solve(); return 0;&#125; 分析&emsp;&emsp;这道题显然不能直接对每一条线段上的点进行分析. 要确定点的位置必须要更快的方法. 可以考虑二分.&emsp;&emsp;想要二分确定这个位置，肯定要慢慢逼近. 看似没有任何单调性，没有依据去逼近. 利用题目中给的信息：最多只有一个奇数点!&emsp;&emsp;这有毛用？新的思路：奇偶前缀和.利用奇数+偶数=奇数，偶数+偶数=偶数来二分. 求出每一个位置的前缀的奇偶性，则可根据此来二分出位置. 总结&emsp;&emsp;如何求得一个具体的答案？可以通过其他题目中给出的变量来解出这个答案，也可以通过枚举的方法判定这个答案是否成立. 道理用哪一种方法？依据数据规模来定.这是从大的方面来想如何解这一类题.&emsp;&emsp;碰到了奇数/偶数这些词，与数的奇偶性联系在一起.]]></content>
+      <categories>
+        <category>算法竞赛进阶指南</category>
+      </categories>
+      <tags>
+        <tag>bzoj</tag>
+        <tag>二分</tag>
+        <tag>奇偶性</tag>
       </tags>
   </entry>
   <entry>
