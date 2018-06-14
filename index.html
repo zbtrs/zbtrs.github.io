@@ -1017,6 +1017,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/区间与点匹配问题小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zbtrs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/13/区间与点匹配问题小结/" itemprop="url">区间与点匹配问题小结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T20:00:53+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/13/区间与点匹配问题小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/13/区间与点匹配问题小结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;晚上想了一下一道题的贪心解法，结果想到很多与之类似的题，特地来记录一下.</p>
+<h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>&emsp;&emsp;这类题通常是给定若干个区间，若干个点，可能是无限个点. 两种类型：要么是点覆盖区间，要么是区间覆盖点，主要看最后是点对答案产生贡献还是区间对答案产生贡献.</p>
+<h1 id="1-一对一匹配"><a href="#1-一对一匹配" class="headerlink" title="1.一对一匹配"></a>1.一对一匹配</h1><p>&emsp;&emsp;一个区间只能和一个点匹配，并且点和区间都是给定的. 常用方法是对区间按照一个端点排序，然后贪心地选点. 或者直接上网络流.(复杂度略高).因为点匹配区间和区间匹配点是对称问题，下面从区间匹配点来考虑.</p>
+<h2 id="区间贡献为1型"><a href="#区间贡献为1型" class="headerlink" title="区间贡献为1型"></a>区间贡献为1型</h2><p>&emsp;&emsp;有若干个区间和若干个点，只有当点在某个区间内时，点才能和这个区间匹配，求最多有多少个区间能被匹配.</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;将所有的区间按照左端点从大到小排序，在不超过右端点的点中找到一个最靠右的点与该区间匹配. 根据决策包容性可以证明这种贪心方法是正确的. 大致原理是：左端点是从大到小排序的，当前选的点一定在以后所有区间的左端点的右边，左端点的条件被满足了，那么要满足右端点的条件. 显然，当前区间的决策越差越好，前提是要能满足当前区间的限制条件，那么留给后来的区间能选的点就更多了.<br>&emsp;&emsp;出处：poj3614.</p>
+<h2 id="区间贡献不为1型"><a href="#区间贡献不为1型" class="headerlink" title="区间贡献不为1型"></a>区间贡献不为1型</h2><h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;显然，若区间贡献为负数，那么这个区间可以不要. 剩下的可以跑最大费用最大流.</p>
+<h1 id="2-一对多匹配"><a href="#2-一对多匹配" class="headerlink" title="2.一对多匹配"></a>2.一对多匹配</h1><p>&emsp;&emsp;一对多匹配指的是：一个数在一个区间内部，那么就相当于这个数匹配了这个区间,因为一个区间可以匹配多个数，所以要对区间的容量进行讨论.</p>
+<h2 id="区间无容量型"><a href="#区间无容量型" class="headerlink" title="区间无容量型"></a>区间无容量型</h2><p>&emsp;&emsp;区间无容量指的是一个区间内只要有一个数即可,必须满足所有区间内至少有一个数，最少要用多少个数?</p>
+<h3 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;将所有区间按照左端点从小到大排序，记录一个变量pos. 一开始$pos = r_1$ ,扫到第i个区间时，若$pos ≥ l_i$,那么该区间可以被覆盖，同时更新$pos = min\{pos,r_i\}$,否则$pos = r_i$,就要多用一个点.<br>&emsp;&emsp;还是贪心算法，原则是让尽量多的区间共用一个点.<br>&emsp;&emsp;出处：poj1328.</p>
+<h2 id="区间有容量型"><a href="#区间有容量型" class="headerlink" title="区间有容量型"></a>区间有容量型</h2><p>&emsp;&emsp;每个区间内至少要有$c_i$个数，必须满足所有区间的要求，问最少要用多少个数？</p>
+<h3 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;将区间按照右端点从小到大排序，每次在第i个区间的右端点放数，直到第i个区间满足要求.<br>&emsp;&emsp;这样做的原理是：一个个满足区间的要求，并且尽可能地对其他区间产生贡献.<br>&emsp;&emsp;上面这道题好像也可以用这种方法，树状数组记录一下即可.<br>&emsp;&emsp;出处：poj1201.</p>
+<h2 id="区间有代价型"><a href="#区间有代价型" class="headerlink" title="区间有代价型"></a>区间有代价型</h2><p>&emsp;&emsp;给点区间和点，每个点选or不选，选了第i个点，那么所有包含它的区间的贡献都会被计算，每个区间的贡献最多被计算一次，求最大贡献.</p>
+<h3 id="分析-4"><a href="#分析-4" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;将点从小到大排序，用vector存每个点能被哪些区间覆盖. 令$f_i$表示前i个点，第i个点<strong>一定</strong>被选的最大贡献. $f_i$从$f_j$转移过来，代价是能覆盖i但是不能覆盖j的区间的贡献和. 增加一个虚拟点n+1,位置为无穷远，最后的答案为$f_{n + 1}$.</p>
+<h2 id="经典dp模型"><a href="#经典dp模型" class="headerlink" title="经典dp模型"></a>经典dp模型</h2><p>&emsp;&emsp;区间和点都必须是整点，点有无数个. 一般的状态表示为$f_{i,j}$表示前i个区间，右端点最远能延伸到j的答案. 分大小区间讨论j的变化来转移.<br>&emsp;&emsp;详见：<a href="https://www.cnblogs.com/zbtrs/p/7751257.html" target="_blank" rel="noopener">https://www.cnblogs.com/zbtrs/p/7751257.html</a></p>
+<h1 id="3-未解之谜—有容量有代价型"><a href="#3-未解之谜—有容量有代价型" class="headerlink" title="3.未解之谜—有容量有代价型"></a>3.未解之谜—有容量有代价型</h1><p>&emsp;&emsp;说一下问题吧：一个数对应一个区间，一个区间至少有$c_i$个数时才会有贡献.<br>&emsp;&emsp;或者是一对多,一个区间包含$c_i$个数时才会产生贡献. 想不出什么好的方法.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/bzoj1123/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1782,171 +1949,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/bzoj1977/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zbtrs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/a.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/12/bzoj1977/" itemprop="url">bzoj1977 [BeiJing2010组队]次小生成树 Tree</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T15:00:53+08:00">
-                2018-06-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/12/bzoj1977/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/12/bzoj1977/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>Description<br>小 C 最近学了很多最小生成树的算法，Prim 算法、Kurskal 算法、消圈算法等等。 正当小 C 洋洋得意之时，小 P 又来泼小 C 冷水了。小 P 说，让小 C 求出一个无向图的次小生成树，而且这个次小生成树还得是严格次小的，也就是说： 如果最小生成树选择的边集是 EM，严格次小生成树选择的边集是 ES，那么需要满足：(value(e) 表示边 e的权值)  这下小 C 蒙了，他找到了你，希望你帮他解决这个问题。<br><img src="https://www.lydsy.com/JudgeOnline/images/1977.jpg" alt="a"></p>
-<p>Input<br>第一行包含两个整数N 和M，表示无向图的点数与边数。 接下来 M行，每行 3个数x y z 表示，点 x 和点y之间有一条边，边的权值为z。</p>
-<p>Output<br>包含一行，仅一个数，表示严格次小生成树的边权和。(数据保证必定存在严格次小生成树)</p>
-<p>Sample Input<br>5 6 </p>
-<p>1 2 1 </p>
-<p>1 3 2 </p>
-<p>2 4 3 </p>
-<p>3 5 4 </p>
-<p>3 4 3 </p>
-<p>4 5 6<br>Sample Output<br>11<br>HINT<br>数据中无向图无自环； 50% 的数据N≤2 000 M≤3 000； 80% 的数据N≤50 000 M≤100 000； 100% 的数据N≤100 000 M≤300 000 ，边权值非负且不超过 10^9 。</p>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>非严格次小生成树怎么求？在此基础上再记录一个什么信息即可？</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">100010</span>,maxm = <span class="number">600010</span>,inf = <span class="number">1e18</span>;</span><br><span class="line">ll n,m,fa[maxn][<span class="number">20</span>],head[maxn],to[maxm],nextt[maxm],tot = <span class="number">1</span>,f[maxn],ans = inf,sum,w[maxm],deep[maxn],g[maxn][<span class="number">20</span>][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll x,y,z,use;</span><br><span class="line">&#125; e[maxm];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.z &lt; b.z;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll x,ll y,ll z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    w[tot] = z;</span><br><span class="line">    to[tot] = y;</span><br><span class="line">    nextt[tot] = head[x];</span><br><span class="line">    head[x] = tot++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">find</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == f[x])</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> f[x] = find(f[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(ll u,ll faa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    deep[u] = deep[faa] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (ll i = head[u]; i; i = nextt[i])</span><br><span class="line">    &#123;</span><br><span class="line">        ll v = to[i];</span><br><span class="line">        <span class="keyword">if</span> (v == faa)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        fa[v][<span class="number">0</span>] = u;</span><br><span class="line">        g[v][<span class="number">0</span>][<span class="number">0</span>] = w[i];</span><br><span class="line">        g[v][<span class="number">0</span>][<span class="number">1</span>] = -inf;</span><br><span class="line">        dfs(v,u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(ll t,ll &amp;max1,ll &amp;max2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (t &gt; max1)</span><br><span class="line">    &#123;</span><br><span class="line">        max2 = max1;</span><br><span class="line">        max1 = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (t &gt; max2)</span><br><span class="line">        max2 = t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pair&lt;ll,ll&gt; solve(ll x,ll y)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (deep[x] &lt; deep[y])</span><br><span class="line">        swap(x,y);</span><br><span class="line">    ll max1 = <span class="number">0</span>,max2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">19</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">if</span> (deep[fa[x][i]] &gt;= deep[y])</span><br><span class="line">        &#123;</span><br><span class="line">            ll t1 = g[x][i][<span class="number">0</span>],t2 = g[x][i][<span class="number">1</span>];</span><br><span class="line">            update(t1,max1,max2);</span><br><span class="line">            update(t2,max1,max2);</span><br><span class="line">            x = fa[x][i];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span> (x == y)</span><br><span class="line">        <span class="keyword">return</span> make_pair(max1,max2);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">19</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">if</span> (fa[x][i] != fa[y][i])</span><br><span class="line">        &#123;</span><br><span class="line">            ll t1 = g[x][i][<span class="number">0</span>],t2 = g[x][i][<span class="number">1</span>];</span><br><span class="line">            ll t3 = g[y][i][<span class="number">0</span>],t4 = g[y][i][<span class="number">1</span>];</span><br><span class="line">            update(t1,max1,max2);</span><br><span class="line">            update(t2,max1,max2);</span><br><span class="line">            update(t3,max1,max2);</span><br><span class="line">            update(t4,max1,max2);</span><br><span class="line">            x = fa[x][i],y = fa[y][i];</span><br><span class="line">        &#125;</span><br><span class="line">    update(g[x][<span class="number">0</span>][<span class="number">0</span>],max1,max2);</span><br><span class="line">    update(g[x][<span class="number">0</span>][<span class="number">1</span>],max1,max2);</span><br><span class="line">    update(g[y][<span class="number">0</span>][<span class="number">0</span>],max1,max2);</span><br><span class="line">    update(g[y][<span class="number">0</span>][<span class="number">1</span>],max1,max2);</span><br><span class="line">    <span class="keyword">return</span> make_pair(max1,max2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        f[i] = i;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>,&amp;e[i].x,&amp;e[i].y,&amp;e[i].z);</span><br><span class="line">    sort(e + <span class="number">1</span>,e + <span class="number">1</span> + m,cmp);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll fx = find(e[i].x),fy = find(e[i].y);</span><br><span class="line">        <span class="keyword">if</span> (fx != fy)</span><br><span class="line">        &#123;</span><br><span class="line">            add(e[i].x,e[i].y,e[i].z);</span><br><span class="line">            add(e[i].y,e[i].x,e[i].z);</span><br><span class="line">            f[fx] = fy;</span><br><span class="line">            sum += e[i].z;</span><br><span class="line">            e[i].use = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (ll j = <span class="number">1</span>; j &lt;= <span class="number">19</span>; j++)</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            fa[i][j] = fa[fa[i][j - <span class="number">1</span>]][j - <span class="number">1</span>];</span><br><span class="line">            g[i][j][<span class="number">0</span>] = max(g[i][j - <span class="number">1</span>][<span class="number">0</span>],g[fa[i][j - <span class="number">1</span>]][j - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">            ll t1 = g[i][j - <span class="number">1</span>][<span class="number">0</span>],t2 = g[fa[i][j - <span class="number">1</span>]][j - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span> (t1 == t2)</span><br><span class="line">                g[i][j][<span class="number">1</span>] = max(g[i][j - <span class="number">1</span>][<span class="number">1</span>],g[fa[i][j - <span class="number">1</span>]][j - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (t1 &gt; t2)</span><br><span class="line">                g[i][j][<span class="number">1</span>] = max(g[i][j - <span class="number">1</span>][<span class="number">1</span>],g[fa[i][j - <span class="number">1</span>]][j - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">if</span> (t1 &lt; t2)</span><br><span class="line">                g[i][j][<span class="number">1</span>] = max(g[i][j - <span class="number">1</span>][<span class="number">0</span>],g[fa[i][j - <span class="number">1</span>]][j - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        <span class="keyword">if</span> (!e[i].use)</span><br><span class="line">        &#123;</span><br><span class="line">            pair&lt;ll,ll&gt; p = solve(e[i].x,e[i].y);</span><br><span class="line">            <span class="keyword">if</span> (e[i].z &gt; p.first)</span><br><span class="line">                ans = min(ans,sum - p.first + e[i].z);</span><br><span class="line">            <span class="keyword">if</span> (e[i].z == p.first)</span><br><span class="line">                ans = min(ans,sum - p.second + e[i].z);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;求非严格次小生成树的方法是：先求出原图的一棵最小生成树，然后依次尝试加入非最小生成树内的边，一定会形成一个环，在环上找到最大的边权，用当前边替换掉该边权，可以得到一棵生成树，记录下所有可能的生成树的答案，取min即为所求.至于怎么求，仿照求LCA的过程，倍增时记录下解即可.<br>&emsp;&emsp;因为题目中要求的次小生成树是严格的，那么可能出现替换的边的权值和原边的权值一样的情况. 为了处理这种情况，记录一下与最大值不同的第二大值即可. 更新的时候先考虑更新最大值，再来考虑更新次大值.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2001,7 +2003,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">177</span>
+                  <span class="site-state-item-count">178</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

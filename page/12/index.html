@@ -330,6 +330,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/poj1417/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zbtrs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/13/poj1417/" itemprop="url">poj1417 True Liars</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T23:51:53+08:00">
+                2018-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/13/poj1417/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/13/poj1417/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="英文题面"><a href="#英文题面" class="headerlink" title="英文题面"></a>英文题面</h3><p>Description</p>
+<p>After having drifted about in a small boat for a couple of days, Akira Crusoe Maeda was finally cast ashore on a foggy island. Though he was exhausted and despaired, he was still fortunate to remember a legend of the foggy island, which he had heard from patriarchs in his childhood. This must be the island in the legend. In the legend, two tribes have inhabited the island, one is divine and the other is devilish, once members of the divine tribe bless you, your future is bright and promising, and your soul will eventually go to Heaven, in contrast, once members of the devilish tribe curse you, your future is bleak and hopeless, and your soul will eventually fall down to Hell. </p>
+<p>In order to prevent the worst-case scenario, Akira should distinguish the devilish from the divine. But how? They looked exactly alike and he could not distinguish one from the other solely by their appearances. He still had his last hope, however. The members of the divine tribe are truth-tellers, that is, they always tell the truth and those of the devilish tribe are liars, that is, they always tell a lie. </p>
+<p>He asked some of them whether or not some are divine. They knew one another very much and always responded to him “faithfully” according to their individual natures (i.e., they always tell the truth or always a lie). He did not dare to ask any other forms of questions, since the legend says that a devilish member would curse a person forever when he did not like the question. He had another piece of useful informationf the legend tells the populations of both tribes. These numbers in the legend are trustworthy since everyone living on this island is immortal and none have ever been born at least these millennia. </p>
+<p>You are a good computer programmer and so requested to help Akira by writing a program that classifies the inhabitants according to their answers to his inquiries.<br>Input</p>
+<p>The input consists of multiple data sets, each in the following format : </p>
+<p>n p1 p2<br>xl yl a1<br>x2 y2 a2<br>…<br>xi yi ai<br>…<br>xn yn an </p>
+<p>The first line has three non-negative integers n, p1, and p2. n is the number of questions Akira asked. pl and p2 are the populations of the divine and devilish tribes, respectively, in the legend. Each of the following n lines has two integers xi, yi and one word ai. xi and yi are the identification numbers of inhabitants, each of which is between 1 and p1 + p2, inclusive. ai is either yes, if the inhabitant xi said that the inhabitant yi was a member of the divine tribe, or no, otherwise. Note that xi and yi can be the same number since “are you a member of the divine tribe?” is a valid question. Note also that two lines may have the same x’s and y’s since Akira was very upset and might have asked the same question to the same one more than once. </p>
+<p>You may assume that n is less than 1000 and that p1 and p2 are less than 300. A line with three zeros, i.e., 0 0 0, represents the end of the input. You can assume that each data set is consistent and no contradictory answers are included. </p>
+<p>Output</p>
+<p>For each data set, if it includes sufficient information to classify all the inhabitants, print the identification numbers of all the divine ones in ascending order, one in a line. In addition, following the output numbers, print end in a line. Otherwise, i.e., if a given data set does not include sufficient information to identify all the divine members, print no in a line.<br>Sample Input</p>
+<p>2 1 1<br>1 2 no<br>2 1 no<br>3 2 1<br>1 1 yes<br>2 2 yes<br>3 3 yes<br>2 2 1<br>1 2 yes<br>2 3 no<br>5 4 3<br>1 2 yes<br>1 3 no<br>4 5 yes<br>5 6 yes<br>6 7 no<br>0 0 0<br>Sample Output</p>
+<p>no<br>no<br>1<br>2<br>end<br>3<br>4<br>5<br>6<br>end<br>Source</p>
+<p>Japan 2002 Kanazawa</p>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><p>有p1个好人,p2个坏人，现在给出m个关系，诸如a说b是好人，a说b是坏人. 好人一定说真话，坏人一定说假话，问能否给出唯一的方案满足上述限制？</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;用图论的观点去思考.</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">610</span>;</span><br><span class="line"><span class="keyword">int</span> n,p1,p2,fa[maxn],cnt,zhonglei[maxn],cnt0[maxn],cnt1[maxn],f[maxn][maxn],ans[maxn],tot,root[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == fa[x])</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> root = find(fa[x]);</span><br><span class="line">    zhonglei[x] ^= zhonglei[fa[x]];</span><br><span class="line">    <span class="keyword">return</span> fa[x] = root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hebing</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fx = find(x),fy = find(y);</span><br><span class="line">    <span class="keyword">if</span> (fx != fy)</span><br><span class="line">    &#123;</span><br><span class="line">        fa[fx] = fy;</span><br><span class="line">        zhonglei[fx] = zhonglei[x] ^ zhonglei[y] ^ op;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;p1,&amp;p2) != EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        tot = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">        <span class="built_in">memset</span>(zhonglei,<span class="number">0</span>,<span class="keyword">sizeof</span>(zhonglei));</span><br><span class="line">        <span class="built_in">memset</span>(cnt0,<span class="number">0</span>,<span class="keyword">sizeof</span>(cnt0));</span><br><span class="line">        <span class="built_in">memset</span>(cnt1,<span class="number">0</span>,<span class="keyword">sizeof</span>(cnt1));</span><br><span class="line">        <span class="built_in">memset</span>(root,<span class="number">0</span>,<span class="keyword">sizeof</span>(root));</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span> &amp;&amp; p1 == <span class="number">0</span> &amp;&amp; p2 == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= p1 + p2; i++)</span><br><span class="line">            fa[i] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x,y;</span><br><span class="line">            <span class="keyword">char</span> s[<span class="number">5</span>];</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (s[<span class="number">1</span>] == <span class="string">'y'</span>)</span><br><span class="line">                hebing(x,y,<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                hebing(x,y,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= p1 + p2; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> fx = find(i);</span><br><span class="line">            <span class="keyword">if</span> (fx != i)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            ++cnt;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= p1 + p2; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> fy = find(j);</span><br><span class="line">                <span class="keyword">if</span> (fx == fy)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (zhonglei[j] == <span class="number">0</span>)</span><br><span class="line">                        cnt0[cnt]++;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        cnt1[cnt]++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            root[cnt] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= p1 + p2; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (j - cnt0[i] &gt;= <span class="number">0</span>)</span><br><span class="line">                    f[i][j] += f[i - <span class="number">1</span>][j - cnt0[i]];</span><br><span class="line">                <span class="keyword">if</span> (j - cnt1[i] &gt;= <span class="number">0</span>)</span><br><span class="line">                    f[i][j] += f[i - <span class="number">1</span>][j - cnt1[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span> (f[cnt][p1] != <span class="number">1</span>)</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"no"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = p1 + p2;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = cnt; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (p1 - cnt1[i] &gt;= <span class="number">0</span> &amp;&amp; f[i - <span class="number">1</span>][p1 - cnt1[i]])</span><br><span class="line">                &#123;</span><br><span class="line">                    p1 -= cnt1[i];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= sum; j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">int</span> fx = find(j);</span><br><span class="line">                        <span class="keyword">if</span> (fx == root[i] &amp;&amp; zhonglei[j] == <span class="number">1</span>)</span><br><span class="line">                            ans[++tot] = j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (p1 - cnt0[i] &gt;= <span class="number">0</span> &amp;&amp; f[i - <span class="number">1</span>][p1 - cnt0[i]])</span><br><span class="line">                &#123;</span><br><span class="line">                    p1 -= cnt0[i];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= sum; j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">int</span> fx = find(j);</span><br><span class="line">                        <span class="keyword">if</span> (fx == root[i] &amp;&amp; zhonglei[j] == <span class="number">0</span>)</span><br><span class="line">                            ans[++tot] = j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            sort(ans + <span class="number">1</span>,ans + <span class="number">1</span> + tot);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= tot; i++)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans[i]);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"end\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;如果有一条关系是“a说b yes or no”,那么就在a,b之间连一条边.  这样就会形成一个有多个连通分量的图. 对于每个连通分量，一定存在一个入度为0的点，确定这个人是好人or坏人，那么这个连通分量就会有两种结果. 记这个人为好人时，该连通分量的好人数为$cnt_1$,为坏人是，好人数为$cnt_2$. 因为每个连通分量都是独立的，问题就转变成了一个背包问题：将每个连通分量看作一个物品，取(cnt1)or不取(cnt2),令$f_{i,j}$表示前i个连通分量中，好人数量为j的方案数. 若最后$f_{cnt,p1}$不为1，则输出no.<br>&emsp;&emsp;输出方案怎么解决？从后往前枚举连通分量. 看这个状态是从哪个状态转移而来的. 因为最后$f_{cnt,p1}$为1，要么$f_{cnt - 1,p1 - cnt_{0,i}}$为1，要么$f_{cnt - 1,p1 - cnt_{1,i}}$为1，确定了转移方向后，更新p1,将符合要求的点加入答案中，最后排序输出即可.<br>&emsp;&emsp;可以利用带权并查集来处理连通分量. 因为yes表示a与b同类,no表示a与b不是同类，维护每个点是不是与连通分量的根的同类即可.</p>
+<h3 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h3><p>&emsp;&emsp;模型见少了，就差最后一步的背包转化.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/bzoj2821/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1783,166 +1954,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/ch磁力块/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zbtrs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/a.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/12/ch磁力块/" itemprop="url">CH Round</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T13:28:53+08:00">
-                2018-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法竞赛进阶指南/" itemprop="url" rel="index">
-                    <span itemprop="name">算法竞赛进阶指南</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/12/ch磁力块/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/12/ch磁力块/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="中文题面"><a href="#中文题面" class="headerlink" title="中文题面"></a>中文题面</h3><p>描述<br>在一片广袤无垠的原野上，散落着N块磁石。每个磁石的性质可以用一个五元组(x,y,m,p,r)描述，其中x,y表示其坐标，m是磁石的质量，p是磁力，r是吸引半径。若磁石A与磁石B的距离不大于磁石A的吸引半径，并且磁石B的质量不大于磁石A的磁力，那么A可以吸引B。<br>小取酒带着一块自己的磁石L来到了这篇原野的(x0,y0)处，我们可以视为磁石L的坐标为(x0,y0)。小取酒手持磁石L并保持原地不动，所有可以被L吸引的磁石将会被吸引过来。在每个时刻，他可以选择更换任意一块自己已经获得的磁石（当然也可以是自己最初携带的L磁石）在(x0,y0)处吸引更多的磁石。小取酒想知道，他最多能获得多少块磁石呢？</p>
-<p>输入格式<br>第一行五个整数x0,y0,pL,rL,N，表示小取酒所在的位置，磁石L磁力、吸引半径和原野上散落磁石的个数。<br>接下来N行每行五个整数x,y,m,p,r，描述一块磁石的性质。</p>
-<p>输出格式<br>输出一个整数，表示最多可以获得的散落磁石个数（不包含最初携带的磁石L）。</p>
-<p>样例输入<br>0 0 5 10 5<br>5 4 7 11 5<br>-7 1 4 7 8<br>0 2 13 5 6<br>2 -3 9 3 4<br>13 5 1 9 9<br>样例输出<br>3<br>数据范围与约定<br>对于30%的数据，1&lt;=N&lt;=1000。<br>对于100%的数据，1&lt;=N&lt;=250000，-10^9&lt;=x,y&lt;=10^9，1&lt;=m,p,r&lt;=10^9。</p>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>&emsp;&emsp;二维偏序问题怎么处理？</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">250010</span>;</span><br><span class="line"><span class="keyword">const</span> ll inf = <span class="number">1e18</span>;</span><br><span class="line">ll n,x0,y00,pl,rl,pos[maxn],block,cnt,ans,L[maxn],R[maxn],tot,vis[maxn],weight[maxn];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll x,y,p,r,m,dist;</span><br><span class="line">&#125; e[maxn],b[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.m &lt; b.m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp2</span><span class="params">(node a,node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.dist &lt; b.dist;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">queue</span> &lt;node&gt; q;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld%lld"</span>,&amp;x0,&amp;y00,&amp;pl,&amp;rl,&amp;n);</span><br><span class="line">    block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld%lld"</span>,&amp;e[i].x,&amp;e[i].y,&amp;e[i].m,&amp;e[i].p,&amp;e[i].r);</span><br><span class="line">        e[i].dist = (e[i].x - x0) * (e[i].x - x0) + (e[i].y - y00) * (e[i].y - y00);</span><br><span class="line">        e[i].r = e[i].r * e[i].r;</span><br><span class="line">    &#125;</span><br><span class="line">    node temp;</span><br><span class="line">    temp.p = pl;</span><br><span class="line">    temp.r = rl * rl;</span><br><span class="line">    q.push(temp);</span><br><span class="line">    sort(e + <span class="number">1</span>,e + <span class="number">1</span> + n,cmp);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        pos[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">    cnt = pos[n];</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">        L[i] = R[i - <span class="number">1</span>] + <span class="number">1</span>,R[i] = min(n,i * block);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">        weight[i] = e[R[i]].m;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">        sort(e + L[i],e + <span class="number">1</span> + R[i],cmp2);</span><br><span class="line">    <span class="keyword">while</span> (!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        node u = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= cnt; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (weight[i] &gt; u.p)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = L[i]; j &lt;= R[i]; j++)</span><br><span class="line">                    <span class="keyword">if</span> (!vis[j] &amp;&amp; e[j].m &lt;= u.p &amp;&amp; e[j].dist &lt;= u.r)</span><br><span class="line">                    &#123;</span><br><span class="line">                        vis[j] = <span class="number">1</span>;</span><br><span class="line">                        q.push(e[j]);</span><br><span class="line">                        ans++;</span><br><span class="line">                    &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (L[i] &lt;= R[i] &amp;&amp; e[L[i]].dist &lt;= u.r)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!vis[L[i]])</span><br><span class="line">                &#123;</span><br><span class="line">                    ans++;</span><br><span class="line">                    q.push(e[L[i]]);</span><br><span class="line">                    vis[L[i]] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                L[i]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>&emsp;&emsp;首先可以想到基本的算法框架：建立一个队列，每次取出队首磁石，将能吸到的磁石全部放到队列里，最后统计队列中的元素个数. 关键问题就是如何快速判断哪些磁石能够被吸引.<br>&emsp;&emsp;本题中，磁石吸引条件包含两个维度：质量≤磁力、距离≤吸引半径.<strong>这是一个二维偏序问题. 通常的解法是排序+树状数组，但是这只能统计数量</strong>，我们想要知道构成二维偏序的是具体的哪一对. 两种解法：1.分块. 2.平衡树. 先对一维进行排序，再对另一维操作.<br>&emsp;&emsp;这道题比较简单的方法是分块. 处理方法是整体排序+块内排序.先将所有的磁石按照质量从小到大排序. 再将每一块内部的磁石按照距离从小到大排序. 在排序之前要记录下每一块内的磁石的最大质量. 当每一块的最大质量被确定下来后，若当前队首磁石的磁力≥当前块内的最大质量，那么这一个块内的磁石的质量对答案就没有影响了，只需要考虑距离. 而块内是按照距离从小到大排序的，可以对每一个块维护一个单调指针,这些单调指针一共最多会移动n步. 可以直接把每一个块的左端点当作指针.<br>&emsp;&emsp;若当前队首磁石的磁力≤当前块内的最大质量，那么只能暴力统计了. 将符合要求的放进队列中. <strong>注意：这一个块的单调指针不会变动，也不需要重新排序. 因为拿走一些元素不影响已经排好的顺序. 为了避免将已入队的元素重复入队，使用vis数组标记.</strong>.</p>
-<h3 id="套路"><a href="#套路" class="headerlink" title="套路"></a>套路</h3><p>&emsp;&emsp;分块处理二维偏序问题，题目要求知道具体的值. 利用整体排序+块内排序的方法.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1997,7 +2008,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">177</span>
+                  <span class="site-state-item-count">178</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
