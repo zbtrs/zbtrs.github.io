@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hello World | zbtrs的博客</title>
+  <title>数据库存储 | zbtrs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="数据库存储存储器介绍1.cache–&gt;main memory–&gt;flash memory–&gt;magnetic disk–&gt;optical disk–&gt;magnetic tapes，从main memory往上都是volatile的。 2.对于同一层次的存储器，如果支持的协议不同，那么传输数据的速度也不同。例如SSD的NVMe协议比SATA 3协议要快。 3.从main">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2022/08/26/hello-world/index.html">
+<meta property="og:title" content="数据库存储">
+<meta property="og:url" content="http://example.com/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/index.html">
 <meta property="og:site_name" content="zbtrs的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="数据库存储存储器介绍1.cache–&gt;main memory–&gt;flash memory–&gt;magnetic disk–&gt;optical disk–&gt;magnetic tapes，从main memory往上都是volatile的。 2.对于同一层次的存储器，如果支持的协议不同，那么传输数据的速度也不同。例如SSD的NVMe协议比SATA 3协议要快。 3.从main">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-26T09:17:57.042Z">
-<meta property="article:modified_time" content="2022-08-26T09:17:57.042Z">
+<meta property="article:published_time" content="2022-08-31T12:15:11.000Z">
+<meta property="article:modified_time" content="2022-08-31T14:20:54.495Z">
 <meta property="article:author" content="zbtrs">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zbtrs的博客" type="application/atom+xml">
@@ -154,39 +155,71 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-数据库存储" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      数据库存储
     </h1>
   
 
         
-        <a href="/2022/08/26/hello-world/" class="archive-article-date">
-  	<time datetime="2022-08-26T09:17:57.042Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-26</time>
+        <a href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/" class="archive-article-date">
+  	<time datetime="2022-08-31T12:15:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h1 id="数据库存储"><a href="#数据库存储" class="headerlink" title="数据库存储"></a>数据库存储</h1><h2 id="存储器介绍"><a href="#存储器介绍" class="headerlink" title="存储器介绍"></a>存储器介绍</h2><p>1.cache–&gt;main memory–&gt;flash memory–&gt;magnetic disk–&gt;optical disk–&gt;magnetic tapes，从main memory往上都是volatile的。</p>
+<p>2.对于同一层次的存储器，如果支持的协议不同，那么传输数据的速度也不同。例如SSD的NVMe协议比SATA 3协议要快。</p>
+<p>3.从main memory往上读写数据都是以字节为单位的，可以进行随机读取。而下面层次的存储器都必须以page&#x2F;block为单位，一次读取连续一段数据。</p>
+<p>4.HDD和SSD与操作系统交互中间层的API相同，也就是说操作系统根本就不知道硬盘是HDD还是SSD。而SSD可以并行执行多个功能。但update有点麻烦，需要先erase掉一整个block的数据（这个block中会包含多个page），然后再来write。而每个block都有erase的次数上限，如果要erase的时候这个block上还有page有数据，就会先将这些page上的数据写到其他的block上。</p>
+<h2 id="数据库存储结构"><a href="#数据库存储结构" class="headerlink" title="数据库存储结构"></a>数据库存储结构</h2><p>1.数据库分为磁盘型数据库和内存型数据库。对于磁盘型数据库而言，数据最终都要保存在磁盘上，但是如果想要对数据进行操作，就必须先把这些数据放到内存上来。因此在内存上会有一个Buffer Pool对所有pages进行管理。当数据库需要获得信息时，它会向Buffer Pool请求得到ID为x的page，若没有命中则Buffer Pool会从Disk中获得并执行替换策略。</p>
+<p>2.Buffer Pool很像操作系统中虚拟内存的实现，但是我们不能直接用mmap，因为数据库对page的掌控更加全面具体。例如如果有多个线程同时对一个page进行读写，如果是数据库来管理这些page，就可以通过添加限制位的方式来解决冲突，而mmap则难以解决这个问题。</p>
+<h2 id="文件组织"><a href="#文件组织" class="headerlink" title="文件组织"></a>文件组织</h2><p>1.数据库以文件的形式存储在磁盘上。文件内部被逻辑上划分为一个个page。这个文件只有数据库本身可以解析。</p>
+<p>2.一个page就是一个固定长度的数据块。这个数据块里面可能有元数据、tuple等等信息，大多数数据库系统在一个page中只会存储一种类型的信息，而有些数据库系统例如Oracle要求一个page要是self-contained的，也就是说我们能够根据这个page中包含的某些信息来恢复这个page的内容。</p>
+<p>3.每个page都有一个独特的标识符。DBMS用indirection层来将page id映射到物理区域上。</p>
+<p>4.有很多不同种类的page，例如Hardware Page一般都是4kb，还有OS Page和Database Page。而Database Page一般比4kb大，这是为了提高命中率和减少对磁盘的读写。但是这也会产生一些问题：因为4kb也就是Hardware Page一般是最大的系统能够保证不出现错误的读写数据块大小，也就是说可以认为以4kb为大小的读写操作是原子性的，如果我们的Database Page大小超过了4kb，就要用一些其他的措施来保证读写中途不会出现问题。</p>
+<h2 id="数据库文件的组织"><a href="#数据库文件的组织" class="headerlink" title="数据库文件的组织"></a>数据库文件的组织</h2><h3 id="堆存储"><a href="#堆存储" class="headerlink" title="堆存储"></a>堆存储</h3><p>如果用堆来组织存储着records的pages，那么这些pages就是无序的。可以用链表和表目录来实现。</p>
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>数据库文件维护一个header page在开头来存储两个指针：</p>
+<p>1.指向free page list。</p>
+<p>2.指向data page list。</p>
+<p>那么对于每一个page都需要维护前后两个指针（双向链表）以及所包含的data。这种方式不是经常用到。</p>
+<h4 id="表目录"><a href="#表目录" class="headerlink" title="表目录"></a>表目录</h4><p>我们可以维护一个header page来保存一个数组，数组的每个元素记录它对应的page上还有多少空间和这个page的位置。这样一旦我们要插入一个record的时候就可以遍历这个数组。为了提高效率，一个数组可以表示连续一大段的page上还有多少空间。</p>
+<h3 id="顺序存储"><a href="#顺序存储" class="headerlink" title="顺序存储"></a>顺序存储</h3><p>如果对relation指定一个special key，那么就会按照这个key的大小顺序来存储所有的record。删除就直接删，如果要在某个位置插入，但是这个位置的空间不够，就在这个位置存一个指针指向实际存储的区域（也就是新开一个大的区域存储）。这样一段时间后这些records在物理上是不连续的，所以要定期重排。</p>
+<h3 id="聚合存储"><a href="#聚合存储" class="headerlink" title="聚合存储"></a>聚合存储</h3><p>可以将多个relation的tuple连接到一起，如果他们有公共属性，并且这个公共属性在连接后的tuple中只会出现一次。这样做的好处是如果有多次对多个relation的查询，效率就会高很多，相当于pre-join了。但是每次查询得到的信息会多一些，并且时间会长。可以在DDL的时候指定是否进行聚合存储。</p>
+<h2 id="数据库文件中page内部的组织"><a href="#数据库文件中page内部的组织" class="headerlink" title="数据库文件中page内部的组织"></a>数据库文件中page内部的组织</h2><p>1.每个page中都会有一个header存储元数据，比如page size，checksum，DBMS Version，Transaction Visibility和Compression Information。</p>
+<p>2.page中存储tuple，必须保证这个tuple的大小不超过page的大小，每个tuple都必须在单独一个page中，不能这个tuple的一部分在其中一个page，另一部分在另外一个page中，因此为tuple分配内存需要格外注意，可能会产生内存碎片。</p>
+<p>3.用slotted-page structure来存储tuples。在每个header处存slot的数量、未使用空间的末尾位置。Header后面是slot数组，每个slot存它对应的tuple的位置和大小。当要插入一个tuple时，slot从前往后加入，tuple从后往前，当两者相遇时，这个page就满了。而删除操作会产生内存碎片，可以通过定期平移tuples的方式来重排。</p>
+<p>4.每个tuple都有一个独特的record identifier，通过page_id + offset&#x2F;slot来得到。</p>
+<h2 id="Tuple组织"><a href="#Tuple组织" class="headerlink" title="Tuple组织"></a>Tuple组织</h2><p>1.一个tuple本质上是一堆字节序列，由DBMS来解析。</p>
+<p>2.每个tuple都有一个header，用来存visibility info(concurrency control)和表示哪个属性是NULL的Bit Map。大多数情况下属性的值按照定义的schema来顺序存储。</p>
+<h2 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h2><p>1.integer&#x2F;bigint&#x2F;smallint&#x2F;tinyint都用C&#x2F;C++的表示。</p>
+<p>2.float&#x2F;real用IEEE-754表示，numeric&#x2F;decimal在数据库中有单独表示方法。对于不定长浮点数，精度上有误差，但是运算速度快，因为CPU有对应的单独一条指令能够执行运算。而定长浮点数运算慢但是可以保证没有误差。</p>
+<p>3.varchar&#x2F;varbinary&#x2F;text&#x2F;blob都是用一个header存长度后面跟着数据。</p>
+<p>4.如果数据过大，数据库会把这个数据作为Blob类型，在对应属性位置上放一个指针指向External File。这个file是不能被数据库操作的，不能提供持久化保护和事物保护。如果通过操作系统对这些文件进行更改，数据库可能会无法正确处理这些文件。当然如果数据不是特别大，数据库是可以把它放到overflow page上。</p>
+<h2 id="SYSTEM-CATALOGS"><a href="#SYSTEM-CATALOGS" class="headerlink" title="SYSTEM CATALOGS"></a>SYSTEM CATALOGS</h2><p>用来存储数据库的元数据，大部分数据库的存储方式是使用另外的数据库来存储。不能用数据库存储有关自己的元数据。通过<strong>INFORMATION_SCHEMA</strong>这个API来从数据库中得到，但是注意的是这里并不是数据库本身的查询语句！</p>
+<h2 id="事务类型"><a href="#事务类型" class="headerlink" title="事务类型"></a>事务类型</h2><p>1.分为OLAP和OLTP以及他们的混合HTAP。</p>
+<p>2.OLTP一般是和外界交互，即要插入一个tuple、删除&#x2F;修改一个数据、查询一组数据等等，更多偏向于write，只会涉及到一小部分tuples。</p>
+<p>3.OLAP则会涉及到对很多数据进行计算、分析，会涉及到大量的数据。</p>
+<p>4.现在的应用一般是用两个数据库，前端数据库负责OLTP，后端数据库负责OLAP。</p>
+<h2 id="数据存储模型"><a href="#数据存储模型" class="headerlink" title="数据存储模型"></a>数据存储模型</h2><p>1.分为行存储和列存储，前者即把每一行的信息存在一起，后者为把每一个属性值的信息存在一起。</p>
+<p>2.如果我们仅仅是想要根据几个属性值来筛选若干个属性值出来，那么用列存储就很容易做到，只需要遍历涉及到的存储属性值的文件即可。而行存储则要读取很多完整的tuple。</p>
+<p>3.那么在列存储方式中，我们如何知道一个属性和另外一个属性是不是在同一个tuple中呢？因为每个属性的大小是固定的，我们可以通过计算offset的方式来得到。</p>
+<p>4.可以在DDL中指定数据库是行存储还是列存储。</p>
+<h2 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h2><p>1.内存区域被组织为一个定长page的数组，每一个数组条目都被叫作frame。一个叫做page table的数据结构可以跟踪正在内存中的pages，还对每个pages有额外的元数据：Dirty Flag（如果内存上的这个page被修改了就要写回到硬盘上去）和Pin&#x2F;Reference Counter（用来处理transaction），即如果正在读一个page的数据，则Pin Counter++，其他线程对这个page不能进行写操作。</p>
+<p>2.可以设多个Buffer Pool来减少latches。通过Object Id来指定存到哪一个Buffer Pool中或者直接将page id进行hash然后对内存池的个数n进行取模来决定。</p>
+<p>3.数据库管理pages优于OS的一点是可以根据一段连续的数据进行预取存或者根据Index进行预取。而在替换策略方面，OS只能根据过去的情况作出预测，而数据库可以根据指令来决定哪些page需要缓存，哪些不需要以此来更换不同策略。例如sort一个relation，不需要将中间数据缓存。</p>
+<p>4.如果有两个线程在读取同一张表，其中一个线程先读了一部分，那么可以利用cursor，也就是给每个查询操作一个cursor，当第一个查询操作进行到一半，第二个查询操作刚开始时，可以将第二个查询操作的cursor赋值为第一个查询操作的cursor，这样后面的每个数据就只用读取一次，接着第二个查询操作再来读取前面没有读取到的部分。</p>
+<p>5.如果我们从操作系统中读取pages，中间会写入到OS PAGE CACHE中，而数据库是会用direct I&#x2F;O，即虽然进行了文件读写，但不经过OS PAGE CACHE这一步，除了PostgreSQL。</p>
+<ol start="6">
+<li></li>
+</ol>
 
       
 
@@ -216,6 +249,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -266,7 +310,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/08/26/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,15 +324,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/08/26/Hello-world-0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/09/01/C++%E5%9B%9E%E9%A1%BE/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Hello_world
+          C++回顾
         
       </div>
     </a>
   
+  
+    <a href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQL基础</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -410,6 +459,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

@@ -154,27 +154,107 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Hello-world-0" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-C++回顾" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/26/Hello-world-0/">Hello_world</a>
+      <a class="article-title" href="/2022/09/01/C++%E5%9B%9E%E9%A1%BE/">C++回顾</a>
     </h1>
   
 
         
-        <a href="/2022/08/26/Hello-world-0/" class="archive-article-date">
-  	<time datetime="2022-08-26T09:21:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-26</time>
+        <a href="/2022/09/01/C++%E5%9B%9E%E9%A1%BE/" class="archive-article-date">
+  	<time datetime="2022-09-01T08:05:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="哈哈"><a href="#哈哈" class="headerlink" title="哈哈"></a>哈哈</h1><p>1</p>
+        <h1 id="C-回顾"><a href="#C-回顾" class="headerlink" title="C++回顾"></a>C++回顾</h1><p>1.可以直接对指针用下标操作，<code>array[2]</code>等价于<code>*(array + 2)</code></p>
+<p>2.对STL容器的迭代器进行封装！例如begin函数，先要判断容器是否为空。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T* <span class="title">begin</span><span class="params">(<span class="type">const</span> vector&lt;T&gt; &amp;vec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> vec.<span class="built_in">empty</span>() ? <span class="number">0</span> : &amp;vec[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.遍历数组、vector、list都可以通过指针来实现，但是在list中，<strong>因为元素在内存区域中不是按照顺序摆放的，所以不能对指针进行算术运算</strong>。但即使这样，我们依然能够在指针上面添加一个抽象层来用这一层操控这些容器。一种最为简单的抽象方式就是将指针当作一个泛型。list的迭代器也不能进行加减！必须传入首尾迭代器！</p>
+<p>4.有一种叫做function object的东西，可以代替函数指针，即它帮我们定义了一些简单的运算，例如：<code>less&lt;int&gt;()</code>就可以表示a &lt; b的bool函数。有unary的function object，可以对binary function object的结果进行操作。</p>
+<p>5.泛型函数设计的流程一般是先写一个局限比较多的函数，然后考虑哪些参数可以让用户来定制，接着考虑如何应用到不同的类型上，最后改template。</p>
+<p>6.Iterator Inserter：类似copy()、unique_copy()等泛型算法会让你提供一个迭代器参数作为复制后的元素放置的位置，如果只是提供一个迭代器，会将这些放置操作变为赋值操作。如果用insertion adapter，就可以将赋值变成插入操作：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unique_copy</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>(),<span class="built_in">back_inserter</span>(result));</span><br></pre></td></tr></table></figure>
+
+<p>Iterator Inserter用于不知道一开始为容器初始化为多大容量的情况。</p>
+<p>7.iostream iterator：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">istream_iterator&lt;string&gt; <span class="title">is</span><span class="params">(cin)</span></span>;</span><br><span class="line">istream_iterator&lt;string&gt; eof;</span><br><span class="line"><span class="built_in">copy</span>(is,eof,<span class="built_in">back_inserter</span>(text));</span><br><span class="line"><span class="function">ostream_iterator&lt;string&gt; <span class="title">os</span><span class="params">(cout,<span class="string">&quot; &quot;</span>)</span></span>;</span><br><span class="line"><span class="built_in">copy</span>(text.<span class="built_in">begin</span>(),text.<span class="built_in">end</span>(),os);</span><br></pre></td></tr></table></figure>
+
+<p>将标准输入的字符串存到一个vector中，并用空格隔开输出到标准输出中。不进行初始化就是默认为EOF。</p>
+<p>厉害之处在于可以把cin、cout替换为ifstream、ofstream。</p>
+<p>8.创建一个class，将class的定义放在同名的.h文件中，如果在class内部定义成员函数，则这些成员函数默认是inline的。如果想在外部定义成员函数，就在同名的.cpp文件中定义。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">A &amp; <span class="title">A::copy</span><span class="params">(<span class="type">const</span> A &amp;rhs)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里作用域关键字加在函数名前面。</p>
+<p>9.成员初始化列表：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Triangular::<span class="built_in">Triangular</span>(<span class="type">int</span> len,<span class="type">int</span> bp) : _name(<span class="string">&quot;Triangular&quot;</span>) &#123;</span><br><span class="line">    _length = len &gt; <span class="number">0</span> ? len : <span class="number">1</span>;</span><br><span class="line">    _beg_pos = bp &gt; <span class="number">0</span> ? bp : <span class="number">1</span>;</span><br><span class="line">    _next = _beg_pos - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>10.copy constructor：有时候一个类中的成员是动态分配的内存，如果直接采用默认的成员对应赋值的方法，就容易出现多个指针指向共同一片内存区域的问题。可以利用成员初始化列表的方式来定义copy constructor：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Matrix::<span class="built_in">Matrix</span>(<span class="type">const</span> Matrix &amp;rhs) : ...</span><br></pre></td></tr></table></figure>
+
+<p>这里参数必须要是一个常引用。</p>
+<p>如果定义了copy constructor，就必须同时定义copy assignment operator。</p>
+<p>11.如果定义了一个const reference实例，虽然这里把实例声明为了const的，但是其成员函数还是有可能改变其成员变量的值。这里应该加以限制：对于那些不会改变成员变量的成员函数，应该在形参列表后面加上const关键词，这样const reference是只能够调用有const关键词的成员函数的。同时这类函数不应该把任何可能修改成员变量的接口暴露出去。但是一个const成员函数如果要改变某一个成员变量的信息，<strong>并且改变这个成员变量的信息不会破坏抽象概念的常量性</strong>，那么可以在这个成员变量前面添加关键词mutable。这样在这个const成员函数中修改这个成员变量的值就没有任何问题了。</p>
+<p>12.静态成员变量在其定义前面加上static关键词。对于class而言，static data member只有唯一的一份实体，必须在和类同名的.cpp文件中清楚地定义，并且要在变量名前面加上作用域：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; A::_elems;</span><br></pre></td></tr></table></figure>
+
+<p>在成员函数中访问静态变量就跟访问一般的成员变量一样，不需要加上作用域。</p>
+<p>如果成员函数不会用到非静态成员变量，就可以把成员函数定义为静态的。加上static关键词即可。这样在程序代码中使用静态成员函数就只需要在前面加上作用域而不需要通过实例进行调用了。</p>
+<p>13.重载运算符：类似成员函数的定义，只需要在运算符名字前面加上operator即可，对于const的运算符，对形参有要求：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="keyword">operator</span> == (<span class="type">const</span> A&amp;) <span class="type">const</span>;</span><br></pre></td></tr></table></figure>
+
+<p>前置++和后置++有区别：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A&amp; <span class="keyword">operator</span>++();  <span class="comment">//前置</span></span><br><span class="line">A <span class="keyword">operator</span>++(<span class="type">int</span>);  <span class="comment">//后置</span></span><br></pre></td></tr></table></figure>
+
+<p>前置版本会返回一个引用，后置版本的形参中有一个int，这里不需要真的传入值进去，只是c++为了区分前置和后置用的方法，会自动设置为0。</p>
+<p>不可以引入新的运算符，运算符的操作数不可改变，优先级不可改变，不能为内置类型重载运算符。</p>
+<p>14.两种友元声明：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> <span class="type">int</span> A::<span class="keyword">operator</span>*();</span><br><span class="line"><span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">A</span>;</span><br></pre></td></tr></table></figure>
+
+<p>友元声明可以放在类定义的任何位置，友元声明的函数或者类（相当于类里面的所有成员函数）都可以访问这个类的private部分。第一种方式需要A的定义在当前类前面，第二种方式不需要。</p>
+<p>不过替代友元更好的方法是暴露一个public inline函数。</p>
+<p>15.重载iostream运算符：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ostream&amp; <span class="keyword">operator</span>&lt;&lt; (ostream &amp;os,<span class="type">const</span> A &amp;rhs) &#123;</span><br><span class="line">    os &lt;&lt; <span class="string">&quot;(&quot;</span> &lt;&lt; rhs.<span class="built_in">beg_pos</span>() &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; rhs.<span class="built_in">length</span>() &lt;&lt; <span class="string">&quot;;&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>iostream运算符第一个形参必须接受iostream引用，并返回，这里的流操作会改变iostream对象，因此不能声明为const的，而且重载运算符不能是成员函数！</p>
+<p>16.如果我们要自己定义一个function object，只需要重载()运算符即可。</p>
+<p>17.定义一个抽象基类：先找出所有子类共通的操作行为，然后找出哪些操作行为与类型相关，最后每个操作行为的访问层级。private是派生类都不能访问，protect是派生类可以访问。如果一个函数在抽象基类中没有实质性的作用，就把它声明为纯虚函数，类似定义为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="type">int</span> <span class="title">elem</span><span class="params">(<span class="type">int</span> pos)</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在后面加上&#x3D;0即可。</p>
+<p>而如果一个类中有虚函数，那么它的析构函数一定要是virtual的，并且最好不要定义为纯虚函数。</p>
+<p>任何有纯虚函数的类都不能实例一个完整的对象，派生类必须把纯虚函数完全都定义了才能用来实例化一个完整的对象。</p>
+<p>18.在基类中声明一个函数为虚函数后，派生类都不需要加上virtual关键词了，只要基类声明就可以,基类声明虚函数后,会建一张虚函数表。 一旦一个函数被声明为虚函数,从该点之后的继承层次结构中都是虚函数,不管它在有没有再次声明是不是虚函数。</p>
+<p>19.C++中的多态只能通过引用和指针来实现。基类的constructor不会调用派生类虚函数！</p>
+<p>20.typeid函数可以获得一个对象在运行时的类型。</p>
+<p>21.对于泛型类，以后凡是要用到这个类的地方都必须要加上<code>&lt;type&gt;</code>，也就是将后面的类型看作是这个类定义的一部分！</p>
+<p>22.泛型类的成员函数的定义比较复杂：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt;</span><br><span class="line"><span class="keyword">inline</span> BinaryTree&lt;elemType&gt;::</span><br><span class="line"><span class="built_in">BinaryTree</span>(<span class="type">const</span> BinaryTree &amp;rhs) &#123;</span><br><span class="line">    <span class="built_in">copy</span>(_root,rhs._root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在一开始要加上模板参数，后面定义成员函数的时候要先指定其作用域，一旦指定了作用域，那么定义的后半部分就知道了这个函数是定义在类里面的成员函数，也就可以直接用类中的成员信息而不用加作用域了。</p>
+<p>23.建议使用初始化列表来初始化泛型类：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> valType&gt;</span><br><span class="line"><span class="keyword">inline</span> BTnode&lt;valType&gt;::</span><br><span class="line"><span class="built_in">BTnode</span>(<span class="type">const</span> valType &amp;val) : _val(val) &#123;</span><br><span class="line">    _cnt = <span class="number">1</span>;</span><br><span class="line">    _lchild = _rchild = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式对于泛型val可以避免通过直接赋值的防止来初始化，也就提高了效率。而如果我们用constructor来进行初始化，就会出现<code>_val = val;</code>这种赋值的情况，可能会使程序变慢。</p>
+<p>24.如果涉及到递归结构，即类中包含类自己，就要用指针。一般用new来分配内存。需要注意的是，如果我们要改变指针本身（也就是不光可以改变指针指向的值，也可以改变指针指向哪个值），那么参数就要用指针的引用，即：<code>BTnode *&amp; prev</code>，从变量名开始往左边读。</p>
+<p>25.表达式也可以作为template参数。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="type">int</span> len&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="built_in">A</span>() : <span class="built_in">num_sequence</span>&lt;len&gt;() &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以用一个表达式作为len的值：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A&lt;<span class="number">16</span>&gt; temp;</span><br></pre></td></tr></table></figure>
+
+<p>26.将template参数作为一种设计策略：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType,<span class="keyword">typename</span> Comp = less&lt;elemType&gt; &gt;</span><br><span class="line"><span class="keyword">class</span> LessThanPred &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">LessThanPred</span>(<span class="type">const</span> elemType &amp;val) : _val(val)&#123;&#125;</span><br><span class="line">    <span class="type">bool</span> <span class="built_in">operator</span>()(<span class="type">const</span> elemType &amp;val) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Comp</span>(val,_val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">val</span><span class="params">(<span class="type">const</span> elemType &amp;newval)</span> </span>&#123;</span><br><span class="line">        _val = newval;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">elemType <span class="title">val</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _val;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    elemType _val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里用了第二个泛型参数Comp，因为我们不知道传入的泛型是否自己定义了&lt;，所以我们就需要把这个作为泛型处理！</p>
 
       
 
@@ -183,11 +263,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/26/Hello-world-0/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/09/01/C++%E5%9B%9E%E9%A1%BE/">展开全文 >></a>
         </p>
       
 
@@ -217,39 +308,71 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-数据库存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/26/hello-world/">Hello World</a>
+      <a class="article-title" href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/">数据库存储</a>
     </h1>
   
 
         
-        <a href="/2022/08/26/hello-world/" class="archive-article-date">
-  	<time datetime="2022-08-26T09:17:57.042Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-26</time>
+        <a href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/" class="archive-article-date">
+  	<time datetime="2022-08-31T12:15:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h1 id="数据库存储"><a href="#数据库存储" class="headerlink" title="数据库存储"></a>数据库存储</h1><h2 id="存储器介绍"><a href="#存储器介绍" class="headerlink" title="存储器介绍"></a>存储器介绍</h2><p>1.cache–&gt;main memory–&gt;flash memory–&gt;magnetic disk–&gt;optical disk–&gt;magnetic tapes，从main memory往上都是volatile的。</p>
+<p>2.对于同一层次的存储器，如果支持的协议不同，那么传输数据的速度也不同。例如SSD的NVMe协议比SATA 3协议要快。</p>
+<p>3.从main memory往上读写数据都是以字节为单位的，可以进行随机读取。而下面层次的存储器都必须以page&#x2F;block为单位，一次读取连续一段数据。</p>
+<p>4.HDD和SSD与操作系统交互中间层的API相同，也就是说操作系统根本就不知道硬盘是HDD还是SSD。而SSD可以并行执行多个功能。但update有点麻烦，需要先erase掉一整个block的数据（这个block中会包含多个page），然后再来write。而每个block都有erase的次数上限，如果要erase的时候这个block上还有page有数据，就会先将这些page上的数据写到其他的block上。</p>
+<h2 id="数据库存储结构"><a href="#数据库存储结构" class="headerlink" title="数据库存储结构"></a>数据库存储结构</h2><p>1.数据库分为磁盘型数据库和内存型数据库。对于磁盘型数据库而言，数据最终都要保存在磁盘上，但是如果想要对数据进行操作，就必须先把这些数据放到内存上来。因此在内存上会有一个Buffer Pool对所有pages进行管理。当数据库需要获得信息时，它会向Buffer Pool请求得到ID为x的page，若没有命中则Buffer Pool会从Disk中获得并执行替换策略。</p>
+<p>2.Buffer Pool很像操作系统中虚拟内存的实现，但是我们不能直接用mmap，因为数据库对page的掌控更加全面具体。例如如果有多个线程同时对一个page进行读写，如果是数据库来管理这些page，就可以通过添加限制位的方式来解决冲突，而mmap则难以解决这个问题。</p>
+<h2 id="文件组织"><a href="#文件组织" class="headerlink" title="文件组织"></a>文件组织</h2><p>1.数据库以文件的形式存储在磁盘上。文件内部被逻辑上划分为一个个page。这个文件只有数据库本身可以解析。</p>
+<p>2.一个page就是一个固定长度的数据块。这个数据块里面可能有元数据、tuple等等信息，大多数数据库系统在一个page中只会存储一种类型的信息，而有些数据库系统例如Oracle要求一个page要是self-contained的，也就是说我们能够根据这个page中包含的某些信息来恢复这个page的内容。</p>
+<p>3.每个page都有一个独特的标识符。DBMS用indirection层来将page id映射到物理区域上。</p>
+<p>4.有很多不同种类的page，例如Hardware Page一般都是4kb，还有OS Page和Database Page。而Database Page一般比4kb大，这是为了提高命中率和减少对磁盘的读写。但是这也会产生一些问题：因为4kb也就是Hardware Page一般是最大的系统能够保证不出现错误的读写数据块大小，也就是说可以认为以4kb为大小的读写操作是原子性的，如果我们的Database Page大小超过了4kb，就要用一些其他的措施来保证读写中途不会出现问题。</p>
+<h2 id="数据库文件的组织"><a href="#数据库文件的组织" class="headerlink" title="数据库文件的组织"></a>数据库文件的组织</h2><h3 id="堆存储"><a href="#堆存储" class="headerlink" title="堆存储"></a>堆存储</h3><p>如果用堆来组织存储着records的pages，那么这些pages就是无序的。可以用链表和表目录来实现。</p>
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>数据库文件维护一个header page在开头来存储两个指针：</p>
+<p>1.指向free page list。</p>
+<p>2.指向data page list。</p>
+<p>那么对于每一个page都需要维护前后两个指针（双向链表）以及所包含的data。这种方式不是经常用到。</p>
+<h4 id="表目录"><a href="#表目录" class="headerlink" title="表目录"></a>表目录</h4><p>我们可以维护一个header page来保存一个数组，数组的每个元素记录它对应的page上还有多少空间和这个page的位置。这样一旦我们要插入一个record的时候就可以遍历这个数组。为了提高效率，一个数组可以表示连续一大段的page上还有多少空间。</p>
+<h3 id="顺序存储"><a href="#顺序存储" class="headerlink" title="顺序存储"></a>顺序存储</h3><p>如果对relation指定一个special key，那么就会按照这个key的大小顺序来存储所有的record。删除就直接删，如果要在某个位置插入，但是这个位置的空间不够，就在这个位置存一个指针指向实际存储的区域（也就是新开一个大的区域存储）。这样一段时间后这些records在物理上是不连续的，所以要定期重排。</p>
+<h3 id="聚合存储"><a href="#聚合存储" class="headerlink" title="聚合存储"></a>聚合存储</h3><p>可以将多个relation的tuple连接到一起，如果他们有公共属性，并且这个公共属性在连接后的tuple中只会出现一次。这样做的好处是如果有多次对多个relation的查询，效率就会高很多，相当于pre-join了。但是每次查询得到的信息会多一些，并且时间会长。可以在DDL的时候指定是否进行聚合存储。</p>
+<h2 id="数据库文件中page内部的组织"><a href="#数据库文件中page内部的组织" class="headerlink" title="数据库文件中page内部的组织"></a>数据库文件中page内部的组织</h2><p>1.每个page中都会有一个header存储元数据，比如page size，checksum，DBMS Version，Transaction Visibility和Compression Information。</p>
+<p>2.page中存储tuple，必须保证这个tuple的大小不超过page的大小，每个tuple都必须在单独一个page中，不能这个tuple的一部分在其中一个page，另一部分在另外一个page中，因此为tuple分配内存需要格外注意，可能会产生内存碎片。</p>
+<p>3.用slotted-page structure来存储tuples。在每个header处存slot的数量、未使用空间的末尾位置。Header后面是slot数组，每个slot存它对应的tuple的位置和大小。当要插入一个tuple时，slot从前往后加入，tuple从后往前，当两者相遇时，这个page就满了。而删除操作会产生内存碎片，可以通过定期平移tuples的方式来重排。</p>
+<p>4.每个tuple都有一个独特的record identifier，通过page_id + offset&#x2F;slot来得到。</p>
+<h2 id="Tuple组织"><a href="#Tuple组织" class="headerlink" title="Tuple组织"></a>Tuple组织</h2><p>1.一个tuple本质上是一堆字节序列，由DBMS来解析。</p>
+<p>2.每个tuple都有一个header，用来存visibility info(concurrency control)和表示哪个属性是NULL的Bit Map。大多数情况下属性的值按照定义的schema来顺序存储。</p>
+<h2 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h2><p>1.integer&#x2F;bigint&#x2F;smallint&#x2F;tinyint都用C&#x2F;C++的表示。</p>
+<p>2.float&#x2F;real用IEEE-754表示，numeric&#x2F;decimal在数据库中有单独表示方法。对于不定长浮点数，精度上有误差，但是运算速度快，因为CPU有对应的单独一条指令能够执行运算。而定长浮点数运算慢但是可以保证没有误差。</p>
+<p>3.varchar&#x2F;varbinary&#x2F;text&#x2F;blob都是用一个header存长度后面跟着数据。</p>
+<p>4.如果数据过大，数据库会把这个数据作为Blob类型，在对应属性位置上放一个指针指向External File。这个file是不能被数据库操作的，不能提供持久化保护和事物保护。如果通过操作系统对这些文件进行更改，数据库可能会无法正确处理这些文件。当然如果数据不是特别大，数据库是可以把它放到overflow page上。</p>
+<h2 id="SYSTEM-CATALOGS"><a href="#SYSTEM-CATALOGS" class="headerlink" title="SYSTEM CATALOGS"></a>SYSTEM CATALOGS</h2><p>用来存储数据库的元数据，大部分数据库的存储方式是使用另外的数据库来存储。不能用数据库存储有关自己的元数据。通过<strong>INFORMATION_SCHEMA</strong>这个API来从数据库中得到，但是注意的是这里并不是数据库本身的查询语句！</p>
+<h2 id="事务类型"><a href="#事务类型" class="headerlink" title="事务类型"></a>事务类型</h2><p>1.分为OLAP和OLTP以及他们的混合HTAP。</p>
+<p>2.OLTP一般是和外界交互，即要插入一个tuple、删除&#x2F;修改一个数据、查询一组数据等等，更多偏向于write，只会涉及到一小部分tuples。</p>
+<p>3.OLAP则会涉及到对很多数据进行计算、分析，会涉及到大量的数据。</p>
+<p>4.现在的应用一般是用两个数据库，前端数据库负责OLTP，后端数据库负责OLAP。</p>
+<h2 id="数据存储模型"><a href="#数据存储模型" class="headerlink" title="数据存储模型"></a>数据存储模型</h2><p>1.分为行存储和列存储，前者即把每一行的信息存在一起，后者为把每一个属性值的信息存在一起。</p>
+<p>2.如果我们仅仅是想要根据几个属性值来筛选若干个属性值出来，那么用列存储就很容易做到，只需要遍历涉及到的存储属性值的文件即可。而行存储则要读取很多完整的tuple。</p>
+<p>3.那么在列存储方式中，我们如何知道一个属性和另外一个属性是不是在同一个tuple中呢？因为每个属性的大小是固定的，我们可以通过计算offset的方式来得到。</p>
+<p>4.可以在DDL中指定数据库是行存储还是列存储。</p>
+<h2 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h2><p>1.内存区域被组织为一个定长page的数组，每一个数组条目都被叫作frame。一个叫做page table的数据结构可以跟踪正在内存中的pages，还对每个pages有额外的元数据：Dirty Flag（如果内存上的这个page被修改了就要写回到硬盘上去）和Pin&#x2F;Reference Counter（用来处理transaction），即如果正在读一个page的数据，则Pin Counter++，其他线程对这个page不能进行写操作。</p>
+<p>2.可以设多个Buffer Pool来减少latches。通过Object Id来指定存到哪一个Buffer Pool中或者直接将page id进行hash然后对内存池的个数n进行取模来决定。</p>
+<p>3.数据库管理pages优于OS的一点是可以根据一段连续的数据进行预取存或者根据Index进行预取。而在替换策略方面，OS只能根据过去的情况作出预测，而数据库可以根据指令来决定哪些page需要缓存，哪些不需要以此来更换不同策略。例如sort一个relation，不需要将中间数据缓存。</p>
+<p>4.如果有两个线程在读取同一张表，其中一个线程先读了一部分，那么可以利用cursor，也就是给每个查询操作一个cursor，当第一个查询操作进行到一半，第二个查询操作刚开始时，可以将第二个查询操作的cursor赋值为第一个查询操作的cursor，这样后面的每个数据就只用读取一次，接着第二个查询操作再来读取前面没有读取到的部分。</p>
+<p>5.如果我们从操作系统中读取pages，中间会写入到OS PAGE CACHE中，而数据库是会用direct I&#x2F;O，即虽然进行了文件读写，但不经过OS PAGE CACHE这一步，除了PostgreSQL。</p>
+<ol start="6">
+<li></li>
+</ol>
 
       
 
@@ -258,11 +381,281 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/26/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SQL基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/">SQL基础</a>
+    </h1>
+  
+
+        
+        <a href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2022-08-27T13:21:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础"></a>SQL基础</h1><h2 id="一、SQL的组成"><a href="#一、SQL的组成" class="headerlink" title="一、SQL的组成"></a>一、SQL的组成</h2><p>SQL包括以下几个部分：</p>
+<p>1.<strong>DDL</strong>，提供定义relation schemas，删除relations和修改relation schemas的命令。</p>
+<p>2.<strong>DML</strong>，提供在database中增删查改tuples的命令。</p>
+<p>3.<strong>Integrity</strong>，DDL命令会对database加上一些确保Integrity的约束，例如给某些attribute赋予某些属性，主键或外键等等。</p>
+<p>4.<strong>View definition</strong>，相当于可以把一些命令给打包。</p>
+<p>5.<strong>Transaction control</strong>，用于处理一些特殊情况，例如并发读写数据库、阻止某些操作破坏操作的原子性。</p>
+<p>6.<strong>Authorization</strong>，相当于Linux里面的用户组和权限，可以给权限到某些用户组&#x2F;用户上。读&#x2F;写&#x2F;增&#x2F;删都有对应的权限。</p>
+<h2 id="二、SQL数据定义"><a href="#二、SQL数据定义" class="headerlink" title="二、SQL数据定义"></a>二、SQL数据定义</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p>1.**char(n)**：一个定长字符串类型，长度为n，是character的缩写。</p>
+<p>2.**varchar(n)**：可变长字符串类型，最大长度为n。</p>
+<p>3.<strong>int</strong>：整数类型。</p>
+<p>4.<strong>smallint</strong>：小整数类型。</p>
+<p>5.**numeric(p,d)**：固定浮点类型，整个数字的位数为p,小数点后的位数为d。</p>
+<p>6.**float(n)**：精度至少为n位的浮点数类型。</p>
+<p>对于字符串建议都用varchar，如果不同长度的char进行比较，会对较短的char填充空格。</p>
+<h3 id="基本规格定义"><a href="#基本规格定义" class="headerlink" title="基本规格定义"></a>基本规格定义</h3><p>1.用create table命令来定义一个relation。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> department</span><br><span class="line">		(dept_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">        building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line">        budget <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>),</span><br><span class="line">        <span class="keyword">primary</span> key(dept_name));</span><br></pre></td></tr></table></figure>
+
+<p>在SQL中每个命令的结尾都必须带有分号。</p>
+<p>2.主键可以是一个属性的集合，被要求必须是<strong>notnull</strong>和<strong>unique</strong>的。</p>
+<p>3.外键关联两个relation，声明的形式为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreign</span> key(A1,A2,...,An) <span class="keyword">references</span> s</span><br></pre></td></tr></table></figure>
+
+<p>对于定义在relation A中的外键，如果他的外键目标是relation B,那么称A是referring，B为referred。其中A1，A2,…,An的值都必须同时要在A中和B中出现（属性名字可以不相同），并且在B中必须是B的主键。可以通过外键进行Integrity限制。例如要往A中插入的tuple的A1在B中找不到值对应时，这个操作就是不合法的。</p>
+<h3 id="基本SQL查询"><a href="#基本SQL查询" class="headerlink" title="基本SQL查询"></a>基本SQL查询</h3><ol>
+<li></li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> (<span class="keyword">all</span><span class="operator">/</span><span class="keyword">distinct</span>) attributes</span><br><span class="line"><span class="keyword">from</span> tablenames</span><br><span class="line"><span class="keyword">where</span> conditions;</span><br></pre></td></tr></table></figure>
+
+<p>从表中查询得到的数据也组成一张表，默认情况下是不会去重的，也就是括号里面all的情况，如果要去重就要加上distinct。</p>
+<p>2.可以对attributes进行算术运算等。where就是筛选条件。</p>
+<p>3.如果指定了多个table，执行顺序是：先将from的表格组成笛卡尔积，然后应用where里面的条件判断，最后选出select中的属性值。</p>
+<h3 id="更多SQL基本操作"><a href="#更多SQL基本操作" class="headerlink" title="更多SQL基本操作"></a>更多SQL基本操作</h3><p>1.关于rename：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> T.name</span><br><span class="line"><span class="keyword">from</span> instructor <span class="keyword">as</span> T,instructor <span class="keyword">as</span> S</span><br><span class="line"><span class="keyword">where</span> T.salary <span class="operator">&gt;</span> S.salary <span class="keyword">and</span> S.dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>用as重命名，并且记得加上作用域。</p>
+<p>2.关于字符串：在各种SQL的实现版本中，字符串都是用单引号括起来的。引号内可以进行模式匹配：</p>
+<p>**%**可以匹配任意字符串；</p>
+<p>**_**可以匹配任意单个字符；</p>
+<p>**\**放在前面可以表示转义字符。</p>
+<p>3.select后加*****可表示选取所有的属性。</p>
+<p>4.关于显示数据的顺序：SQL的实现是基于bags的，也就是不考虑顺序和重复问题，如果要按某个属性的顺序输出，则要在查询语句的后面加上：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> attributename (<span class="keyword">asc</span><span class="operator">/</span><span class="keyword">desc</span>);</span><br></pre></td></tr></table></figure>
+
+<p>5.关于集合操作：我们可以把两个query的结果进行集合之间的交、并、补等等，例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(select...)</span><br><span class="line"><span class="keyword">union</span><span class="operator">/</span><span class="keyword">intersect</span><span class="operator">/</span><span class="keyword">except</span> (<span class="keyword">all</span>)</span><br><span class="line">(select...);</span><br></pre></td></tr></table></figure>
+
+<p>这些集合操作默认是去重的，原因在于操作的名称为集合操作。</p>
+<h3 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h3><p>1.这里null应该理解为暂时不知道的数据而不是空值，虽然在很多数据库实现上是被显示为空值。</p>
+<p>2.任何和null进行算术运算的结果都是null。</p>
+<p>3.和null进行比较的结果都是null。</p>
+<p>4.and&#x2F;or&#x2F;not等逻辑运算的短路定律依然成立。如果在有null的这些逻辑表达式中不能运用短路定律，则结果为null。</p>
+<p>5.因为有null这种结果存在，where成立当且仅当结果为true。</p>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>1.有以下几种聚合函数：</p>
+<p>avg，min，max，sum，count。</p>
+<p>2.使用方法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(salary) <span class="keyword">as</span> avg_salary</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">where</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Comp.sci&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> ID)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>有几点值的注意的是，这里聚合函数计算的结果最好是重命名，而且最后的输出结果只会有一个tuple，即聚合函数计算的结果。</p>
+<p>如果想用count函数来计算有多少个tuple，用<code>count(*)</code></p>
+<p>3.如果在select中使用了聚合函数，那么输出结果只会有一个tuple。如果要输出另外的属性，就必须要进行分组。当然也可以利用分组操作实现对每个组内单独计算聚合函数值到一个tuple中。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> attributenames</span><br></pre></td></tr></table></figure>
+
+<p>这样凡是在attributenames中的attributes相同的tuples都会被分到同一组中。每个组最后会作为一个tuple输出。而在select中选择的属性<strong>要么是聚合函数计算结果，要么是出现在group中的属性</strong>，因为一个group只会输出一个tuple，如果一个属性不在group by中，那么就不知道要输出这个组中的哪一个tuple中的属性值了。</p>
+<p>4.可以在group by语句后面加上having语句，这里和where语句不同的是，having语句用于对group进行筛选，而where语句是对tuple进行筛选。</p>
+<h3 id="完整SQL语句执行顺序"><a href="#完整SQL语句执行顺序" class="headerlink" title="完整SQL语句执行顺序"></a>完整SQL语句执行顺序</h3><p>1.from语句首先执行得到一个relation。</p>
+<p>2.如果where语句存在，则应用where来筛选得到的每一个tuple。</p>
+<p>3.where筛选出来的tuple被group by语句进行分组，如果group by不存在，则所有筛选出来的语句组成一整个group。</p>
+<p>4.执行having语句。</p>
+<p>5.执行select语句。</p>
+<h3 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h3><p>可以在增加子语句在where中，形式如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">where</span> ... action(...)</span><br></pre></td></tr></table></figure>
+
+<p>其中括号内的是另一条query语句，这里action可以有以下几种：</p>
+<p>1.in&#x2F;not in：是否存在。</p>
+<p>2.比较符号+all&#x2F;some：与查询结果中的一个或所有tuples进行比较，这里比较符号可以为&lt;,&lt;&#x3D;,&gt;,&gt;&#x3D;,&#x3D;,&lt;&gt;.</p>
+<p>3.exist：结果的count是否&gt;0。</p>
+<p>4.unique：结果中是否有重复的tuple。</p>
+<h3 id="增删改"><a href="#增删改" class="headerlink" title="增删改"></a>增删改</h3><p>1.删除操作：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> r</span><br><span class="line">while P;</span><br></pre></td></tr></table></figure>
+
+<p>这里一条delete命令只能删除一个relation。</p>
+<p>2.插入操作：</p>
+<p>有两种形式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student</span><br><span class="line">		<span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line">		<span class="keyword">from</span> student;</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course</span><br><span class="line">		<span class="keyword">values</span>(&quot;1&quot;,&quot;2&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>3.修改操作：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> instructor</span><br><span class="line"><span class="keyword">set</span> salary <span class="operator">=</span> <span class="keyword">case</span></span><br><span class="line">				<span class="keyword">when</span> salary <span class="operator">&lt;=</span> <span class="number">100000</span> <span class="keyword">then</span> salary <span class="operator">*</span> <span class="number">1.05</span></span><br><span class="line">				<span class="keyword">else</span> salary <span class="operator">*</span> <span class="number">1.03</span></span><br><span class="line">		 	 <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="CTE"><a href="#CTE" class="headerlink" title="CTE"></a>CTE</h3><p>提供了一种在大规模查询中写任意声明的方法。必须命名，可以指定返回参数的名字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cteName (col1,col2) <span class="keyword">AS</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> col1 <span class="operator">+</span> col2 <span class="keyword">FROM</span> cteName</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cteSource (maxId) <span class="keyword">As</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="built_in">MAX</span>(sid) <span class="keyword">FROM</span> enrolled</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> student,cteSource</span><br><span class="line"><span class="keyword">WHERE</span> student.sid <span class="operator">=</span> cteSource.maxId</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-如何创建一个新的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/">如何创建一个新的博客</a>
+    </h1>
+  
+
+        
+        <a href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2022-08-27T13:20:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><p>1.下载node.js</p>
+<p>2.npm更换淘宝的源:<code>npm install -g cnpm --registry=https://registry.npm.taobao.org </code></p>
+<p>3.下载hexo:<code>cnpm install -g hexo-cli</code></p>
+<p>4.创建一个blogs文件夹，进入后<code>hexo init</code></p>
+<p>5.启动博客:<code>hexo s</code></p>
+<p>6.创建一篇文章:<code>hexo n &quot;title&quot;</code>，文章在&#x2F;source&#x2F;_posts中</p>
+<p>7.生成hexo博客:<code>hexo g</code>,然后可以再次启动</p>
+<p>8.创建一个github仓库，仓库名字一定为:id.github.io,id是github的名字</p>
+<p>9.部署:<code>cnpm install --save hexo-deployer-git</code></p>
+<p>10.更改_config.yml，更改：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/zbtrs/zbtrs.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>11.<code>hexo d</code>:往远端部署博客</p>
+<h2 id="更换博客主题"><a href="#更换博客主题" class="headerlink" title="更换博客主题"></a>更换博客主题</h2><p>1.将theme clone到&#x2F;themes文件夹中</p>
+<p>2.改_config.yml，theme后面改主题名</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
         </p>
       
 
@@ -383,6 +776,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
