@@ -154,6 +154,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据库sorting-Aggregations-joins" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/14/%E6%95%B0%E6%8D%AE%E5%BA%93sorting-Aggregations-joins/">数据库sorting&amp;aggregations&amp;joins</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/14/%E6%95%B0%E6%8D%AE%E5%BA%93sorting-Aggregations-joins/" class="archive-article-date">
+  	<time datetime="2022-09-14T07:44:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="数据库operator-algorithms"><a href="#数据库operator-algorithms" class="headerlink" title="数据库operator algorithms"></a>数据库operator algorithms</h1><p>对于数据库，operator algorithms要考虑的大头是磁盘IO，在设计算法的时候要把IO的消耗考虑进去。</p>
+<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><p>在实际应用中我们一般不会去频繁使用，而是建立一个索引，然后维护这个索引，这样也就保证了数据是有序的。如果有排序的需求，先看数据大小能否放在内存中，如果可以，就能用任何快速排序方法，否则就要用到一些特殊的方法。直接用快速排序会产生大量的随机IO，效率低。</p>
+<p>在设计算法前需要弄清楚我们的bufferpool一次能处理多少个page。</p>
+<h3 id="External-Merge-Sort"><a href="#External-Merge-Sort" class="headerlink" title="External Merge Sort"></a>External Merge Sort</h3><p>分为两个阶段，如果BufferPool一次能处理B个pages。第一个阶段即每次读入B个pages，然后在内存中进行排序，最后写出到磁盘上。写出来的所有数据称为一个run，这里run不能一次写完，而是一个一个page写出到磁盘上的。</p>
+<p>第二个阶段是两两合并runs，一次内存操作也不能直接合并完，因此底层操作是BufferPool每次读入两个runs的各若干个page，将合并的结果写到一个page中，并把这个page写到磁盘上。也就是说一次合并操作会用到多次磁盘IO。上面说的若干个page只需要保证读入的page的总和是B-1个即可，留下一个page用来写出。</p>
+<p>有密集的IO操作，可以用prefetch来优化，也就是异步IO。这个技术也叫Double Buffering，用两个buffer pool，一个bufferpool用来计算，另一个用来IO。</p>
+<p>注意我们每次只合并两个runs，而是取多个page，多路合并的话条件判断多了会影响效率。</p>
+<h3 id="B-Tree-Sort"><a href="#B-Tree-Sort" class="headerlink" title="B+ Tree Sort"></a>B+ Tree Sort</h3><p>1.如果我们的B+ Tree实现方式是Clustered的，那么可以直接扫一遍叶子即可。所谓的Clustered就是说叶子节点会存下tuple的完整信息，而不是存一个指向page的指针。</p>
+<p>2.如果不是Clustered，就不能用B+ Tree来Sort。</p>
+<h2 id="Aggregations"><a href="#Aggregations" class="headerlink" title="Aggregations"></a>Aggregations</h2><p>所谓aggregations，就是指聚合函数。将一些tuple计算得到一个标量值。因为常常涉及到GROUP BY和DISTINCT，所以可以用sort也可以用hash来处理。</p>
+<p>如果没有排序需求，hash一般是更好的方法。</p>
+<h3 id="Hash-Aggregation"><a href="#Hash-Aggregation" class="headerlink" title="Hash Aggregation"></a>Hash Aggregation</h3><p>我们的目的是对GROUP BY的属性分好组，并计算每一组的聚合函数值。</p>
+<p>1.用hash function h1把tuples划分到不同的partitions中。如果有B个pages可以用，那么B-1个pages用来暂存partitions，另外一个page用来写入。如果不够存partition了就把page写出到磁盘上。</p>
+<p>2.对于每个partition，读入到内存中，然后用另外一个hash function h2，这一步可以完全在内存中进行。我们新建一个临时的hash table，将h2得到的值记为GroupKey。在hash table中存(GroupKey-value)对。这样每次当我们要往临时的hash table中插入一个值时，如果在这个hash table中找到了这个GroupKey，直接更新对应的value即可，否则插入。</p>
+<h2 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h2><p>这里的join暂时只考虑inner join，两个relation中会有一个相等的key。</p>
+<p>数据库进行的一系列操作可以看作一棵树，从下往上进行运算。一般把左儿子称为Outer，把右儿子称为Inner。在for循环中，Outer一般放在外层，所以让Outer作为较小的对象。</p>
+<h3 id="Block-Nested-Loop-Join"><a href="#Block-Nested-Loop-Join" class="headerlink" title="Block Nested Loop Join"></a>Block Nested Loop Join</h3><p>每次从R中取一个block放到内存中，再从S中取一个block放到内存中。接着一个二重循环遍历这两个block来进行join操作。</p>
+<p>一个优化：一个BufferPool可以存多个blocks，那么可以直接读R的B-2个blocks，然后读入1个S的block，还是二重循环即可。</p>
+<p>更进一步优化：如果我们已经有索引了，就可以直接在索引里面查。索引yyds！</p>
+<h3 id="Sort-Merge-Join"><a href="#Sort-Merge-Join" class="headerlink" title="Sort-Merge Join"></a>Sort-Merge Join</h3><p>可以把两个表按照键来排序，用多指针来扫描合并。但是这种合并会有一个问题：当有很多对键值相同的时候，我们可能要将其中一个指针来回溯。对于这种情况，更好是使用循序扫描而不必多一步排序。</p>
+<p>一般只有当其中一个或两个表已经按照join key排好序了或者要求输出必须是有序的才会用排序的方法。</p>
+<h3 id="Basic-Hash-Join"><a href="#Basic-Hash-Join" class="headerlink" title="Basic Hash Join"></a>Basic Hash Join</h3><p>将R的join key放到hash表中，对S中的join key使用同样的hash函数，如果已经在hash表中了就可以进行join。</p>
+<p>可以存整个tuple，也可以存tuple identifier。</p>
+<p>一个优化：如果我们想要得知一个key是否在hash table中，可以先用bloom filter过滤一下。</p>
+<h4 id="bloom-filter"><a href="#bloom-filter" class="headerlink" title="bloom filter"></a>bloom filter</h4><p>维护一个有N位的bitset，支持insert和check操作。每当我们要insert一个数进去时，用k个hash函数运算，结果对N取模，在bitset的对应位置上将值设为1。要check的话同样用k个hash函数运算然后对N取模，看这些位置上的值是不是都是1。</p>
+<p>这种做法一般只会出现把不存在的数认成存在，而不会把存在的数认成不存在。</p>
+<h3 id="Grace-Hash-Join"><a href="#Grace-Hash-Join" class="headerlink" title="Grace Hash Join"></a>Grace Hash Join</h3><p>一个完整的hash table在内存中可能放不下。那么可以把hash table分块。对R和S各建一个hash table。构建完成后，对于hash table中相同的块，二重循环进行join。因为分块了，所以可以把hash table一段段地存。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/09/14/%E6%95%B0%E6%8D%AE%E5%BA%93sorting-Aggregations-joins/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CMU15-445-Project1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
