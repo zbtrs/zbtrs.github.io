@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022/8 | zbtrs的博客</title>
+  <title>Query Execution | zbtrs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="华中科技大学2021级学生，搞过OI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zbtrs的博客">
-<meta property="og:url" content="http://example.com/archives/2022/08/index.html">
+  <meta name="description" content="Query ExecutionProcessing Model定义了一个系统如何执行一个查询计划。 Iterator Model每个query plan operator都采用了一个叫做Next的函数。每一次调用的时候，每个运算符要么返回一个tuple，要么返回一个null。就类似于一个DFS，一次调用一直从叶子节点取一个tuple返回到调用者。这么做的一个目的是为了使读入到内存中的tuple存在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Query Execution">
+<meta property="og:url" content="http://example.com/2022/09/18/Query-Execution/index.html">
 <meta property="og:site_name" content="zbtrs的博客">
-<meta property="og:description" content="华中科技大学2021级学生，搞过OI">
+<meta property="og:description" content="Query ExecutionProcessing Model定义了一个系统如何执行一个查询计划。 Iterator Model每个query plan operator都采用了一个叫做Next的函数。每一次调用的时候，每个运算符要么返回一个tuple，要么返回一个null。就类似于一个DFS，一次调用一直从叶子节点取一个tuple返回到调用者。这么做的一个目的是为了使读入到内存中的tuple存在">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-18T11:06:25.000Z">
+<meta property="article:modified_time" content="2022-09-18T14:53:33.056Z">
 <meta property="article:author" content="zbtrs">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zbtrs的博客" type="application/atom+xml">
@@ -152,36 +155,88 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Query-Execution" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/" class="archive-article-date">
-  	<time datetime="2022-08-31T12:15:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-31</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/">数据库存储</a>
+    <h1 class="article-title" itemprop="name">
+      Query Execution
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/09/18/Query-Execution/" class="archive-article-date">
+  	<time datetime="2022-09-18T11:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Query-Execution"><a href="#Query-Execution" class="headerlink" title="Query Execution"></a>Query Execution</h1><h2 id="Processing-Model"><a href="#Processing-Model" class="headerlink" title="Processing Model"></a>Processing Model</h2><p>定义了一个系统如何执行一个查询计划。</p>
+<h3 id="Iterator-Model"><a href="#Iterator-Model" class="headerlink" title="Iterator Model"></a>Iterator Model</h3><p>每个query plan operator都采用了一个叫做Next的函数。每一次调用的时候，每个运算符要么返回一个tuple，要么返回一个null。就类似于一个DFS，一次调用一直从叶子节点取一个tuple返回到调用者。这么做的一个目的是为了使读入到内存中的tuple存在尽可能长的时间。也叫做pipeline model。</p>
+<p>有一些operators会阻断掉pipeline，比如joins、subquery、order by。这些运算符不能一次只返回一个tuple，因此叫做pipeline breakers。</p>
+<p>对于LIMIT命令非常友好。</p>
+<h3 id="Materialization-Model"><a href="#Materialization-Model" class="headerlink" title="Materialization Model"></a>Materialization Model</h3><p>这种方法就是每一次调用是先把这个operator的结果全部收集起来，然后向上传递而不是一条一条地收集。适用于OLTP事务类型。如果是OLAP类型，则可能因为中间operator产生的数据太大被写入到磁盘中。</p>
+<p>当然也有一种方法叫做Late Materialization。这种就是一次不把所有的数据向上传完，而是传一些关键的信息量，到最后需要用的时候，利用这些信息返回去取。而Materialization Model就不需要回取。</p>
+<h3 id="Vectorization-Model"><a href="#Vectorization-Model" class="headerlink" title="Vectorization Model"></a>Vectorization Model</h3><p>就是对Iterator Model的一种优化，一次Next不再是传一个tuple上去，而是传一块tuple上去。因为next函数调用的少了，所以对OLAP事务更友好。</p>
+<h2 id="Access-Methods"><a href="#Access-Methods" class="headerlink" title="Access Methods"></a>Access Methods</h2><p>查询树的最底层涉及到Access data，有不同的方法去获取数据。</p>
+<h3 id="Sequential-Scan"><a href="#Sequential-Scan" class="headerlink" title="Sequential Scan"></a>Sequential Scan</h3><p>基本的方法就是对于table中存的每一个page，从BufferPool中取出，然后遍历一遍。每调用一次next就会向后取一次，因此DBMS会保存一个内部的cursor来记录当前取到了哪一个page的哪一个slot。</p>
+<h4 id="Prefetching"><a href="#Prefetching" class="headerlink" title="Prefetching"></a>Prefetching</h4><p>先取一片pages放到内存池中而不是一次只取一个</p>
+<h4 id="Parallelization"><a href="#Parallelization" class="headerlink" title="Parallelization"></a>Parallelization</h4><p>用多个线程去扫描&#x2F;处理</p>
+<h4 id="Zone-Map"><a href="#Zone-Map" class="headerlink" title="Zone Map"></a>Zone Map</h4><p>存关于一个page中信息的聚合函数值，在访问page前先看看zone map中的信息，能提前判断是否需要进入这个page中扫描。Zone Map一般放在一个单独的page中。类似bloom filter。</p>
+<h4 id="Late-Materialization"><a href="#Late-Materialization" class="headerlink" title="Late Materialization"></a>Late Materialization</h4><p>只往上传例如offset等关键的信息，到最后需要的时候才进行计算，获取完整的信息，只适用于列存储的table。</p>
+<h4 id="Heap-Clustering"><a href="#Heap-Clustering" class="headerlink" title="Heap Clustering"></a>Heap Clustering</h4><p>Clustering的方式存储，有序可以使扫描更快。</p>
+<h3 id="Index-Scan"><a href="#Index-Scan" class="headerlink" title="Index Scan"></a>Index Scan</h3><p>如果有多个索引，数据库会利用这多个索引来得到多个数据的set，存到bitset中，做一次AND操作就能得到所有符合条件的tuples。</p>
+<p>如果索引是unclustered的，就要先把要取的page id拿出来排序，然后一个个扫描。clustered index比较难以维护，如果中间的一个page满了要进行分裂就要做很多额外的处理。</p>
+<h2 id="Expression-Evaluation"><a href="#Expression-Evaluation" class="headerlink" title="Expression Evaluation"></a>Expression Evaluation</h2><p>在Where语句中会出现的expression。可以构建成一棵语法树遍历一遍来求。</p>
+<h2 id="Parallel-VS-Distributed"><a href="#Parallel-VS-Distributed" class="headerlink" title="Parallel VS Distributed"></a>Parallel VS Distributed</h2><p>Parallel数据库的资源在物理上相距非常近，communicate的速度非常快，并且代价非常低。</p>
+<p>分布式数据库则正好相反。</p>
+<h2 id="Process-Model"><a href="#Process-Model" class="headerlink" title="Process Model"></a>Process Model</h2><p>1.用每个worker来运行一个process，依赖于系统的调度器、共享内存（因为是不同的进程）。</p>
+<p>2.用worker pool来分配进程，通常会预留一个进程用来处理系统管理员发送进来的指令。</p>
+<p>3.一个进程多个线程。如果是多进程模式的话，一个线程崩溃了并不会使得整个系统崩溃，但是如果是多线程模式，一个线程崩溃了整个进程就会崩溃。线程切换效率更高，也不需要用到共享内存（使用的内存都在同一个进程中了），甚至还可以把线程绑定在CPU一个特定的核上运行。</p>
+<h2 id="Intra-Query-Parallelism"><a href="#Intra-Query-Parallelism" class="headerlink" title="Intra-Query Parallelism"></a>Intra-Query Parallelism</h2><p>并行地执行每个operator，每个operator都有对应的并行算法。将operators拆分成独立的实例，每个实例在不同的数据集上执行相同的函数。最后DBMS会插入一个exchange operator在query plan上去把child operator的结果给合并起来。</p>
+<p>有三种exchange operators:</p>
+<p>Gather：合并多个worker的结果成一个输出流。</p>
+<p>Repartition：将多个输入流重新组合成多个输出流。</p>
+<p>Distribute：将一个输入流分成多个输出流。</p>
+<h2 id="Inter-Query-Parallelism"><a href="#Inter-Query-Parallelism" class="headerlink" title="Inter-Query Parallelism"></a>Inter-Query Parallelism</h2><p>多个命令并行执行，同时还有一种叫做Inter-Operator Parallelism，这种就类似于pipeline parallelism，即我们用多个线程分别处理不同的operator，每当上一个operator处理完一个tuple时，我们可以直接把这个tuple扔给下一个operator来执行。</p>
+<h2 id="I-x2F-O-Parallelism"><a href="#I-x2F-O-Parallelism" class="headerlink" title="I&#x2F;O Parallelism"></a>I&#x2F;O Parallelism</h2><p>有时候如果只把数据库存在一个磁盘上，这个磁盘的IO可能是瓶颈。我们可以把数据库存在不同的磁盘上。</p>
+<h3 id="Multi-Disk-Parallelism"><a href="#Multi-Disk-Parallelism" class="headerlink" title="Multi-Disk Parallelism"></a>Multi-Disk Parallelism</h3><p>一个磁盘上存数据库的一部分信息，需要借助RAID，依赖于操作系统和设备，换一台设备方法可能就失效了。</p>
+<h3 id="Logical-Partitioning"><a href="#Logical-Partitioning" class="headerlink" title="Logical Partitioning"></a>Logical Partitioning</h3><p>逻辑分区，即把一个logical table分成不相交的几个物理片段储存，这个分区对应用是不可见的！作为数据库的使用者不需要管下层的分区。</p>
+<h4 id="Vertical-Partitioning"><a href="#Vertical-Partitioning" class="headerlink" title="Vertical Partitioning"></a>Vertical Partitioning</h4><p>把table的不同属性分在不同的位置，需要存tuple information在最后重构origin record。</p>
+<h4 id="Horizontal-Partitioning"><a href="#Horizontal-Partitioning" class="headerlink" title="Horizontal Partitioning"></a>Horizontal Partitioning</h4><p>直接把tuples划分成不同的部分存在不同的位置。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,95 +248,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/09/18/Query-Execution/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2022-08-27T13:21:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/09/17/CMU15-445-Project2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CMU15-445 Project2</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/">SQL基础</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2022-08-27T13:20:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/">如何创建一个新的博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -304,8 +370,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
