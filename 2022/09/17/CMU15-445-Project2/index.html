@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022/8 | zbtrs的博客</title>
+  <title>CMU15-445 Project2 | zbtrs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="华中科技大学2021级学生，搞过OI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zbtrs的博客">
-<meta property="og:url" content="http://example.com/archives/2022/08/index.html">
+  <meta name="description" content="CMU15-445 Project2Part I PAGE LAYOUTS整个Hash Table分为directory和bucket。我们选择把directory和bucket都放在page里面。 设计逻辑directory和bucket存的是不同的信息，但都是page。因为是page，所以对空间的要求比较高。需要计算好每个成员变量会占用的空间大小！不要动态分配内存。如果动态分配了内存，我们是把">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU15-445 Project2">
+<meta property="og:url" content="http://example.com/2022/09/17/CMU15-445-Project2/index.html">
 <meta property="og:site_name" content="zbtrs的博客">
-<meta property="og:description" content="华中科技大学2021级学生，搞过OI">
+<meta property="og:description" content="CMU15-445 Project2Part I PAGE LAYOUTS整个Hash Table分为directory和bucket。我们选择把directory和bucket都放在page里面。 设计逻辑directory和bucket存的是不同的信息，但都是page。因为是page，所以对空间的要求比较高。需要计算好每个成员变量会占用的空间大小！不要动态分配内存。如果动态分配了内存，我们是把">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-17T11:42:10.000Z">
+<meta property="article:modified_time" content="2022-09-18T09:17:55.231Z">
 <meta property="article:author" content="zbtrs">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zbtrs的博客" type="application/atom+xml">
@@ -152,36 +155,127 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-CMU15-445-Project2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/" class="archive-article-date">
-  	<time datetime="2022-08-31T12:15:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-31</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/">数据库存储</a>
+    <h1 class="article-title" itemprop="name">
+      CMU15-445 Project2
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/09/17/CMU15-445-Project2/" class="archive-article-date">
+  	<time datetime="2022-09-17T11:42:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CMU15-445-Project2"><a href="#CMU15-445-Project2" class="headerlink" title="CMU15-445 Project2"></a>CMU15-445 Project2</h1><h2 id="Part-I-PAGE-LAYOUTS"><a href="#Part-I-PAGE-LAYOUTS" class="headerlink" title="Part I PAGE LAYOUTS"></a>Part I PAGE LAYOUTS</h2><p>整个Hash Table分为directory和bucket。我们选择把directory和bucket都放在page里面。</p>
+<h3 id="设计逻辑"><a href="#设计逻辑" class="headerlink" title="设计逻辑"></a>设计逻辑</h3><p>directory和bucket存的是不同的信息，但都是page。因为是page，所以对空间的要求比较高。<strong>需要计算好每个成员变量会占用的空间大小！不要动态分配内存</strong>。如果动态分配了内存，我们是把内存分在了堆上，那么当我们要将一个page写回到磁盘上时，并不会将堆上的信息写回，<strong>而是只写回这个page类中的成员信息</strong>。因此如果要把数据保存在page中，就要保存数据的实体，用一个定长数组。空闲需要提前计算好。</p>
+<p>对于所有的操作，用最暴力的方法来实现，因为一个page也就4kb，直接枚举花不了多少时间。</p>
+<h3 id="Directory-Page"><a href="#Directory-Page" class="headerlink" title="Directory Page"></a>Directory Page</h3><table>
+<thead>
+<tr>
+<th><strong>Variable Name</strong></th>
+<th><strong>Size</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>page_id_</code></td>
+<td>4 bytes</td>
+<td>Self Page Id</td>
+</tr>
+<tr>
+<td><code>lsn_</code></td>
+<td>4 bytes</td>
+<td>Log sequence number (Used in Project 4)</td>
+</tr>
+<tr>
+<td><code>global_depth_</code></td>
+<td>4 bytes</td>
+<td>Global depth of the directory</td>
+</tr>
+<tr>
+<td><code>local_depths_</code></td>
+<td>512 bytes</td>
+<td>Array of local depths for each bucket (uint8)</td>
+</tr>
+<tr>
+<td><code>bucket_page_ids_</code></td>
+<td>2048 bytes</td>
+<td>Array of bucket <code>page_id_t</code></td>
+</tr>
+</tbody></table>
+<p>一些小功能实现起来非常简单。</p>
+<h3 id="Bucket-Page"><a href="#Bucket-Page" class="headerlink" title="Bucket Page"></a>Bucket Page</h3><p>这个类因为要存数据，而且要存的数据类型是未知的，所以定义成员变量要格外小心。一个occupied_数组用来标注每一位有没有被占用，一个readable_数组用来标注每一位的值能不能被读取。array数组存实际的数据。因为一个page中的空间非常重要，因此这里的readable和occupied数组都用char类型，即一个字节可以表示8位的数据，用位运算就可以得到第i位的值。</p>
+<p>需要注意的是这里的array千万不能用动态分配内存扩容的方式，因为动态内存不会被写到磁盘上。这里用了一个trick：我们将array数组定义为0长度的，将这个成员变量放在类的最后面，就表示这个成员使用的空间一直到类的空间的末尾。除此之外，千万不能定义其他的成员变量！不然就会和前面的计算结果冲突。</p>
+<h4 id="函数设计"><a href="#函数设计" class="headerlink" title="函数设计"></a>函数设计</h4><h5 id="GetValue"><a href="#GetValue" class="headerlink" title="GetValue"></a>GetValue</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">HASH_TABLE_BUCKET_TYPE::GetValue</span><span class="params">(KeyType key, KeyComparator cmp, std::vector&lt;ValueType&gt; *result)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="type">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">  <span class="type">int</span> size = ((BUCKET_ARRAY_SIZE - <span class="number">1</span>) / <span class="number">8</span> + <span class="number">1</span>) * <span class="number">8</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsReadable</span>(i) &amp;&amp; <span class="built_in">cmp</span>(key, array_[i].first) == <span class="number">0</span>) &#123;</span><br><span class="line">      result-&gt;<span class="built_in">push_back</span>(array_[i].second);</span><br><span class="line">      flag = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">HASH_TABLE_BUCKET_TYPE::Insert</span><span class="params">(KeyType key, ValueType value, KeyComparator cmp)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 如果找到了完全相同的，就返回false</span></span><br><span class="line">  <span class="type">int</span> size = ((BUCKET_ARRAY_SIZE - <span class="number">1</span>) / <span class="number">8</span> + <span class="number">1</span>) * <span class="number">8</span>;</span><br><span class="line">  <span class="type">int</span> lastpos = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsReadable</span>(i) &amp;&amp; <span class="built_in">cmp</span>(key, array_[i].first) == <span class="number">0</span> &amp;&amp; value == array_[i].second) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsOccupied</span>(i)) &#123;</span><br><span class="line">      lastpos = i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  lastpos++;</span><br><span class="line">  std::pair&lt;KeyType, ValueType&gt; temp = std::<span class="built_in">make_pair</span>(key, value);</span><br><span class="line">  array_[lastpos] = temp;</span><br><span class="line">  <span class="built_in">SetOccupied</span>(lastpos);</span><br><span class="line">  <span class="built_in">SetReadable</span>(lastpos);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果是要插入一个pair，最好是先用make_pair这个函数来初始化一个！</p>
+<h5 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">HASH_TABLE_BUCKET_TYPE::Remove</span><span class="params">(KeyType key, ValueType value, KeyComparator cmp)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> pos = <span class="number">-1</span>;</span><br><span class="line">  <span class="type">int</span> size = ((BUCKET_ARRAY_SIZE - <span class="number">1</span>) / <span class="number">8</span> + <span class="number">1</span>) * <span class="number">8</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsReadable</span>(i) &amp;&amp; <span class="built_in">cmp</span>(key, array_[i].first) == <span class="number">0</span> &amp;&amp; value == array_[i].second) &#123;</span><br><span class="line">      pos = i;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (pos == <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">RemoveReadable</span>(pos);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果删除了一个元素，为了不移动整个hash table，我们直接在这个位置上设一个墓碑。这个位置以后不能写入，也不能读出来了。不用真的把元素给删掉。</p>
+<h2 id="Part-II-Hash-Table-Implementation"><a href="#Part-II-Hash-Table-Implementation" class="headerlink" title="Part II Hash Table Implementation"></a>Part II Hash Table Implementation</h2><h3 id="设计逻辑-1"><a href="#设计逻辑-1" class="headerlink" title="设计逻辑"></a>设计逻辑</h3><p>先把单线程的版本写好，再来加锁，最后优化锁（尽量让锁细一点）。</p>
+<p>这里就涉及到和低层的交互了，会用到BufferPool来获取page。在写每个函数之前都先确认一遍和低层的交互是否有问题。比如这里我们创建了一个Page，必须先用reinterpret_cast来进行类型转换，转换为我们实现的page类型，不管是NewPage还是FetchPage最后都必须要UnpinPage，而且在DeletePage之前也必须要先UnpinPage。</p>
+<p>在写每个函数前，先列个清单，想好这个函数的每一步要做什么。如果设计到helper function，就要先写好helper function。</p>
+<p>搞清楚bucket_index和bucket_id的区别。索引和id的区别！</p>
+<h4 id="函数设计-1"><a href="#函数设计-1" class="headerlink" title="函数设计"></a>函数设计</h4><h5 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line">HASH_TABLE_TYPE::<span class="built_in">ExtendibleHashTable</span>(<span class="type">const</span> std::string &amp;name, BufferPoolManager *buffer_pool_manager,</span><br><span class="line">                                     <span class="type">const</span> KeyComparator &amp;comparator, HashFunction&lt;KeyType&gt; hash_fn)</span><br><span class="line">    : <span class="built_in">buffer_pool_manager_</span>(buffer_pool_manager), <span class="built_in">comparator_</span>(comparator), <span class="built_in">hash_fn_</span>(std::<span class="built_in">move</span>(hash_fn)) &#123;</span><br><span class="line">  <span class="keyword">auto</span> directory_page = <span class="built_in">reinterpret_cast</span>&lt;HashTableDirectoryPage *&gt;(</span><br><span class="line">      buffer_pool_manager_-&gt;<span class="built_in">NewPage</span>(&amp;directory_page_id_, <span class="literal">nullptr</span>)-&gt;<span class="built_in">GetData</span>());</span><br><span class="line">  directory_page-&gt;<span class="built_in">IncrGlobalDepth</span>();</span><br><span class="line">  <span class="type">page_id_t</span> bucket_page_id_1 = INVALID_PAGE_ID;</span><br><span class="line">  <span class="type">page_id_t</span> bucket_page_id_2 = INVALID_PAGE_ID;</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">NewPage</span>(&amp;bucket_page_id_1, <span class="literal">nullptr</span>);</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">NewPage</span>(&amp;bucket_page_id_2, <span class="literal">nullptr</span>);</span><br><span class="line">  directory_page-&gt;<span class="built_in">SetLocalDepth</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">  directory_page-&gt;<span class="built_in">SetLocalDepth</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">  directory_page-&gt;<span class="built_in">SetBucketPageId</span>(<span class="number">0</span>, bucket_page_id_1);</span><br><span class="line">  directory_page-&gt;<span class="built_in">SetBucketPageId</span>(<span class="number">1</span>, bucket_page_id_2);</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id_1, <span class="literal">true</span>);</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id_2, <span class="literal">true</span>);</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(directory_page_id_, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里要注意的点就是这3个page一定要Unpin掉。</p>
+<h5 id="GetValue-1"><a href="#GetValue-1" class="headerlink" title="GetValue"></a>GetValue</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">HASH_TABLE_TYPE::GetValue</span><span class="params">(Transaction *transaction, <span class="type">const</span> KeyType &amp;key, std::vector&lt;ValueType&gt; *result)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  table_latch_.<span class="built_in">RLock</span>();</span><br><span class="line">  <span class="keyword">auto</span> directory_page = <span class="built_in">FetchDirectoryPage</span>();</span><br><span class="line">  <span class="keyword">auto</span> bucket_page_id = <span class="built_in">KeyToPageId</span>(key, directory_page);</span><br><span class="line">  <span class="keyword">auto</span> bucket_page = <span class="built_in">FetchBucketPage</span>(bucket_page_id);</span><br><span class="line">  <span class="built_in">AddBucketLatch</span>(bucket_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">  <span class="type">bool</span> flag = bucket_page-&gt;<span class="built_in">GetValue</span>(key, comparator_, result);</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(directory_page_id_, <span class="literal">false</span>);</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id, <span class="literal">false</span>);</span><br><span class="line">  table_latch_.<span class="built_in">RUnlock</span>();</span><br><span class="line">  <span class="built_in">RemoveBucketLatch</span>(bucket_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Insert-1"><a href="#Insert-1" class="headerlink" title="Insert"></a>Insert</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">HASH_TABLE_TYPE::Insert</span><span class="params">(Transaction *transaction, <span class="type">const</span> KeyType &amp;key, <span class="type">const</span> ValueType &amp;value)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  table_latch_.<span class="built_in">WLock</span>();</span><br><span class="line">  <span class="keyword">auto</span> directory_page = <span class="built_in">FetchDirectoryPage</span>();</span><br><span class="line">  <span class="built_in">AddDirectoryLatch</span>(directory_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">  <span class="keyword">auto</span> bucket_page_id = <span class="built_in">KeyToPageId</span>(key, directory_page);</span><br><span class="line">  <span class="keyword">auto</span> bucket_page = <span class="built_in">FetchBucketPage</span>(bucket_page_id);</span><br><span class="line">  <span class="built_in">RemoveDirectoryLatch</span>(directory_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">  <span class="comment">// 如果要插入的bucketpage中已经有完全相同的key-value了，不插入</span></span><br><span class="line">  <span class="built_in">AddBucketLatch</span>(bucket_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (bucket_page-&gt;<span class="built_in">FindElement</span>(key, value, comparator_)) &#123;</span><br><span class="line">    <span class="built_in">RemoveBucketLatch</span>(bucket_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(directory_page_id_, <span class="literal">false</span>);</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id, <span class="literal">false</span>);</span><br><span class="line">    table_latch_.<span class="built_in">WUnlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">RemoveBucketLatch</span>(bucket_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">  <span class="built_in">AddDirectoryLatch</span>(directory_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">  <span class="built_in">AddBucketLatch</span>(bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">  <span class="keyword">auto</span> directory_index = <span class="built_in">KeyToDirectoryIndex</span>(key, directory_page);</span><br><span class="line">  <span class="keyword">auto</span> limit_size = (<span class="number">1</span> &lt;&lt; ((directory_page-&gt;<span class="built_in">GetLocalDepth</span>(directory_index)) - <span class="number">1</span>));</span><br><span class="line">  <span class="keyword">if</span> (limit_size == <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(bucket_page-&gt;<span class="built_in">GetSize</span>())) &#123;</span><br><span class="line">    <span class="comment">// 如果满了，要进行分裂</span></span><br><span class="line">    <span class="keyword">auto</span> last_local_depth = directory_page-&gt;<span class="built_in">GetLocalDepth</span>(directory_index);</span><br><span class="line">    <span class="keyword">auto</span> new_bucket_page_id =</span><br><span class="line">        <span class="built_in">SplitBucketPage</span>(bucket_page, directory_page, bucket_page_id, <span class="built_in">KeyToDirectoryIndex</span>(key, directory_page));</span><br><span class="line">    <span class="keyword">if</span> (directory_page-&gt;<span class="built_in">GetGlobalDepth</span>() == last_local_depth) &#123;</span><br><span class="line">      directory_page-&gt;<span class="built_in">IncrGlobalDepth</span>();</span><br><span class="line">      <span class="built_in">UpdateDirectoryPage</span>(directory_page, bucket_page_id, new_bucket_page_id);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">UpdateLittleDirectoryPage</span>(directory_page, bucket_page_id, new_bucket_page_id, last_local_depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">auto</span> another_bucket_page_id = <span class="built_in">KeyToPageId</span>(key, directory_page);</span><br><span class="line">    <span class="keyword">if</span> (another_bucket_page_id != bucket_page_id) &#123;</span><br><span class="line">      <span class="keyword">auto</span> another_bucket_page = <span class="built_in">FetchBucketPage</span>(another_bucket_page_id);</span><br><span class="line">      <span class="built_in">AddBucketLatch</span>(another_bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">      another_bucket_page-&gt;<span class="built_in">Insert</span>(key, value, comparator_);</span><br><span class="line">      buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(another_bucket_page_id, <span class="literal">true</span>);</span><br><span class="line">      <span class="built_in">RemoveBucketLatch</span>(another_bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      bucket_page-&gt;<span class="built_in">Insert</span>(key, value, comparator_);</span><br><span class="line">    &#125;</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(directory_page_id_, <span class="literal">true</span>);</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id, <span class="literal">true</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    bucket_page-&gt;<span class="built_in">Insert</span>(key, value, comparator_);</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(directory_page_id_, <span class="literal">false</span>);</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id, <span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">RemoveBucketLatch</span>(bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">  <span class="built_in">RemoveDirectoryLatch</span>(directory_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">  table_latch_.<span class="built_in">WUnlock</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先把一开始的框架写好，即取directory_page和bucket_page，把必要的信息都用变量给保存起来。然后就是一些常规操作，比如是否要分裂，分裂后目录的改变：先复制原来一半的指针，然后更新要指向新的bucket_page的指针。</p>
+<h5 id="Remove-1"><a href="#Remove-1" class="headerlink" title="Remove"></a>Remove</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">HASH_TABLE_TYPE::Remove</span><span class="params">(Transaction *transaction, <span class="type">const</span> KeyType &amp;key, <span class="type">const</span> ValueType &amp;value)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  table_latch_.<span class="built_in">WLock</span>();</span><br><span class="line">  <span class="keyword">auto</span> directory_page = <span class="built_in">FetchDirectoryPage</span>();</span><br><span class="line">  <span class="built_in">AddDirectoryLatch</span>(directory_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">  <span class="keyword">auto</span> bucket_page_id = <span class="built_in">KeyToPageId</span>(key, directory_page);</span><br><span class="line">  <span class="keyword">auto</span> bucket_page = <span class="built_in">FetchBucketPage</span>(bucket_page_id);</span><br><span class="line">  <span class="keyword">auto</span> directory_index = <span class="built_in">KeyToDirectoryIndex</span>(key, directory_page);</span><br><span class="line">  <span class="keyword">auto</span> local_depth = directory_page-&gt;<span class="built_in">GetLocalDepth</span>(directory_index);</span><br><span class="line">  <span class="type">page_id_t</span> another_bucket_page_id = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">AddBucketLatch</span>(bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!bucket_page-&gt;<span class="built_in">FindElement</span>(key, value, comparator_) &amp;&amp;</span><br><span class="line">      (!bucket_page-&gt;<span class="built_in">IsEmpty</span>() || !<span class="built_in">CheckMerge</span>(directory_page, directory_index, local_depth, &amp;another_bucket_page_id))) &#123;</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(directory_page_id_, <span class="literal">false</span>);</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id, <span class="literal">false</span>);</span><br><span class="line">    table_latch_.<span class="built_in">WUnlock</span>();</span><br><span class="line">    <span class="built_in">RemoveDirectoryLatch</span>(directory_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">    <span class="built_in">RemoveBucketLatch</span>(bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  bucket_page-&gt;<span class="built_in">Remove</span>(key, value, comparator_);</span><br><span class="line">  <span class="keyword">if</span> (!bucket_page-&gt;<span class="built_in">IsEmpty</span>() || !<span class="built_in">CheckMerge</span>(directory_page, directory_index, local_depth, &amp;another_bucket_page_id)) &#123;</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(directory_page_id_, <span class="literal">false</span>);</span><br><span class="line">    buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id, <span class="literal">true</span>);</span><br><span class="line">    table_latch_.<span class="built_in">WUnlock</span>();</span><br><span class="line">    <span class="built_in">RemoveDirectoryLatch</span>(directory_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">    <span class="built_in">RemoveBucketLatch</span>(bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// try to merge</span></span><br><span class="line">  <span class="built_in">Merge</span>(<span class="literal">nullptr</span>, directory_page, bucket_page_id, another_bucket_page_id);</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">CheckUpdateGlobalDepth</span>(directory_page)) &#123;</span><br><span class="line">    <span class="comment">// update global depth</span></span><br><span class="line">    directory_page-&gt;<span class="built_in">DecrGlobalDepth</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(directory_page_id_, <span class="literal">true</span>);</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id, <span class="literal">true</span>);</span><br><span class="line">  table_latch_.<span class="built_in">WUnlock</span>();</span><br><span class="line">  <span class="built_in">RemoveDirectoryLatch</span>(directory_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">  <span class="built_in">RemoveBucketLatch</span>(bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里要注意合并的几个条件。合并其实也就是改指针。</p>
+<h5 id="UpdateDirectoryPage"><a href="#UpdateDirectoryPage" class="headerlink" title="UpdateDirectoryPage"></a>UpdateDirectoryPage</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="type">void</span> ExtendibleHashTable&lt;KeyType, ValueType, KeyComparator&gt;::<span class="built_in">UpdateDirectoryPage</span>(HashTableDirectoryPage *directory_page,</span><br><span class="line">                                                                                 <span class="type">page_id_t</span> id0, <span class="type">page_id_t</span> id1) &#123;</span><br><span class="line">  <span class="keyword">auto</span> offset = (<span class="number">1</span> &lt;&lt; (directory_page-&gt;<span class="built_in">GetGlobalDepth</span>() - <span class="number">1</span>));</span><br><span class="line">  <span class="keyword">auto</span> global_depth = directory_page-&gt;<span class="built_in">GetGlobalDepth</span>();</span><br><span class="line">  <span class="comment">// 先复制指针</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; offset; i++) &#123;</span><br><span class="line">    directory_page-&gt;<span class="built_in">SetBucketPageId</span>(i + offset, directory_page-&gt;<span class="built_in">GetBucketPageId</span>(i));</span><br><span class="line">    directory_page-&gt;<span class="built_in">SetLocalDepth</span>(i + offset, directory_page-&gt;<span class="built_in">GetLocalDepth</span>(i));</span><br><span class="line">  &#125;</span><br><span class="line">  offset &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; offset; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (directory_page-&gt;<span class="built_in">GetBucketPageId</span>(i) == id0) &#123;</span><br><span class="line">      <span class="keyword">auto</span> maxbit = ((i &gt;&gt; (global_depth - <span class="number">1</span>)) &amp; <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">if</span> (maxbit != <span class="number">0</span>) &#123;</span><br><span class="line">        directory_page-&gt;<span class="built_in">SetBucketPageId</span>(i, id1);</span><br><span class="line">      &#125;</span><br><span class="line">      directory_page-&gt;<span class="built_in">SetLocalDepth</span>(i, global_depth);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="SplitBucketPage"><a href="#SplitBucketPage" class="headerlink" title="SplitBucketPage"></a>SplitBucketPage</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="keyword">auto</span> ExtendibleHashTable&lt;KeyType, ValueType, KeyComparator&gt;::<span class="built_in">SplitBucketPage</span>(</span><br><span class="line">    HashTableBucketPage&lt;KeyType, ValueType, KeyComparator&gt; *bucket_page, HashTableDirectoryPage *directory_page,</span><br><span class="line">    <span class="type">page_id_t</span> bucket_page_id, <span class="type">uint32_t</span> bucket_index) -&gt; <span class="type">page_id_t</span> &#123;</span><br><span class="line">  <span class="keyword">auto</span> local_depth = directory_page-&gt;<span class="built_in">GetLocalDepth</span>(bucket_index);</span><br><span class="line">  local_depth++;</span><br><span class="line">  <span class="type">page_id_t</span> new_bucket_page_id = INVALID_PAGE_ID;</span><br><span class="line">  <span class="keyword">auto</span> new_bucket_page = <span class="keyword">reinterpret_cast</span>&lt;HashTableBucketPage&lt;KeyType, ValueType, KeyComparator&gt; *&gt;(</span><br><span class="line">      buffer_pool_manager_-&gt;<span class="built_in">NewPage</span>(&amp;new_bucket_page_id, <span class="literal">nullptr</span>)-&gt;<span class="built_in">GetData</span>());</span><br><span class="line">  <span class="built_in">AddBucketLatch</span>(new_bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line">  new_bucket_page-&gt;<span class="built_in">Clear</span>();</span><br><span class="line">  std::vector&lt;MappingType&gt; elements;</span><br><span class="line">  bucket_page-&gt;<span class="built_in">GetAllPairs</span>(&amp;elements);</span><br><span class="line">  bucket_page-&gt;<span class="built_in">Clear</span>();</span><br><span class="line">  <span class="keyword">auto</span> maskbits = (<span class="number">1</span> &lt;&lt; local_depth) - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> it : elements) &#123;</span><br><span class="line">    <span class="keyword">auto</span> hash_val = (<span class="built_in">Hash</span>(it.first) &amp; maskbits);</span><br><span class="line">    <span class="keyword">auto</span> check_bit = ((hash_val &gt;&gt; (local_depth - <span class="number">1</span>)) &amp; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (check_bit) &#123;</span><br><span class="line">      new_bucket_page-&gt;<span class="built_in">Insert</span>(it.first, it.second, comparator_);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      bucket_page-&gt;<span class="built_in">Insert</span>(it.first, it.second, comparator_);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(new_bucket_page_id, <span class="literal">true</span>);</span><br><span class="line">  <span class="built_in">RemoveBucketLatch</span>(new_bucket_page, <span class="string">&#x27;W&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> new_bucket_page_id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="CheckMerge"><a href="#CheckMerge" class="headerlink" title="CheckMerge"></a>CheckMerge</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="type">bool</span> ExtendibleHashTable&lt;KeyType, ValueType, KeyComparator&gt;::<span class="built_in">CheckMerge</span>(HashTableDirectoryPage *directory_page,</span><br><span class="line">                                                                        <span class="type">uint32_t</span> pid, <span class="type">uint32_t</span> local_depth,</span><br><span class="line">                                                                        <span class="type">page_id_t</span> *pInt) &#123;</span><br><span class="line">  <span class="keyword">auto</span> global_depth = directory_page-&gt;<span class="built_in">GetGlobalDepth</span>();</span><br><span class="line">  <span class="keyword">auto</span> maxbit = (<span class="number">1</span> &lt;&lt; (global_depth - <span class="number">1</span>));</span><br><span class="line">  <span class="keyword">auto</span> npid = (pid ^ maxbit);</span><br><span class="line">  <span class="keyword">if</span> (local_depth &lt;= <span class="number">1</span> || directory_page-&gt;<span class="built_in">GetLocalDepth</span>(npid) != local_depth) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">auto</span> bucket_page_id = directory_page-&gt;<span class="built_in">GetBucketPageId</span>(npid);</span><br><span class="line">  <span class="keyword">if</span> (bucket_page_id == directory_page-&gt;<span class="built_in">GetBucketPageId</span>(pid)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  *pInt = bucket_page_id;</span><br><span class="line">  <span class="keyword">auto</span> bucket_page = <span class="built_in">FetchBucketPage</span>(bucket_page_id);</span><br><span class="line">  <span class="built_in">AddBucketLatch</span>(bucket_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line">  <span class="type">bool</span> flag = bucket_page-&gt;<span class="built_in">IsEmpty</span>();</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(bucket_page_id, <span class="literal">false</span>);</span><br><span class="line">  <span class="built_in">RemoveBucketLatch</span>(bucket_page, <span class="string">&#x27;R&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType, <span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="type">void</span> ExtendibleHashTable&lt;KeyType, ValueType, KeyComparator&gt;::<span class="built_in">Merge</span>(Transaction *transaction,</span><br><span class="line">                                                                   HashTableDirectoryPage *directory_page,</span><br><span class="line">                                                                   <span class="type">page_id_t</span> id0, <span class="type">page_id_t</span> id1) &#123;</span><br><span class="line">  <span class="keyword">auto</span> global_mask = directory_page-&gt;<span class="built_in">GetGlobalDepthMask</span>();</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(global_mask); ++i) &#123;</span><br><span class="line">    <span class="keyword">auto</span> bucket_page_id = directory_page-&gt;<span class="built_in">GetBucketPageId</span>(i);</span><br><span class="line">    <span class="keyword">if</span> (bucket_page_id == id0) &#123;</span><br><span class="line">      directory_page-&gt;<span class="built_in">DecrLocalDepth</span>(i);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (bucket_page_id == id1) &#123;</span><br><span class="line">      directory_page-&gt;<span class="built_in">DecrLocalDepth</span>(i);</span><br><span class="line">      directory_page-&gt;<span class="built_in">SetBucketPageId</span>(i, id0);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">UnpinPage</span>(id1, <span class="literal">true</span>);</span><br><span class="line">  buffer_pool_manager_-&gt;<span class="built_in">DeletePage</span>(id1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里一定要先unpin掉page然后才能delete。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,95 +287,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/09/17/CMU15-445-Project2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2022-08-27T13:21:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/09/14/%E6%95%B0%E6%8D%AE%E5%BA%93sorting-Aggregations-joins/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据库sorting&amp;aggregations&amp;joins</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/">SQL基础</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2022-08-27T13:20:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/">如何创建一个新的博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -304,8 +409,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
