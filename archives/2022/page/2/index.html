@@ -6,19 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>CMU15-445 Project1 | zbtrs的博客</title>
+  <title>Archives: 2022 | zbtrs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CMU15-445 Project1Part I LRU Replacement Policy类的设计Replacer作为基类，LRU_Replacer作为继承类，实现基本功能： Victim、Pin、Unpin、Size。 链表+Hash table来实现。Hash table存frame_id到链表上元素指针的映射。这里通过存指针来实现直接定位链表上的元素。链表的实现可以是作用域中的另外一个s">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CMU15-445 Project1">
-<meta property="og:url" content="http://example.com/2022/09/09/CMU15-445-Project1/index.html">
+  <meta name="description" content="华中科技大学2021级学生，搞过OI">
+<meta property="og:type" content="website">
+<meta property="og:title" content="zbtrs的博客">
+<meta property="og:url" content="http://example.com/archives/2022/page/2/index.html">
 <meta property="og:site_name" content="zbtrs的博客">
-<meta property="og:description" content="CMU15-445 Project1Part I LRU Replacement Policy类的设计Replacer作为基类，LRU_Replacer作为继承类，实现基本功能： Victim、Pin、Unpin、Size。 链表+Hash table来实现。Hash table存frame_id到链表上元素指针的映射。这里通过存指针来实现直接定位链表上的元素。链表的实现可以是作用域中的另外一个s">
+<meta property="og:description" content="华中科技大学2021级学生，搞过OI">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-09-09T09:38:48.000Z">
-<meta property="article:modified_time" content="2022-09-10T03:18:59.883Z">
 <meta property="article:author" content="zbtrs">
-<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zbtrs的博客" type="application/atom+xml">
@@ -155,233 +152,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-CMU15-445-Project1" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      CMU15-445 Project1
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2022-08-27T13:20:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/">如何创建一个新的博客</a>
     </h1>
   
 
-        
-        <a href="/2022/09/09/CMU15-445-Project1/" class="archive-article-date">
-  	<time datetime="2022-09-09T09:38:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CMU15-445-Project1"><a href="#CMU15-445-Project1" class="headerlink" title="CMU15-445 Project1"></a>CMU15-445 Project1</h1><h2 id="Part-I-LRU-Replacement-Policy"><a href="#Part-I-LRU-Replacement-Policy" class="headerlink" title="Part I LRU Replacement Policy"></a>Part I LRU Replacement Policy</h2><h3 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h3><p>Replacer作为基类，LRU_Replacer作为继承类，实现基本功能：</p>
-<p>Victim、Pin、Unpin、Size。</p>
-<p>链表+Hash table来实现。Hash table存frame_id到链表上元素指针的映射。这里通过存指针来实现直接定位链表上的元素。链表的实现可以是作用域中的另外一个struct。一开始要有两个sentinel指针head和tail。</p>
-<h3 id="函数及其功能"><a href="#函数及其功能" class="headerlink" title="函数及其功能"></a>函数及其功能</h3><h4 id="Victim-frame-id-t"><a href="#Victim-frame-id-t" class="headerlink" title="Victim(frame_id_t *)"></a>Victim(frame_id_t *)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">LRUReplacer::Victim</span><span class="params">(<span class="type">frame_id_t</span> *frame_id)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  mtx_.<span class="built_in">lock</span>();</span><br><span class="line">  <span class="keyword">if</span> (size_ == <span class="number">0</span>) &#123;</span><br><span class="line">    mtx_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ListNode *tail_node = head_-&gt;next_;</span><br><span class="line">  *frame_id = tail_node-&gt;frame_id_;</span><br><span class="line">  tail_node-&gt;<span class="built_in">Remove</span>();</span><br><span class="line">  <span class="keyword">delete</span> tail_node;</span><br><span class="line">  --size_;</span><br><span class="line">  hash_map_.<span class="built_in">erase</span>(*frame_id);</span><br><span class="line">  mtx_.<span class="built_in">unlock</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个函数就是直接把链表首元素返回，同时在hash table中删除即可。</p>
-<p><strong>犯了一个错：如果要对指针指向的值进行修改，一定要先对指针进行解引用，如果对指针本身指向的地址更改，可以不用解引用，如果要对指针本身指向的值进行更改，并且要让这个更改传递下去，需要定义为指针的引用</strong></p>
-<h4 id="Pin-frame-id-t-frame-id"><a href="#Pin-frame-id-t-frame-id" class="headerlink" title="Pin(frame_id_t frame_id)"></a>Pin(frame_id_t frame_id)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">LRUReplacer::Pin</span><span class="params">(<span class="type">frame_id_t</span> frame_id)</span> </span>&#123;</span><br><span class="line">  mtx_.<span class="built_in">lock</span>();</span><br><span class="line">  <span class="keyword">if</span> (hash_map_.<span class="built_in">find</span>(frame_id) != hash_map_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">    ListNode *object_node = hash_map_[frame_id];</span><br><span class="line">    object_node-&gt;<span class="built_in">Remove</span>();</span><br><span class="line">    hash_map_.<span class="built_in">erase</span>(frame_id);</span><br><span class="line">    <span class="keyword">delete</span> object_node;</span><br><span class="line">    --size_;</span><br><span class="line">  &#125;</span><br><span class="line">  mtx_.<span class="built_in">unlock</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>就是直接从LRU队列中将这个元素给删掉。</p>
-<h4 id="Unpin-frame-id-t-frame-id"><a href="#Unpin-frame-id-t-frame-id" class="headerlink" title="Unpin(frame_id_t frame_id)"></a>Unpin(frame_id_t frame_id)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">LRUReplacer::Unpin</span><span class="params">(<span class="type">frame_id_t</span> frame_id)</span> </span>&#123;</span><br><span class="line">  mtx_.<span class="built_in">lock</span>();</span><br><span class="line">  <span class="keyword">if</span> (hash_map_.<span class="built_in">find</span>(frame_id) == hash_map_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">    <span class="keyword">while</span> (size_ &gt;= capacity_) &#123;</span><br><span class="line">      ListNode *object_node = head_-&gt;next_;</span><br><span class="line">      object_node-&gt;<span class="built_in">Remove</span>();</span><br><span class="line">      hash_map_.<span class="built_in">erase</span>(object_node-&gt;frame_id_);</span><br><span class="line">      <span class="keyword">delete</span> object_node;</span><br><span class="line">      --size_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">auto</span> *new_node = <span class="keyword">new</span> <span class="built_in">ListNode</span>(frame_id);</span><br><span class="line">    <span class="built_in">AddTail</span>(new_node);</span><br><span class="line">    hash_map_[frame_id] = new_node;</span><br><span class="line">    ++size_;</span><br><span class="line">  &#125;</span><br><span class="line">  mtx_.<span class="built_in">unlock</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一开始要判断LRU队列是不是满的，如果是满的，就要把队首的给删了。</p>
-<h3 id="设计要点"><a href="#设计要点" class="headerlink" title="设计要点"></a>设计要点</h3><p>1.类中动态分配了内存，所以析构函数一定要考虑到类中所有的成员变量！对应着delete。这里要遍历链表进行delete：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LRUReplacer::~<span class="built_in">LRUReplacer</span>() &#123;</span><br><span class="line">  <span class="comment">//释放整个链表的内存</span></span><br><span class="line">  ListNode *temp;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> it = head_ -&gt; next_; it != tail_; it = temp) &#123;</span><br><span class="line">    temp = it -&gt; next_;</span><br><span class="line">    <span class="keyword">delete</span> it;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">delete</span> head_;</span><br><span class="line">  <span class="keyword">delete</span> tail_;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.Latch需要在每个外部函数中加上。在加锁之前先分析清楚代码层次结构，如果外部加了锁内部就不要再继续加锁了。</p>
-<p>3.对Pin和Unpin表示的意义：单看LRU这一部分不能理解的很清楚，<strong>先查阅整个项目整体的设计，需要设计哪些函数，每个函数用来干什么</strong>。</p>
-<h2 id="Part-II-BufferPoolManager"><a href="#Part-II-BufferPoolManager" class="headerlink" title="Part II BufferPoolManager"></a>Part II BufferPoolManager</h2><h3 id="设计逻辑"><a href="#设计逻辑" class="headerlink" title="设计逻辑"></a>设计逻辑</h3><p>这一部分和LRU这一部分联系起来。先要详细阅读任务书中的要实现的函数的定义、作用，记一下类中的成员变量的作用。做成一个文档列出来方便查阅，不急着写。</p>
-<p>1.BufferPool上存储page的位置叫做frame。一开始所有的frame都是空的，空的frame_id都存在free_list中。从外层操作BufferPool的逻辑是，如果我们要分配一个新的page，那么就先看free_list上有没有空的frame，如果有就直接把page放到对应的frame上，否则从LRU中找。</p>
-<p>2.LRU和BufferPool交互的逻辑：<strong>LRU队列上存的都是已经有page的frame，并且这些frame现在并没有被任何线程操作。</strong>也就是说，一开始LRU队列是空的，每当我们在BufferPool中对一个frame上的page操作完后，我们就在LRU层次上对他Unpin，那么就说明这个frame是可以被替换的。如果一个线程对这个frame要进行操作了，我们就在LRU层次上对这个frame Pin，那么这个frame就不能被替换了。</p>
-<p>3.BufferPool上的成员操作的都是frame，因此需要有一个map将给定的page_id映射到frame_id上。</p>
-<p>4.设计每一个函数的逻辑应该是这个函数的操作步骤–&gt;LRU应该做什么。即上层应该考虑到下层应该做什么操作，想清楚再写。</p>
-<p>5.不仅仅是LRU，对磁盘的读写操作也是一个下层。什么时候应该写回磁盘，需要在写每个函数前弄清楚。</p>
-<h3 id="函数及其功能-1"><a href="#函数及其功能-1" class="headerlink" title="函数及其功能"></a>函数及其功能</h3><h4 id="NewPgImp-page-id-t-page-id-gt-Page"><a href="#NewPgImp-page-id-t-page-id-gt-Page" class="headerlink" title="NewPgImp(page_id_t *page_id) -&gt; Page *"></a>NewPgImp(page_id_t *page_id) -&gt; Page *</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">BufferPoolManagerInstance::NewPgImp</span><span class="params">(<span class="type">page_id_t</span> *page_id)</span> -&gt; Page * </span>&#123;</span><br><span class="line">  <span class="comment">// 0.   Make sure you call AllocatePage!</span></span><br><span class="line">  <span class="comment">// 1.   If all the pages in the buffer pool are pinned, return nullptr.</span></span><br><span class="line">  <span class="comment">// 2.   Pick a victim page P from either the free list or the replacer. Always pick from the free list first.</span></span><br><span class="line">  <span class="comment">// 3.   Update P&#x27;s metadata, zero out memory and add P to the page table.</span></span><br><span class="line">  <span class="comment">// 4.   Set the page ID output parameter. Return a pointer to P.</span></span><br><span class="line">  latch_.<span class="built_in">lock</span>();</span><br><span class="line">  <span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(pool_size_); ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pages_[i].pin_count_ == <span class="number">0</span>) &#123;</span><br><span class="line">      flag = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">    latch_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">frame_id_t</span> stored_frame;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">findFrame</span>(&amp;stored_frame)) &#123;</span><br><span class="line">    latch_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">page_id_t</span> new_page_id = <span class="built_in">AllocatePage</span>();</span><br><span class="line">  Page *new_page = &amp;pages_[stored_frame];</span><br><span class="line">  new_page -&gt; page_id_ = new_page_id;</span><br><span class="line">  new_page -&gt; pin_count_++;</span><br><span class="line">  replacer_ -&gt; <span class="built_in">Pin</span>(stored_frame);</span><br><span class="line">  page_table_[new_page_id] = stored_frame;</span><br><span class="line">  reverse_page_table_[stored_frame] = new_page_id;</span><br><span class="line">  new_page -&gt; is_dirty_ = <span class="literal">false</span>;</span><br><span class="line">  disk_manager_ -&gt;<span class="built_in">WritePage</span>(new_page -&gt; <span class="built_in">GetPageId</span>(),new_page -&gt; <span class="built_in">GetData</span>());</span><br><span class="line">  *page_id = new_page_id;</span><br><span class="line">  latch_.<span class="built_in">unlock</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> new_page;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1.如果所有的frame都在被其他线程使用，无法分配也无法替换，失败。</p>
-<p>2.如果能找到一个frame存新分配的page，就分配&#x2F;替换。</p>
-<p>3.修改新分配的page的元数据，<strong>确保所有的元数据都要修改到，即使本身不需要修改</strong>。这里新分配的page是默认被占用的，因此要在LRU上Pin住。</p>
-<h4 id="bool-findFrame-frame-id-t-frame-id"><a href="#bool-findFrame-frame-id-t-frame-id" class="headerlink" title="bool findFrame(frame_id_t *frame_id)"></a>bool findFrame(frame_id_t *frame_id)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">BufferPoolManagerInstance::findFrame</span><span class="params">(<span class="type">frame_id_t</span> *frame_id)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!free_list_.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">    *frame_id = free_list_.<span class="built_in">front</span>();</span><br><span class="line">    free_list_.<span class="built_in">pop_front</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (replacer_ -&gt;<span class="built_in">Victim</span>(frame_id)) &#123;</span><br><span class="line">    <span class="comment">//如果要替换的帧在page_table_中，就要改写，这里可以另外用一个map</span></span><br><span class="line">    <span class="keyword">if</span> (reverse_page_table_.<span class="built_in">find</span>(*frame_id) != reverse_page_table_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">      Page* replaced_page = &amp;pages_[*frame_id];</span><br><span class="line">      <span class="keyword">if</span> (replaced_page -&gt; is_dirty_) &#123;</span><br><span class="line">        disk_manager_ -&gt;<span class="built_in">WritePage</span>(replaced_page -&gt; page_id_,replaced_page-&gt;data_);</span><br><span class="line">        replaced_page -&gt; pin_count_ = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      page_table_.<span class="built_in">erase</span>(replaced_page -&gt; page_id_);</span><br><span class="line">      reverse_page_table_.<span class="built_in">erase</span>(*frame_id);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>当我们要把一个page从frame上拿出时（可能是直接扔掉，也可能是要拿到上层进行一些修改操作），要写回磁盘</strong>。</p>
-<h4 id="FlushPgImp-page-id-t-page-id-gt-bool"><a href="#FlushPgImp-page-id-t-page-id-gt-bool" class="headerlink" title="FlushPgImp(page_id_t page_id) -&gt; bool"></a>FlushPgImp(page_id_t page_id) -&gt; bool</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">BufferPoolManagerInstance::FlushPgImp</span><span class="params">(<span class="type">page_id_t</span> page_id)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (page_id == INVALID_PAGE_ID || page_table_.<span class="built_in">find</span>(page_id) == page_table_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  disk_manager_ -&gt;<span class="built_in">WritePage</span>(page_id,pages_[page_table_[page_id]].data_);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>特别注意这个函数和上一个函数都不要加锁。因为这两个函数在类中属于低层次，并不会直接被类外的函数直接调用，而一定是被类中的其他函数间接调用，如果加锁就会造成死锁问题。</p>
-<h4 id="BufferPoolManagerInstance-FetchPgImp-page-id-t-page-id-gt-Page"><a href="#BufferPoolManagerInstance-FetchPgImp-page-id-t-page-id-gt-Page" class="headerlink" title="BufferPoolManagerInstance::FetchPgImp(page_id_t page_id) -&gt; Page *"></a>BufferPoolManagerInstance::FetchPgImp(page_id_t page_id) -&gt; Page *</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">BufferPoolManagerInstance::FetchPgImp</span><span class="params">(<span class="type">page_id_t</span> page_id)</span> -&gt; Page * </span>&#123;</span><br><span class="line">  <span class="comment">// 1.     Search the page table for the requested page (P).</span></span><br><span class="line">  <span class="comment">// 1.1    If P exists, pin it and return it immediately.</span></span><br><span class="line">  <span class="comment">// 1.2    If P does not exist, find a replacement page (R) from either the free list or the replacer.</span></span><br><span class="line">  <span class="comment">//        Note that pages are always found from the free list first.</span></span><br><span class="line">  <span class="comment">// 2.     If R is dirty, write it back to the disk.</span></span><br><span class="line">  <span class="comment">// 3.     Delete R from the page table and insert P.</span></span><br><span class="line">  <span class="comment">// 4.     Update P&#x27;s metadata, read in the page content from disk, and then return a pointer to P.</span></span><br><span class="line">  latch_.<span class="built_in">lock</span>();</span><br><span class="line">  <span class="keyword">if</span> (page_table_.<span class="built_in">find</span>(page_id) != page_table_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">    <span class="type">frame_id_t</span> frame_id = page_table_[page_id];</span><br><span class="line">    Page* page = &amp;pages_[frame_id];</span><br><span class="line">    page-&gt;pin_count_++;</span><br><span class="line">    replacer_ -&gt;<span class="built_in">Pin</span>(frame_id);</span><br><span class="line">    latch_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> page;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">frame_id_t</span> stored_frame;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">findFrame</span>(&amp;stored_frame)) &#123;</span><br><span class="line">    latch_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  Page *new_page = &amp;pages_[stored_frame];</span><br><span class="line">  <span class="keyword">if</span> (new_page -&gt; is_dirty_) &#123;</span><br><span class="line">    disk_manager_ -&gt;<span class="built_in">WritePage</span>(new_page -&gt; page_id_,new_page -&gt; data_);</span><br><span class="line">  &#125;</span><br><span class="line">  page_table_.<span class="built_in">erase</span>(new_page -&gt; page_id_);</span><br><span class="line">  new_page -&gt; page_id_ = page_id;</span><br><span class="line">  new_page -&gt; pin_count_++;</span><br><span class="line">  replacer_ -&gt; <span class="built_in">Pin</span>(stored_frame);</span><br><span class="line">  new_page -&gt; is_dirty_ = <span class="literal">false</span>;</span><br><span class="line">  replacer_ -&gt;<span class="built_in">Pin</span>(stored_frame);</span><br><span class="line">  disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id,new_page-&gt;<span class="built_in">GetData</span>());</span><br><span class="line">  page_table_[page_id] = stored_frame;</span><br><span class="line">  reverse_page_table_[stored_frame] = page_id;</span><br><span class="line">  latch_.<span class="built_in">unlock</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> new_page;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>要点就是要Pin住和写回磁盘。</p>
-<h4 id="BufferPoolManagerInstance-DeletePgImp-page-id-t-page-id-gt-bool"><a href="#BufferPoolManagerInstance-DeletePgImp-page-id-t-page-id-gt-bool" class="headerlink" title="BufferPoolManagerInstance::DeletePgImp(page_id_t page_id) -&gt; bool"></a>BufferPoolManagerInstance::DeletePgImp(page_id_t page_id) -&gt; bool</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">BufferPoolManagerInstance::DeletePgImp</span><span class="params">(<span class="type">page_id_t</span> page_id)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 0.   Make sure you call DeallocatePage!</span></span><br><span class="line">  <span class="comment">// 1.   Search the page table for the requested page (P).</span></span><br><span class="line">  <span class="comment">// 1.   If P does not exist, return true.</span></span><br><span class="line">  <span class="comment">// 2.   If P exists, but has a non-zero pin-count, return false. Someone is using the page.</span></span><br><span class="line">  <span class="comment">// 3.   Otherwise, P can be deleted. Remove P from the page table, reset its metadata and return it to the free list.</span></span><br><span class="line"></span><br><span class="line">  latch_.<span class="built_in">lock</span>();</span><br><span class="line">  <span class="keyword">if</span> (page_table_.<span class="built_in">find</span>(page_id) == page_table_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">    latch_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">frame_id_t</span> stored_frame = page_table_[page_id];</span><br><span class="line">  Page *delete_page = &amp;pages_[stored_frame];</span><br><span class="line">  <span class="keyword">if</span> (delete_page -&gt; pin_count_ &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    latch_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (delete_page -&gt; is_dirty_) &#123;</span><br><span class="line">    <span class="built_in">FlushPgImp</span>(page_id);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">DeallocatePage</span>(page_id);</span><br><span class="line">  reverse_page_table_.<span class="built_in">erase</span>(stored_frame);</span><br><span class="line">  page_table_.<span class="built_in">erase</span>(page_id);</span><br><span class="line">  free_list_.<span class="built_in">push_back</span>(stored_frame);</span><br><span class="line">  delete_page -&gt; is_dirty_ = <span class="literal">false</span>;</span><br><span class="line">  delete_page -&gt; pin_count_ = <span class="number">0</span>;</span><br><span class="line">  delete_page -&gt; page_id_ = INVALID_PAGE_ID;</span><br><span class="line"></span><br><span class="line">  latch_.<span class="built_in">unlock</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果一个page正在被使用，就不能删除。</p>
-<h4 id="UnpinPgImp-page-id-t-page-id-bool-is-dirty-gt-bool"><a href="#UnpinPgImp-page-id-t-page-id-bool-is-dirty-gt-bool" class="headerlink" title="UnpinPgImp(page_id_t page_id, bool is_dirty) -&gt; bool"></a>UnpinPgImp(page_id_t page_id, bool is_dirty) -&gt; bool</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">BufferPoolManagerInstance::UnpinPgImp</span><span class="params">(<span class="type">page_id_t</span> page_id, <span class="type">bool</span> is_dirty)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  latch_.<span class="built_in">lock</span>();</span><br><span class="line">  <span class="keyword">if</span> (page_table_.<span class="built_in">find</span>(page_id) == page_table_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">    latch_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">frame_id_t</span> stored_frame = page_table_[page_id];</span><br><span class="line">  Page *unpin_page = &amp;pages_[stored_frame];</span><br><span class="line">  <span class="comment">//unpin_page -&gt; is_dirty_ = is_dirty;</span></span><br><span class="line">  <span class="keyword">if</span> (is_dirty) &#123; <span class="comment">//notice</span></span><br><span class="line">    unpin_page -&gt; is_dirty_ = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (unpin_page -&gt; pin_count_ == <span class="number">0</span>) &#123;</span><br><span class="line">    latch_.<span class="built_in">unlock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  unpin_page -&gt; pin_count_--;</span><br><span class="line">  <span class="keyword">if</span> (unpin_page -&gt; <span class="built_in">GetPinCount</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">    replacer_ -&gt;<span class="built_in">Unpin</span>(stored_frame);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  latch_.<span class="built_in">unlock</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="设计要点-1"><a href="#设计要点-1" class="headerlink" title="设计要点"></a>设计要点</h3><p>1.其实每个函数做的事情就是那么几步，自身怎么做、底层怎么做。</p>
-<p>2.加锁的问题，先要搞清楚类中的层次，然后是类的每个成员的定义。</p>
-<p>3.难点：<strong>Page不支持拷贝构造，因此要么用一个vector的emplace_back，要么用一个指针指向数组中的某个位置，对这个指针进行操作，也就是先默认对象数组中的所有元素都是初始化好了的。</strong></p>
-<h2 id="PART-III-Parallel-Buffer-Pool-Manager"><a href="#PART-III-Parallel-Buffer-Pool-Manager" class="headerlink" title="PART III Parallel Buffer Pool Manager"></a>PART III Parallel Buffer Pool Manager</h2><h3 id="设计逻辑-1"><a href="#设计逻辑-1" class="headerlink" title="设计逻辑"></a>设计逻辑</h3><p>1.Parallel Buffer Pool Manager和Buffer Pool Manager都是Buffer Manager的子类，这里可以直接调用上一部分写的Buffer Pool中的函数，只需要在当前类中用一个数组存Buffer Pools即可。但是因为两个类是兄弟关系，如果要用到Buffer Pool Manager类中的方法，就需要声明友元。</p>
-<p>2.一个不太好的设计：其实这里最好是用一个数组存Buffer Pool Manager的实例，但是受限于任务要求，这里我存了指针的指针数组，因此在操作指针的时候容易出问题：是否需要对指针本身进行修改？是否需要对指针指向的内容进行更改等等。而且一旦这样声明了，就必须遍历整个数组一个个delete对象，然后再来delete整个指针数组。</p>
-<h3 id="函数及其功能-2"><a href="#函数及其功能-2" class="headerlink" title="函数及其功能"></a>函数及其功能</h3><h4 id="NewPgImp-page-id-t-page-id-gt-Page-1"><a href="#NewPgImp-page-id-t-page-id-gt-Page-1" class="headerlink" title="NewPgImp(page_id_t *page_id) -&gt; Page *"></a>NewPgImp(page_id_t *page_id) -&gt; Page *</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">ParallelBufferPoolManager::NewPgImp</span><span class="params">(<span class="type">page_id_t</span> *page_id)</span> -&gt; Page * </span>&#123;</span><br><span class="line">  <span class="comment">// create new page. We will request page allocation in a round robin manner from the underlying</span></span><br><span class="line">  <span class="comment">// BufferPoolManagerInstances</span></span><br><span class="line">  <span class="comment">// 1.   From a starting index of the BPMIs, call NewPageImpl until either 1) success and return 2) looped around to</span></span><br><span class="line">  <span class="comment">// starting index and return nullptr</span></span><br><span class="line">  <span class="comment">// 2.   Bump the starting index (mod number of instances) to start search at a different BPMI each time this function</span></span><br><span class="line">  <span class="comment">// is called</span></span><br><span class="line">  latch_.<span class="built_in">lock</span>();</span><br><span class="line">  <span class="keyword">auto</span> x = start_index_;</span><br><span class="line">  Page* result = <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="keyword">do</span> &#123;</span><br><span class="line">    BufferPoolManagerInstance*&amp; buffer_pool = buffer_pools_[x];</span><br><span class="line">    <span class="keyword">if</span> (!allocated_[x]) &#123;</span><br><span class="line">      allocated_[x] = <span class="literal">true</span>;</span><br><span class="line">      buffer_pool = <span class="keyword">new</span> <span class="built_in">BufferPoolManagerInstance</span>(pool_size_,disk_manager_,log_manager_);</span><br><span class="line">    &#125;</span><br><span class="line">    result = buffer_pool -&gt;<span class="built_in">NewPgImp</span>(page_id);</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">      ++x;</span><br><span class="line">      <span class="keyword">if</span> (x == num_instances_) &#123;</span><br><span class="line">        x = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      start_index_++;</span><br><span class="line">      <span class="keyword">if</span> (start_index_ == num_instances_) &#123;</span><br><span class="line">        start_index_ = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      latch_.<span class="built_in">unlock</span>();</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">while</span> (x != start_index_);</span><br><span class="line">  start_index_++;</span><br><span class="line">  <span class="keyword">if</span> (start_index_ == num_instances_) &#123;</span><br><span class="line">    start_index_ = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  latch_.<span class="built_in">unlock</span>();</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1.在Parallel Buffer Pool Manager中维护一个start_index，采用轮询分配的方法，先看start_index的这个Buffer Pool能否分配，如果不行就跳到下一个，直到走完一个圈。每次分配新的page都要让start_index++。</p>
-<p>2.一个大坑就是：<strong>因为之前存的是指针数组，当我取出这个数组中的一个指针时，我是要对这个数组中的元素进行更改的，也就是要对取出来的这个指针进行更改，因此需要声明为指针的引用</strong>。</p>
-<h3 id="设计要点-2"><a href="#设计要点-2" class="headerlink" title="设计要点"></a>设计要点</h3><p>1.对于下层类，用什么数据结构来存。最好是直接存实例。</p>
-<p>2.关于锁，下层的函数其实都上锁了，但是这里依然要上锁，因为涉及到对当前类中的成员的修改。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1.先通读整个项目需求，搞清楚不同层次之间的联系、每个函数的定义。</p>
-<p>2.从下往上设计，用单独的文档写出每个成员变量和成员函数的API。</p>
-<p>3.每个类的析构函数，对着成员变量一个个进行检验。</p>
-<p>4.写成员函数的时候，先考虑对本层做什么，再考虑对下层做什么，先想清楚再写。</p>
-<p>5.锁最后再来加。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/09/09/CMU15-445-Project1/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2022/09/14/%E6%95%B0%E6%8D%AE%E5%BA%93sorting-Aggregations-joins/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据库sorting&amp;aggregations&amp;joins
-        
-      </div>
-    </a>
   
   
-    <a href="/2022/09/07/Hash-Table/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hash Table</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2022/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2022/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -405,8 +232,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

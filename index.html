@@ -154,6 +154,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Query-Optimization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/24/Query-Optimization/">Query Optimization</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/24/Query-Optimization/" class="archive-article-date">
+  	<time datetime="2022-09-24T03:39:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Query-Optimization"><a href="#Query-Optimization" class="headerlink" title="Query Optimization"></a>Query Optimization</h1><p>Query Optimization是一个NP-Hard问题。</p>
+<p>有两种基本方法，一种是利用一些人为规定的规则将一些无用的条件、查询给扔掉。这些技巧可能需要检查数据库的system catalog，但是不需要真的去获取数据。</p>
+<p>另一种方法是利用成本模型计算一些查询计划的成本，选成本最低的查询方案。</p>
+<h2 id="查询优化器结构"><a href="#查询优化器结构" class="headerlink" title="查询优化器结构"></a>查询优化器结构</h2><p>1.SQL Rewriter将SQL语句重写。</p>
+<p>2.Parser将SQL语句中的不同成分解析出来，类似编译器中的Parser。</p>
+<p>3.Binder将Parser解析出来的各个标识符用System Catalog中的信息标注为Internal ID。</p>
+<p>4.生成Logical Plan，即用关系代数组成的查询树，可以在这一层进行Tree Rewrite，比如将某个逻辑层下放、合并之类的。</p>
+<p>5.将生成的Logical Plan传入Optimizer中，用Cost Model来估计“所有”Logical Plan的成本，选一个最优的生成Physical Plan来执行。</p>
+<h2 id="Relational-Algebra-Equivalences"><a href="#Relational-Algebra-Equivalences" class="headerlink" title="Relational Algebra Equivalences"></a>Relational Algebra Equivalences</h2><h3 id="Selections"><a href="#Selections" class="headerlink" title="Selections"></a>Selections</h3><p>1.尽量把filter往下放。</p>
+<p>2.将最具有筛选性的filter往下放的更多。</p>
+<p>3.将复杂的predicate拆分成若干条件，然后下放。例如X &#x3D; Y AND Y &#x3D; 3 –&gt; X &#x3D; 3 AND Y &#x3D; 3。</p>
+<h3 id="Projections"><a href="#Projections" class="headerlink" title="Projections"></a>Projections</h3><p>1.也是尽量把projection操作下放，这样就能把更少的数据往上传。</p>
+<p>2.可以把额外的数据也上传，并不是只传要求的数据，比如join key。</p>
+<h3 id="一些其他优化"><a href="#一些其他优化" class="headerlink" title="一些其他优化"></a>一些其他优化</h3><p>1.消除无用predicates：例如WHERE中的1 &#x3D; 0和1 &#x3D; 1。</p>
+<p>2.忽略无用的projection、merge等等。</p>
+<p>3.将Where中的多个条件合并。</p>
+<h2 id="Cost-based-Query-Optimization"><a href="#Cost-based-Query-Optimization" class="headerlink" title="Cost-based Query Optimization"></a>Cost-based Query Optimization</h2><p>一般来说，我们用Cost-based模型计算一个plan的以下几个方面：</p>
+<p>1.CPU：最难估计的部分。</p>
+<p>2.Disk：在内存和磁盘之间传递了多少block。</p>
+<p>3.Memory：用了多少DRAM内存。</p>
+<p>4.Network：有多少信息被传递了。</p>
+<h2 id="统计信息"><a href="#统计信息" class="headerlink" title="统计信息"></a>统计信息</h2><p>可以在数据库中维护直方图来存统计信息，也可以采用取样的方法。因为数据库的信息可能经常会变，所以我们可能需要经常更新统计信息。大部分数据库有ANALYSIS命令来执行分析操作。</p>
+<p>我们可以维护每个断言的sel值，即我如果执行这个命令，那么将会有多大比例的tuples被过滤掉。这样可以帮助我们将SQL语句rewrite。如果直接用公式来计算sel值，那么必须先有数据库中数据是均匀分布这样一个假设，在大多数情况下是不成立的，因此我们可以把数据库中的若干个连续数据放到一个桶中，认为桶里的数据是均匀分布的，如果要计算一个操作的sel值就到对应桶中用公式计算。这里的桶可以动态维护，尽量使得每个桶的大小差不多。</p>
+<h2 id="Multi-Relation-Query-Planning"><a href="#Multi-Relation-Query-Planning" class="headerlink" title="Multi-Relation Query Planning"></a>Multi-Relation Query Planning</h2><p>基本顺序是：1.先枚举join的顺序。2.决定对每个operator用什么方法，例如Hash、Sort-Merge等等。3.决定每个方法用什么方式去访问数据，例如Index、循序扫描等等。</p>
+<p>OLTP事务类型是非常好解决这个问题的，因为对每个操作我们一般选最佳index，并且基本上都是用外键来进行join。</p>
+<h2 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h2><p>PostgreSQL的策略是：如果要join的表格数量少于15个，就用Dynamic programming，否则用启发式算法。</p>
+<h3 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h3><p>这种方法就是每一步选择一个表来join。每次往已有的join表中加一个表上去，选择最合适的方法计算代价，对于每个特定状态都选择一条最优路径。也叫动态规划。</p>
+<h3 id="System-R"><a href="#System-R" class="headerlink" title="System R"></a>System R</h3><p>System R这个数据库只会选Left-most tree来作为join的顺序。因为系统中可以只用维护一个join而成的表，并且能够实现fully pipelined。</p>
+<h3 id="启发式算法"><a href="#启发式算法" class="headerlink" title="启发式算法"></a>启发式算法</h3><p>如果要join的表太多，可能的顺序为卡特兰数，大约为4^n。因此用启发式算法。先随机一批顺序组成一棵join树，在每一步选出最优的、删掉最垃圾的，保留最优的部分结构继续随机，被删除的就重新随机一棵树，这样做直到超时。</p>
+<h2 id="Sub-Query"><a href="#Sub-Query" class="headerlink" title="Sub-Query"></a>Sub-Query</h2><p>无非就是两种办法，要么把查询重排，将内外查询都放到一起，要么先执行内部查询，把结果放到一个临时的表中，然后执行外部查询。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/09/24/Query-Optimization/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Query-Execution" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1245,94 +1348,10 @@
 
 
   
-    <article id="post-如何创建一个新的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/">如何创建一个新的博客</a>
-    </h1>
-  
-
-        
-        <a href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2022-08-27T13:20:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><p>1.下载node.js</p>
-<p>2.npm更换淘宝的源:<code>npm install -g cnpm --registry=https://registry.npm.taobao.org </code></p>
-<p>3.下载hexo:<code>cnpm install -g hexo-cli</code></p>
-<p>4.创建一个blogs文件夹，进入后<code>hexo init</code></p>
-<p>5.启动博客:<code>hexo s</code></p>
-<p>6.创建一篇文章:<code>hexo n &quot;title&quot;</code>，文章在&#x2F;source&#x2F;_posts中</p>
-<p>7.生成hexo博客:<code>hexo g</code>,然后可以再次启动</p>
-<p>8.创建一个github仓库，仓库名字一定为:id.github.io,id是github的名字</p>
-<p>9.部署:<code>cnpm install --save hexo-deployer-git</code></p>
-<p>10.更改_config.yml，更改：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/zbtrs/zbtrs.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>11.<code>hexo d</code>:往远端部署博客</p>
-<h2 id="更换博客主题"><a href="#更换博客主题" class="headerlink" title="更换博客主题"></a>更换博客主题</h2><p>1.将theme clone到&#x2F;themes文件夹中</p>
-<p>2.改_config.yml，theme后面改主题名</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -1426,7 +1445,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">15-445,数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1434,7 +1453,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">15-445,数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
