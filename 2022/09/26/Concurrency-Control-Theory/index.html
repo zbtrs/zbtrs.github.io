@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022/8 | zbtrs的博客</title>
+  <title>Concurrency Control Theory | zbtrs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="华中科技大学2021级学生，搞过OI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zbtrs的博客">
-<meta property="og:url" content="http://example.com/archives/2022/08/index.html">
+  <meta name="description" content="Concurrency Control TheoryDefinitions1.每个事务的结果要么是COMMIT要么是ABORT。如果COMMIT了，所有事务的修改都会被保存，如果ABORT了，所有事务的修改都会被撤销。ABORT可以是事务本身自己调用，也可以是被DBMS调用。 2.事务的正确性和速度都是需要保证的，其中正确性准则是ACID准则。 Atomicity：原子性要确保一个事务中的操作要么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Concurrency Control Theory">
+<meta property="og:url" content="http://example.com/2022/09/26/Concurrency-Control-Theory/index.html">
 <meta property="og:site_name" content="zbtrs的博客">
-<meta property="og:description" content="华中科技大学2021级学生，搞过OI">
+<meta property="og:description" content="Concurrency Control TheoryDefinitions1.每个事务的结果要么是COMMIT要么是ABORT。如果COMMIT了，所有事务的修改都会被保存，如果ABORT了，所有事务的修改都会被撤销。ABORT可以是事务本身自己调用，也可以是被DBMS调用。 2.事务的正确性和速度都是需要保证的，其中正确性准则是ACID准则。 Atomicity：原子性要确保一个事务中的操作要么">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-26T11:08:55.000Z">
+<meta property="article:modified_time" content="2022-09-26T11:54:47.156Z">
 <meta property="article:author" content="zbtrs">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zbtrs的博客" type="application/atom+xml">
@@ -152,36 +155,70 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Concurrency-Control-Theory" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/" class="archive-article-date">
-  	<time datetime="2022-08-31T12:15:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-31</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/">数据库存储</a>
+    <h1 class="article-title" itemprop="name">
+      Concurrency Control Theory
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/09/26/Concurrency-Control-Theory/" class="archive-article-date">
+  	<time datetime="2022-09-26T11:08:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Concurrency-Control-Theory"><a href="#Concurrency-Control-Theory" class="headerlink" title="Concurrency Control Theory"></a>Concurrency Control Theory</h1><h2 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h2><p>1.每个事务的结果要么是COMMIT要么是ABORT。如果COMMIT了，所有事务的修改都会被保存，如果ABORT了，所有事务的修改都会被撤销。ABORT可以是事务本身自己调用，也可以是被DBMS调用。</p>
+<p>2.事务的正确性和速度都是需要保证的，其中正确性准则是ACID准则。</p>
+<p>Atomicity：原子性要确保一个事务中的操作要么都发生，要么都不发生。</p>
+<p>Consistency：如果每个事务都是一致的，并且数据库在处理事务前也是一致的，那么这个数据库就认为是一致的。</p>
+<p>Isolation：每个事务的执行都是孤立的。</p>
+<p>Durability：如果一个事务commit了，那么它对数据库的影响就会一直持续存在。</p>
+<h2 id="ACID：Atomicity"><a href="#ACID：Atomicity" class="headerlink" title="ACID：Atomicity"></a>ACID：Atomicity</h2><h3 id="Approach1：Shadow-Paging"><a href="#Approach1：Shadow-Paging" class="headerlink" title="Approach1：Shadow Paging"></a>Approach1：Shadow Paging</h3><p>DBMS把pages复制一遍并且将事务作用在这些复制的page上面，一旦事务commit了，原先的page就会被换成新的page。这个做法因为要复制，效率比较低下，而且复制page容易造成内存碎片，不实用。</p>
+<h3 id="Approach2：Logging"><a href="#Approach2：Logging" class="headerlink" title="Approach2：Logging"></a>Approach2：Logging</h3><p>数据库在进行事务之前先把事务要进行的操作写在日志中，这个日志会同时存在与内存和磁盘之中。这样如果一个事务被自身给终止了，那么DBMS就会根据内存中的日志来恢复整个数据库；如果事务被写入到磁盘中了，就会根据磁盘上的日志来恢复数据库。</p>
+<p>而且日志除了有可以恢复的功能，还能够先预处理出所有可能读&#x2F;写的page，根据这些page对操作进行重排来提高效率。被commit的操作也不是立刻写入到磁盘中，可能是将一段时间内所有的commit操作都写入到磁盘中，那么这个时候如果数据库出现了故障，损失的也就是这段时间的操作，数据库会根据内存中的日志来还原。</p>
+<h2 id="ACID：Isolation"><a href="#ACID：Isolation" class="headerlink" title="ACID：Isolation"></a>ACID：Isolation</h2><p>有两种并发协议，一种是悲观协议，它会假设所有的事务都是冲突的，因此在一开始就不会让问题发生。另外一种是乐观协议，它会假设事务之间很少会发生冲突，因此在执行事务之前不会进行检查，而是等事务执行完再来检查有没有问题，如果有问题就撤销所有的操作。</p>
+<p>并发协议的目的是为了生成一种执行方案，使得这个执行方案等同某种顺序执行方案。当我们提交了两个事务时，这两个事务可能并不会按照我们提交的先后顺序执行，并且事务内部的操作也可能会交错执行。</p>
+<p>事务之间可能会存在冲突：读-写冲突、写&#x2F;读冲突、写&#x2F;写冲突。也就是说凡是两个事务中对同一个object进行的操作中涉及到写，就认为这两个事务会产生冲突。</p>
+<h2 id="Serializable"><a href="#Serializable" class="headerlink" title="Serializable"></a>Serializable</h2><p>如果一个调度方案等同于一个顺序执行的方案，那么这个方案就是serializable的。</p>
+<p>如果一个调度方案可以通过连续交换不冲突的操作来等同于一个顺序执行的方案，那么这个方案就是conflict serializable的。大多数数据库可以判断一个方案是不是conflict serializable的。但是还有一种类型叫做view serializable。因为数据库能够看到的仅仅是事务中我要对某个对象进行读操作&#x2F;写操作，因此数据库并不能确保事务最后执行出来的结果在逻辑上是正确的。比如时间先后顺序的要求数据库是不知道的，这就需要在应用层上对这些事务进行调度，比如强制让一个事务先执行完再来执行另一个事务等等，数据库做不到这一点。因为数据库不知道应用层如何翻译理解这些数据。</p>
+<h3 id="Dependency-Graphs"><a href="#Dependency-Graphs" class="headerlink" title="Dependency Graphs"></a>Dependency Graphs</h3><p>我们用一种叫做依赖图的结构来判断一个方案是不是conflict serializable的。每个事务都当作图中的一个点，如果一个操作x在事务a中和事务b中的操作y冲突了，并且x的在y前面被执行，那么就从a连一条边到b。这里的冲突就是上面说的三种冲突类型。<strong>如果这个依赖图中存在环，那么就说明这个调度方案不是conflict serializable的。</strong></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,95 +230,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/09/26/Concurrency-Control-Theory/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2022-08-27T13:21:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/09/24/Query-Optimization/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Query Optimization</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/">SQL基础</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2022-08-27T13:20:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/08/27/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/">如何创建一个新的博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -304,8 +352,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

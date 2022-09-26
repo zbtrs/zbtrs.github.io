@@ -154,6 +154,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Concurrency-Control-Theory" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/Concurrency-Control-Theory/">Concurrency Control Theory</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/Concurrency-Control-Theory/" class="archive-article-date">
+  	<time datetime="2022-09-26T11:08:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Concurrency-Control-Theory"><a href="#Concurrency-Control-Theory" class="headerlink" title="Concurrency Control Theory"></a>Concurrency Control Theory</h1><h2 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h2><p>1.每个事务的结果要么是COMMIT要么是ABORT。如果COMMIT了，所有事务的修改都会被保存，如果ABORT了，所有事务的修改都会被撤销。ABORT可以是事务本身自己调用，也可以是被DBMS调用。</p>
+<p>2.事务的正确性和速度都是需要保证的，其中正确性准则是ACID准则。</p>
+<p>Atomicity：原子性要确保一个事务中的操作要么都发生，要么都不发生。</p>
+<p>Consistency：如果每个事务都是一致的，并且数据库在处理事务前也是一致的，那么这个数据库就认为是一致的。</p>
+<p>Isolation：每个事务的执行都是孤立的。</p>
+<p>Durability：如果一个事务commit了，那么它对数据库的影响就会一直持续存在。</p>
+<h2 id="ACID：Atomicity"><a href="#ACID：Atomicity" class="headerlink" title="ACID：Atomicity"></a>ACID：Atomicity</h2><h3 id="Approach1：Shadow-Paging"><a href="#Approach1：Shadow-Paging" class="headerlink" title="Approach1：Shadow Paging"></a>Approach1：Shadow Paging</h3><p>DBMS把pages复制一遍并且将事务作用在这些复制的page上面，一旦事务commit了，原先的page就会被换成新的page。这个做法因为要复制，效率比较低下，而且复制page容易造成内存碎片，不实用。</p>
+<h3 id="Approach2：Logging"><a href="#Approach2：Logging" class="headerlink" title="Approach2：Logging"></a>Approach2：Logging</h3><p>数据库在进行事务之前先把事务要进行的操作写在日志中，这个日志会同时存在与内存和磁盘之中。这样如果一个事务被自身给终止了，那么DBMS就会根据内存中的日志来恢复整个数据库；如果事务被写入到磁盘中了，就会根据磁盘上的日志来恢复数据库。</p>
+<p>而且日志除了有可以恢复的功能，还能够先预处理出所有可能读&#x2F;写的page，根据这些page对操作进行重排来提高效率。被commit的操作也不是立刻写入到磁盘中，可能是将一段时间内所有的commit操作都写入到磁盘中，那么这个时候如果数据库出现了故障，损失的也就是这段时间的操作，数据库会根据内存中的日志来还原。</p>
+<h2 id="ACID：Isolation"><a href="#ACID：Isolation" class="headerlink" title="ACID：Isolation"></a>ACID：Isolation</h2><p>有两种并发协议，一种是悲观协议，它会假设所有的事务都是冲突的，因此在一开始就不会让问题发生。另外一种是乐观协议，它会假设事务之间很少会发生冲突，因此在执行事务之前不会进行检查，而是等事务执行完再来检查有没有问题，如果有问题就撤销所有的操作。</p>
+<p>并发协议的目的是为了生成一种执行方案，使得这个执行方案等同某种顺序执行方案。当我们提交了两个事务时，这两个事务可能并不会按照我们提交的先后顺序执行，并且事务内部的操作也可能会交错执行。</p>
+<p>事务之间可能会存在冲突：读-写冲突、写&#x2F;读冲突、写&#x2F;写冲突。也就是说凡是两个事务中对同一个object进行的操作中涉及到写，就认为这两个事务会产生冲突。</p>
+<h2 id="Serializable"><a href="#Serializable" class="headerlink" title="Serializable"></a>Serializable</h2><p>如果一个调度方案等同于一个顺序执行的方案，那么这个方案就是serializable的。</p>
+<p>如果一个调度方案可以通过连续交换不冲突的操作来等同于一个顺序执行的方案，那么这个方案就是conflict serializable的。大多数数据库可以判断一个方案是不是conflict serializable的。但是还有一种类型叫做view serializable。因为数据库能够看到的仅仅是事务中我要对某个对象进行读操作&#x2F;写操作，因此数据库并不能确保事务最后执行出来的结果在逻辑上是正确的。比如时间先后顺序的要求数据库是不知道的，这就需要在应用层上对这些事务进行调度，比如强制让一个事务先执行完再来执行另一个事务等等，数据库做不到这一点。因为数据库不知道应用层如何翻译理解这些数据。</p>
+<h3 id="Dependency-Graphs"><a href="#Dependency-Graphs" class="headerlink" title="Dependency Graphs"></a>Dependency Graphs</h3><p>我们用一种叫做依赖图的结构来判断一个方案是不是conflict serializable的。每个事务都当作图中的一个点，如果一个操作x在事务a中和事务b中的操作y冲突了，并且x的在y前面被执行，那么就从a连一条边到b。这里的冲突就是上面说的三种冲突类型。<strong>如果这个依赖图中存在环，那么就说明这个调度方案不是conflict serializable的。</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/09/26/Concurrency-Control-Theory/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Query-Optimization" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1177,177 +1265,6 @@
 
 
   
-    <article id="post-SQL基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/">SQL基础</a>
-    </h1>
-  
-
-        
-        <a href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2022-08-27T13:21:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础"></a>SQL基础</h1><h2 id="一、SQL的组成"><a href="#一、SQL的组成" class="headerlink" title="一、SQL的组成"></a>一、SQL的组成</h2><p>SQL包括以下几个部分：</p>
-<p>1.<strong>DDL</strong>，提供定义relation schemas，删除relations和修改relation schemas的命令。</p>
-<p>2.<strong>DML</strong>，提供在database中增删查改tuples的命令。</p>
-<p>3.<strong>Integrity</strong>，DDL命令会对database加上一些确保Integrity的约束，例如给某些attribute赋予某些属性，主键或外键等等。</p>
-<p>4.<strong>View definition</strong>，相当于可以把一些命令给打包。</p>
-<p>5.<strong>Transaction control</strong>，用于处理一些特殊情况，例如并发读写数据库、阻止某些操作破坏操作的原子性。</p>
-<p>6.<strong>Authorization</strong>，相当于Linux里面的用户组和权限，可以给权限到某些用户组&#x2F;用户上。读&#x2F;写&#x2F;增&#x2F;删都有对应的权限。</p>
-<h2 id="二、SQL数据定义"><a href="#二、SQL数据定义" class="headerlink" title="二、SQL数据定义"></a>二、SQL数据定义</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p>1.**char(n)**：一个定长字符串类型，长度为n，是character的缩写。</p>
-<p>2.**varchar(n)**：可变长字符串类型，最大长度为n。</p>
-<p>3.<strong>int</strong>：整数类型。</p>
-<p>4.<strong>smallint</strong>：小整数类型。</p>
-<p>5.**numeric(p,d)**：固定浮点类型，整个数字的位数为p,小数点后的位数为d。</p>
-<p>6.**float(n)**：精度至少为n位的浮点数类型。</p>
-<p>对于字符串建议都用varchar，如果不同长度的char进行比较，会对较短的char填充空格。</p>
-<h3 id="基本规格定义"><a href="#基本规格定义" class="headerlink" title="基本规格定义"></a>基本规格定义</h3><p>1.用create table命令来定义一个relation。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> department</span><br><span class="line">		(dept_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">        building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line">        budget <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>),</span><br><span class="line">        <span class="keyword">primary</span> key(dept_name));</span><br></pre></td></tr></table></figure>
-
-<p>在SQL中每个命令的结尾都必须带有分号。</p>
-<p>2.主键可以是一个属性的集合，被要求必须是<strong>notnull</strong>和<strong>unique</strong>的。</p>
-<p>3.外键关联两个relation，声明的形式为：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreign</span> key(A1,A2,...,An) <span class="keyword">references</span> s</span><br></pre></td></tr></table></figure>
-
-<p>对于定义在relation A中的外键，如果他的外键目标是relation B,那么称A是referring，B为referred。其中A1，A2,…,An的值都必须同时要在A中和B中出现（属性名字可以不相同），并且在B中必须是B的主键。可以通过外键进行Integrity限制。例如要往A中插入的tuple的A1在B中找不到值对应时，这个操作就是不合法的。</p>
-<h3 id="基本SQL查询"><a href="#基本SQL查询" class="headerlink" title="基本SQL查询"></a>基本SQL查询</h3><ol>
-<li></li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> (<span class="keyword">all</span><span class="operator">/</span><span class="keyword">distinct</span>) attributes</span><br><span class="line"><span class="keyword">from</span> tablenames</span><br><span class="line"><span class="keyword">where</span> conditions;</span><br></pre></td></tr></table></figure>
-
-<p>从表中查询得到的数据也组成一张表，默认情况下是不会去重的，也就是括号里面all的情况，如果要去重就要加上distinct。</p>
-<p>2.可以对attributes进行算术运算等。where就是筛选条件。</p>
-<p>3.如果指定了多个table，执行顺序是：先将from的表格组成笛卡尔积，然后应用where里面的条件判断，最后选出select中的属性值。</p>
-<h3 id="更多SQL基本操作"><a href="#更多SQL基本操作" class="headerlink" title="更多SQL基本操作"></a>更多SQL基本操作</h3><p>1.关于rename：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> T.name</span><br><span class="line"><span class="keyword">from</span> instructor <span class="keyword">as</span> T,instructor <span class="keyword">as</span> S</span><br><span class="line"><span class="keyword">where</span> T.salary <span class="operator">&gt;</span> S.salary <span class="keyword">and</span> S.dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>用as重命名，并且记得加上作用域。</p>
-<p>2.关于字符串：在各种SQL的实现版本中，字符串都是用单引号括起来的。引号内可以进行模式匹配：</p>
-<p>**%**可以匹配任意字符串；</p>
-<p>**_**可以匹配任意单个字符；</p>
-<p>**\**放在前面可以表示转义字符。</p>
-<p>3.select后加*****可表示选取所有的属性。</p>
-<p>4.关于显示数据的顺序：SQL的实现是基于bags的，也就是不考虑顺序和重复问题，如果要按某个属性的顺序输出，则要在查询语句的后面加上：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> attributename (<span class="keyword">asc</span><span class="operator">/</span><span class="keyword">desc</span>);</span><br></pre></td></tr></table></figure>
-
-<p>5.关于集合操作：我们可以把两个query的结果进行集合之间的交、并、补等等，例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(select...)</span><br><span class="line"><span class="keyword">union</span><span class="operator">/</span><span class="keyword">intersect</span><span class="operator">/</span><span class="keyword">except</span> (<span class="keyword">all</span>)</span><br><span class="line">(select...);</span><br></pre></td></tr></table></figure>
-
-<p>这些集合操作默认是去重的，原因在于操作的名称为集合操作。</p>
-<h3 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h3><p>1.这里null应该理解为暂时不知道的数据而不是空值，虽然在很多数据库实现上是被显示为空值。</p>
-<p>2.任何和null进行算术运算的结果都是null。</p>
-<p>3.和null进行比较的结果都是null。</p>
-<p>4.and&#x2F;or&#x2F;not等逻辑运算的短路定律依然成立。如果在有null的这些逻辑表达式中不能运用短路定律，则结果为null。</p>
-<p>5.因为有null这种结果存在，where成立当且仅当结果为true。</p>
-<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>1.有以下几种聚合函数：</p>
-<p>avg，min，max，sum，count。</p>
-<p>2.使用方法如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(salary) <span class="keyword">as</span> avg_salary</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">where</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Comp.sci&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> ID)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>有几点值的注意的是，这里聚合函数计算的结果最好是重命名，而且最后的输出结果只会有一个tuple，即聚合函数计算的结果。</p>
-<p>如果想用count函数来计算有多少个tuple，用<code>count(*)</code></p>
-<p>3.如果在select中使用了聚合函数，那么输出结果只会有一个tuple。如果要输出另外的属性，就必须要进行分组。当然也可以利用分组操作实现对每个组内单独计算聚合函数值到一个tuple中。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> attributenames</span><br></pre></td></tr></table></figure>
-
-<p>这样凡是在attributenames中的attributes相同的tuples都会被分到同一组中。每个组最后会作为一个tuple输出。而在select中选择的属性<strong>要么是聚合函数计算结果，要么是出现在group中的属性</strong>，因为一个group只会输出一个tuple，如果一个属性不在group by中，那么就不知道要输出这个组中的哪一个tuple中的属性值了。</p>
-<p>4.可以在group by语句后面加上having语句，这里和where语句不同的是，having语句用于对group进行筛选，而where语句是对tuple进行筛选。</p>
-<h3 id="完整SQL语句执行顺序"><a href="#完整SQL语句执行顺序" class="headerlink" title="完整SQL语句执行顺序"></a>完整SQL语句执行顺序</h3><p>1.from语句首先执行得到一个relation。</p>
-<p>2.如果where语句存在，则应用where来筛选得到的每一个tuple。</p>
-<p>3.where筛选出来的tuple被group by语句进行分组，如果group by不存在，则所有筛选出来的语句组成一整个group。</p>
-<p>4.执行having语句。</p>
-<p>5.执行select语句。</p>
-<h3 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h3><p>可以在增加子语句在where中，形式如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">where</span> ... action(...)</span><br></pre></td></tr></table></figure>
-
-<p>其中括号内的是另一条query语句，这里action可以有以下几种：</p>
-<p>1.in&#x2F;not in：是否存在。</p>
-<p>2.比较符号+all&#x2F;some：与查询结果中的一个或所有tuples进行比较，这里比较符号可以为&lt;,&lt;&#x3D;,&gt;,&gt;&#x3D;,&#x3D;,&lt;&gt;.</p>
-<p>3.exist：结果的count是否&gt;0。</p>
-<p>4.unique：结果中是否有重复的tuple。</p>
-<h3 id="增删改"><a href="#增删改" class="headerlink" title="增删改"></a>增删改</h3><p>1.删除操作：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> r</span><br><span class="line">while P;</span><br></pre></td></tr></table></figure>
-
-<p>这里一条delete命令只能删除一个relation。</p>
-<p>2.插入操作：</p>
-<p>有两种形式：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student</span><br><span class="line">		<span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line">		<span class="keyword">from</span> student;</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> course</span><br><span class="line">		<span class="keyword">values</span>(&quot;1&quot;,&quot;2&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>3.修改操作：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> instructor</span><br><span class="line"><span class="keyword">set</span> salary <span class="operator">=</span> <span class="keyword">case</span></span><br><span class="line">				<span class="keyword">when</span> salary <span class="operator">&lt;=</span> <span class="number">100000</span> <span class="keyword">then</span> salary <span class="operator">*</span> <span class="number">1.05</span></span><br><span class="line">				<span class="keyword">else</span> salary <span class="operator">*</span> <span class="number">1.03</span></span><br><span class="line">		 	 <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="CTE"><a href="#CTE" class="headerlink" title="CTE"></a>CTE</h3><p>提供了一种在大规模查询中写任意声明的方法。必须命名，可以指定返回参数的名字：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cteName (col1,col2) <span class="keyword">AS</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> col1 <span class="operator">+</span> col2 <span class="keyword">FROM</span> cteName</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> cteSource (maxId) <span class="keyword">As</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="built_in">MAX</span>(sid) <span class="keyword">FROM</span> enrolled</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> student,cteSource</span><br><span class="line"><span class="keyword">WHERE</span> student.sid <span class="operator">=</span> cteSource.maxId</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/27/SQL%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1445,7 +1362,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">15-445,数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1453,7 +1370,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">15-445,数据库</a>
               </li>
              
               <li class="article-tag-list-item">
