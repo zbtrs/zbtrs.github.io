@@ -154,6 +154,142 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Concurrency-Control-Methods" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/01/Concurrency-Control-Methods/">Concurrency Control Methods</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/01/Concurrency-Control-Methods/" class="archive-article-date">
+  	<time datetime="2022-10-01T12:05:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Concurrency-Control-Methods"><a href="#Concurrency-Control-Methods" class="headerlink" title="Concurrency Control Methods"></a>Concurrency Control Methods</h1><h2 id="Transaction-Locks"><a href="#Transaction-Locks" class="headerlink" title="Transaction Locks"></a>Transaction Locks</h2><p>DBMS有一个锁管理者用来决定一个事务是否能够拥有一个锁，有整个系统的全局信息。</p>
+<p>1.Shared Lock(S-LOCK)：允许多个事务读同一个对象在同一时间内。</p>
+<p>2.Exclusive Lock(X-LOCK)：允许一个事务去修改一个对象。和其他的锁不能同时存在。</p>
+<h3 id="锁的运行方式："><a href="#锁的运行方式：" class="headerlink" title="锁的运行方式："></a>锁的运行方式：</h3><p>1.事务向lock manager请求锁。</p>
+<p>2.lock manager要么满足要么拒绝请求，取决于其他事务拥有的锁的类型。</p>
+<p>3.事务在不需要锁的时候释放它们。</p>
+<p>4.lock manager更新内部的lock-table，并且把锁给等待中的事务。</p>
+<h2 id="Two-Phase-Locking"><a href="#Two-Phase-Locking" class="headerlink" title="Two-Phase Locking"></a>Two-Phase Locking</h2><p>两阶段锁是一种悲观并发协议，将事务的进行分为两个阶段：Growing和Shrinking。</p>
+<h3 id="Phase1：Growing"><a href="#Phase1：Growing" class="headerlink" title="Phase1：Growing"></a>Phase1：Growing</h3><p>处于这个阶段的事务会向DBMS的lock manager请求需要的锁。</p>
+<h3 id="Phase2：Shrinking"><a href="#Phase2：Shrinking" class="headerlink" title="Phase2：Shrinking"></a>Phase2：Shrinking</h3><p>一旦一个事务释放了一个锁，这个事务就会进行这个阶段。在这个阶段里事务只能够释放锁而不能够请求锁。</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>2PL能够保证依赖图是无环的，所以可以确保是conflict serializable，但是可能造成cascading aborts，具体来说就是当一个事务aborts时，会引起其他有关联的事务一起aborts，这样可能会引起特别多的回滚操作。</p>
+<p>而且2PL的限制更加严格，可能会有一些原本是serializable的调度方案不满足2PL的限制。</p>
+<h2 id="Strong-Strict-Two-Phase-Locking"><a href="#Strong-Strict-Two-Phase-Locking" class="headerlink" title="Strong Strict Two-Phase Locking"></a>Strong Strict Two-Phase Locking</h2><p>在2PL的基础上取消了shrinking阶段，<strong>只有在事务commit的时候才会释放锁。</strong></p>
+<h2 id="2PL-Deadlock-Handling"><a href="#2PL-Deadlock-Handling" class="headerlink" title="2PL Deadlock Handling"></a>2PL Deadlock Handling</h2><p>不同的主流数据库用不同的方法处理死锁问题。有的采用detection的方法，即会不定期检测是否出现了死锁问题，有的采用preevention，即每一步都先看是否会出现死锁问题，在死锁问题出现前就解决掉。</p>
+<h3 id="Approach1：Deadlock-Detection"><a href="#Approach1：Deadlock-Detection" class="headerlink" title="Approach1：Deadlock Detection"></a>Approach1：Deadlock Detection</h3><p>DBMS创建一个waits-for图，图中的点都是事务，如果事务Ti等待Tj释放锁，就从Ti连一条边向Tj。这个系统会定期检查图中是否存在环然后决定如何去破坏这个环。</p>
+<p>1.如果DBMS检测到了死锁，它会选择一个牺牲者去restart或者abort。</p>
+<p>2.DBMS根据事务的很多特性去决定选哪一个牺牲者。比如事务创建时间、有多少个条目被锁住了等等。</p>
+<p>而且回滚也不是全部回滚，可能只是回滚事务的一部分。</p>
+<h3 id="Approach2：Deadlock-Prevention"><a href="#Approach2：Deadlock-Prevention" class="headerlink" title="Approach2：Deadlock Prevention"></a>Approach2：Deadlock Prevention</h3><p>当一个事务尝试去获取一个锁时，如果这个锁已经被其他事务占据了，DBMS就会做出一些防止死锁的事情。</p>
+<p>给事务分配时间戳属性，可以设定要么是老的事务优先级高，要么是新的事务优先级高。如果T1要去获取T2上的锁，如果T1的优先级高，T1等待，否则T1aborts。</p>
+<h2 id="Lock-Granularities"><a href="#Lock-Granularities" class="headerlink" title="Lock Granularities"></a>Lock Granularities</h2><p>如果一个事务想要修改特别多的tuples，如果锁太细了，就会在锁上面花很多时间。解决这个问题的方法是分层，思想就是我们一次锁更高层次，比如把一页或者一个table给锁住，而不是一次一个tuple。</p>
+<p>我们设计了一种叫做Intention locks的东西，允许在更高层次的点上加锁而不需要去检查所有的后代节点。如果一个点处于intention模式，那么说明它下面层次的点被显式上锁了，如果它下面层次的所有点都上了某一种锁，那么这个点的intention锁可以进行提升，比如Intention-shared锁可以提升为shared锁。</p>
+<p>有这么几种锁：</p>
+<p>1.Intention-Shared（IS）：表明低层次的点被共享锁锁住了。</p>
+<p>2.Intention-Exclusive（IX）：表明低层次的点被exclusive或共享锁锁住了。</p>
+<p>3.Shared+Intention-Exclusive（SIX）：这个点已经处于shared mode，并且低层次的点正要被exclusive锁锁住。</p>
+<p>我们在S、X的基础上添加了额外三种类型的锁，那么当我们要从上往下去遍历到一个叶子节点时，我们对路径上的逐个点尝试加锁，如果当前要加的锁和这个点上已经存在的锁冲突了，这次操作就失败了，就要restart。这里会有一张5*5大小的表格来表示每两种类型的锁之间会不会冲突。</p>
+<p>举个例子：如果我们要进行一次读取操作，我们会尝试给路径上的所有点加上Intention-Shared锁，给叶子节点加上Shared锁；如果我们要对所有的叶子节点进行一次读取操作，并且修改其中某个叶子节点的值，我们会给路径上的所有点加上SIX锁。</p>
+<h2 id="Timestamp-Ordering-Concurrency-Control"><a href="#Timestamp-Ordering-Concurrency-Control" class="headerlink" title="Timestamp Ordering Concurrency Control"></a>Timestamp Ordering Concurrency Control</h2><p>1.Timestamp ordering是一种乐观并发协议，不需要在操作前去请求锁，而是通过时间戳去确保serializability order。</p>
+<p>2.每个事务Ti都会被赋值一个独特的严格单调的时间戳：TS(Ti)。</p>
+<p>3.如果TS(Ti) &lt; TS(Tj)，那么DBMS必须确保最后的执行方案等同于Ti在Tj之前发生的一个serial schedule。</p>
+<h3 id="Basic-TimeStamp-Ordering"><a href="#Basic-TimeStamp-Ordering" class="headerlink" title="Basic TimeStamp Ordering"></a>Basic TimeStamp Ordering</h3><p>每个数据库对象X都被赋予了一个时间戳，这个时间戳是最后一次对这个对象进行读&#x2F;写操作的事务的时间戳，如W-TS(X)：X的写时间戳；R-TS(X)：X的读时间戳。</p>
+<p>假设接下来要进行的步骤属于事务Ti，对X进行操作：</p>
+<h4 id="Read-Operations："><a href="#Read-Operations：" class="headerlink" title="Read Operations："></a>Read Operations：</h4><p>1.如果TS(Ti) &lt; W-TS(X)，说明如果Ti对X操作，会影响到<strong>后面</strong>对X的写操作，因此将Ti给abort并且<strong>用原来的TS值restart。</strong></p>
+<p>2.否则先让Ti去读X，然后将R-TS(X)更新为max(R-TS(X),TS(Ti))。</p>
+<p>3.这里Ti对X的操作之前必须先拷贝X，在副本上进行操作。</p>
+<h4 id="Write-Operations："><a href="#Write-Operations：" class="headerlink" title="Write Operations："></a>Write Operations：</h4><p>操作基本上和读一样，只是一开始的判断条件为TS(Ti) &lt; R-TS(X)或者TS(Ti) &lt; W-TS(X)时要abort并且restart Ti。</p>
+<p>托马斯优化：如果只是TS(Ti) &lt; W-TS(X)，那么只需要忽略掉这个写操作让事务继续进行下去即可。因为这个写操作在其他的写操作之前发生，因此一定会被其他的写操作给覆盖，那么这次写操作也就是不必要的了。但是需要注意的是托马斯优化会破坏conflict serializable。</p>
+<h4 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h4><p>不会造成死锁问题，如果不用托马斯优化可以确保方案是conflict serializable的。但是如果短事务持续冲突，会让长事务一直处于starvation状态；并且调度方案可能是不可恢复的；复制数据到事务的工作空间花销较大；</p>
+<h4 id="Recoverable"><a href="#Recoverable" class="headerlink" title="Recoverable"></a>Recoverable</h4><p>如果所有的事务在他读&#x2F;写涉及到的其他事务提交之后提交，那么这个事务就是可恢复的。</p>
+<h3 id="Optimistic-Concurrency-Control"><a href="#Optimistic-Concurrency-Control" class="headerlink" title="Optimistic Concurrency Control"></a>Optimistic Concurrency Control</h3><p>1.如果事务之间的冲突很罕见，并且大多数事务流程很短，那么就可以假设事务之间不会出现冲突。OCC这种方法在冲突数量少的时候表现比较好。</p>
+<p>2.整个OCC分为三个阶段：Read、Validation、Write。</p>
+<p>Read Phase：得到事务的read&#x2F;write set，并把write存到自己的工作空间。</p>
+<p>Validation Phase：当一个事务commit的时候，检查它是否跟其他的事务冲突了。</p>
+<p>Write Phase：如果通过了Validation Phase，将自己的变化应用到数据库中，否则abort并且restart事务。</p>
+<p>3.DBMS为每个事务创建一个私自的工作空间，所有的事务的修改都被应用在工作空间中、所有对对象的读取操作都将对象复制到工作空间中、不同事务的工作空间是相互隔离的。</p>
+<p>4.如果一个事务commit了，那么DBMS会将这个事务空间的write set和其他事务进行比较。如果合法就把这个write set放到全局数据库中。</p>
+<h4 id="Validation-Phase"><a href="#Validation-Phase" class="headerlink" title="Validation Phase"></a>Validation Phase</h4><p>每个事务只有在进入Validation阶段才会被赋予一个时间戳，Ti会检查其他的所有事务，看是否存在RW和WW冲突，并且只会从一个方向上检查，例如只会检查Tj &gt; Ti的事务j或者检查Tj &lt; Ti的事务j。</p>
+<p>如果TS(Ti) &lt; TS(Tj)，那么下面三个条件必须满足至少一个：</p>
+<p>1.Ti 在 Tj开始前完成了所有阶段。</p>
+<p>2.Ti在Tj开始写阶段前完成了，并且Ti不会去写任何被Tj读的对象。</p>
+<p>3.Ti在Tj完成读阶段前完成了读阶段，并且Ti不会去写任何被Tj写或读的对象。</p>
+<h3 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h3><p>1.将数据复制到事务各自的空间中花费过高。</p>
+<p>2.Validation和Write阶段是瓶颈。</p>
+<p>3.这里Abort只有可能发生在事务执行完的时候，比其他方法的Abort所花时间可能更长。</p>
+<p>4.分配时间栈也是一个时间瓶颈。</p>
+<h3 id="Partition-Based-T-x2F-O"><a href="#Partition-Based-T-x2F-O" class="headerlink" title="Partition-Based T&#x2F;O"></a>Partition-Based T&#x2F;O</h3><p>如果用OCC，在事务非常多的情况下，Validation就会花很多时间。如果我们把数据库给分区，并且只检查那些涉及到相同分区的事务之间是否冲突就能减少复杂度。这里我们只会给区上锁，区里面的操作都是单线程的。</p>
+<p>对每个分区，我们都维护一个队列，取队列中第一个事务进行操作：</p>
+<p>1.获取分区的锁。</p>
+<p>2.如果这个事务涉及到的所有分区的锁都被获取了，那么他就可以开始执行。</p>
+<p>3.事务可以在获得锁的分区中读&#x2F;写任何东西，因为可以把在分区中的操作看成是单线程的，如果一个事务尝试到一个他没有获取锁的分区中，他就会abort并且restart。</p>
+<h4 id="优缺点-3"><a href="#优缺点-3" class="headerlink" title="优缺点"></a>优缺点</h4><p>1.很快，因为DBMS一般提前可以知道每个事务会访问哪些分区，并且大部分事务只会访问一个分区。</p>
+<p>2.如果事务访问涉及到多个分区，就会比较麻烦。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/10/01/Concurrency-Control-Methods/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Concurrency-Control-Theory" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1147,124 +1283,6 @@
 
 
   
-    <article id="post-数据库存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/">数据库存储</a>
-    </h1>
-  
-
-        
-        <a href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/" class="archive-article-date">
-  	<time datetime="2022-08-31T12:15:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="数据库存储"><a href="#数据库存储" class="headerlink" title="数据库存储"></a>数据库存储</h1><h2 id="存储器介绍"><a href="#存储器介绍" class="headerlink" title="存储器介绍"></a>存储器介绍</h2><p>1.cache–&gt;main memory–&gt;flash memory–&gt;magnetic disk–&gt;optical disk–&gt;magnetic tapes，从main memory往上都是volatile的。</p>
-<p>2.对于同一层次的存储器，如果支持的协议不同，那么传输数据的速度也不同。例如SSD的NVMe协议比SATA 3协议要快。</p>
-<p>3.从main memory往上读写数据都是以字节为单位的，可以进行随机读取。而下面层次的存储器都必须以page&#x2F;block为单位，一次读取连续一段数据。</p>
-<p>4.HDD和SSD与操作系统交互中间层的API相同，也就是说操作系统根本就不知道硬盘是HDD还是SSD。而SSD可以并行执行多个功能。但update有点麻烦，需要先erase掉一整个block的数据（这个block中会包含多个page），然后再来write。而每个block都有erase的次数上限，如果要erase的时候这个block上还有page有数据，就会先将这些page上的数据写到其他的block上。</p>
-<h2 id="数据库存储结构"><a href="#数据库存储结构" class="headerlink" title="数据库存储结构"></a>数据库存储结构</h2><p>1.数据库分为磁盘型数据库和内存型数据库。对于磁盘型数据库而言，数据最终都要保存在磁盘上，但是如果想要对数据进行操作，就必须先把这些数据放到内存上来。因此在内存上会有一个Buffer Pool对所有pages进行管理。当数据库需要获得信息时，它会向Buffer Pool请求得到ID为x的page，若没有命中则Buffer Pool会从Disk中获得并执行替换策略。</p>
-<p>2.Buffer Pool很像操作系统中虚拟内存的实现，但是我们不能直接用mmap，因为数据库对page的掌控更加全面具体。例如如果有多个线程同时对一个page进行读写，如果是数据库来管理这些page，就可以通过添加限制位的方式来解决冲突，而mmap则难以解决这个问题。</p>
-<h2 id="文件组织"><a href="#文件组织" class="headerlink" title="文件组织"></a>文件组织</h2><p>1.数据库以文件的形式存储在磁盘上。文件内部被逻辑上划分为一个个page。这个文件只有数据库本身可以解析。</p>
-<p>2.一个page就是一个固定长度的数据块。这个数据块里面可能有元数据、tuple等等信息，大多数数据库系统在一个page中只会存储一种类型的信息，而有些数据库系统例如Oracle要求一个page要是self-contained的，也就是说我们能够根据这个page中包含的某些信息来恢复这个page的内容。</p>
-<p>3.每个page都有一个独特的标识符。DBMS用indirection层来将page id映射到物理区域上。</p>
-<p>4.有很多不同种类的page，例如Hardware Page一般都是4kb，还有OS Page和Database Page。而Database Page一般比4kb大，这是为了提高命中率和减少对磁盘的读写。但是这也会产生一些问题：因为4kb也就是Hardware Page一般是最大的系统能够保证不出现错误的读写数据块大小，也就是说可以认为以4kb为大小的读写操作是原子性的，如果我们的Database Page大小超过了4kb，就要用一些其他的措施来保证读写中途不会出现问题。</p>
-<h2 id="数据库文件的组织"><a href="#数据库文件的组织" class="headerlink" title="数据库文件的组织"></a>数据库文件的组织</h2><h3 id="堆存储"><a href="#堆存储" class="headerlink" title="堆存储"></a>堆存储</h3><p>如果用堆来组织存储着records的pages，那么这些pages就是无序的。可以用链表和表目录来实现。</p>
-<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>数据库文件维护一个header page在开头来存储两个指针：</p>
-<p>1.指向free page list。</p>
-<p>2.指向data page list。</p>
-<p>那么对于每一个page都需要维护前后两个指针（双向链表）以及所包含的data。这种方式不是经常用到。</p>
-<h4 id="表目录"><a href="#表目录" class="headerlink" title="表目录"></a>表目录</h4><p>我们可以维护一个header page来保存一个数组，数组的每个元素记录它对应的page上还有多少空间和这个page的位置。这样一旦我们要插入一个record的时候就可以遍历这个数组。为了提高效率，一个数组可以表示连续一大段的page上还有多少空间。</p>
-<h3 id="顺序存储"><a href="#顺序存储" class="headerlink" title="顺序存储"></a>顺序存储</h3><p>如果对relation指定一个special key，那么就会按照这个key的大小顺序来存储所有的record。删除就直接删，如果要在某个位置插入，但是这个位置的空间不够，就在这个位置存一个指针指向实际存储的区域（也就是新开一个大的区域存储）。这样一段时间后这些records在物理上是不连续的，所以要定期重排。</p>
-<h3 id="聚合存储"><a href="#聚合存储" class="headerlink" title="聚合存储"></a>聚合存储</h3><p>可以将多个relation的tuple连接到一起，如果他们有公共属性，并且这个公共属性在连接后的tuple中只会出现一次。这样做的好处是如果有多次对多个relation的查询，效率就会高很多，相当于pre-join了。但是每次查询得到的信息会多一些，并且时间会长。可以在DDL的时候指定是否进行聚合存储。</p>
-<h2 id="数据库文件中page内部的组织"><a href="#数据库文件中page内部的组织" class="headerlink" title="数据库文件中page内部的组织"></a>数据库文件中page内部的组织</h2><p>1.每个page中都会有一个header存储元数据，比如page size，checksum，DBMS Version，Transaction Visibility和Compression Information。</p>
-<p>2.page中存储tuple，必须保证这个tuple的大小不超过page的大小，每个tuple都必须在单独一个page中，不能这个tuple的一部分在其中一个page，另一部分在另外一个page中，因此为tuple分配内存需要格外注意，可能会产生内存碎片。</p>
-<p>3.用slotted-page structure来存储tuples。在每个header处存slot的数量、未使用空间的末尾位置。Header后面是slot数组，每个slot存它对应的tuple的位置和大小。当要插入一个tuple时，slot从前往后加入，tuple从后往前，当两者相遇时，这个page就满了。而删除操作会产生内存碎片，可以通过定期平移tuples的方式来重排。</p>
-<p>4.每个tuple都有一个独特的record identifier，通过page_id + offset&#x2F;slot来得到。</p>
-<h2 id="Tuple组织"><a href="#Tuple组织" class="headerlink" title="Tuple组织"></a>Tuple组织</h2><p>1.一个tuple本质上是一堆字节序列，由DBMS来解析。</p>
-<p>2.每个tuple都有一个header，用来存visibility info(concurrency control)和表示哪个属性是NULL的Bit Map。大多数情况下属性的值按照定义的schema来顺序存储。</p>
-<h2 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h2><p>1.integer&#x2F;bigint&#x2F;smallint&#x2F;tinyint都用C&#x2F;C++的表示。</p>
-<p>2.float&#x2F;real用IEEE-754表示，numeric&#x2F;decimal在数据库中有单独表示方法。对于不定长浮点数，精度上有误差，但是运算速度快，因为CPU有对应的单独一条指令能够执行运算。而定长浮点数运算慢但是可以保证没有误差。</p>
-<p>3.varchar&#x2F;varbinary&#x2F;text&#x2F;blob都是用一个header存长度后面跟着数据。</p>
-<p>4.如果数据过大，数据库会把这个数据作为Blob类型，在对应属性位置上放一个指针指向External File。这个file是不能被数据库操作的，不能提供持久化保护和事物保护。如果通过操作系统对这些文件进行更改，数据库可能会无法正确处理这些文件。当然如果数据不是特别大，数据库是可以把它放到overflow page上。</p>
-<h2 id="SYSTEM-CATALOGS"><a href="#SYSTEM-CATALOGS" class="headerlink" title="SYSTEM CATALOGS"></a>SYSTEM CATALOGS</h2><p>用来存储数据库的元数据，大部分数据库的存储方式是使用另外的数据库来存储。不能用数据库存储有关自己的元数据。通过<strong>INFORMATION_SCHEMA</strong>这个API来从数据库中得到，但是注意的是这里并不是数据库本身的查询语句！</p>
-<h2 id="事务类型"><a href="#事务类型" class="headerlink" title="事务类型"></a>事务类型</h2><p>1.分为OLAP和OLTP以及他们的混合HTAP。</p>
-<p>2.OLTP一般是和外界交互，即要插入一个tuple、删除&#x2F;修改一个数据、查询一组数据等等，更多偏向于write，只会涉及到一小部分tuples。</p>
-<p>3.OLAP则会涉及到对很多数据进行计算、分析，会涉及到大量的数据。</p>
-<p>4.现在的应用一般是用两个数据库，前端数据库负责OLTP，后端数据库负责OLAP。</p>
-<h2 id="数据存储模型"><a href="#数据存储模型" class="headerlink" title="数据存储模型"></a>数据存储模型</h2><p>1.分为行存储和列存储，前者即把每一行的信息存在一起，后者为把每一个属性值的信息存在一起。</p>
-<p>2.如果我们仅仅是想要根据几个属性值来筛选若干个属性值出来，那么用列存储就很容易做到，只需要遍历涉及到的存储属性值的文件即可。而行存储则要读取很多完整的tuple。</p>
-<p>3.那么在列存储方式中，我们如何知道一个属性和另外一个属性是不是在同一个tuple中呢？因为每个属性的大小是固定的，我们可以通过计算offset的方式来得到。</p>
-<p>4.可以在DDL中指定数据库是行存储还是列存储。</p>
-<h2 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h2><p>1.内存区域被组织为一个定长page的数组，每一个数组条目都被叫作frame。一个叫做page table的数据结构可以跟踪正在内存中的pages，还对每个pages有额外的元数据：Dirty Flag（如果内存上的这个page被修改了就要写回到硬盘上去）和Pin&#x2F;Reference Counter（用来处理transaction），即如果正在读一个page的数据，则Pin Counter++，其他线程对这个page不能进行写操作。</p>
-<p>2.可以设多个Buffer Pool来减少latches。通过Object Id来指定存到哪一个Buffer Pool中或者直接将page id进行hash然后对内存池的个数n进行取模来决定。</p>
-<p>3.数据库管理pages优于OS的一点是可以根据一段连续的数据进行预取存或者根据Index进行预取。而在替换策略方面，OS只能根据过去的情况作出预测，而数据库可以根据指令来决定哪些page需要缓存，哪些不需要以此来更换不同策略。例如sort一个relation，不需要将中间数据缓存。</p>
-<p>4.如果有两个线程在读取同一张表，其中一个线程先读了一部分，那么可以利用cursor，也就是给每个查询操作一个cursor，当第一个查询操作进行到一半，第二个查询操作刚开始时，可以将第二个查询操作的cursor赋值为第一个查询操作的cursor，这样后面的每个数据就只用读取一次，接着第二个查询操作再来读取前面没有读取到的部分。</p>
-<p>5.如果我们从操作系统中读取pages，中间会写入到OS PAGE CACHE中，而数据库是会用direct I&#x2F;O，即虽然进行了文件读写，但不经过OS PAGE CACHE这一步，除了PostgreSQL。</p>
-<ol start="6">
-<li></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1362,15 +1380,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">15-445,数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">15-445,数据库</a>
               </li>
              
               <li class="article-tag-list-item">
