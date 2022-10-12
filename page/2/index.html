@@ -154,6 +154,160 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C++回顾" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/01/C++%E5%9B%9E%E9%A1%BE/">C++回顾</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/01/C++%E5%9B%9E%E9%A1%BE/" class="archive-article-date">
+  	<time datetime="2022-09-01T08:05:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="C-回顾"><a href="#C-回顾" class="headerlink" title="C++回顾"></a>C++回顾</h1><p>1.可以直接对指针用下标操作，<code>array[2]</code>等价于<code>*(array + 2)</code></p>
+<p>2.对STL容器的迭代器进行封装！例如begin函数，先要判断容器是否为空。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T* <span class="title">begin</span><span class="params">(<span class="type">const</span> vector&lt;T&gt; &amp;vec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> vec.<span class="built_in">empty</span>() ? <span class="number">0</span> : &amp;vec[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.遍历数组、vector、list都可以通过指针来实现，但是在list中，<strong>因为元素在内存区域中不是按照顺序摆放的，所以不能对指针进行算术运算</strong>。但即使这样，我们依然能够在指针上面添加一个抽象层来用这一层操控这些容器。一种最为简单的抽象方式就是将指针当作一个泛型。list的迭代器也不能进行加减！必须传入首尾迭代器！</p>
+<p>4.有一种叫做function object的东西，可以代替函数指针，即它帮我们定义了一些简单的运算，例如：<code>less&lt;int&gt;()</code>就可以表示a &lt; b的bool函数。有unary的function object，可以对binary function object的结果进行操作。</p>
+<p>5.泛型函数设计的流程一般是先写一个局限比较多的函数，然后考虑哪些参数可以让用户来定制，接着考虑如何应用到不同的类型上，最后改template。</p>
+<p>6.Iterator Inserter：类似copy()、unique_copy()等泛型算法会让你提供一个迭代器参数作为复制后的元素放置的位置，如果只是提供一个迭代器，会将这些放置操作变为赋值操作。如果用insertion adapter，就可以将赋值变成插入操作：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unique_copy</span>(vec.<span class="built_in">begin</span>(),vec.<span class="built_in">end</span>(),<span class="built_in">back_inserter</span>(result));</span><br></pre></td></tr></table></figure>
+
+<p>Iterator Inserter用于不知道一开始为容器初始化为多大容量的情况。</p>
+<p>7.iostream iterator：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">istream_iterator&lt;string&gt; <span class="title">is</span><span class="params">(cin)</span></span>;</span><br><span class="line">istream_iterator&lt;string&gt; eof;</span><br><span class="line"><span class="built_in">copy</span>(is,eof,<span class="built_in">back_inserter</span>(text));</span><br><span class="line"><span class="function">ostream_iterator&lt;string&gt; <span class="title">os</span><span class="params">(cout,<span class="string">&quot; &quot;</span>)</span></span>;</span><br><span class="line"><span class="built_in">copy</span>(text.<span class="built_in">begin</span>(),text.<span class="built_in">end</span>(),os);</span><br></pre></td></tr></table></figure>
+
+<p>将标准输入的字符串存到一个vector中，并用空格隔开输出到标准输出中。不进行初始化就是默认为EOF。</p>
+<p>厉害之处在于可以把cin、cout替换为ifstream、ofstream。</p>
+<p>8.创建一个class，将class的定义放在同名的.h文件中，如果在class内部定义成员函数，则这些成员函数默认是inline的。如果想在外部定义成员函数，就在同名的.cpp文件中定义。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">A &amp; <span class="title">A::copy</span><span class="params">(<span class="type">const</span> A &amp;rhs)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里作用域关键字加在函数名前面。</p>
+<p>9.成员初始化列表：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Triangular::<span class="built_in">Triangular</span>(<span class="type">int</span> len,<span class="type">int</span> bp) : _name(<span class="string">&quot;Triangular&quot;</span>) &#123;</span><br><span class="line">    _length = len &gt; <span class="number">0</span> ? len : <span class="number">1</span>;</span><br><span class="line">    _beg_pos = bp &gt; <span class="number">0</span> ? bp : <span class="number">1</span>;</span><br><span class="line">    _next = _beg_pos - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>10.copy constructor：有时候一个类中的成员是动态分配的内存，如果直接采用默认的成员对应赋值的方法，就容易出现多个指针指向共同一片内存区域的问题。可以利用成员初始化列表的方式来定义copy constructor：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Matrix::<span class="built_in">Matrix</span>(<span class="type">const</span> Matrix &amp;rhs) : ...</span><br></pre></td></tr></table></figure>
+
+<p>这里参数必须要是一个常引用。</p>
+<p>如果定义了copy constructor，就必须同时定义copy assignment operator。</p>
+<p>11.如果定义了一个const reference实例，虽然这里把实例声明为了const的，但是其成员函数还是有可能改变其成员变量的值。这里应该加以限制：对于那些不会改变成员变量的成员函数，应该在形参列表后面加上const关键词，这样const reference是只能够调用有const关键词的成员函数的。同时这类函数不应该把任何可能修改成员变量的接口暴露出去。但是一个const成员函数如果要改变某一个成员变量的信息，<strong>并且改变这个成员变量的信息不会破坏抽象概念的常量性</strong>，那么可以在这个成员变量前面添加关键词mutable。这样在这个const成员函数中修改这个成员变量的值就没有任何问题了。</p>
+<p>12.静态成员变量在其定义前面加上static关键词。对于class而言，static data member只有唯一的一份实体，必须在和类同名的.cpp文件中清楚地定义，并且要在变量名前面加上作用域：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; A::_elems;</span><br></pre></td></tr></table></figure>
+
+<p>在成员函数中访问静态变量就跟访问一般的成员变量一样，不需要加上作用域。</p>
+<p>如果成员函数不会用到非静态成员变量，就可以把成员函数定义为静态的。加上static关键词即可。这样在程序代码中使用静态成员函数就只需要在前面加上作用域而不需要通过实例进行调用了。</p>
+<p>13.重载运算符：类似成员函数的定义，只需要在运算符名字前面加上operator即可，对于const的运算符，对形参有要求：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="keyword">operator</span> == (<span class="type">const</span> A&amp;) <span class="type">const</span>;</span><br></pre></td></tr></table></figure>
+
+<p>前置++和后置++有区别：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A&amp; <span class="keyword">operator</span>++();  <span class="comment">//前置</span></span><br><span class="line">A <span class="keyword">operator</span>++(<span class="type">int</span>);  <span class="comment">//后置</span></span><br></pre></td></tr></table></figure>
+
+<p>前置版本会返回一个引用，后置版本的形参中有一个int，这里不需要真的传入值进去，只是c++为了区分前置和后置用的方法，会自动设置为0。</p>
+<p>不可以引入新的运算符，运算符的操作数不可改变，优先级不可改变，不能为内置类型重载运算符。</p>
+<p>14.两种友元声明：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> <span class="type">int</span> A::<span class="keyword">operator</span>*();</span><br><span class="line"><span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">A</span>;</span><br></pre></td></tr></table></figure>
+
+<p>友元声明可以放在类定义的任何位置，友元声明的函数或者类（相当于类里面的所有成员函数）都可以访问这个类的private部分。第一种方式需要A的定义在当前类前面，第二种方式不需要。</p>
+<p>不过替代友元更好的方法是暴露一个public inline函数。</p>
+<p>15.重载iostream运算符：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ostream&amp; <span class="keyword">operator</span>&lt;&lt; (ostream &amp;os,<span class="type">const</span> A &amp;rhs) &#123;</span><br><span class="line">    os &lt;&lt; <span class="string">&quot;(&quot;</span> &lt;&lt; rhs.<span class="built_in">beg_pos</span>() &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; rhs.<span class="built_in">length</span>() &lt;&lt; <span class="string">&quot;;&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>iostream运算符第一个形参必须接受iostream引用，并返回，这里的流操作会改变iostream对象，因此不能声明为const的，而且重载运算符不能是成员函数！</p>
+<p>16.如果我们要自己定义一个function object，只需要重载()运算符即可。</p>
+<p>17.定义一个抽象基类：先找出所有子类共通的操作行为，然后找出哪些操作行为与类型相关，最后每个操作行为的访问层级。private是派生类都不能访问，protect是派生类可以访问。如果一个函数在抽象基类中没有实质性的作用，就把它声明为纯虚函数，类似定义为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="type">int</span> <span class="title">elem</span><span class="params">(<span class="type">int</span> pos)</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在后面加上&#x3D;0即可。</p>
+<p>而如果一个类中有虚函数，那么它的析构函数一定要是virtual的，并且最好不要定义为纯虚函数。</p>
+<p>任何有纯虚函数的类都不能实例一个完整的对象，派生类必须把纯虚函数完全都定义了才能用来实例化一个完整的对象。</p>
+<p>18.在基类中声明一个函数为虚函数后，派生类都不需要加上virtual关键词了，只要基类声明就可以,基类声明虚函数后,会建一张虚函数表。 一旦一个函数被声明为虚函数,从该点之后的继承层次结构中都是虚函数,不管它在有没有再次声明是不是虚函数。</p>
+<p>19.C++中的多态只能通过引用和指针来实现。基类的constructor不会调用派生类虚函数！</p>
+<p>20.typeid函数可以获得一个对象在运行时的类型。</p>
+<p>21.对于泛型类，以后凡是要用到这个类的地方都必须要加上<code>&lt;type&gt;</code>，也就是将后面的类型看作是这个类定义的一部分！</p>
+<p>22.泛型类的成员函数的定义比较复杂：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType&gt;</span><br><span class="line"><span class="keyword">inline</span> BinaryTree&lt;elemType&gt;::</span><br><span class="line"><span class="built_in">BinaryTree</span>(<span class="type">const</span> BinaryTree &amp;rhs) &#123;</span><br><span class="line">    <span class="built_in">copy</span>(_root,rhs._root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在一开始要加上模板参数，后面定义成员函数的时候要先指定其作用域，一旦指定了作用域，那么定义的后半部分就知道了这个函数是定义在类里面的成员函数，也就可以直接用类中的成员信息而不用加作用域了。</p>
+<p>23.建议使用初始化列表来初始化泛型类：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> valType&gt;</span><br><span class="line"><span class="keyword">inline</span> BTnode&lt;valType&gt;::</span><br><span class="line"><span class="built_in">BTnode</span>(<span class="type">const</span> valType &amp;val) : _val(val) &#123;</span><br><span class="line">    _cnt = <span class="number">1</span>;</span><br><span class="line">    _lchild = _rchild = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式对于泛型val可以避免通过直接赋值的防止来初始化，也就提高了效率。而如果我们用constructor来进行初始化，就会出现<code>_val = val;</code>这种赋值的情况，可能会使程序变慢。</p>
+<p>24.如果涉及到递归结构，即类中包含类自己，就要用指针。一般用new来分配内存。需要注意的是，如果我们要改变指针本身（也就是不光可以改变指针指向的值，也可以改变指针指向哪个值），那么参数就要用指针的引用，即：<code>BTnode *&amp; prev</code>，从变量名开始往左边读。</p>
+<p>25.表达式也可以作为template参数。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="type">int</span> len&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="built_in">A</span>() : <span class="built_in">num_sequence</span>&lt;len&gt;() &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以用一个表达式作为len的值：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A&lt;<span class="number">16</span>&gt; temp;</span><br></pre></td></tr></table></figure>
+
+<p>26.将template参数作为一种设计策略：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> elemType,<span class="keyword">typename</span> Comp = less&lt;elemType&gt; &gt;</span><br><span class="line"><span class="keyword">class</span> LessThanPred &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">LessThanPred</span>(<span class="type">const</span> elemType &amp;val) : _val(val)&#123;&#125;</span><br><span class="line">    <span class="type">bool</span> <span class="built_in">operator</span>()(<span class="type">const</span> elemType &amp;val) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Comp</span>(val,_val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">val</span><span class="params">(<span class="type">const</span> elemType &amp;newval)</span> </span>&#123;</span><br><span class="line">        _val = newval;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">elemType <span class="title">val</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _val;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    elemType _val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里用了第二个泛型参数Comp，因为我们不知道传入的泛型是否自己定义了&lt;，所以我们就需要把这个作为泛型处理！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/09/01/C++%E5%9B%9E%E9%A1%BE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-数据库存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -628,7 +782,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">15-445,数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,7 +790,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">15-445,数据库</a>
               </li>
              
               <li class="article-tag-list-item">

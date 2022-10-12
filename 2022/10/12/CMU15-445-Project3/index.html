@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022 | zbtrs的博客</title>
+  <title>CMU15-445 Project3 | zbtrs的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="华中科技大学2021级学生，搞过OI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zbtrs的博客">
-<meta property="og:url" content="http://example.com/archives/2022/index.html">
+  <meta name="description" content="CMU15-445 Project3这个project主要考验了阅读工程代码的能力。像这种大型工程代码，推荐的阅读顺序是：先看测试代码，大概能够了解这个项目会用到哪些部分，用了哪些类，然后分层次去看这些类的头文件，搞清楚每个类的作用，而我们看类重点还是先看这些类中的成员变量 接下来先梳理一下bustub数据库中的一些类： Catalog下去了解一下emplace和move和智能指针方面的知识，还有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU15-445 Project3">
+<meta property="og:url" content="http://example.com/2022/10/12/CMU15-445-Project3/index.html">
 <meta property="og:site_name" content="zbtrs的博客">
-<meta property="og:description" content="华中科技大学2021级学生，搞过OI">
+<meta property="og:description" content="CMU15-445 Project3这个project主要考验了阅读工程代码的能力。像这种大型工程代码，推荐的阅读顺序是：先看测试代码，大概能够了解这个项目会用到哪些部分，用了哪些类，然后分层次去看这些类的头文件，搞清楚每个类的作用，而我们看类重点还是先看这些类中的成员变量 接下来先梳理一下bustub数据库中的一些类： Catalog下去了解一下emplace和move和智能指针方面的知识，还有">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-12T12:46:02.000Z">
+<meta property="article:modified_time" content="2022-10-12T12:46:51.459Z">
 <meta property="article:author" content="zbtrs">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zbtrs的博客" type="application/atom+xml">
@@ -152,36 +155,124 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-CMU15-445-Project3" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      CMU15-445 Project3
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/10/12/CMU15-445-Project3/" class="archive-article-date">
+
+        
+        <a href="/2022/10/12/CMU15-445-Project3/" class="archive-article-date">
   	<time datetime="2022-10-12T12:46:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-12</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/10/12/CMU15-445-Project3/">CMU15-445 Project3</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CMU15-445-Project3"><a href="#CMU15-445-Project3" class="headerlink" title="CMU15-445 Project3"></a>CMU15-445 Project3</h1><p>这个project主要考验了阅读工程代码的能力。像这种大型工程代码，推荐的阅读顺序是：<strong>先看测试代码，大概能够了解这个项目会用到哪些部分，用了哪些类，然后分层次去看这些类的头文件，搞清楚每个类的作用，而我们看类重点还是先看这些类中的成员变量</strong></p>
+<p>接下来先梳理一下bustub数据库中的一些类：</p>
+<h2 id="Catalog"><a href="#Catalog" class="headerlink" title="Catalog"></a>Catalog</h2><p><strong>下去了解一下emplace和move和智能指针方面的知识，还有atomic</strong></p>
+<p>这个类主要是用来创建&#x2F;得到table和index的，在创建一个catalog的时候，我们需要把底层的一些基础架构传入，例如bufferpool,lockmanager,logmanager等等。</p>
+<p>那么在Catalog中就要管理table和index，这就又会涉及到其他类。如果我们在Catalog中要存管理的table和index，<strong>我们不去直接存实例化对象，而是存指向这些对象的指针。而且不是普通的指针，是智能指针！</strong>用unique_ptr来存，在构造的时候用移动语义，也能解决效率问题。</p>
+<p>当然table和index中会有一些元数据，因此我们实际存的是tableinfo和indexinfo，即在真正的table和index上面加了一层。</p>
+<p><strong>在GetIndex和GetTable中有多种可行的查询方式，这里可以直接重载！而不是重新命名例如GetIndexById和GetIndexByName，这也是一种设计模式。</strong></p>
+<h3 id="TableInfo"><a href="#TableInfo" class="headerlink" title="TableInfo"></a>TableInfo</h3><p>存这个table的schema,name,tableheap实例（用unique_ptr）和这个table的id。</p>
+<h3 id="IndexInfo"><a href="#IndexInfo" class="headerlink" title="IndexInfo"></a>IndexInfo</h3><p>存的信息和TableInfo差不多，只是这里的schema变成了key_schema，专门为key设计。</p>
+<h2 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h2><p>Schema是在Catalog中的结构，用来存Column和这些Column组合的信息。注意这里的Column不是指具体的这一列上的值，而是值这一列的值应该具有的某些属性。</p>
+<p>Schema类中有四个成员变量：<code>length_</code>表示所有column总共占了多大空间。<code>columns_</code>作为存column的vector，还有<code>uninlined_columns_</code>作为存哪些column是uninlined的vector。</p>
+<p>这里schema会存column，注意这两个都是元数据，不会保存真正的数据。真正的数据保存在tuple类中。</p>
+<h2 id="Column"><a href="#Column" class="headerlink" title="Column"></a>Column</h2><p>存了关于这一列所存元素的元信息，例如列的名字，这一列元素的类型，这一列在tuple中的offset，还有一个对应的AbstractExpression，表示用这个表达式来生成了这一列。</p>
+<p>几个设计点：</p>
+<p>1.存元数据的这种类大部分的成员函数都是取一些信息啊之类的，尽量把成员函数的定义写在类里面。</p>
+<p>2.涉及到STL的尽量用不要直接拷贝复制，Column类中，就算是String也是直接move初始化。</p>
+<h2 id="Table-heap"><a href="#Table-heap" class="headerlink" title="Table_heap"></a>Table_heap</h2><p>这个类就会接触到更低层的东西了，我们将table存在若干个page上，这些page用链表串联起来。table_heap主要负责查找我们要操作的page是哪一个以及进行什么操作，至于具体的操作就要留给page来实现。</p>
+<p>在table_heap中，删除操作是markDelete的，也就是不会立即删除。</p>
+<p>一个设计点：</p>
+<p>因为可能涉及到遍历table_heap的操作，我们可以设计另外一个table_heap的迭代器类，而在table_heap中主要负责返回begin和end迭代器。</p>
+<h2 id="Table-iterator"><a href="#Table-iterator" class="headerlink" title="Table_iterator"></a>Table_iterator</h2><p>因为iterator会有解引用操作，为了避免频繁进行磁盘IO，我们要将目前的tuple存下来。而且因为table_heap是以page的形式存储的，所以每次在++操作的时候要先看是否到了page的边界。</p>
+<p>后置++运算符可以复用前置++运算符：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> TableIterator::<span class="keyword">operator</span>++(<span class="type">int</span>) -&gt; TableIterator &#123;</span><br><span class="line">  <span class="function">TableIterator <span class="title">clone</span><span class="params">(*<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  ++(*<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">return</span> clone;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<h2 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h2><p>1.这个Tuple设计的很有意思。我们的Tuple分为临时tuple和永久tuple。所谓的临时tuple，指的是用完就会销毁的，常用于创建一个临时的tuple来进行返回、传参。在成员中用<code>allocated_</code>来标记这个tuple是不是临时的，用于在拷贝、构造和析构时选择深拷贝还是浅拷贝、是否释放内存。</p>
+<p>2.Tuple上是要存实际数据的，但是我们的数据可能有很多种，而且有的数据可能太大了在tuple上存不下。解决的方法是将所有的数据序列化后存到tuple上，即在tuple上定义一个char数组，对每种类型，在其内部定义序列化和反序列化函数。除此之外，还会有一些数据太大不能直接放到tuple上的，我们把这种数据成为uninlined，我们的做法是：在char数组的对应位置上（这个位置本来该存这个实际的数据）不再存放实际数据，而是存放这个实际数据的偏移，即我可以在哪个位置上找到这个数据。注意到char本身的特殊性（表示一个字节），可以用强制类型转换来做到这一点：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*<span class="built_in">reinterpret_cast</span>&lt;<span class="type">uint32_t</span> *&gt;(data_ + col.<span class="built_in">GetOffset</span>()) = offset;</span><br></pre></td></tr></table></figure>
+
+<p>3.和schema以及column类联合起来，column中会存<strong>自身在tuple中的偏移</strong>，这也是面向对象设计的一个点，每个类存自身的信息。</p>
+<h2 id="Expression"><a href="#Expression" class="headerlink" title="Expression"></a>Expression</h2><p>用来执行运算的类，其中abstract_expression是一个抽象基类。计算表达式的时候将表达式组织成一棵表达式树。这里用:<code>std::vector&lt;const AbstractExpression *&gt; children_</code>来存。所有的表达式的返回结果都是一个Value。</p>
+<h3 id="column-value-expression"><a href="#column-value-expression" class="headerlink" title="column_value_expression"></a>column_value_expression</h3><p>这个运算主要用于求一个tuple的某个特定列或者是join的join key。成员有<code>tuple_idx_</code>和<code>col_idx_</code>，分别表示join的时候这个tuple在左边还是右边，以及我们要取的是哪一列。也就是说，我们在创建这个表达式的时候，我们其实就知道了要取哪个位置上的Value，这个位置并不是在表达式中计算出来的。</p>
+<h3 id="constant-value-expression"><a href="#constant-value-expression" class="headerlink" title="constant_value_expression"></a>constant_value_expression</h3><p>这个就是直接返回一个Value。已经设定好的。</p>
+<h3 id="comparison-expression"><a href="#comparison-expression" class="headerlink" title="comparison_expression"></a>comparison_expression</h3><p>递归执行左右儿子的表达式，然后将结果进行比较，返回一个bool值。<strong>比较的类型和结果类型都封装在一个Type类中。也就是所谓的类型封装。这里的思想是：我们完全可以把比较的类型看做是常量，在程序中尽量不要直接用常量，而是用名字去表示常量，并且把这些常量都封装到一个类中。</strong></p>
+<h3 id="aggregate-value-expression"><a href="#aggregate-value-expression" class="headerlink" title="aggregate_value_expression"></a>aggregate_value_expression</h3><p>和column_value_expression差不多，返回指定列上的值，适用于aggregate操作。这里不进行aggregate操作的原因是在对应的aggregate_executor中，已经用hash table计算好了。</p>
+<h2 id="Execution"><a href="#Execution" class="headerlink" title="Execution"></a>Execution</h2><p>查询计划的执行可以看成由两部分组成，一部分是plan，另一部分是executor。这两部分都组成树结构。</p>
+<p>当我们要执行一个查询计划的时候，步骤如下：</p>
+<p>1.外部代码传给plan对应的信息，plan包含了对应的executor执行必须要有的特定信息。</p>
+<p>2.初始化executor_context，包含了执行的上下文信息，例如transaction,catalog,bufferpool和lockmanager等。</p>
+<p>3.executor_engine开始执行，先调用对应的executor的init函数，然后不停调用对应executor的next函数，如果返回结果是true，就把绑定参数的tuple和rid给存到结果中能够，否则结束操作。</p>
+<p>接下来到我们的任务了，实现9个executor：</p>
+<h3 id="seq-scan-executor"><a href="#seq-scan-executor" class="headerlink" title="seq_scan_executor"></a>seq_scan_executor</h3><p>每个executor要获得table,index等要操作的对象的信息(如果需要的话)。seq_scan_executor将从一个表中遍历，<strong>并按照自己指定的schema的形式输出tuple</strong>，因此我们要先对照output_schema来存最后的结果中每一列对应着原来schema中的哪一列。如果有predicate的话还要先检验一下是否满足条件。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">SeqScanExecutor::<span class="built_in">SeqScanExecutor</span>(ExecutorContext *exec_ctx, <span class="type">const</span> SeqScanPlanNode *plan)</span><br><span class="line">    : <span class="built_in">AbstractExecutor</span>(exec_ctx), <span class="built_in">plan_</span>(plan), <span class="built_in">cur_</span>(<span class="literal">nullptr</span>, RID&#123;&#125;, <span class="literal">nullptr</span>), <span class="built_in">end_</span>(<span class="literal">nullptr</span>, RID&#123;&#125;, <span class="literal">nullptr</span>) &#123;</span><br><span class="line">  table_info_ = exec_ctx_-&gt;<span class="built_in">GetCatalog</span>()-&gt;<span class="built_in">GetTable</span>(plan_-&gt;<span class="built_in">GetTableOid</span>());</span><br><span class="line"></span><br><span class="line">  out_schema_idx_.<span class="built_in">reserve</span>(plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumnCount</span>());</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint32_t</span> i = <span class="number">0</span>; i &lt; plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumnCount</span>(); i++) &#123;</span><br><span class="line">      <span class="keyword">auto</span> col_name = plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumn</span>(i).<span class="built_in">GetName</span>();</span><br><span class="line">      out_schema_idx_.<span class="built_in">push_back</span>(table_info_-&gt;schema_.<span class="built_in">GetColIdx</span>(col_name));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="built_in">catch</span> (<span class="type">const</span> std::logic_error &amp;error) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">uint32_t</span> i = <span class="number">0</span>; i &lt; plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumnCount</span>(); i++) &#123;</span><br><span class="line">      out_schema_idx_.<span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (plan_-&gt;<span class="built_in">GetPredicate</span>() != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">    predicate_ = plan_-&gt;<span class="built_in">GetPredicate</span>();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    is_alloc_ = <span class="literal">true</span>;</span><br><span class="line">    predicate_ = <span class="keyword">new</span> <span class="built_in">ConstantValueExpression</span>(ValueFactory::<span class="built_in">GetBooleanValue</span>(<span class="literal">true</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SeqScanExecutor::~<span class="built_in">SeqScanExecutor</span>() &#123;</span><br><span class="line">  <span class="keyword">if</span> (is_alloc_) &#123;</span><br><span class="line">    <span class="keyword">delete</span> predicate_;</span><br><span class="line">  &#125;</span><br><span class="line">  predicate_ = <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SeqScanExecutor::Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cur_ = table_info_-&gt;table_-&gt;<span class="built_in">Begin</span>(exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">  end_ = table_info_-&gt;table_-&gt;<span class="built_in">End</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">SeqScanExecutor::Next</span><span class="params">(Tuple *tuple, RID *rid)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (cur_ != end_) &#123;</span><br><span class="line">    <span class="keyword">auto</span> temp = cur_++;</span><br><span class="line">    <span class="keyword">auto</span> value = predicate_-&gt;<span class="built_in">Evaluate</span>(&amp;(*temp), &amp;table_info_-&gt;schema_);</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="built_in">GetAs</span>&lt;<span class="type">bool</span>&gt;()) &#123;</span><br><span class="line">      <span class="comment">// Only keep the columns of the out schema</span></span><br><span class="line">      std::vector&lt;Value&gt; values;</span><br><span class="line">      values.<span class="built_in">reserve</span>(out_schema_idx_.<span class="built_in">size</span>());</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">auto</span> i : out_schema_idx_) &#123;</span><br><span class="line">        values.<span class="built_in">push_back</span>(temp-&gt;<span class="built_in">GetValue</span>(&amp;table_info_-&gt;schema_, i));</span><br><span class="line">      &#125;</span><br><span class="line">      *tuple = <span class="built_in">Tuple</span>(values, plan_-&gt;<span class="built_in">OutputSchema</span>());</span><br><span class="line">      *rid = temp-&gt;<span class="built_in">GetRid</span>();</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意区分Init和构造函数的作用。因为一个表可能会多次扫描，所以Init是用来进行重置状态的，而构造函数才是用来进行初始化的。</p>
+<h3 id="insert-executor"><a href="#insert-executor" class="headerlink" title="insert_executor"></a>insert_executor</h3><p>insert只有可能出现在executor树的最上层，并且不会改变result vector，所以它应该一次性执行完所有的插入操作，并且只会返回false。</p>
+<p>主要是要注意index的插入，这里的tuple是要从原来的tuple中抽一些key value出来组成key_tuple，注意函数参数名的区别。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">InsertExecutor::<span class="built_in">InsertExecutor</span>(ExecutorContext *exec_ctx, <span class="type">const</span> InsertPlanNode *plan,</span><br><span class="line">                               std::unique_ptr&lt;AbstractExecutor&gt; &amp;&amp;child_executor)</span><br><span class="line">    : <span class="built_in">AbstractExecutor</span>(exec_ctx), <span class="built_in">plan_</span>(plan) &#123;</span><br><span class="line">  table_info_ = exec_ctx-&gt;<span class="built_in">GetCatalog</span>()-&gt;<span class="built_in">GetTable</span>(plan-&gt;<span class="built_in">TableOid</span>());</span><br><span class="line">  index_info_ = exec_ctx-&gt;<span class="built_in">GetCatalog</span>()-&gt;<span class="built_in">GetTableIndexes</span>(table_info_-&gt;name_);</span><br><span class="line">  child_executor_ = std::<span class="built_in">move</span>(child_executor);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">InsertExecutor::Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!plan_-&gt;<span class="built_in">IsRawInsert</span>()) &#123;</span><br><span class="line">    child_executor_-&gt;<span class="built_in">Init</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">InsertExecutor::Next</span><span class="params">([[maybe_unused]] Tuple *tuple, RID *rid)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  RID tuple_rid;</span><br><span class="line">  <span class="keyword">if</span> (plan_-&gt;<span class="built_in">IsRawInsert</span>()) &#123;</span><br><span class="line">    <span class="keyword">auto</span> tuples = plan_-&gt;<span class="built_in">RawValues</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;value : tuples) &#123;</span><br><span class="line">      <span class="keyword">auto</span> made_tuple = <span class="built_in">Tuple</span>(value, &amp;(table_info_-&gt;schema_));</span><br><span class="line">      <span class="comment">// insert into table</span></span><br><span class="line">      <span class="keyword">if</span> (!table_info_-&gt;table_-&gt;<span class="built_in">InsertTuple</span>(made_tuple, &amp;tuple_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>())) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">auto</span> index_info : index_info_) &#123;</span><br><span class="line">        <span class="type">const</span> <span class="keyword">auto</span> index_tuple =</span><br><span class="line">            made_tuple.<span class="built_in">KeyFromTuple</span>(table_info_-&gt;schema_, index_info-&gt;key_schema_, index_info-&gt;index_-&gt;<span class="built_in">GetKeyAttrs</span>());</span><br><span class="line">        <span class="comment">// 这里注意看参数名</span></span><br><span class="line">        index_info-&gt;index_-&gt;<span class="built_in">InsertEntry</span>(index_tuple, tuple_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    Tuple child_tuple;</span><br><span class="line">    <span class="keyword">while</span> (child_executor_-&gt;<span class="built_in">Next</span>(&amp;child_tuple, &amp;tuple_rid)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!table_info_-&gt;table_-&gt;<span class="built_in">InsertTuple</span>(child_tuple, &amp;tuple_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>())) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">auto</span> index_info : index_info_) &#123;</span><br><span class="line">        <span class="type">const</span> <span class="keyword">auto</span> index_tuple =</span><br><span class="line">            child_tuple.<span class="built_in">KeyFromTuple</span>(table_info_-&gt;schema_, index_info-&gt;key_schema_, index_info-&gt;index_-&gt;<span class="built_in">GetKeyAttrs</span>());</span><br><span class="line">        index_info-&gt;index_-&gt;<span class="built_in">InsertEntry</span>(index_tuple, tuple_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="delete-executor"><a href="#delete-executor" class="headerlink" title="delete_executor"></a>delete_executor</h3><p>和insert差不多，就是这里的删除操作并不是真正的删除，而是markdelete，只有当事务提交后才会被真正地删除掉。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">DeleteExecutor::<span class="built_in">DeleteExecutor</span>(ExecutorContext *exec_ctx, <span class="type">const</span> DeletePlanNode *plan,</span><br><span class="line">                               std::unique_ptr&lt;AbstractExecutor&gt; &amp;&amp;child_executor)</span><br><span class="line">    : <span class="built_in">AbstractExecutor</span>(exec_ctx), <span class="built_in">plan_</span>(plan) &#123;</span><br><span class="line">  child_executor_ = std::<span class="built_in">move</span>(child_executor);</span><br><span class="line">  table_info_ = exec_ctx-&gt;<span class="built_in">GetCatalog</span>()-&gt;<span class="built_in">GetTable</span>(plan-&gt;<span class="built_in">TableOid</span>());</span><br><span class="line">  index_info_ = exec_ctx-&gt;<span class="built_in">GetCatalog</span>()-&gt;<span class="built_in">GetTableIndexes</span>(table_info_-&gt;name_);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DeleteExecutor::Init</span><span class="params">()</span> </span>&#123; child_executor_-&gt;<span class="built_in">Init</span>(); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">DeleteExecutor::Next</span><span class="params">([[maybe_unused]] Tuple *tuple, RID *rid)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  Tuple child_tuple;</span><br><span class="line">  RID child_tuple_rid;</span><br><span class="line">  <span class="keyword">while</span> (child_executor_-&gt;<span class="built_in">Next</span>(&amp;child_tuple, &amp;child_tuple_rid)) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> index_info : index_info_) &#123;</span><br><span class="line">      <span class="keyword">auto</span> index_tuple =</span><br><span class="line">          child_tuple.<span class="built_in">KeyFromTuple</span>(table_info_-&gt;schema_, index_info-&gt;key_schema_, index_info-&gt;index_-&gt;<span class="built_in">GetKeyAttrs</span>());</span><br><span class="line">      index_info-&gt;index_-&gt;<span class="built_in">DeleteEntry</span>(index_tuple, child_tuple_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    table_info_-&gt;table_-&gt;<span class="built_in">MarkDelete</span>(child_tuple_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="update-executor"><a href="#update-executor" class="headerlink" title="update_executor"></a>update_executor</h3><p>和insert以及delete差不多，这里需要注意的一点是：因为我们每次从子节点next一个tuple上来，底层是用迭代器实现的，而在迭代器迭代的时候我们是不能够对一个表进行增删操作的。因此一开始删除我们要把这些tuple存下来，改完后一起插入。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">UpdateExecutor::<span class="built_in">UpdateExecutor</span>(ExecutorContext *exec_ctx, <span class="type">const</span> UpdatePlanNode *plan,</span><br><span class="line">                               std::unique_ptr&lt;AbstractExecutor&gt; &amp;&amp;child_executor)</span><br><span class="line">    : <span class="built_in">AbstractExecutor</span>(exec_ctx), <span class="built_in">plan_</span>(plan) &#123;</span><br><span class="line">  child_executor_ = std::<span class="built_in">move</span>(child_executor);</span><br><span class="line">  table_info_ = exec_ctx-&gt;<span class="built_in">GetCatalog</span>()-&gt;<span class="built_in">GetTable</span>(plan-&gt;<span class="built_in">TableOid</span>());</span><br><span class="line">  index_info_ = exec_ctx-&gt;<span class="built_in">GetCatalog</span>()-&gt;<span class="built_in">GetTableIndexes</span>(table_info_-&gt;name_);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UpdateExecutor::Init</span><span class="params">()</span> </span>&#123; child_executor_-&gt;<span class="built_in">Init</span>(); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">UpdateExecutor::Next</span><span class="params">([[maybe_unused]] Tuple *tuple, RID *rid)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  Tuple child_tuple;</span><br><span class="line">  RID child_tuple_rid;</span><br><span class="line">  std::vector&lt;std::pair&lt;Tuple, RID&gt;&gt; vec;</span><br><span class="line">  <span class="keyword">while</span> (child_executor_-&gt;<span class="built_in">Next</span>(&amp;child_tuple, &amp;child_tuple_rid)) &#123;</span><br><span class="line">    table_info_-&gt;table_-&gt;<span class="built_in">MarkDelete</span>(child_tuple_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> index_info : index_info_) &#123;</span><br><span class="line">      <span class="type">const</span> <span class="keyword">auto</span> index_tuple =</span><br><span class="line">          child_tuple.<span class="built_in">KeyFromTuple</span>(table_info_-&gt;schema_, index_info-&gt;key_schema_, index_info-&gt;index_-&gt;<span class="built_in">GetKeyAttrs</span>());</span><br><span class="line">      index_info-&gt;index_-&gt;<span class="built_in">DeleteEntry</span>(index_tuple, child_tuple_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    vec.<span class="built_in">emplace_back</span>(child_tuple, child_tuple_rid);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;tuple_pair : vec) &#123;</span><br><span class="line">    child_tuple = tuple_pair.first;</span><br><span class="line">    child_tuple_rid = tuple_pair.second;</span><br><span class="line">    RID new_tupld_rid;</span><br><span class="line">    <span class="keyword">auto</span> new_tuple = <span class="built_in">GenerateUpdatedTuple</span>(child_tuple);</span><br><span class="line">    table_info_-&gt;table_-&gt;<span class="built_in">InsertTuple</span>(new_tuple, &amp;new_tupld_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> index_info : index_info_) &#123;</span><br><span class="line">      <span class="type">const</span> <span class="keyword">auto</span> index_tuple =</span><br><span class="line">          new_tuple.<span class="built_in">KeyFromTuple</span>(table_info_-&gt;schema_, index_info-&gt;key_schema_, index_info-&gt;index_-&gt;<span class="built_in">GetKeyAttrs</span>());</span><br><span class="line">      index_info-&gt;index_-&gt;<span class="built_in">InsertEntry</span>(index_tuple, new_tupld_rid, exec_ctx_-&gt;<span class="built_in">GetTransaction</span>());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">UpdateExecutor::GenerateUpdatedTuple</span><span class="params">(<span class="type">const</span> Tuple &amp;src_tuple)</span> -&gt; Tuple </span>&#123;</span><br><span class="line">  <span class="type">const</span> <span class="keyword">auto</span> &amp;update_attrs = plan_-&gt;<span class="built_in">GetUpdateAttr</span>();</span><br><span class="line">  Schema schema = table_info_-&gt;schema_;</span><br><span class="line">  <span class="type">uint32_t</span> col_count = schema.<span class="built_in">GetColumnCount</span>();</span><br><span class="line">  std::vector&lt;Value&gt; values;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">uint32_t</span> idx = <span class="number">0</span>; idx &lt; col_count; idx++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (update_attrs.<span class="built_in">find</span>(idx) == update_attrs.<span class="built_in">cend</span>()) &#123;</span><br><span class="line">      values.<span class="built_in">emplace_back</span>(src_tuple.<span class="built_in">GetValue</span>(&amp;schema, idx));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="type">const</span> UpdateInfo info = update_attrs.<span class="built_in">at</span>(idx);</span><br><span class="line">      Value val = src_tuple.<span class="built_in">GetValue</span>(&amp;schema, idx);</span><br><span class="line">      <span class="keyword">switch</span> (info.type_) &#123;</span><br><span class="line">        <span class="keyword">case</span> UpdateType::Add:</span><br><span class="line">          values.<span class="built_in">emplace_back</span>(val.<span class="built_in">Add</span>(ValueFactory::<span class="built_in">GetIntegerValue</span>(info.update_val_)));</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> UpdateType::Set:</span><br><span class="line">          values.<span class="built_in">emplace_back</span>(ValueFactory::<span class="built_in">GetIntegerValue</span>(info.update_val_));</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Tuple&#123;values, &amp;schema&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="nested-loop-join"><a href="#nested-loop-join" class="headerlink" title="nested_loop_join"></a>nested_loop_join</h3><p>注意这里nested_loop_join是可以实现流水线化的！我们保留outer tuple的状态，每次inner获取一个tuple。先判断能不能join，如果能join的话需要重组成一个新的tuple来输出。依据output_schema中每一column的tuple_id和col_id来决定每个value的位置。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">NestedLoopJoinExecutor::<span class="built_in">NestedLoopJoinExecutor</span>(ExecutorContext *exec_ctx, <span class="type">const</span> NestedLoopJoinPlanNode *plan,</span><br><span class="line">                                               std::unique_ptr&lt;AbstractExecutor&gt; &amp;&amp;left_executor,</span><br><span class="line">                                               std::unique_ptr&lt;AbstractExecutor&gt; &amp;&amp;right_executor)</span><br><span class="line">    : <span class="built_in">AbstractExecutor</span>(exec_ctx),</span><br><span class="line">      <span class="built_in">plan_</span>(plan),</span><br><span class="line">      <span class="built_in">left_executor_</span>(std::<span class="built_in">move</span>(left_executor)),</span><br><span class="line">      <span class="built_in">right_executor_</span>(std::<span class="built_in">move</span>(right_executor)),</span><br><span class="line">      <span class="built_in">flag_</span>(<span class="literal">false</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">NestedLoopJoinExecutor::Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  left_executor_-&gt;<span class="built_in">Init</span>();</span><br><span class="line">  right_executor_-&gt;<span class="built_in">Init</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">NestedLoopJoinExecutor::Next</span><span class="params">(Tuple *tuple, RID *rid)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!flag_) &#123;</span><br><span class="line">    flag_ = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (!left_executor_-&gt;<span class="built_in">Next</span>(&amp;left_tuple_, &amp;left_tuple_rid_)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  Tuple right_tuple;</span><br><span class="line">  RID right_tuple_rid;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="type">bool</span> can_join = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span> (right_executor_-&gt;<span class="built_in">Next</span>(&amp;right_tuple, &amp;right_tuple_rid)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (plan_-&gt;<span class="built_in">Predicate</span>()</span><br><span class="line">              -&gt;<span class="built_in">EvaluateJoin</span>(&amp;left_tuple_, plan_-&gt;<span class="built_in">GetLeftPlan</span>()-&gt;<span class="built_in">OutputSchema</span>(), &amp;right_tuple,</span><br><span class="line">                             plan_-&gt;<span class="built_in">GetRightPlan</span>()-&gt;<span class="built_in">OutputSchema</span>())</span><br><span class="line">              .<span class="built_in">GetAs</span>&lt;<span class="type">bool</span>&gt;()) &#123;</span><br><span class="line">        can_join = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!can_join) &#123;</span><br><span class="line">      right_executor_-&gt;<span class="built_in">Init</span>();</span><br><span class="line">      <span class="keyword">if</span> (!left_executor_-&gt;<span class="built_in">Next</span>(&amp;left_tuple_, &amp;left_tuple_rid_)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      std::vector&lt;Value&gt; values;</span><br><span class="line">      values.<span class="built_in">reserve</span>(plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumnCount</span>());</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;column : plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumns</span>()) &#123;</span><br><span class="line">        <span class="keyword">auto</span> column_expr = <span class="built_in">dynamic_cast</span>&lt;<span class="type">const</span> ColumnValueExpression *&gt;(column.<span class="built_in">GetExpr</span>());</span><br><span class="line">        <span class="keyword">if</span> (column_expr-&gt;<span class="built_in">GetTupleIdx</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">          values.<span class="built_in">push_back</span>(left_tuple_.<span class="built_in">GetValue</span>(plan_-&gt;<span class="built_in">GetLeftPlan</span>()-&gt;<span class="built_in">OutputSchema</span>(), column_expr-&gt;<span class="built_in">GetColIdx</span>()));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          values.<span class="built_in">push_back</span>(right_tuple.<span class="built_in">GetValue</span>(plan_-&gt;<span class="built_in">GetRightPlan</span>()-&gt;<span class="built_in">OutputSchema</span>(), column_expr-&gt;<span class="built_in">GetColIdx</span>()));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      *tuple = <span class="built_in">Tuple</span>(values, plan_-&gt;<span class="built_in">OutputSchema</span>());</span><br><span class="line">      *rid = left_tuple_.<span class="built_in">GetRid</span>();</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="hash-join-executor"><a href="#hash-join-executor" class="headerlink" title="hash_join_executor"></a>hash_join_executor</h3><p>选用unordered_map来作为hash表，这里与map不同的是，前者是hashmap，后者是treemap，因此如果要让一种类作为key，必须要给这个类重载&#x3D;&#x3D;运算符和定义hash函数。我们把hash_key（实质上是一个Value）封装成一个类。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> bustub &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">HashJoinKey</span> &#123;</span><br><span class="line">  Value value_;</span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>==(<span class="type">const</span> HashJoinKey &amp;other) <span class="type">const</span> &#123; <span class="keyword">return</span> value_.<span class="built_in">CompareEquals</span>(other.value_) == CmpBool::CmpTrue; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&#125;  <span class="comment">// namespace bustub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> std &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">hash</span>&lt;bustub::HashJoinKey&gt; &#123;</span><br><span class="line">  <span class="function"><span class="keyword">auto</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> bustub::HashJoinKey &amp;hash_join_key)</span> <span class="type">const</span> -&gt; std::<span class="type">size_t</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> curr_hash = <span class="number">0</span>;</span><br><span class="line">    <span class="type">const</span> <span class="keyword">auto</span> &amp;key = hash_join_key.value_;</span><br><span class="line">    <span class="keyword">if</span> (!key.<span class="built_in">IsNull</span>()) &#123;</span><br><span class="line">      curr_hash = bustub::HashUtil::<span class="built_in">CombineHashes</span>(curr_hash, bustub::HashUtil::<span class="built_in">HashValue</span>(&amp;key));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curr_hash;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&#125;  <span class="comment">// namespace std</span></span><br></pre></td></tr></table></figure>
+
+<p>必须要在一开始的bustub作用域中定义hashjoinkey类，然后在std作用域中定义偏特化hash类。这里偏特化的意思是指只有bustub::HashJoinKey作为模板参数时，这个类才能被创建。在其中定义调用运算符，返回一个hash值。</p>
+<p>接着在后面的bustub作用域中正常实现HashJoinExecutor的定义。顺序是：bustub–std–bustub。而不能是bustub–std，即将std放在最后。因为我们会在HashJoinExecutor中定义一个unordered_map，它会去查找hash类的实现，因此我们要把hash类的定义放在unorderde_map的定义前面。</p>
+<p><strong>hash_join是pipeline blocker</strong>，我们在init阶段为outer table构建hash table，每次next我们会定位到一个hash table中的一个条目中，这个条目中可能会有多个tuple，因此我们的实现中会保存指向这个条目的指针和一个此条目的迭代器。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">HashJoinExecutor::<span class="built_in">HashJoinExecutor</span>(ExecutorContext *exec_ctx, <span class="type">const</span> HashJoinPlanNode *plan,</span><br><span class="line">                                   std::unique_ptr&lt;AbstractExecutor&gt; &amp;&amp;left_child,</span><br><span class="line">                                   std::unique_ptr&lt;AbstractExecutor&gt; &amp;&amp;right_child)</span><br><span class="line">    : <span class="built_in">AbstractExecutor</span>(exec_ctx),</span><br><span class="line">      <span class="built_in">plan_</span>(plan),</span><br><span class="line">      <span class="built_in">left_child_</span>(std::<span class="built_in">move</span>(left_child)),</span><br><span class="line">      <span class="built_in">right_child_</span>(std::<span class="built_in">move</span>(right_child)),</span><br><span class="line">      <span class="built_in">hash_page_</span>(<span class="literal">nullptr</span>),</span><br><span class="line">      <span class="built_in">is_scanned_</span>(<span class="literal">false</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">HashJoinExecutor::Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  left_child_-&gt;<span class="built_in">Init</span>();</span><br><span class="line">  right_child_-&gt;<span class="built_in">Init</span>();</span><br><span class="line">  <span class="comment">// build hash table</span></span><br><span class="line">  Tuple left_tuple;</span><br><span class="line">  RID left_rid;</span><br><span class="line">  <span class="keyword">while</span> (left_child_-&gt;<span class="built_in">Next</span>(&amp;left_tuple, &amp;left_rid)) &#123;</span><br><span class="line">    <span class="keyword">auto</span> value = plan_-&gt;<span class="built_in">LeftJoinKeyExpression</span>()-&gt;<span class="built_in">Evaluate</span>(&amp;left_tuple, plan_-&gt;<span class="built_in">GetLeftPlan</span>()-&gt;<span class="built_in">OutputSchema</span>());</span><br><span class="line">    HashJoinKey hash_join_key&#123;value&#125;;  <span class="comment">// 可以直接这样初始化？</span></span><br><span class="line">    <span class="keyword">if</span> (hash_table_.<span class="built_in">count</span>(hash_join_key) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      hash_table_[hash_join_key].<span class="built_in">emplace_back</span>(std::<span class="built_in">move</span>(left_tuple));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      hash_table_.<span class="built_in">insert</span>(&#123;hash_join_key, &#123;left_tuple&#125;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">HashJoinExecutor::Next</span><span class="params">(Tuple *tuple, RID *rid)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!is_scanned_) &#123;</span><br><span class="line">    is_scanned_ = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (!right_child_-&gt;<span class="built_in">Next</span>(&amp;unhashed_tuple_, rid)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    unhashed_tuple_key_ =</span><br><span class="line">        HashJoinKey&#123;plan_-&gt;<span class="built_in">RightJoinKeyExpression</span>()-&gt;<span class="built_in">Evaluate</span>(&amp;unhashed_tuple_, plan_-&gt;<span class="built_in">GetRightPlan</span>()-&gt;<span class="built_in">OutputSchema</span>())&#125;;</span><br><span class="line">    hash_page_ = &amp;hash_table_[unhashed_tuple_key_];</span><br><span class="line">    cur_ = hash_page_-&gt;<span class="built_in">begin</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    Tuple left_tuple;</span><br><span class="line">    <span class="keyword">while</span> (cur_ != hash_page_-&gt;<span class="built_in">end</span>()) &#123;</span><br><span class="line">      <span class="keyword">auto</span> left_join_key =</span><br><span class="line">          HashJoinKey&#123;plan_-&gt;<span class="built_in">LeftJoinKeyExpression</span>()-&gt;<span class="built_in">Evaluate</span>(&amp;*cur_, plan_-&gt;<span class="built_in">GetLeftPlan</span>()-&gt;<span class="built_in">OutputSchema</span>())&#125;;</span><br><span class="line">      left_tuple = *cur_;</span><br><span class="line">      cur_++;</span><br><span class="line">      <span class="keyword">if</span> (left_join_key == unhashed_tuple_key_) &#123;</span><br><span class="line">        std::vector&lt;Value&gt; values;</span><br><span class="line">        values.<span class="built_in">reserve</span>(plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumnCount</span>());</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;column : plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumns</span>()) &#123;</span><br><span class="line">          <span class="keyword">auto</span> column_expr = <span class="built_in">dynamic_cast</span>&lt;<span class="type">const</span> ColumnValueExpression *&gt;(column.<span class="built_in">GetExpr</span>());</span><br><span class="line">          <span class="keyword">if</span> (column_expr-&gt;<span class="built_in">GetTupleIdx</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">            values.<span class="built_in">push_back</span>(left_tuple.<span class="built_in">GetValue</span>(plan_-&gt;<span class="built_in">GetLeftPlan</span>()-&gt;<span class="built_in">OutputSchema</span>(), column_expr-&gt;<span class="built_in">GetColIdx</span>()));</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            values.<span class="built_in">push_back</span>(unhashed_tuple_.<span class="built_in">GetValue</span>(plan_-&gt;<span class="built_in">GetRightPlan</span>()-&gt;<span class="built_in">OutputSchema</span>(), column_expr-&gt;<span class="built_in">GetColIdx</span>()));</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        *tuple = <span class="built_in">Tuple</span>(values, plan_-&gt;<span class="built_in">OutputSchema</span>());</span><br><span class="line">        *rid = left_tuple.<span class="built_in">GetRid</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!right_child_-&gt;<span class="built_in">Next</span>(&amp;unhashed_tuple_, rid)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    unhashed_tuple_key_ =</span><br><span class="line">        HashJoinKey&#123;plan_-&gt;<span class="built_in">RightJoinKeyExpression</span>()-&gt;<span class="built_in">Evaluate</span>(&amp;unhashed_tuple_, plan_-&gt;<span class="built_in">GetRightPlan</span>()-&gt;<span class="built_in">OutputSchema</span>())&#125;;</span><br><span class="line">    hash_page_ = &amp;hash_table_[unhashed_tuple_key_];</span><br><span class="line">    cur_ = hash_page_-&gt;<span class="built_in">begin</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="aggregation-executor"><a href="#aggregation-executor" class="headerlink" title="aggregation_executor"></a>aggregation_executor</h3><p>和hash_join_executor差不多，当我们把一个元素插入到hash_table的时候，hash_table的条目维护的aggregation的结果，每当我要往这个条目中插入一个新的元素的时候，就会去更新这个条目的信息。</p>
+<p>aggregation可能会有having语句，这里的having语句是先根据group_by划分出组后，再来判断每组是否满足条件。</p>
+<p>而aggregation是可以pipeline的，因此先把hash_table建好，保存好迭代器信息。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">AggregationExecutor::<span class="built_in">AggregationExecutor</span>(ExecutorContext *exec_ctx, <span class="type">const</span> AggregationPlanNode *plan,</span><br><span class="line">                                         std::unique_ptr&lt;AbstractExecutor&gt; &amp;&amp;child)</span><br><span class="line">    : <span class="built_in">AbstractExecutor</span>(exec_ctx),</span><br><span class="line">      <span class="built_in">plan_</span>(plan),</span><br><span class="line">      <span class="built_in">child_</span>(std::<span class="built_in">move</span>(child)),</span><br><span class="line">      <span class="built_in">aht_</span>(plan-&gt;<span class="built_in">GetAggregates</span>(), plan-&gt;<span class="built_in">GetAggregateTypes</span>()),</span><br><span class="line">      <span class="built_in">aht_iterator_</span>(aht_.<span class="built_in">Begin</span>()) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AggregationExecutor::Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  child_-&gt;<span class="built_in">Init</span>();</span><br><span class="line">  Tuple child_tuple;</span><br><span class="line">  RID child_rid;</span><br><span class="line">  aht_.<span class="built_in">GenerateInitialAggregateValue</span>();</span><br><span class="line">  <span class="keyword">while</span> (child_-&gt;<span class="built_in">Next</span>(&amp;child_tuple, &amp;child_rid)) &#123;</span><br><span class="line">    aht_.<span class="built_in">InsertCombine</span>(<span class="built_in">MakeAggregateKey</span>(&amp;child_tuple), <span class="built_in">MakeAggregateValue</span>(&amp;child_tuple));</span><br><span class="line">  &#125;</span><br><span class="line">  aht_iterator_ = aht_.<span class="built_in">Begin</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">AggregationExecutor::Next</span><span class="params">(Tuple *tuple, RID *rid)</span> -&gt; <span class="type">bool</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (aht_iterator_ != aht_.<span class="built_in">End</span>()) &#123;</span><br><span class="line">    <span class="keyword">auto</span> temp_iter = aht_iterator_;</span><br><span class="line">    ++aht_iterator_;</span><br><span class="line">    <span class="keyword">if</span> (plan_-&gt;<span class="built_in">GetHaving</span>() != <span class="literal">nullptr</span> &amp;&amp;</span><br><span class="line">        !plan_-&gt;<span class="built_in">GetHaving</span>()-&gt;<span class="built_in">EvaluateAggregate</span>(temp_iter.<span class="built_in">Key</span>().group_bys_, temp_iter.<span class="built_in">Val</span>().aggregates_).<span class="built_in">GetAs</span>&lt;<span class="type">bool</span>&gt;()) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::vector&lt;Value&gt; values;</span><br><span class="line">    values.<span class="built_in">reserve</span>(plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumnCount</span>());</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;column : plan_-&gt;<span class="built_in">OutputSchema</span>()-&gt;<span class="built_in">GetColumns</span>()) &#123;</span><br><span class="line">      <span class="keyword">auto</span> agg_expr = <span class="built_in">dynamic_cast</span>&lt;<span class="type">const</span> AggregateValueExpression *&gt;(column.<span class="built_in">GetExpr</span>());</span><br><span class="line">      values.<span class="built_in">push_back</span>(agg_expr-&gt;<span class="built_in">EvaluateAggregate</span>(temp_iter.<span class="built_in">Key</span>().group_bys_, temp_iter.<span class="built_in">Val</span>().aggregates_));</span><br><span class="line">    &#125;</span><br><span class="line">    *tuple = <span class="built_in">Tuple</span>(values, plan_-&gt;<span class="built_in">OutputSchema</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,364 +284,105 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/10/12/CMU15-445-Project3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/10/01/Concurrency-Control-Methods/" class="archive-article-date">
-  	<time datetime="2022-10-01T12:05:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/10/01/Concurrency-Control-Methods/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Concurrency Control Methods</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/10/01/Concurrency-Control-Methods/">Concurrency Control Methods</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/09/26/Concurrency-Control-Theory/" class="archive-article-date">
-  	<time datetime="2022-09-26T11:08:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/09/26/Concurrency-Control-Theory/">Concurrency Control Theory</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/09/24/Query-Optimization/" class="archive-article-date">
-  	<time datetime="2022-09-24T03:39:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/09/24/Query-Optimization/">Query Optimization</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/09/18/Query-Execution/" class="archive-article-date">
-  	<time datetime="2022-09-18T11:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/09/18/Query-Execution/">Query Execution</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/09/17/CMU15-445-Project2/" class="archive-article-date">
-  	<time datetime="2022-09-17T11:42:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/09/17/CMU15-445-Project2/">CMU15-445 Project2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/09/14/%E6%95%B0%E6%8D%AE%E5%BA%93sorting-Aggregations-joins/" class="archive-article-date">
-  	<time datetime="2022-09-14T07:44:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/09/14/%E6%95%B0%E6%8D%AE%E5%BA%93sorting-Aggregations-joins/">数据库sorting&amp;aggregations&amp;joins</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/09/09/CMU15-445-Project1/" class="archive-article-date">
-  	<time datetime="2022-09-09T09:38:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/09/09/CMU15-445-Project1/">CMU15-445 Project1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/09/07/Hash-Table/" class="archive-article-date">
-  	<time datetime="2022-09-07T03:06:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/09/07/Hash-Table/">Hash Table</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/09/03/CMU15-445-Project0/" class="archive-article-date">
-  	<time datetime="2022-09-03T08:20:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/09/03/CMU15-445-Project0/">CMU15-445 Project0</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">15-445,数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2022/page/2/">2</a><a class="extend next" rel="next" href="/archives/2022/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -574,8 +406,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
